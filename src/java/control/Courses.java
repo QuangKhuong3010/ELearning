@@ -65,7 +65,7 @@ public class Courses extends HttpServlet {
         request.setAttribute("categories", listCategory);
         request.getRequestDispatcher("courses.jsp").forward(request, response);
     } 
-
+    //a
     /** 
      * Handles the HTTP <code>POST</code> method.
      * @param request servlet request
