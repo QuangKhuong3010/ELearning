@@ -19,16 +19,15 @@ import model.Course;
 public class courseDAO extends DBContext {
 
     public ArrayList<Course> getAllCourse() {
-        String sql = "SELECT SELECT [course_id]\n"
-                + "      ,[course_name]\n"
+        String sql = "SELECT [id]\n"
+                + "      ,[constructer_id]\n"
+                + "      ,[created_by_id]\n"
+                + "      ,[name]\n"
                 + "      ,[price]\n"
-                + "      ,[discount]"
-                + "      ,[level]"
-                + "      ,[time_duration]"
+                + "      ,[level_id]\n"
+                + "      ,[time_duration]\n"
                 + "      ,[category_id]\n"
                 + "      ,[created_date]\n"
-                + "      ,[created_by_id]\n"
-                + "      ,[constructer_id]\n"
                 + "      ,[avatar]\n"
                 + "      ,[description]\n"
                 + "  FROM [dbo].[Course]";
@@ -39,22 +38,38 @@ public class courseDAO extends DBContext {
             while (rs.next()) {
                 CourseList.add(new Course(
                         rs.getInt(1),
-                        rs.getString(2),
-                        rs.getFloat(3),
-                        rs.getInt(4),
-                        rs.getString(5),
-                        rs.getString(6),
-                        rs.getInt((7)),
-                        rs.getString(8),
-                        rs.getInt(9),
-                        rs.getInt(10),
-                        rs.getString(11),
-                        rs.getString(12)));
+                        rs.getInt(2),
+                        rs.getInt(3),
+                        rs.getString(4),
+                        rs.getFloat(5),
+                        rs.getInt(6),
+                        rs.getString((7)),
+                        rs.getInt(8),
+                        rs.getString(9),
+                        rs.getString(10),
+                        rs.getString(11)));
             }
             return CourseList;
         } catch (SQLException e) {
             System.out.println(e);
         }
         return null;
+    }
+
+    public int getQuantityCourseWithCategory(int category_id) {
+        String sql = "SELECT COUNT(*) AS course_count\n"
+                + "FROM [dbo].[Course]\n";
+        if (category_id!=0){
+            sql+= "WHERE [category_id] =" + category_id;
+        }
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            ResultSet rs = st.executeQuery();
+            int Total = rs.getInt(1);
+            return Total;
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return 0;
     }
 }

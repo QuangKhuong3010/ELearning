@@ -15,7 +15,6 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
-import java.util.Locale;
 import model.Category;
 import model.Course;
 
@@ -61,9 +60,9 @@ public class Courses extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        categoryDAO categodyDAO = new categoryDAO();
+        categoryDAO categoryDAO = new categoryDAO();
         courseDAO courseDAO= new courseDAO();
-        ArrayList<Category> listCategory = categodyDAO.getAllCategory();
+        ArrayList<Category> listCategory = categoryDAO.getAllCategory();
         ArrayList<Course> listCourse = courseDAO.getAllCourse();
         request.setAttribute("categories", listCategory);
         request.setAttribute("courses", listCourse);

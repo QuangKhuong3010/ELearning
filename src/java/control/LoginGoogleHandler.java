@@ -22,6 +22,7 @@ import org.apache.http.client.fluent.Form;
 import org.apache.http.client.fluent.Request;
 import common.Constants;
 
+
 /**
  *
  * @author Admin
@@ -76,7 +77,7 @@ public class LoginGoogleHandler extends HttpServlet {
         System.out.println(user.getEmail());
         userDAO dao = new userDAO();
         if(!dao.checkEmailExist(user.getEmail())){
-            dao.SignUp("", "", user.getEmail(), user.getEmail());
+            dao.SignUp("", "", user.getEmail(), "");
         }
         HttpSession session = request.getSession();
         session.setAttribute("account", user);

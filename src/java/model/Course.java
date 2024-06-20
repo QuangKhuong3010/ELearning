@@ -8,39 +8,37 @@ package model;
  *
  * @author Quangkhuong3010
  */
-
-
 public class Course {
-    private int id; 
-    private String name; 
-    private float price; 
-    private int discount;
-    private String level;
-    private String time_duration; 
-    private int category_id; 
-    private String created_date; 
-    private int created_by_id;
+
+    private int id;
     private int constructer_id;
+    private int created_by_id;
+    private String name;
+    private double price;
+    private int level_id;
+    private String time_duration;
+    private int category_id;
+    private String created_date;
     private String avatar;
     private String description;
 
     public Course() {
     }
 
-    public Course(int id, String name, float price, int discount, String level, String time_duration, int category_id, String created_date, int created_by_id, int constructer_id, String avatar, String description) {
+    public Course(int id, int constructer_id, int created_by_id, String name, double price, int level_id, String time_duration, int category_id, String created_date, String avatar, String description) {
         this.id = id;
+        this.constructer_id = constructer_id;
+        this.created_by_id = created_by_id;
         this.name = name;
         this.price = price;
-        this.discount = discount;
-        this.level = level;
+        this.level_id = level_id;
         this.time_duration = time_duration;
         this.category_id = category_id;
         this.created_date = created_date;
-        this.created_by_id = created_by_id;
-        this.constructer_id = constructer_id;
         this.avatar = avatar;
         this.description = description;
     }
+
 
     public int getId() {
         return id;
@@ -58,28 +56,20 @@ public class Course {
         this.name = name;
     }
 
-    public float getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(float price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 
-    public int getDiscount() {
-        return discount;
+    public int getLevel_id() {
+        return level_id;
     }
 
-    public void setDiscount(int discount) {
-        this.discount = discount;
-    }
-
-    public String getLevel() {
-        return level;
-    }
-
-    public void setLevel(String level) {
-        this.level = level;
+    public void setLevel_id(int level_id) {
+        this.level_id = level_id;
     }
 
     public String getTime_duration() {
@@ -106,11 +96,11 @@ public class Course {
         this.created_date = created_date;
     }
 
-    public int getCreate_by_id() {
+    public int getCreated_by_id() {
         return created_by_id;
     }
 
-    public void setCreate_by_id(int created_by_id) {
+    public void setCreated_by_id(int created_by_id) {
         this.created_by_id = created_by_id;
     }
 
@@ -137,7 +127,5 @@ public class Course {
     public void setDescription(String description) {
         this.description = description;
     }
-    
-    
-    
+
 }

@@ -10,7 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import model.Category;
-import model.Rate;
+import model.Feedback;
 
 /**
  *
@@ -18,22 +18,23 @@ import model.Rate;
  */
 public class rateDAO extends DBContext {
 
-    public ArrayList<Rate> getRateOf(int cousre_id) {
+    public ArrayList<Feedback> getRateOf(int cousre_id) {
         String sql = "";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             st.setInt(1, cousre_id);
             ResultSet rs = st.executeQuery();
-            ArrayList<Rate> Rate = new ArrayList<>();
+            ArrayList<Feedback> Rate = new ArrayList<>();
             
             while (rs.next()) {
-                Rate.add(new Rate(
+                Rate.add(new Feedback(
                         rs.getInt(1),
                         rs.getInt(2),
                         rs.getInt(3),
                         rs.getInt(4),
                         rs.getString(5),
-                        rs.getString(6)));
+                        rs.getString(6),
+                        rs.getString(7)));
             }
             return Rate;
         } catch (SQLException e) {
@@ -48,7 +49,7 @@ public class rateDAO extends DBContext {
             PreparedStatement st = connection.prepareStatement(sql);
             st.setInt(1, cousre_id);
             ResultSet rs = st.executeQuery();
-            ArrayList<Rate> Rate = new ArrayList<>();
+            ArrayList<Feedback> Rate = new ArrayList<>();
             int total = 0, index = 0;
             while (rs.next()) {
                 total += rs.getInt(1);

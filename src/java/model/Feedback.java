@@ -8,7 +8,7 @@ package model;
  *
  * @author Quangkhuong3010
  */
-public class Rate {
+public class Feedback {
     private int id;
     private int rating;
     private int course_id;
@@ -17,10 +17,10 @@ public class Rate {
     private String title;
     private String description;
 
-    public Rate() {
+    public Feedback() {
     }
 
-    public Rate(int id, int rating, int course_id, int created_by, String created_date, String title, String description) {
+    public Feedback(int id, int rating, int course_id, int created_by, String created_date, String title, String description) {
         this.id = id;
         this.rating = rating;
         this.course_id = course_id;
