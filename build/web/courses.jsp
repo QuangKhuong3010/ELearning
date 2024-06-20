@@ -242,19 +242,19 @@
                                         <li>
                                             <div class="form-check">
                                                 <input class="form-check-input" type="checkbox" value="" id="difficulty_2">
-                                                <label class="form-check-label" for="difficulty_2">Beginner (55)</label>
+                                                <label class="form-check-label" for="difficulty_2">Beginner</label>
                                             </div>
                                         </li>
                                         <li>
                                             <div class="form-check">
                                                 <input class="form-check-input" type="checkbox" value="" id="difficulty_3">
-                                                <label class="form-check-label" for="difficulty_3">Intermediate (22)</label>
+                                                <label class="form-check-label" for="difficulty_3">Intermediate</label>
                                             </div>
                                         </li>
                                         <li>
                                             <div class="form-check">
                                                 <input class="form-check-input" type="checkbox" value="" id="difficulty_4">
-                                                <label class="form-check-label" for="difficulty_4">High (42)</label>
+                                                <label class="form-check-label" for="difficulty_4">High</label>
                                             </div>
                                         </li>
                                     </ul>
@@ -275,7 +275,7 @@
                                                         <li><i class="fas fa-star"></i></li>
                                                         <li><i class="fas fa-star"></i></li>
                                                     </ul>
-                                                    <span>(42)</span>
+                                                    <span></span>
                                                 </div>
                                             </div>
                                         </li>
@@ -290,7 +290,7 @@
                                                         <li><i class="fas fa-star"></i></li>
                                                         <li class="delete"><i class="fas fa-star"></i></li>
                                                     </ul>
-                                                    <span>(23)</span>
+                                                    <span></span>
                                                 </div>
                                             </div>
                                         </li>
@@ -305,7 +305,7 @@
                                                         <li class="delete"><i class="fas fa-star"></i></li>
                                                         <li class="delete"><i class="fas fa-star"></i></li>
                                                     </ul>
-                                                    <span>(11)</span>
+                                                    <span></span>
                                                 </div>
                                             </div>
                                         </li>
@@ -320,7 +320,7 @@
                                                         <li class="delete"><i class="fas fa-star"></i></li>
                                                         <li class="delete"><i class="fas fa-star"></i></li>
                                                     </ul>
-                                                    <span>(7)</span>
+                                                    <span></span>
                                                 </div>
                                             </div>
                                         </li>
@@ -335,7 +335,7 @@
                                                         <li class="delete"><i class="fas fa-star"></i></li>
                                                         <li class="delete"><i class="fas fa-star"></i></li>
                                                     </ul>
-                                                    <span>(3)</span>
+                                                    <span></span>
                                                 </div>
                                             </div>
                                         </li>
@@ -361,7 +361,6 @@
                                                     <option value="Most Popular">Most Popular</option>
                                                     <option value="popularity">popularity</option>
                                                     <option value="average rating">average rating</option>
-                                                    <option value="latest">latest</option>
                                                     <option value="latest">latest</option>
                                                 </select>
                                             </div>
@@ -420,314 +419,6 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col">
-                                        <div class="courses__item shine__animate-item">
-                                            <div class="courses__item-thumb">
-                                                <a href="course-details.jsp" class="shine__animate-link">
-                                                    <img src="assets/img/courses/course_thumb02.jpg" alt="img">
-                                                </a>
-                                            </div>
-                                            <div class="courses__item-content">
-                                                <ul class="courses__item-meta list-wrap">
-                                                    <li class="courses__item-tag">
-                                                        <a href="Course">Design</a>
-                                                    </li>
-                                                    <li class="avg-rating"><i class="fas fa-star"></i> (4.5 Reviews)</li>
-                                                </ul>
-                                                <h5 class="title"><a href="course-details.jsp">The Complete Graphic Design for Beginners</a></h5>
-                                                <p class="author">By <a href="#">Jenny Wilson</a></p>
-                                                <div class="courses__item-bottom">
-                                                    <div class="button">
-                                                        <a href="course-details.jsp">
-                                                            <span class="text">Enroll Now</span>
-                                                            <i class="flaticon-arrow-right"></i>
-                                                        </a>
-                                                    </div>
-                                                    <h5 class="price">$19.00</h5>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col">
-                                        <div class="courses__item shine__animate-item">
-                                            <div class="courses__item-thumb">
-                                                <a href="course-details.jsp" class="shine__animate-link">
-                                                    <img src="assets/img/courses/course_thumb03.jpg" alt="img">
-                                                </a>
-                                            </div>
-                                            <div class="courses__item-content">
-                                                <ul class="courses__item-meta list-wrap">
-                                                    <li class="courses__item-tag">
-                                                        <a href="Course">Marketing</a>
-                                                    </li>
-                                                    <li class="avg-rating"><i class="fas fa-star"></i> (4.3 Reviews)</li>
-                                                </ul>
-                                                <h5 class="title"><a href="course-details.jsp">Learning Digital Marketing on Facebook</a></h5>
-                                                <p class="author">By <a href="#">Wade Warren</a></p>
-                                                <div class="courses__item-bottom">
-                                                    <div class="button">
-                                                        <a href="course-details.jsp">
-                                                            <span class="text">Enroll Now</span>
-                                                            <i class="flaticon-arrow-right"></i>
-                                                        </a>
-                                                    </div>
-                                                    <h5 class="price">$24.00</h5>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col">
-                                        <div class="courses__item shine__animate-item">
-                                            <div class="courses__item-thumb">
-                                                <a href="course-details.jsp" class="shine__animate-link">
-                                                    <img src="assets/img/courses/course_thumb04.jpg" alt="img">
-                                                </a>
-                                            </div>
-                                            <div class="courses__item-content">
-                                                <ul class="courses__item-meta list-wrap">
-                                                    <li class="courses__item-tag">
-                                                        <a href="Course">Business</a>
-                                                    </li>
-                                                    <li class="avg-rating"><i class="fas fa-star"></i> (4.8 Reviews)</li>
-                                                </ul>
-                                                <h5 class="title"><a href="course-details.jsp">Financial Analyst Training & Investing Course</a></h5>
-                                                <p class="author">By <a href="#">Robert Fox</a></p>
-                                                <div class="courses__item-bottom">
-                                                    <div class="button">
-                                                        <a href="course-details.jsp">
-                                                            <span class="text">Enroll Now</span>
-                                                            <i class="flaticon-arrow-right"></i>
-                                                        </a>
-                                                    </div>
-                                                    <h5 class="price">$12.00</h5>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col">
-                                        <div class="courses__item shine__animate-item">
-                                            <div class="courses__item-thumb">
-                                                <a href="course-details.jsp" class="shine__animate-link">
-                                                    <img src="assets/img/courses/course_thumb05.jpg" alt="img">
-                                                </a>
-                                            </div>
-                                            <div class="courses__item-content">
-                                                <ul class="courses__item-meta list-wrap">
-                                                    <li class="courses__item-tag">
-                                                        <a href="Course">Data Science</a>
-                                                    </li>
-                                                    <li class="avg-rating"><i class="fas fa-star"></i> (4.5 Reviews)</li>
-                                                </ul>
-                                                <h5 class="title"><a href="course-details.jsp">Data Analysis & Visualization Masterclass</a></h5>
-                                                <p class="author">By <a href="#">Guy Hawkins</a></p>
-                                                <div class="courses__item-bottom">
-                                                    <div class="button">
-                                                        <a href="course-details.jsp">
-                                                            <span class="text">Enroll Now</span>
-                                                            <i class="flaticon-arrow-right"></i>
-                                                        </a>
-                                                    </div>
-                                                    <h5 class="price">$27.00</h5>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col">
-                                        <div class="courses__item shine__animate-item">
-                                            <div class="courses__item-thumb">
-                                                <a href="course-details.jsp" class="shine__animate-link">
-                                                    <img src="assets/img/courses/course_thumb06.jpg" alt="img">
-                                                </a>
-                                            </div>
-                                            <div class="courses__item-content">
-                                                <ul class="courses__item-meta list-wrap">
-                                                    <li class="courses__item-tag">
-                                                        <a href="Course">Mathematic</a>
-                                                    </li>
-                                                    <li class="avg-rating"><i class="fas fa-star"></i> (4.7 Reviews)</li>
-                                                </ul>
-                                                <h5 class="title"><a href="course-details.jsp">Master the Fundamentals of Math</a></h5>
-                                                <p class="author">By <a href="#">Sawpawlo Mark</a></p>
-                                                <div class="courses__item-bottom">
-                                                    <div class="button">
-                                                        <a href="course-details.jsp">
-                                                            <span class="text">Enroll Now</span>
-                                                            <i class="flaticon-arrow-right"></i>
-                                                        </a>
-                                                    </div>
-                                                    <h5 class="price">$10.00</h5>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col">
-                                        <div class="courses__item shine__animate-item">
-                                            <div class="courses__item-thumb">
-                                                <a href="course-details.jsp" class="shine__animate-link">
-                                                    <img src="assets/img/courses/course_thumb07.jpg" alt="img">
-                                                </a>
-                                            </div>
-                                            <div class="courses__item-content">
-                                                <ul class="courses__item-meta list-wrap">
-                                                    <li class="courses__item-tag">
-                                                        <a href="Course">Business</a>
-                                                    </li>
-                                                    <li class="avg-rating"><i class="fas fa-star"></i> (4.8 Reviews)</li>
-                                                </ul>
-                                                <h5 class="title"><a href="course-details.jsp">How To Build A Localized Website With Hugo And Strapi</a></h5>
-                                                <p class="author">By <a href="#">David Millar</a></p>
-                                                <div class="courses__item-bottom">
-                                                    <div class="button">
-                                                        <a href="course-details.jsp">
-                                                            <span class="text">Enroll Now</span>
-                                                            <i class="flaticon-arrow-right"></i>
-                                                        </a>
-                                                    </div>
-                                                    <h5 class="price">$11.00</h5>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col">
-                                        <div class="courses__item shine__animate-item">
-                                            <div class="courses__item-thumb">
-                                                <a href="course-details.jsp" class="shine__animate-link">
-                                                    <img src="assets/img/courses/course_thumb08.jpg" alt="img">
-                                                </a>
-                                            </div>
-                                            <div class="courses__item-content">
-                                                <ul class="courses__item-meta list-wrap">
-                                                    <li class="courses__item-tag">
-                                                        <a href="Course">Desing</a>
-                                                    </li>
-                                                    <li class="avg-rating"><i class="fas fa-star"></i> (4.5 Reviews)</li>
-                                                </ul>
-                                                <h5 class="title"><a href="course-details.jsp">Designing Effective Pricing Plans UX</a></h5>
-                                                <p class="author">By <a href="#">Sawpawlo Mark</a></p>
-                                                <div class="courses__item-bottom">
-                                                    <div class="button">
-                                                        <a href="course-details.jsp">
-                                                            <span class="text">Enroll Now</span>
-                                                            <i class="flaticon-arrow-right"></i>
-                                                        </a>
-                                                    </div>
-                                                    <h5 class="price">$17.00</h5>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col">
-                                        <div class="courses__item shine__animate-item">
-                                            <div class="courses__item-thumb">
-                                                <a href="course-details.jsp" class="shine__animate-link">
-                                                    <img src="assets/img/courses/course_thumb09.jpg" alt="img">
-                                                </a>
-                                            </div>
-                                            <div class="courses__item-content">
-                                                <ul class="courses__item-meta list-wrap">
-                                                    <li class="courses__item-tag">
-                                                        <a href="Course">Language</a>
-                                                    </li>
-                                                    <li class="avg-rating"><i class="fas fa-star"></i> (4.6 Reviews)</li>
-                                                </ul>
-                                                <h5 class="title"><a href="course-details.jsp">Accelerating UX Maturity With A Breakthrough Project</a></h5>
-                                                <p class="author">By <a href="#">David Millar</a></p>
-                                                <div class="courses__item-bottom">
-                                                    <div class="button">
-                                                        <a href="course-details.jsp">
-                                                            <span class="text">Enroll Now</span>
-                                                            <i class="flaticon-arrow-right"></i>
-                                                        </a>
-                                                    </div>
-                                                    <h5 class="price">$22.00</h5>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col">
-                                        <div class="courses__item shine__animate-item">
-                                            <div class="courses__item-thumb">
-                                                <a href="course-details.jsp" class="shine__animate-link">
-                                                    <img src="assets/img/courses/course_thumb10.jpg" alt="img">
-                                                </a>
-                                            </div>
-                                            <div class="courses__item-content">
-                                                <ul class="courses__item-meta list-wrap">
-                                                    <li class="courses__item-tag">
-                                                        <a href="Course">Creative</a>
-                                                    </li>
-                                                    <li class="avg-rating"><i class="fas fa-star"></i> (4.7 Reviews)</li>
-                                                </ul>
-                                                <h5 class="title"><a href="course-details.jsp">Demystifying The New Gatsby Framework</a></h5>
-                                                <p class="author">By <a href="#">Jack & Jon</a></p>
-                                                <div class="courses__item-bottom">
-                                                    <div class="button">
-                                                        <a href="course-details.jsp">
-                                                            <span class="text">Enroll Now</span>
-                                                            <i class="flaticon-arrow-right"></i>
-                                                        </a>
-                                                    </div>
-                                                    <h5 class="price">$29.00</h5>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col">
-                                        <div class="courses__item shine__animate-item">
-                                            <div class="courses__item-thumb">
-                                                <a href="course-details.jsp" class="shine__animate-link">
-                                                    <img src="assets/img/courses/course_thumb11.jpg" alt="img">
-                                                </a>
-                                            </div>
-                                            <div class="courses__item-content">
-                                                <ul class="courses__item-meta list-wrap">
-                                                    <li class="courses__item-tag">
-                                                        <a href="Course">Data</a>
-                                                    </li>
-                                                    <li class="avg-rating"><i class="fas fa-star"></i> (4.8 Reviews)</li>
-                                                </ul>
-                                                <h5 class="title"><a href="course-details.jsp">Voice Control Usability Considerations For Partially</a></h5>
-                                                <p class="author">By <a href="#">Lily Rebeca</a></p>
-                                                <div class="courses__item-bottom">
-                                                    <div class="button">
-                                                        <a href="course-details.jsp">
-                                                            <span class="text">Enroll Now</span>
-                                                            <i class="flaticon-arrow-right"></i>
-                                                        </a>
-                                                    </div>
-                                                    <h5 class="price">$12.00</h5>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col">
-                                        <div class="courses__item shine__animate-item">
-                                            <div class="courses__item-thumb">
-                                                <a href="course-details.jsp" class="shine__animate-link">
-                                                    <img src="assets/img/courses/course_thumb12.jpg" alt="img">
-                                                </a>
-                                            </div>
-                                            <div class="courses__item-content">
-                                                <ul class="courses__item-meta list-wrap">
-                                                    <li class="courses__item-tag">
-                                                        <a href="Course">Finance</a>
-                                                    </li>
-                                                    <li class="avg-rating"><i class="fas fa-star"></i> (4.5 Reviews)</li>
-                                                </ul>
-                                                <h5 class="title"><a href="course-details.jsp">Things I Wish I?d Known Earlier In My Career</a></h5>
-                                                <p class="author">By <a href="#">Sawpawlo Mark</a></p>
-                                                <div class="courses__item-bottom">
-                                                    <div class="button">
-                                                        <a href="course-details.jsp">
-                                                            <span class="text">Enroll Now</span>
-                                                            <i class="flaticon-arrow-right"></i>
-                                                        </a>
-                                                    </div>
-                                                    <h5 class="price">$9.00</h5>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
                                 </div>
                                 <nav class="pagination__wrap mt-30">
                                     <ul class="list-wrap">
@@ -771,193 +462,6 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col">
-                                        <div class="courses__item courses__item-three shine__animate-item">
-                                            <div class="courses__item-thumb">
-                                                <a href="course-details.jsp" class="shine__animate-link">
-                                                    <img src="assets/img/courses/course_thumb02.jpg" alt="img">
-                                                </a>
-                                            </div>
-                                            <div class="courses__item-content">
-                                                <ul class="courses__item-meta list-wrap">
-                                                    <li class="courses__item-tag">
-                                                        <a href="Course">Design</a>
-                                                        <div class="avg-rating">
-                                                            <i class="fas fa-star"></i> (4.5 Reviews)
-                                                        </div>
-                                                    </li>
-                                                    <li class="price">$41.00</li>
-                                                </ul>
-                                                <h5 class="title"><a href="course-details.jsp">Powerful Image Optimization Tools for this year</a></h5>
-                                                <p class="author">By <a href="#">Jenny Wilson</a></p>
-                                                <p class="info">when an unknown printer took a galley of type and scrambled type specimen book It has survived not only.</p>
-                                                <div class="courses__item-bottom">
-                                                    <div class="button">
-                                                        <a href="course-details.jsp">
-                                                            <span class="text">Enroll Now</span>
-                                                            <i class="flaticon-arrow-right"></i>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col">
-                                        <div class="courses__item courses__item-three shine__animate-item">
-                                            <div class="courses__item-thumb">
-                                                <a href="course-details.jsp" class="shine__animate-link">
-                                                    <img src="assets/img/courses/course_thumb03.jpg" alt="img">
-                                                </a>
-                                            </div>
-                                            <div class="courses__item-content">
-                                                <ul class="courses__item-meta list-wrap">
-                                                    <li class="courses__item-tag">
-                                                        <a href="Course">Marketing</a>
-                                                        <div class="avg-rating">
-                                                            <i class="fas fa-star"></i> (4.6 Reviews)
-                                                        </div>
-                                                    </li>
-                                                    <li class="price"><del>$24.00</del>$12.00</li>
-                                                </ul>
-                                                <h5 class="title"><a href="course-details.jsp">Learning JavaScript With Imagination</a></h5>
-                                                <p class="author">By <a href="#">Wade Warren</a></p>
-                                                <p class="info">when an unknown printer took a galley of type and scrambled type specimen book It has survived not only.</p>
-                                                <div class="courses__item-bottom">
-                                                    <div class="button">
-                                                        <a href="course-details.jsp">
-                                                            <span class="text">Enroll Now</span>
-                                                            <i class="flaticon-arrow-right"></i>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col">
-                                        <div class="courses__item courses__item-three shine__animate-item">
-                                            <div class="courses__item-thumb">
-                                                <a href="course-details.jsp" class="shine__animate-link">
-                                                    <img src="assets/img/courses/course_thumb04.jpg" alt="img">
-                                                </a>
-                                            </div>
-                                            <div class="courses__item-content">
-                                                <ul class="courses__item-meta list-wrap">
-                                                    <li class="courses__item-tag">
-                                                        <a href="Course">Finance</a>
-                                                        <div class="avg-rating">
-                                                            <i class="fas fa-star"></i> (4.9 Reviews)
-                                                        </div>
-                                                    </li>
-                                                    <li class="price"><del>$32.00</del>$19.00</li>
-                                                </ul>
-                                                <h5 class="title"><a href="course-details.jsp">Resolving Conflicts Between Designers And Engineers</a></h5>
-                                                <p class="author">By <a href="#">Robert Fox</a></p>
-                                                <p class="info">when an unknown printer took a galley of type and scrambled type specimen book It has survived not only.</p>
-                                                <div class="courses__item-bottom">
-                                                    <div class="button">
-                                                        <a href="course-details.jsp">
-                                                            <span class="text">Enroll Now</span>
-                                                            <i class="flaticon-arrow-right"></i>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col">
-                                        <div class="courses__item courses__item-three shine__animate-item">
-                                            <div class="courses__item-thumb">
-                                                <a href="course-details.jsp" class="shine__animate-link">
-                                                    <img src="assets/img/courses/course_thumb05.jpg" alt="img">
-                                                </a>
-                                            </div>
-                                            <div class="courses__item-content">
-                                                <ul class="courses__item-meta list-wrap">
-                                                    <li class="courses__item-tag">
-                                                        <a href="Course">Data Science</a>
-                                                        <div class="avg-rating">
-                                                            <i class="fas fa-star"></i> (4.7 Reviews)
-                                                        </div>
-                                                    </li>
-                                                    <li class="price"><del>$50.00</del>$40.00</li>
-                                                </ul>
-                                                <h5 class="title"><a href="course-details.jsp">A Look At Remix And The Differences With Next.js</a></h5>
-                                                <p class="author">By <a href="#">Guy Hawkins</a></p>
-                                                <p class="info">when an unknown printer took a galley of type and scrambled type specimen book It has survived not only.</p>
-                                                <div class="courses__item-bottom">
-                                                    <div class="button">
-                                                        <a href="course-details.jsp">
-                                                            <span class="text">Enroll Now</span>
-                                                            <i class="flaticon-arrow-right"></i>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col">
-                                        <div class="courses__item courses__item-three shine__animate-item">
-                                            <div class="courses__item-thumb">
-                                                <a href="course-details.jsp" class="shine__animate-link">
-                                                    <img src="assets/img/courses/course_thumb06.jpg" alt="img">
-                                                </a>
-                                            </div>
-                                            <div class="courses__item-content">
-                                                <ul class="courses__item-meta list-wrap">
-                                                    <li class="courses__item-tag">
-                                                        <a href="Course">Mathematic</a>
-                                                        <div class="avg-rating">
-                                                            <i class="fas fa-star"></i> (4.8 Reviews)
-                                                        </div>
-                                                    </li>
-                                                    <li class="price"><del>$30.00</del>$19.00</li>
-                                                </ul>
-                                                <h5 class="title"><a href="course-details.jsp">An Accessibility-First Approach To Chart Visual</a></h5>
-                                                <p class="author">By <a href="#">Sawpawlo Mark</a></p>
-                                                <p class="info">when an unknown printer took a galley of type and scrambled type specimen book It has survived not only.</p>
-                                                <div class="courses__item-bottom">
-                                                    <div class="button">
-                                                        <a href="course-details.jsp">
-                                                            <span class="text">Enroll Now</span>
-                                                            <i class="flaticon-arrow-right"></i>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col">
-                                        <div class="courses__item courses__item-three shine__animate-item">
-                                            <div class="courses__item-thumb">
-                                                <a href="course-details.jsp" class="shine__animate-link">
-                                                    <img src="assets/img/courses/course_thumb07.jpg" alt="img">
-                                                </a>
-                                            </div>
-                                            <div class="courses__item-content">
-                                                <ul class="courses__item-meta list-wrap">
-                                                    <li class="courses__item-tag">
-                                                        <a href="Course">Development</a>
-                                                        <div class="avg-rating">
-                                                            <i class="fas fa-star"></i> (4.6 Reviews)
-                                                        </div>
-                                                    </li>
-                                                    <li class="price">$11.00</li>
-                                                </ul>
-                                                <h5 class="title"><a href="course-details.jsp">How To Build A Localized Website With Hugo And Strapi</a></h5>
-                                                <p class="author">By <a href="#">Robert Fox</a></p>
-                                                <p class="info">when an unknown printer took a galley of type and scrambled type specimen book It has survived not only.</p>
-                                                <div class="courses__item-bottom">
-                                                    <div class="button">
-                                                        <a href="course-details.jsp">
-                                                            <span class="text">Enroll Now</span>
-                                                            <i class="flaticon-arrow-right"></i>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
                                 <nav class="pagination__wrap mt-30">
                                     <ul class="list-wrap">
                                         <li class="active"><a href="#">1</a></li>

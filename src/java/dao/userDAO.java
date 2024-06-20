@@ -11,7 +11,7 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import model.User;
 
-public class DAO extends DBContext {
+public class userDAO extends DBContext {
 
     public User login(String email, String pass) {
         String sql = "SELECT [user_id]\n"

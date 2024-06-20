@@ -5,26 +5,18 @@
 
 package control;
 
-import dao.categoryDAO;
-import dao.courseDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
-import java.util.Locale;
-import model.Category;
-import model.Course;
 
 /**
  *
- * @author Admin
+ * @author Quangkhuong3010
  */
-@WebServlet(name="Courses", urlPatterns={"/Courses"})
-public class Courses extends HttpServlet {
+public class ConfirmAccount extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -41,10 +33,10 @@ public class Courses extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Courses</title>");  
+            out.println("<title>Servlet ConfirmAccount</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet Courses at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet ConfirmAccount at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -61,15 +53,9 @@ public class Courses extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        categoryDAO categodyDAO = new categoryDAO();
-        courseDAO courseDAO= new courseDAO();
-        ArrayList<Category> listCategory = categodyDAO.getAllCategory();
-        ArrayList<Course> listCourse = courseDAO.getAllCourse();
-        request.setAttribute("categories", listCategory);
-        request.setAttribute("courses", listCourse);
-        request.getRequestDispatcher("courses.jsp").forward(request, response);
+        request.getRequestDispatcher("confirmaccount.jsp").forward(request, response);
     } 
-    //a
+
     /** 
      * Handles the HTTP <code>POST</code> method.
      * @param request servlet request

@@ -144,6 +144,7 @@
                 </div>
             </div>
         </header>
+
         <!-- header-area-end -->
 
 
@@ -202,7 +203,7 @@
                                             <label for="terms-check" class="form-check-label">Remember me</label>
                                         </div>
                                         <div class="account__check-forgot">
-                                            <a href="Registration">Forgot Password?</a>
+                                            <a href="ForgotPassword">Forgotten password?</a>
                                         </div>
                                     </div>
                                     <button type="submit" class="btn btn-two arrow-btn">Sign In<img src="assets/img/icons/right_arrow.svg" alt="img" class="injectable"></button>

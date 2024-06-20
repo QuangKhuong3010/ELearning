@@ -4,7 +4,7 @@
  */
 package control;
 
-import dao.DAO;
+import dao.userDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -52,7 +52,7 @@ public class Login extends HttpServlet {
             response.addCookie(ce);
             response.addCookie(cp);
             response.addCookie(cr);
-        DAO dao = new DAO();
+        userDAO dao = new userDAO();
         User user = dao.login(email, pass);
         System.out.println(user);
         if (user == null) {

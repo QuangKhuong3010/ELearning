@@ -6,7 +6,7 @@ package control;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-import dao.DAO;
+import dao.userDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -20,7 +20,7 @@ import org.apache.catalina.connector.ClientAbortException;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.fluent.Form;
 import org.apache.http.client.fluent.Request;
-import util.Constants;
+import common.Constants;
 
 /**
  *
@@ -74,7 +74,7 @@ public class LoginGoogleHandler extends HttpServlet {
         String accessToken = getToken(code);
         User user = getUserInfo(accessToken);
         System.out.println(user.getEmail());
-        DAO dao = new DAO();
+        userDAO dao = new userDAO();
         if(!dao.checkEmailExist(user.getEmail())){
             dao.SignUp("", "", user.getEmail(), user.getEmail());
         }

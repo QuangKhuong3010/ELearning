@@ -5,26 +5,25 @@
 
 package control;
 
-import dao.categoryDAO;
-import dao.courseDAO;
+import dao.userDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
-import java.util.Locale;
-import model.Category;
-import model.Course;
+import util.Email;
+import util.generateOTP;
 
 /**
  *
- * @author Admin
+ * @author Quangkhuong3010
  */
-@WebServlet(name="Courses", urlPatterns={"/Courses"})
-public class Courses extends HttpServlet {
+
+@WebServlet(name="ForgotPassword", urlPatterns={"/ForgotPassword"})
+public class ForgotPassword extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -41,10 +40,10 @@ public class Courses extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Courses</title>");  
+            out.println("<title>Servlet ForgotPassword</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet Courses at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet ForgotPassword at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -61,15 +60,9 @@ public class Courses extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        categoryDAO categodyDAO = new categoryDAO();
-        courseDAO courseDAO= new courseDAO();
-        ArrayList<Category> listCategory = categodyDAO.getAllCategory();
-        ArrayList<Course> listCourse = courseDAO.getAllCourse();
-        request.setAttribute("categories", listCategory);
-        request.setAttribute("courses", listCourse);
-        request.getRequestDispatcher("courses.jsp").forward(request, response);
+        request.getRequestDispatcher("forgotpassword.jsp").forward(request, response);
     } 
-    //a
+
     /** 
      * Handles the HTTP <code>POST</code> method.
      * @param request servlet request
@@ -80,7 +73,24 @@ public class Courses extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+        String email = request.getParameter("email");
+        userDAO user = new userDAO();
+        if(user.checkEmailExist(email)){
+            generateOTP generate = new generateOTP();
+            String otp = generate.generateOTP(6);
+            Cookie cookieOtp = new Cookie("otp", otp);
+            Cookie cookieEmail = new Cookie("cEmail", email);
+            cookieOtp.setMaxAge(60 * 5);
+            cookieEmail.setMaxAge(60 * 60);
+            Email sendEmail = new Email();
+            sendEmail.sendEmail(email, otp);
+            response.addCookie(cookieOtp);
+            response.addCookie(cookieEmail);
+            response.sendRedirect("ConfirmAccount");
+        }else{
+            request.setAttribute("error", "Email not exist");
+            request.getRequestDispatcher("ForgotPassword").forward(request, response);
+        }
     }
 
     /** 

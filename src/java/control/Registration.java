@@ -5,7 +5,7 @@
 
 package control;
 
-import dao.DAO;
+import dao.userDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -54,7 +54,7 @@ public class Registration extends HttpServlet {
         String pass = request.getParameter("password");
         String repass = request.getParameter("repass");
         String mess;
-        DAO new_user = new DAO();
+        userDAO new_user = new userDAO();
         if (!pass.equals(repass)) {
             mess = "Password and Confirm password not match";
             request.setAttribute("mess", mess);
