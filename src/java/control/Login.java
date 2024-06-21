@@ -35,26 +35,25 @@ public class Login extends HttpServlet {
         String email = request.getParameter("email");
         String pass = request.getParameter("password");
         String rem = request.getParameter("remember");
-            
-            Cookie ce = new Cookie("cemail", email);
-            Cookie cp = new Cookie("cpass", pass);
-            Cookie cr = new Cookie("crem", rem);
-            if(rem != null){
-                ce.setMaxAge(7 * 60 * 60 * 24);
-                cp.setMaxAge(7 * 60 * 60 * 24);
-                cr.setMaxAge(7 * 60 * 60 * 24);
-            }else{
-                
-                ce.setMaxAge(0);
-                cp.setMaxAge(0);
-                cr.setMaxAge(0);
-            }
-            response.addCookie(ce);
-            response.addCookie(cp);
-            response.addCookie(cr);
+
+        Cookie ce = new Cookie("cemail", email);
+        Cookie cp = new Cookie("cpass", pass);
+        Cookie cr = new Cookie("crem", rem);
+        if (rem != null) {
+            ce.setMaxAge(7 * 60 * 60 * 24);
+            cp.setMaxAge(7 * 60 * 60 * 24);
+            cr.setMaxAge(7 * 60 * 60 * 24);
+        } else {
+
+            ce.setMaxAge(0);
+            cp.setMaxAge(0);
+            cr.setMaxAge(0);
+        }
+        response.addCookie(ce);
+        response.addCookie(cp);
+        response.addCookie(cr);
         userDAO dao = new userDAO();
         User user = dao.login(email, pass);
-        System.out.println(user);
         if (user == null) {
             request.setAttribute("mess", "Wrong email or password");
             request.getRequestDispatcher("Login").forward(request, response);

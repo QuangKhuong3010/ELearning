@@ -84,42 +84,9 @@
                                     </div>
                                     <div class="tgmenu__navbar-wrap tgmenu__main-menu d-none d-xl-flex">
                                         <ul class="navigation">
-                                            <li class="button"><a href="#">Home</a></li>
+                                            <li class="button"><a href="HomePage">Home</a></li>
                                             <li class="button"><a href="Courses">Courses List</a></li>
-                                            <li class="menu-item-has-children"><a href="#">Dashboard</a>
-                                                <ul class="sub-menu">
-                                                    <li class="menu-item-has-children">
-                                                        <a href="instructor-dashboard.jsp">Instructor Dashboard</a>
-                                                        <ul class="sub-menu">
-                                                            <li><a href="instructor-dashboard.jsp">Dashboard</a></li>
-                                                            <li><a href="instructor-profile.jsp">Profile</a></li>
-                                                            <li><a href="instructor-enrolled-courses.jsp">Enrolled Courses</a></li>
-                                                            <li><a href="instructor-wishlist.jsp">Wishlist</a></li>
-                                                            <li><a href="instructor-review.jsp">Reviews</a></li>
-                                                            <li><a href="instructor-attempts.jsp">My Quiz Attempts</a></li>
-                                                            <li><a href="instructor-history.jsp">Order History</a></li>
-                                                            <li><a href="instructor-courses.jsp">My Course</a></li>
-                                                            <li><a href="instructor-announcement.jsp">Announcements</a></li>
-                                                            <li><a href="instructor-quiz.jsp">Quiz Attempts</a></li>
-                                                            <li><a href="instructor-assignment.jsp">Assignments</a></li>
-                                                            <li><a href="instructor-setting.jsp">Settings</a></li>
-                                                        </ul>
-                                                    </li>
-                                                    <li class="menu-item-has-children"><a href="student-dashboard.jsp">Student Dashboard</a>
-                                                        <ul class="sub-menu">
-                                                            <li><a href="student-dashboard.jsp">Dashboard</a></li>
-                                                            <li><a href="student-profile.jsp">Profile</a></li>
-                                                            <li><a href="student-enrolled-courses.jsp">Enrolled Courses</a></li>
-                                                            <li><a href="student-wishlist.jsp">Wishlist</a></li>
-                                                            <li><a href="student-review.jsp">Reviews</a></li>
-                                                            <li><a href="student-attempts.jsp">My Quiz Attempts</a></li>
-                                                            <li><a href="student-history.jsp">Order History</a></li>
-                                                            <li><a href="student-setting.jsp">Settings</a></li>
-                                                        </ul>
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                            <li class="button"><a href="#">Profile</a></li>
+                                            <li class="button"><a href="#">About Us</a></li>
                                         </ul>
                                     </div>
                                     <div class="tgmenu__search d-none d-md-block">
@@ -188,7 +155,7 @@
                                 <h2 class="title">Create Your Account</h2>
                                 <p>Hey there! Ready to join the party? We just need a few details from you to get <br> started. Let's do this!</p>
                                 <div class="account__social">
-                                    <a href="#" class="account__social-btn">
+                                    <a href="https://accounts.google.com/o/oauth2/auth?scope=email&redirect_uri=http://localhost:8080/ELearning/LoginGoogleHandler&response_type=code&client_id=407572289292-0o85s9ip7lffdbee2deojs3u0lhktsvf.apps.googleusercontent.com&approval_prompt=force  " class="account__social-btn">
                                         <img src="assets/img/icons/google.svg" alt="img">
                                         Continue with google
                                     </a>

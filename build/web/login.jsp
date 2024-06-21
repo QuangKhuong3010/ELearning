@@ -86,40 +86,7 @@
                                         <ul class="navigation">
                                             <li class="button"><a href="HomePage">Home</a></li>
                                             <li class="button"><a href="Courses">Courses List</a></li>
-                                            <li class="menu-item-has-children"><a href="#">Dashboard</a>
-                                                <ul class="sub-menu">
-                                                    <li class="menu-item-has-children">
-                                                        <a href="instructor-dashboard.jsp">Instructor Dashboard</a>
-                                                        <ul class="sub-menu">
-                                                            <li><a href="instructor-dashboard.jsp">Dashboard</a></li>
-                                                            <li><a href="instructor-profile.jsp">Profile</a></li>
-                                                            <li><a href="instructor-enrolled-courses.jsp">Enrolled Courses</a></li>
-                                                            <li><a href="instructor-wishlist.jsp">Wishlist</a></li>
-                                                            <li><a href="instructor-review.jsp">Reviews</a></li>
-                                                            <li><a href="instructor-attempts.jsp">My Quiz Attempts</a></li>
-                                                            <li><a href="instructor-history.jsp">Order History</a></li>
-                                                            <li><a href="instructor-courses.jsp">My Course</a></li>
-                                                            <li><a href="instructor-announcement.jsp">Announcements</a></li>
-                                                            <li><a href="instructor-quiz.jsp">Quiz Attempts</a></li>
-                                                            <li><a href="instructor-assignment.jsp">Assignments</a></li>
-                                                            <li><a href="instructor-setting.jsp">Settings</a></li>
-                                                        </ul>
-                                                    </li>
-                                                    <li class="menu-item-has-children"><a href="student-dashboard.jsp">Student Dashboard</a>
-                                                        <ul class="sub-menu">
-                                                            <li><a href="student-dashboard.jsp">Dashboard</a></li>
-                                                            <li><a href="student-profile.jsp">Profile</a></li>
-                                                            <li><a href="student-enrolled-courses.jsp">Enrolled Courses</a></li>
-                                                            <li><a href="student-wishlist.jsp">Wishlist</a></li>
-                                                            <li><a href="student-review.jsp">Reviews</a></li>
-                                                            <li><a href="student-attempts.jsp">My Quiz Attempts</a></li>
-                                                            <li><a href="student-history.jsp">Order History</a></li>
-                                                            <li><a href="student-setting.jsp">Settings</a></li>
-                                                        </ul>
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                            <li class="button"><a href="#">Profile</a></li>
+                                            <li class="button"><a href="#">About Us</a></li>
                                         </ul>
                                     </div>
                                     <div class="tgmenu__search d-none d-md-block">

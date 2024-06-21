@@ -3,10 +3,8 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/Learning/ELearning/web/courses.jsp</file>
-            <file>file:/D:/Learning/ELearning/src/java/dao/courseDAO.java</file>
-            <file>file:/D:/Learning/ELearning/src/java/model/Course.java</file>
-            <file>file:/D:/Learning/ELearning/src/java/control/Courses.java</file>
+            <file>file:/D:/Learning/ELearning/src/java/dao/userDAO.java</file>
+            <file>file:/D:/Learning/ELearning/src/java/dao/rateDAO.java</file>
         </group>
     </open-files>
 </project-private>

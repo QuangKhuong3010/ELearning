@@ -75,22 +75,23 @@ public class ForgotPassword extends HttpServlet {
     throws ServletException, IOException {
         String email = request.getParameter("email");
         userDAO user = new userDAO();
-        if(user.checkEmailExist(email)){
-            generateOTP generate = new generateOTP();
-            String otp = generate.generateOTP(6);
-            Cookie cookieOtp = new Cookie("otp", otp);
-            Cookie cookieEmail = new Cookie("cEmail", email);
-            cookieOtp.setMaxAge(60 * 5);
-            cookieEmail.setMaxAge(60 * 60);
-            Email sendEmail = new Email();
-            sendEmail.sendEmail(email, otp);
-            response.addCookie(cookieOtp);
-            response.addCookie(cookieEmail);
-            response.sendRedirect("ConfirmAccount");
-        }else{
-            request.setAttribute("error", "Email not exist");
-            request.getRequestDispatcher("ForgotPassword").forward(request, response);
-        }
+        response.sendRedirect("ConfirmAccount");
+//        if(user.checkEmailExist(email)){
+//            generateOTP generate = new generateOTP();
+//            String otp = generate.generateOTP(6);
+//            Cookie cookieOtp = new Cookie("otp", otp);
+//            Cookie cookieEmail = new Cookie("cEmail", email);
+//            cookieOtp.setMaxAge(60 * 5);
+//            cookieEmail.setMaxAge(60 * 60);
+//            Email sendEmail = new Email();
+//            sendEmail.sendEmail(email, otp);
+//            response.addCookie(cookieOtp);
+//            response.addCookie(cookieEmail);
+//            response.sendRedirect("ConfirmAccount");
+//        }else{
+//            request.setAttribute("error", "Email not exist");
+//            request.getRequestDispatcher("ForgotPassword").forward(request, response);
+//        }
     }
 
     /** 

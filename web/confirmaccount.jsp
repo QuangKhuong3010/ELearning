@@ -86,40 +86,7 @@
                                         <ul class="navigation">
                                             <li class="button"><a href="HomePage">Home</a></li>
                                             <li class="button"><a href="Courses">Courses List</a></li>
-                                            <li class="menu-item-has-children"><a href="#">Dashboard</a>
-                                                <ul class="sub-menu">
-                                                    <li class="menu-item-has-children">
-                                                        <a href="instructor-dashboard.jsp">Instructor Dashboard</a>
-                                                        <ul class="sub-menu">
-                                                            <li><a href="instructor-dashboard.jsp">Dashboard</a></li>
-                                                            <li><a href="instructor-profile.jsp">Profile</a></li>
-                                                            <li><a href="instructor-enrolled-courses.jsp">Enrolled Courses</a></li>
-                                                            <li><a href="instructor-wishlist.jsp">Wishlist</a></li>
-                                                            <li><a href="instructor-review.jsp">Reviews</a></li>
-                                                            <li><a href="instructor-attempts.jsp">My Quiz Attempts</a></li>
-                                                            <li><a href="instructor-history.jsp">Order History</a></li>
-                                                            <li><a href="instructor-courses.jsp">My Course</a></li>
-                                                            <li><a href="instructor-announcement.jsp">Announcements</a></li>
-                                                            <li><a href="instructor-quiz.jsp">Quiz Attempts</a></li>
-                                                            <li><a href="instructor-assignment.jsp">Assignments</a></li>
-                                                            <li><a href="instructor-setting.jsp">Settings</a></li>
-                                                        </ul>
-                                                    </li>
-                                                    <li class="menu-item-has-children"><a href="student-dashboard.jsp">Student Dashboard</a>
-                                                        <ul class="sub-menu">
-                                                            <li><a href="student-dashboard.jsp">Dashboard</a></li>
-                                                            <li><a href="student-profile.jsp">Profile</a></li>
-                                                            <li><a href="student-enrolled-courses.jsp">Enrolled Courses</a></li>
-                                                            <li><a href="student-wishlist.jsp">Wishlist</a></li>
-                                                            <li><a href="student-review.jsp">Reviews</a></li>
-                                                            <li><a href="student-attempts.jsp">My Quiz Attempts</a></li>
-                                                            <li><a href="student-history.jsp">Order History</a></li>
-                                                            <li><a href="student-setting.jsp">Settings</a></li>
-                                                        </ul>
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                            <li class="button"><a href="#">Profile</a></li>
+                                            <li class="button"><a href="#">About Us</a></li>
                                         </ul>
                                     </div>
                                     <div class="tgmenu__search d-none d-md-block">
@@ -156,13 +123,13 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="breadcrumb__content">
-                                <h3 class="title">Forgot Password</h3>
+                                <h3 class="title">Reset Password</h3>
                                 <nav class="breadcrumb">
                                     <span property="itemListElement" typeof="ListItem">
                                         <a href="HomePage">Home</a>
                                     </span>
                                     <span class="breadcrumb-separator"><i class="fas fa-angle-right"></i></span>
-                                    <span property="itemListElement" typeof="ListItem">Forgot Password</span>
+                                    <span property="itemListElement" typeof="ListItem">Reset Password</span>
                                 </nav>
                             </div>
                         </div>
@@ -184,14 +151,23 @@
                     <div class="row justify-content-center">
                         <div class="col-xl-6 col-lg-8">
                             <div class="singUp-wrap">
-                                <h2 class="title">Forgot Password</h2>
-                                <form action="ForgotPassword" method="post" class="account__form">
+                                <h2 class="title">Create New Password</h2>
+                                <p>Enter your new password and confirm it to reset your password.</p>
+                                <form action="ConfirmAccount" method="post" class="account__form">
                                     <div class="form-grp">
-                                        <label for="email">Email</label>
-                                        <input name="email" type="email" id="email" placeholder="email">
+                                        <label for="password">Type your OTP</label>
+                                        <input name="otp" type="otp" id="otp" placeholder="otp">
+                                    </div>
+                                    <div class="form-grp">
+                                        <label for="password">Password</label>
+                                        <input name="password" type="password" id="password" placeholder="password">
+                                    </div>
+                                    <div class="form-grp">
+                                        <label for="confirm-password">Confirm Password</label>
+                                        <input name="repass" type="password" id="repass" placeholder="Confirm Password">
                                     </div>
                                     <c:if test="${requestScope.mess!=null}"> <div class="alert-danger alert" >${requestScope.mess}</div> </c:if>
-                                    <button type="submit" class="btn btn-two arrow-btn">Send otp to email<img src="assets/img/icons/right_arrow.svg" alt="img" class="injectable"></button>
+                                    <button type="submit" class="btn btn-two arrow-btn">Confirm<img src="assets/img/icons/right_arrow.svg" alt="img" class="injectable"></button>
                                 </form>
                                 <div class="account__switch">
                                     <p>You want cancel that?<a href="Login">Cancel</a></p>

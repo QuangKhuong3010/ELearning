@@ -52,11 +52,11 @@ public class Email {
             msg.setContent("<html>"
                     + "<body>"
                     + "<h1>"
-                    + "Coursera"
+                    + "ELearning"
                     + "</h1>"
                     + "Mã OTP lấy lại mật khẩu của bạn là: "
                     + "<b>" + otp + "</b>"
-                    + "<p>Mã otp này sẽ tồn tại trong 5p</p>"
+                    + "<p>Mã otp này sẽ tồn tại trong 5m</p>"
                     + "</body>"
                     + "</html>",
                     "text/html;charset = UTF-8");

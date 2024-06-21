@@ -61,7 +61,7 @@ public class Courses extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         categoryDAO categoryDAO = new categoryDAO();
-        courseDAO courseDAO= new courseDAO();
+        courseDAO courseDAO= new courseDAO();   
         ArrayList<Category> listCategory = categoryDAO.getAllCategory();
         ArrayList<Course> listCourse = courseDAO.getAllCourse();
         request.setAttribute("categories", listCategory);
