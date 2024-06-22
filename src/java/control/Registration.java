@@ -55,6 +55,7 @@ public class Registration extends HttpServlet {
         String repass = request.getParameter("repass");
         String mess;
         userDAO new_user = new userDAO();
+        System.out.println(firstName);
         if (!pass.equals(repass)) {
             mess = "Password and Confirm password not match";
             request.setAttribute("mess", mess);

@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -74,33 +75,47 @@ public class ConfirmAccount extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String otp = request.getParameter("otp");
-        String pass = request.getParameter("pass");
+        String pass = request.getParameter("password");
         String repass = request.getParameter("repass");
+        Cookie[] cookies = request.getCookies();
+        String email = null;
+        String cotp = null;
+        for (Cookie c : cookies) {
+            if (c.getName().equals("cEmail")) {
+                email = c.getValue();
+                break;
+            }
+        }
+        for (Cookie c : cookies) {
+            if (c.getName().equals("cotp")) {
+                cotp = c.getValue();
+                break;
+            }
+        }
         String mess;
         userDAO user = new userDAO();
-        if (!otp.equals(otp)) {
+        if (!otp.equals(cotp)) {
             mess = "The otp you entered is incorrect";
             request.setAttribute("mess", mess);
             request.getRequestDispatcher("confirmaccount.jsp").forward(request, response);
-            if (!pass.equals(repass)) {
-                mess = "Password and Confirm password not match";
-                request.setAttribute("mess", mess);
-                request.getRequestDispatcher("confirmaccount.jsp").forward(request, response);
-            } else {
-                user.updateNewPassword(user.findUserId(email), pass);
-                response.sendRedirect("Login");
-            }
-            response.sendRedirect("ConfirmAccount");
+        } else if (!pass.equals(repass)) {
+            mess = "Password and Confirm password not match";
+            request.setAttribute("mess", mess);
+            request.getRequestDispatcher("confirmaccount.jsp").forward(request, response);
+        } else {
+            user.updateNewPassword(user.findUserId(email), pass);
+            response.sendRedirect("Login");
         }
     }
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
+
+/**
+ * Returns a short description of the servlet.
+ *
+ * @return a String containing servlet description
+ */
+@Override
+public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
 

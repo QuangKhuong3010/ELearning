@@ -17,7 +17,7 @@ import javax.mail.internet.MimeMessage;
 //czqn pyrq umwt srxu
 public class Email {
     static final String from ="khuongdqhe176204@fpt.edu.vn";
-    static final String password ="jerf eeot qgzb empc";
+    static final String password ="bafq wydh bvze faag";
     
     public void sendEmail(String to, String otp) {
         Properties props = new Properties();

@@ -66,6 +66,7 @@ public class Courses extends HttpServlet {
         ArrayList<Course> listCourse = courseDAO.getAllCourse();
         request.setAttribute("categories", listCategory);
         request.setAttribute("courses", listCourse);
+        System.out.println(listCourse.get(0).getAvatar());
         request.getRequestDispatcher("courses.jsp").forward(request, response);
     } 
     //a

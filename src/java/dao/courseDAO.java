@@ -59,8 +59,8 @@ public class courseDAO extends DBContext {
     public int getQuantityCourseWithCategory(int category_id) {
         String sql = "SELECT COUNT(*) AS course_count\n"
                 + "FROM [dbo].[Course]\n";
-        if (category_id!=0){
-            sql+= "WHERE [category_id] =" + category_id;
+        if (category_id != 0) {
+            sql += "WHERE [category_id] =" + category_id;
         }
         try {
             PreparedStatement st = connection.prepareStatement(sql);

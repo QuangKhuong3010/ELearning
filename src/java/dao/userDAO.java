@@ -40,7 +40,7 @@ public class userDAO extends DBContext {
     }
 
     public boolean checkEmailExist(String email) {
-        String sql = "SELECT [user_id]\n"
+        String sql = "SELECT [id]\n"
                 + "  FROM [dbo].[User]\n"
                 + "WHERE [email] = ?";
         try {
@@ -62,7 +62,7 @@ public class userDAO extends DBContext {
                     + "           ([role_id]\n"
                     + "           ,[email]\n"
                     + "           ,[password]\n"
-                    + "           ,[fisrt_name]\n"
+                    + "           ,[first_name]\n"
                     + "           ,[last_name]\n"
                     + "           ,[isDeleted])\n"
                     + "     VALUES\n"
@@ -82,9 +82,10 @@ public class userDAO extends DBContext {
 
     public int findUserId(String email) {
         try {
-            String sql = "SELECT [email]\n"
+            String sql = "SELECT [id]\n"
+                    + "\n"
                     + "  FROM [dbo].[User]\n"
-                    + "where [user].[id]=?";
+                    + "  where [email] = ?";
             PreparedStatement st = connection.prepareStatement(sql);
             st.setString(1, email);
             ResultSet rs = st.executeQuery();
@@ -101,10 +102,10 @@ public class userDAO extends DBContext {
         try {
             String sql = "UPDATE [dbo].[User]\n"
                     + "   SET [password] = ?\n"
-                    + " WHERE [dbo].[User].[id] = ?";
+                    + " WHERE [id]=?";
             PreparedStatement st = connection.prepareStatement(sql);
             st.setString(1, pass);
-            st.setInt(1, id);
+            st.setInt(2, id);
             st.executeUpdate();
         } catch (SQLException ex) {
             System.out.println(ex);
