@@ -32,8 +32,24 @@ public class categoryDAO extends DBContext {
         return null;
     }
 
+    public String getNameCategory(int id) {
+        String sql = "SELECT [name]\n"
+                + "  FROM [dbo].[Category]\n"
+                + "  WHERE id= ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, id);
+            ResultSet rs = st.executeQuery();
+            if (rs.next())
+                return rs.getString(1);
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return null;
+    }
+
     public static void main(String[] agrs) {
         categoryDAO categoryDAO = new categoryDAO();
-        System.out.println(categoryDAO.getAllCategory());
+        System.out.println(categoryDAO.getNameCategory(1));
     }
 }

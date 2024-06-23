@@ -33,17 +33,17 @@
     <body>
 
         <!--Preloader-->
-<!--        <div id="preloader">
+        <div id="preloader">
             <div id="loader" class="loader">
                 <div class="loader-container">
                     <div class="loader-icon"><img src="assets/img/logo/preloader.svg" alt="Preloader"></div>
                 </div>
             </div>
-        </div>-->
+        </div>
         <!--Preloader-end -->
 
         <!-- Scroll-top -->
-        <button class="scroll__top scroll-to-target" data-target="jsp">
+        <button class="scroll__top scroll-to-target" data-target="html">
             <i class="tg-flaticon-arrowhead-up"></i>
         </button>
         <!-- Scroll-top-end-->
@@ -391,59 +391,31 @@
                             <div class="tab-content" id="myTabContent">
                                 <div class="tab-pane fade show active" id="grid" role="tabpanel" aria-labelledby="grid-tab">
                                     <div class="row courses__grid-wrap row-cols-1 row-cols-xl-3 row-cols-lg-2 row-cols-md-2 row-cols-sm-1">
-                                        <div class="col">
-                                            <div class="courses__item shine__animate-item">
-                                                <div class="courses__item-thumb">
-                                                    <a href="course-details.jsp" class="shine__animate-link">
-                                                        <img src="assets/img/courses/course_thumb01.jpg" alt="img">
-                                                    </a>
-                                                </div>
-                                                <div class="courses__item-content">
-                                                    <ul class="courses__item-meta list-wrap">
-                                                        <li class="courses__item-tag">
-                                                            <a href="Course">Development</a>
-                                                        </li>
-                                                        <li class="avg-rating"><i class="fas fa-star"></i> (4.8 Reviews)</li>
-                                                    </ul>
-                                                    <h5 class="title"><a href="course-details.jsp">Learning JavaScript With Imagination</a></h5>
-                                                    <p class="author">By <a href="#">David Millar</a></p>
-                                                    <div class="courses__item-bottom">
-                                                        <div class="button">
-                                                            <a href="course-details.jsp">
-                                                                <span class="text">Enroll Now</span>
-                                                                <i class="flaticon-arrow-right"></i>
-                                                            </a>
-                                                        </div>
-                                                        <h5 class="price">$15.00</h5>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
                                         <c:forEach items="${courses}" var="c">
                                             <div class="col">
                                                 <div class="courses__item shine__animate-item">
                                                     <div class="courses__item-thumb">
-                                                        <a href="course-details.jsp" class="shine__animate-link">
+                                                        <a href="CourseDetails?id=${c.id}" class="shine__animate-link">
                                                             <img src="${c.avatar}" alt="img">
                                                         </a>
                                                     </div>
                                                     <div class="courses__item-content">
                                                         <ul class="courses__item-meta list-wrap">
                                                             <li class="courses__item-tag">
-                                                                <a href="Course">Development</a>
+                                                                <a>${c.category_name}</a>
                                                             </li>
-                                                            <li class="avg-rating"><i class="fas fa-star"></i> (4.8 Reviews)</li>
+                                                            <li class="avg-rating"><i class="fas fa-star"></i> (${c.rating} Reviews)</li>
                                                         </ul>
-                                                        <h5 class="title"><a href="course-details.jsp">Learning JavaScript With Imagination</a></h5>
-                                                        <p class="author">By <a href="#">David Millar</a></p>
+                                                        <h5 class="title"><a href="CourseDetails?id=${c.id}"">${c.name}</a></h5>
+                                                        <p class="author">By <a href="#">${c.constructer_name}</a></p>
                                                         <div class="courses__item-bottom">
                                                             <div class="button">
-                                                                <a href="course-details.jsp">
+                                                                <a href="CourseDetails?id=${c.id}">
                                                                     <span class="text">Enroll Now</span>
                                                                     <i class="flaticon-arrow-right"></i>
                                                                 </a>
                                                             </div>
-                                                            <h5 class="price">$15.00</h5>
+                                                            <h5 class="price">${c.price} VND</h5>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -464,7 +436,7 @@
                                         <div class="col">
                                             <div class="courses__item courses__item-three shine__animate-item">
                                                 <div class="courses__item-thumb">
-                                                    <a href="course-details.jsp" class="shine__animate-link">
+                                                    <a href="coursedetails.jsp" class="shine__animate-link">
                                                         <img src="assets/img/courses/course_thumb01.jpg" alt="img">
                                                     </a>
                                                 </div>
@@ -478,12 +450,12 @@
                                                         </li>
                                                         <li class="price"><del>$29.00</del>$15.00</li>
                                                     </ul>
-                                                    <h5 class="title"><a href="course-details.jsp">Resolving Conflicts Between Designers And Engineers</a></h5>
+                                                    <h5 class="title"><a href="coursedetails.jsp">Resolving Conflicts Between Designers And Engineers</a></h5>
                                                     <p class="author">By <a href="#">David Millar</a></p>
                                                     <p class="info">when an unknown printer took a galley of type and scrambled type specimen book It has survived not only.</p>
                                                     <div class="courses__item-bottom">
                                                         <div class="button">
-                                                            <a href="course-details.jsp">
+                                                            <a href="coursedetails.jsp">
                                                                 <span class="text">Enroll Now</span>
                                                                 <i class="flaticon-arrow-right"></i>
                                                             </a>

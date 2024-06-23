@@ -158,11 +158,11 @@
                                 <form action="Login" method="post" class="account__form">
                                     <div class="form-grp">
                                         <label for="email">Email</label>
-                                        <input name="email" id="email" type="text" placeholder="email">
+                                        <input name="email" id="email" type="text" placeholder="email" required>
                                     </div>
                                     <div class="form-grp">
                                         <label for="password">Password</label>
-                                        <input name="password" id="password" type="password" placeholder="password">
+                                        <input name="password" id="password" type="password" placeholder="password" required>
                                     </div>
                                     <div class="account__check">
                                         <div class="account__check-remember">

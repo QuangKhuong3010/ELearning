@@ -18,6 +18,15 @@ public class User {
     private String first_name;
     private String last_name;
     private String phone_number;
+    private String avatar;
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
     private String description;
     private int isDeleted;
 
@@ -32,7 +41,7 @@ public class User {
         this.isDeleted = isDeleted;
     }
 
-    public User(int user_id, int role_id, String email, String pass, String registration_date, String first_name, String last_name, String phone_number, String description, int isDeleted) {
+    public User(int user_id, int role_id, String email, String pass, String registration_date, String first_name, String last_name, String phone_number, String avatar, String description, int isDeleted) {
         this.user_id = user_id;
         this.role_id = role_id;
         this.email = email;
@@ -41,6 +50,7 @@ public class User {
         this.first_name = first_name;
         this.last_name = last_name;
         this.phone_number = phone_number;
+        this.avatar = avatar;
         this.description = description;
         this.isDeleted = isDeleted;
     }

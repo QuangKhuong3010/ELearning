@@ -25,7 +25,7 @@ public class rateDAO extends DBContext {
             st.setInt(1, cousre_id);
             ResultSet rs = st.executeQuery();
             ArrayList<Feedback> Rate = new ArrayList<>();
-            
+
             while (rs.next()) {
                 Rate.add(new Feedback(
                         rs.getInt(1),
@@ -42,23 +42,27 @@ public class rateDAO extends DBContext {
         }
         return null;
     }
-    
+
     public double getAverageRateOf(int cousre_id) {
-        String sql = "";
+        int total = 0;
+        int index = 0;
+        String sql = "SELECT [rating]\n"
+                + "  FROM [dbo].[Feedback]\n"
+                + "  WHERE course_id=?";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             st.setInt(1, cousre_id);
             ResultSet rs = st.executeQuery();
-            ArrayList<Feedback> Rate = new ArrayList<>();
-            int total = 0, index = 0;
             while (rs.next()) {
                 total += rs.getInt(1);
-                index ++;
+                index++;
             }
-            return total/index;
+            if (index==0)
+                return 5.0;
+            return total / index;
         } catch (SQLException e) {
             System.out.println(e);
         }
-        return 0;
+        return 5.0;
     }
 }

@@ -39,23 +39,6 @@ public class userDAO extends DBContext {
         return null;
     }
 
-    public boolean checkEmailExist(String email) {
-        String sql = "SELECT [id]\n"
-                + "  FROM [dbo].[User]\n"
-                + "WHERE [email] = ?";
-        try {
-            PreparedStatement st = connection.prepareStatement(sql);
-            st.setString(1, email);
-            ResultSet rs = st.executeQuery();
-            if (rs.next()) {
-                return true;
-            }
-        } catch (SQLException e) {
-            System.out.println(e);
-        }
-        return false;
-    }
-
     public void SignUp(String firstName, String lastName, String email, String pass) {
         try {
             String sql = "INSERT INTO [dbo].[User]\n"
@@ -80,6 +63,74 @@ public class userDAO extends DBContext {
         }
     }
 
+    public boolean checkEmailExist(String email) {
+        String sql = "SELECT [id]\n"
+                + "  FROM [dbo].[User]\n"
+                + "WHERE [email] = ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, email);
+            ResultSet rs = st.executeQuery();
+            if (rs.next()) {
+                return true;
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return false;
+    }
+    
+    public void updateNewPassword(int id, String pass) {
+        try {
+            String sql = "UPDATE [dbo].[User]\n"
+                    + "   SET [password] = ?\n"
+                    + " WHERE [id]=?";
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, pass);
+            st.setInt(2, id);
+            st.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+    }
+
+    public User getUser(int id) {
+        try {
+            String sql = "SELECT [id]\n" 
+                    + "      ,[role_id]\n" 
+                    + "      ,[email]\n" 
+                    + "      ,[password]\n" 
+                    + "      ,[registration_date]\n" 
+                    + "      ,[first_name]\n" 
+                    + "      ,[last_name]\n" 
+                    + "      ,[phone_number]\n" 
+                    + "      ,[avatar]\n" 
+                    + "      ,[description]\n" 
+                    + "      ,[isDeleted]\n" 
+                    + "  FROM [dbo].[User]\n" 
+                    + "  WHERE [id]=?";
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, id);
+            ResultSet rs = st.executeQuery();
+            if (rs.next()) {
+                return new User(rs.getInt(1),
+                        rs.getInt(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getString(6),
+                        rs.getString(7),
+                        rs.getString(8),
+                        rs.getString(9),
+                        rs.getString(10),
+                        rs.getInt(11));
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+        return null;
+    }
+
     public int findUserId(String email) {
         try {
             String sql = "SELECT [id]\n"
@@ -98,17 +149,37 @@ public class userDAO extends DBContext {
         return 0;
     }
 
-    public void updateNewPassword(int id, String pass) {
+    public String findUserName(int id) {
         try {
-            String sql = "UPDATE [dbo].[User]\n"
-                    + "   SET [password] = ?\n"
-                    + " WHERE [id]=?";
+            String sql = "SELECT [first_name]\n"
+                    + "      ,[last_name]\n"
+                    + "  FROM [dbo].[User]\n"
+                    + "  where [id] = ?";
             PreparedStatement st = connection.prepareStatement(sql);
-            st.setString(1, pass);
-            st.setInt(2, id);
-            st.executeUpdate();
+            st.setInt(1, id);
+            ResultSet rs = st.executeQuery();
+            if (rs.next()) {
+                return rs.getString(1) + " " + rs.getString(2);
+            }
         } catch (SQLException ex) {
             System.out.println(ex);
         }
+        return null;
     }
+    
+    public int StudentOnCourse(int id) {
+        try {
+            String sql = "";
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, id);
+            ResultSet rs = st.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+        return 0;
+    }
+    
 }

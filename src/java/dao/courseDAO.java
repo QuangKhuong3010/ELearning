@@ -56,6 +56,45 @@ public class courseDAO extends DBContext {
         return null;
     }
 
+    public Course getCourse(int id) {
+        String sql = "SELECT [id]\n"
+                + "      ,[constructer_id]\n"
+                + "      ,[created_by_id]\n"
+                + "      ,[name]\n"
+                + "      ,[price]\n"
+                + "      ,[level_id]\n"
+                + "      ,[time_duration]\n"
+                + "      ,[category_id]\n"
+                + "      ,[created_date]\n"
+                + "      ,[avatar]\n"
+                + "      ,[description]\n"
+                + "  FROM [dbo].[Course]"
+                + "  WHERE id=?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, id);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                return new Course(
+                        rs.getInt(1),
+                        rs.getInt(2),
+                        rs.getInt(3),
+                        rs.getString(4),
+                        rs.getFloat(5),
+                        rs.getInt(6),
+                        rs.getString((7)),
+                        rs.getInt(8),
+                        rs.getString(9),
+                        rs.getString(10),
+                        rs.getString(11));
+            }
+
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return null;
+    }
+
     public int getQuantityCourseWithCategory(int category_id) {
         String sql = "SELECT COUNT(*) AS course_count\n"
                 + "FROM [dbo].[Course]\n";

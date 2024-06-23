@@ -18,6 +18,42 @@ public class Course {
     private int level_id;
     private String time_duration;
     private int category_id;
+    private String category_name;
+    private String constructer_name;
+    private double rating;
+    private int studentOnCourse;
+
+    public int getStudentOnCourse() {
+        return studentOnCourse;
+    }
+
+    public void setStudentOnCourse(int studentOnCourse) {
+        this.studentOnCourse = studentOnCourse;
+    }
+
+    public double getRating() {
+        return rating;
+    }
+
+    public void setRating(double rating) {
+        this.rating = rating;
+    }
+
+    public String getCategory_name() {
+        return category_name;
+    }
+
+    public void setCategory_name(String category_name) {
+        this.category_name = category_name;
+    }
+
+    public String getConstructer_name() {
+        return constructer_name;
+    }
+
+    public void setConstructer_name(String constructer_name) {
+        this.constructer_name = constructer_name;
+    }
     private String created_date;
     private String avatar;
     private String description;
@@ -25,6 +61,7 @@ public class Course {
     public Course() {
     }
 
+    
     public Course(int id, int constructer_id, int created_by_id, String name, double price, int level_id, String time_duration, int category_id, String created_date, String avatar, String description) {
         this.id = id;
         this.constructer_id = constructer_id;
