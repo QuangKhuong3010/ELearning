@@ -20,8 +20,8 @@ public class courseDAO extends DBContext {
 
     public ArrayList<Course> getAllCourse() {
         String sql = "SELECT [id]\n"
-                + "      ,[constructer_id]\n"
-                + "      ,[created_by_id]\n"
+                + "      ,[instructor_id]\n"
+                + "      ,[constructor_id]\n"
                 + "      ,[name]\n"
                 + "      ,[price]\n"
                 + "      ,[level_id]\n"
@@ -58,8 +58,8 @@ public class courseDAO extends DBContext {
 
     public Course getCourse(int id) {
         String sql = "SELECT [id]\n"
-                + "      ,[constructer_id]\n"
-                + "      ,[created_by_id]\n"
+                + "      ,[instructor_id]\n"
+                + "      ,[constructor_id]\n"
                 + "      ,[name]\n"
                 + "      ,[price]\n"
                 + "      ,[level_id]\n"

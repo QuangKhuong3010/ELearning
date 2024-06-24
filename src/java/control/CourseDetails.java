@@ -6,7 +6,10 @@ package control;
 
 import dao.categoryDAO;
 import dao.courseDAO;
-import dao.rateDAO;
+import dao.feedbackDAO;
+import dao.lessonDAO;
+import dao.organizationDAO;
+import dao.feedbackDAO;
 import dao.topicDAO;
 import dao.userDAO;
 import java.io.IOException;
@@ -19,6 +22,8 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import model.Topic;
 import model.Course;
+import model.Feedback;
+import model.Lesson;
 import model.User;
 
 /**
@@ -68,23 +73,32 @@ public class CourseDetails extends HttpServlet {
             throws ServletException, IOException {
         courseDAO courseDAO = new courseDAO();
         categoryDAO categoryDAO = new categoryDAO();
-        rateDAO rateDAO = new rateDAO();
+        feedbackDAO feedbackDAO = new feedbackDAO();
         userDAO userDAO = new userDAO();
         topicDAO topicDAO = new topicDAO();
-
+        lessonDAO lessonDAO = new lessonDAO();
+        organizationDAO organizationDAO = new organizationDAO();
+        
         int id = Integer.parseInt(request.getParameter("id"));
         Course course = courseDAO.getCourse(id);
-        User constructer = userDAO.getUser(course.getConstructer_id());
-//        ArrayList<Topic> topicCourse = topicDAO.getAllTopicOnCourse(id);
-//        System.out.println(topicCourse);
-
+        User instructor = userDAO.getUser(course.getInstructor_id());
+        User constructor = userDAO.getUser(course.getConstructor_id());
+        ArrayList<Topic> topicOnCourse = topicDAO.getAllTopicOnCourse(id);
+        ArrayList<Lesson> lessonOnCourse = lessonDAO.getLessonOnCourse(id);
+        ArrayList<Feedback> feedbackList = feedbackDAO.getFeedbackOnCousre(id);
+        
         course.setCategory_name(categoryDAO.getNameCategory(course.getCategory_id()));
-        course.setRating(rateDAO.getAverageRateOf(id));
-//        course.setStudentOnCourse(userDAO.StudentOnCourse(id));
-
-//        request.setAttribute("topic", topicCourse);
-        request.setAttribute("constructer", constructer);
+        
+        course.setRating(feedbackDAO.getAverageRateOf(id));
+        course.setStudentOnCourse(userDAO.StudentOnCourse(id));
+        constructor.setOrganization_name(organizationDAO.getNameOrganization(constructor.getUser_id()));
+        System.out.println(feedbackList);
+        request.setAttribute("feedback", feedbackList);
+        request.setAttribute("topic", topicOnCourse);
+        request.setAttribute("instructor", instructor);
+        request.setAttribute("constructor", constructor);
         request.setAttribute("course", course);
+        request.setAttribute("lesson", lessonOnCourse);
         request.getRequestDispatcher("coursedetails.jsp").forward(request, response);
     }
 

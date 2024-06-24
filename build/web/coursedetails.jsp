@@ -202,9 +202,9 @@
                                 <div class="courses__details-meta">
                                     <ul class="list-wrap">
                                         <li class="author-two">
-                                            <img src="${constructer.avatar}" alt="img">
+                                            <img src="${instructor.avatar}" alt="img">
                                             By
-                                            <a href="#">${constructer.first_name} ${constructer.last_name}</a>
+                                            <a href="#">${instructor.first_name} ${instructor.last_name}</a>
                                         </li>
                                         <li class="date"><i class="flaticon-calendar"></i>${course.created_date}</li>
                                         <li><i class="flaticon-mortarboard"></i>${course.studentOnCourse} Students</li>
@@ -218,7 +218,7 @@
                                         <button class="nav-link" id="curriculum-tab" data-bs-toggle="tab" data-bs-target="#curriculum-tab-pane" type="button" role="tab" aria-controls="curriculum-tab-pane" aria-selected="false">Curriculum</button>
                                     </li>
                                     <li class="nav-item" role="presentation">
-                                        <button class="nav-link" id="instructors-tab" data-bs-toggle="tab" data-bs-target="#instructors-tab-pane" type="button" role="tab" aria-controls="instructors-tab-pane" aria-selected="false">Instructors</button>
+                                        <button class="nav-link" id="instructors-tab" data-bs-toggle="tab" data-bs-target="#instructors-tab-pane" type="button" role="tab" aria-controls="instructors-tab-pane" aria-selected="false">Organization</button>
                                     </li>
                                     <li class="nav-item" role="presentation">
                                         <button class="nav-link" id="reviews-tab" data-bs-toggle="tab" data-bs-target="#reviews-tab-pane" type="button" role="tab" aria-controls="reviews-tab-pane" aria-selected="false">reviews</button>
@@ -242,46 +242,25 @@
                                                                 ${t.name}
                                                             </button>
                                                         </h2>
-                                                        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                                                            <div class="accordion-body">
-                                                                <ul class="list-wrap">
-                                                                    <li class="course-item open-item">
-                                                                        <a href="https://www.youtube.com/watch?v=b2Az7_lLh3g" class="course-item-link popup-video">
-                                                                            <span class="item-name">Course Installation</span>
-                                                                            <div class="course-item-meta">
-                                                                                <span class="item-meta duration">03:03</span>
-                                                                            </div>
-                                                                        </a>
-                                                                    </li>
-                                                                    <li class="course-item">
-                                                                        <a href="#" class="course-item-link">
-                                                                            <span class="item-name">Create a Simple React App</span>
-                                                                            <div class="course-item-meta">
-                                                                                <span class="item-meta duration">07:48</span>
-                                                                                <span class="item-meta course-item-status">
-                                                                                    <img src="assets/img/icons/lock.svg" alt="icon">
-                                                                                </span>
-                                                                            </div>
-                                                                        </a>
-                                                                    </li>
-                                                                    <li class="course-item">
-                                                                        <a href="#" class="course-item-link">
-                                                                            <span class="item-name">React for the Rest of us</span>
-                                                                            <div class="course-item-meta">
-                                                                                <span class="item-meta duration">10:48</span>
-                                                                                <span class="item-meta course-item-status">
-                                                                                    <img src="assets/img/icons/lock.svg" alt="icon">
-                                                                                </span>
-                                                                            </div>
-                                                                        </a>
-                                                                    </li>
-                                                                </ul>
+                                                        <c:forEach items="${lesson}" var="l">   
+                                                            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                                                                <div class="accordion-body">
+                                                                    <ul class="list-wrap">
+                                                                        <li class="course-item open-item">
+                                                                            <a href="https://www.youtube.com/watch?v=b2Az7_lLh3g" class="course-item-link popup-video">
+                                                                                <span class="item-name">${l.name}</span>
+                                                                                <div class="course-item-meta">
+                                                                                    <span class="item-meta duration">03:03</span>
+                                                                                </div>
+                                                                            </a>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
                                                             </div>
-                                                        </div>
+                                                        </c:forEach>
                                                     </div>
                                                 </div>
                                             </c:forEach>
-
                                         </div>
                                     </div>
                                     <div class="tab-pane fade" id="instructors-tab-pane" role="tabpanel" aria-labelledby="instructors-tab" tabindex="0">
@@ -290,10 +269,10 @@
                                                 <img src="assets/img/courses/course_instructors.png" alt="img">
                                             </div>
                                             <div class="courses__instructors-content">
-                                                <h2 class="title">Mark Jukarberg</h2>
-                                                <span class="designation">UX Design Lead</span>
+                                                <h2 class="title">${constructor.first_name} ${constructor.last_name}</h2>
+                                                <span class="designation">${constructor.organization_name}</span>
                                                 <p class="avg-rating"><i class="fas fa-star"></i>(4.8 Ratings)</p>
-                                                <p>Dorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan.</p>
+                                                <p>${constructor.description}</p>
                                                 <div class="instructor__social">
                                                     <ul class="list-wrap justify-content-start">
                                                         <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
@@ -380,25 +359,27 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="course-review-head">
-                                                <div class="review-author-thumb">
-                                                    <img src="assets/img/courses/review-author.png" alt="img">
-                                                </div>
-                                                <div class="review-author-content">
-                                                    <div class="author-name">
-                                                        <h5 class="name">Jura Hujaor <span>2 Days ago</span></h5>
-                                                        <div class="author-rating">
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                            <i class="fas fa-star"></i>
-                                                        </div>
+                                            <c:forEach items="feedback" var="f">
+                                                <div class="course-review-head">
+                                                    <div class="review-author-thumb">
+                                                        <img src="${l.created_by_avatar}" alt="img">
                                                     </div>
-                                                    <h4 class="title">The best LMS Design System</h4>
-                                                    <p>Maximus ligula eleifend id nisl quis interdum. Sed malesuada tortor non turpis semper bibendum nisi porta, malesuada risus nonerviverra dolor. Vestibulum ante ipsum primis in faucibus.</p>
+                                                    <div class="review-author-content">
+                                                        <div class="author-name">
+                                                            <h5 class="name"> ${l.created_by_name}<span>${l.created_date}</span></h5>
+                                                            <div class="author-rating">
+                                                                <i class="fas fa-star"></i>
+                                                                <i class="fas fa-star"></i>
+                                                                <i class="fas fa-star"></i>
+                                                                <i class="fas fa-star"></i>
+                                                                <i class="fas fa-star"></i>
+                                                            </div>
+                                                        </div>
+                                                        <h4 class="title">${l.title}</h4>
+                                                        <p>${l.description}</p>
+                                                    </div>
                                                 </div>
-                                            </div>
+                                            </c:forEach>
                                         </div>
                                     </div>
                                 </div>
@@ -453,16 +434,6 @@
                                     <h5 class="title">Secure Payment:</h5>
                                     <img src="assets/img/others/payment.png" alt="img">
                                 </div>
-                                <div class="courses__details-social">
-                                    <h5 class="title">Share this course:</h5>
-                                    <ul class="list-wrap">
-                                        <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-                                        <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                                        <li><a href="#"><i class="fab fa-whatsapp"></i></a></li>
-                                        <li><a href="#"><i class="fab fa-instagram"></i></a></li>
-                                        <li><a href="#"><i class="fab fa-youtube"></i></a></li>
-                                    </ul>
-                                </div>
                                 <div class="courses__details-enroll">
                                     <div class="tg-button-wrap">
                                         <a href="courses.html" class="btn btn-two arrow-btn">
@@ -483,117 +454,6 @@
 
 
 
-        <!-- footer-area -->
-        <footer class="footer__area">
-            <div class="footer__top">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-xl-3 col-lg-4 col-md-6">
-                            <div class="footer__widget">
-                                <div class="logo mb-35">
-                                    <a href="index.html"><img src="assets/img/logo/secondary_logo.svg" alt="img"></a>
-                                </div>
-                                <div class="footer__content">
-                                    <p>when an unknown printer took galley of type and scrambled it to make pspecimen bookt has.</p>
-                                    <ul class="list-wrap">
-                                        <li>463 7th Ave, NY 10018, USA</li>
-                                        <li>+123 88 9900 456</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
-                            <div class="footer__widget">
-                                <h4 class="footer__widget-title">Useful Links</h4>
-                                <div class="footer__link">
-                                    <ul class="list-wrap">
-                                        <li><a href="events-details.html">Our values</a></li>
-                                        <li><a href="events-details.html">Our advisory board</a></li>
-                                        <li><a href="events-details.html">Our partners</a></li>
-                                        <li><a href="events-details.html">Become a partner</a></li>
-                                        <li><a href="events-details.html">Work at Future Learn</a></li>
-                                        <li><a href="events-details.html">Quizlet Plus</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
-                            <div class="footer__widget">
-                                <h4 class="footer__widget-title">Our Company</h4>
-                                <div class="footer__link">
-                                    <ul class="list-wrap">
-                                        <li><a href="contact.html">Contact Us</a></li>
-                                        <li><a href="instructor-details.html">Become Teacher</a></li>
-                                        <li><a href="blog.html">Blog</a></li>
-                                        <li><a href="instructor-details.html">Instructor</a></li>
-                                        <li><a href="events-details.html">Events</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-3 col-lg-4 col-md-6">
-                            <div class="footer__widget">
-                                <h4 class="footer__widget-title">Get In Touch</h4>
-                                <div class="footer__contact-content">
-                                    <p>when an unknown printer took <br> galley type and scrambled</p>
-                                    <ul class="list-wrap footer__social">
-                                        <li>
-                                            <a href="https://www.facebook.com/" target="_blank">
-                                                <img src="assets/img/icons/facebook.svg" alt="img" class="injectable">
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="https://www.facebook.com/" target="_blank">
-                                                <img src="assets/img/icons/twitter.svg" alt="img" class="injectable">
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="https://www.facebook.com/" target="_blank">
-                                                <img src="assets/img/icons/whatsapp.svg" alt="img" class="injectable">
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="https://www.facebook.com/" target="_blank">
-                                                <img src="assets/img/icons/instagram.svg" alt="img" class="injectable">
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="https://www.facebook.com/" target="_blank">
-                                                <img src="assets/img/icons/youtube.svg" alt="img" class="injectable">
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="app-download">
-                                    <a href="#"><img src="assets/img/others/google-play.svg" alt="img"></a>
-                                    <a href="#"><img src="assets/img/others/apple-store.svg" alt="img"></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="footer__bottom">
-                <div class="container">
-                    <div class="row align-items-center">
-                        <div class="col-md-7">
-                            <div class="copy-right-text">
-                                <p>© 2010-2024 skillgro.com. All rights reserved.</p>
-                            </div>
-                        </div>
-                        <div class="col-md-5">
-                            <div class="footer__bottom-menu">
-                                <ul class="list-wrap">
-                                    <li><a href="contact.html">Term of Use</a></li>
-                                    <li><a href="contact.html">Privacy Policy</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </footer>
-        <!-- footer-area-end -->
 
 
 

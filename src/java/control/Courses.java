@@ -7,7 +7,7 @@ package control;
 
 import dao.categoryDAO;
 import dao.courseDAO;
-import dao.rateDAO;
+import dao.feedbackDAO;
 import dao.userDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -65,12 +65,12 @@ public class Courses extends HttpServlet {
         categoryDAO categoryDAO = new categoryDAO();
         courseDAO courseDAO= new courseDAO();   
         userDAO userDAO = new userDAO();
-        rateDAO rateDAO = new rateDAO();
+        feedbackDAO rateDAO = new feedbackDAO();
         ArrayList<Category> listCategory = categoryDAO.getAllCategory();
         ArrayList<Course> listCourse = courseDAO.getAllCourse();
         for (Course course : listCourse) {
             course.setCategory_name(categoryDAO.getNameCategory(course.getCategory_id()));
-            course.setConstructer_name(userDAO.findUserName(course.getConstructer_id()));
+            course.setInstructor_name(userDAO.findUserName(course.getInstructor_id()));
             course.setRating(rateDAO.getAverageRateOf(course.getId()));
         }
         request.setAttribute("categories", listCategory);

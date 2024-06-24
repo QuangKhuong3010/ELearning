@@ -11,15 +11,15 @@ package model;
 public class Course {
 
     private int id;
-    private int constructer_id;
-    private int created_by_id;
+    private int instructor_id;
+    private int constructor_id;
     private String name;
     private double price;
     private int level_id;
     private String time_duration;
     private int category_id;
     private String category_name;
-    private String constructer_name;
+    private String instructor_name;
     private double rating;
     private int studentOnCourse;
 
@@ -48,24 +48,24 @@ public class Course {
     }
 
     public String getConstructer_name() {
-        return constructer_name;
+        return instructor_name;
     }
 
-    public void setConstructer_name(String constructer_name) {
-        this.constructer_name = constructer_name;
+    public void setConstructer_name(String instructor_name) {
+        this.instructor_name = instructor_name;
     }
     private String created_date;
     private String avatar;
     private String description;
-
+    
     public Course() {
     }
 
     
-    public Course(int id, int constructer_id, int created_by_id, String name, double price, int level_id, String time_duration, int category_id, String created_date, String avatar, String description) {
+    public Course(int id, int instructor_id, int constructor_id, String name, double price, int level_id, String time_duration, int category_id, String created_date, String avatar, String description) {
         this.id = id;
-        this.constructer_id = constructer_id;
-        this.created_by_id = created_by_id;
+        this.instructor_id = instructor_id;
+        this.constructor_id = constructor_id;
         this.name = name;
         this.price = price;
         this.level_id = level_id;
@@ -76,13 +76,28 @@ public class Course {
         this.description = description;
     }
 
-
     public int getId() {
         return id;
     }
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getInstructor_id() {
+        return instructor_id;
+    }
+
+    public void setInstructor_id(int instructor_id) {
+        this.instructor_id = instructor_id;
+    }
+
+    public int getConstructor_id() {
+        return constructor_id;
+    }
+
+    public void setConstructor_id(int constructor_id) {
+        this.constructor_id = constructor_id;
     }
 
     public String getName() {
@@ -125,28 +140,20 @@ public class Course {
         this.category_id = category_id;
     }
 
+    public String getInstructor_name() {
+        return instructor_name;
+    }
+
+    public void setInstructor_name(String instructor_name) {
+        this.instructor_name = instructor_name;
+    }
+
     public String getCreated_date() {
         return created_date;
     }
 
     public void setCreated_date(String created_date) {
         this.created_date = created_date;
-    }
-
-    public int getCreated_by_id() {
-        return created_by_id;
-    }
-
-    public void setCreated_by_id(int created_by_id) {
-        this.created_by_id = created_by_id;
-    }
-
-    public int getConstructer_id() {
-        return constructer_id;
-    }
-
-    public void setConstructer_id(int constructer_id) {
-        this.constructer_id = constructer_id;
     }
 
     public String getAvatar() {
@@ -164,5 +171,7 @@ public class Course {
     public void setDescription(String description) {
         this.description = description;
     }
+
+
 
 }

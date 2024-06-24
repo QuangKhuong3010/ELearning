@@ -29,6 +29,15 @@ public class User {
     }
     private String description;
     private int isDeleted;
+    private String organization_name;
+
+    public String getOrganization_name() {
+        return organization_name;
+    }
+
+    public void setOrganization_name(String organization_name) {
+        this.organization_name = organization_name;
+    }
 
     public User() {
     }

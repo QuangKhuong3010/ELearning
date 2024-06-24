@@ -9,33 +9,26 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import model.Topic;
+import model.Category;
+import model.Feedback;
 
 /**
  *
  * @author Quangkhuong3010
  */
-public class topicDAO extends DBContext {
+public class organizationDAO extends DBContext {
 
-    public ArrayList<Topic> getAllTopicOnCourse(int id) {
-        String sql = "SELECT [id]\n"
-                + "      ,[course_id]\n"
-                + "      ,[name]\n"
-                + "      ,[description]\n"
-                + "  FROM [dbo].[Topic]\n"
-                + "WHERE [course_id]=?";
+    public String getNameOrganization(int manager_id) {
+        String sql = "SELECT [name]\n"
+                + "  FROM [dbo].[Organization]\n"
+                + "  WHERE [manager_id]=?";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
-            st.setInt(1, id);
+            st.setInt(1, manager_id);
             ResultSet rs = st.executeQuery();
-            ArrayList<Topic> topicList = new ArrayList<>();
             while (rs.next()) {
-                topicList.add(new Topic(rs.getInt(1),
-                        rs.getInt(2),
-                        rs.getString(3),
-                        rs.getString(4)));
+                return rs.getString(1);
             }
-            return topicList;
         } catch (SQLException e) {
             System.out.println(e);
         }

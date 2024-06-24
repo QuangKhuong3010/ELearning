@@ -15,12 +15,22 @@ public class Feedback {
     private int created_by;
     private String created_date;
     private String title;
+
+    public String getCreated_by_name() {
+        return created_by_name;
+    }
+
+    public void setCreated_by_name(String created_by_name) {
+        this.created_by_name = created_by_name;
+    }
     private String description;
+    private String created_by_name;
+    private String created_by_avatar;
 
     public Feedback() {
     }
 
-    public Feedback(int id, int rating, int course_id, int created_by, String created_date, String title, String description) {
+    public Feedback(int id, int rating, int course_id, int created_by, String created_date, String title, String description, String created_by_name, String created_by_avatar) {
         this.id = id;
         this.rating = rating;
         this.course_id = course_id;
@@ -28,7 +38,21 @@ public class Feedback {
         this.created_date = created_date;
         this.title = title;
         this.description = description;
+        this.created_by_name = created_by_name;
+        this.created_by_avatar = created_by_avatar;
     }
+
+    public String getCreated_by_avatar() {
+        return created_by_avatar;
+    }
+
+    public void setCreated_by_avatar(String created_by_avatar) {
+        this.created_by_avatar = created_by_avatar;
+    }
+
+    
+    
+    
 
     public int getId() {
         return id;

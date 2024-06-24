@@ -79,7 +79,7 @@ public class userDAO extends DBContext {
         }
         return false;
     }
-    
+
     public void updateNewPassword(int id, String pass) {
         try {
             String sql = "UPDATE [dbo].[User]\n"
@@ -96,18 +96,18 @@ public class userDAO extends DBContext {
 
     public User getUser(int id) {
         try {
-            String sql = "SELECT [id]\n" 
-                    + "      ,[role_id]\n" 
-                    + "      ,[email]\n" 
-                    + "      ,[password]\n" 
-                    + "      ,[registration_date]\n" 
-                    + "      ,[first_name]\n" 
-                    + "      ,[last_name]\n" 
-                    + "      ,[phone_number]\n" 
-                    + "      ,[avatar]\n" 
-                    + "      ,[description]\n" 
-                    + "      ,[isDeleted]\n" 
-                    + "  FROM [dbo].[User]\n" 
+            String sql = "SELECT [id]\n"
+                    + "      ,[role_id]\n"
+                    + "      ,[email]\n"
+                    + "      ,[password]\n"
+                    + "      ,[registration_date]\n"
+                    + "      ,[first_name]\n"
+                    + "      ,[last_name]\n"
+                    + "      ,[phone_number]\n"
+                    + "      ,[avatar]\n"
+                    + "      ,[description]\n"
+                    + "      ,[isDeleted]\n"
+                    + "  FROM [dbo].[User]\n"
                     + "  WHERE [id]=?";
             PreparedStatement st = connection.prepareStatement(sql);
             st.setInt(1, id);
@@ -166,12 +166,14 @@ public class userDAO extends DBContext {
         }
         return null;
     }
-    
-    public int StudentOnCourse(int id) {
+
+    public int StudentOnCourse(int course_id) {
         try {
-            String sql = "";
+            String sql = "SELECT COUNT(DISTINCT [user_id])\n"
+                    + "FROM [ELearning].[dbo].[Purchased]\n"
+                    + "WHERE [course_id] = ?";
             PreparedStatement st = connection.prepareStatement(sql);
-            st.setInt(1, id);
+            st.setInt(1, course_id);
             ResultSet rs = st.executeQuery();
             if (rs.next()) {
                 return rs.getInt(1);
@@ -181,5 +183,5 @@ public class userDAO extends DBContext {
         }
         return 0;
     }
-    
+
 }

@@ -407,7 +407,7 @@
                                                             <li class="avg-rating"><i class="fas fa-star"></i> (${c.rating} Reviews)</li>
                                                         </ul>
                                                         <h5 class="title"><a href="CourseDetails?id=${c.id}"">${c.name}</a></h5>
-                                                        <p class="author">By <a href="#">${c.constructer_name}</a></p>
+                                                        <p class="author">By <a href="#">${c.instructor_name}</a></p>
                                                         <div class="courses__item-bottom">
                                                             <div class="button">
                                                                 <a href="CourseDetails?id=${c.id}">
