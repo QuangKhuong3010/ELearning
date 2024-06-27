@@ -21,6 +21,33 @@ public class Course {
     private String category_name;
     private String instructor_name;
     private double rating;
+    private int ratingNear;
+    private String level;
+
+    public String getLevel() {
+        return level;
+    }
+
+    public void setLevel(String level) {
+        this.level = level;
+    }
+
+    public int getRatingNear() {
+        return ratingNear;
+    }
+
+    public void setRatingNear(int ratingNear) {
+        this.ratingNear = ratingNear;
+    }
+    private int numberRating;
+
+    public int getNumberRating() {
+        return numberRating;
+    }
+
+    public void setNumberRating(int numberRating) {
+        this.numberRating = numberRating;
+    }
     private int studentOnCourse;
 
     public int getStudentOnCourse() {

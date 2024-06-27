@@ -4,14 +4,7 @@
  */
 package control;
 
-import dao.categoryDAO;
-import dao.courseDAO;
-import dao.feedbackDAO;
-import dao.lessonDAO;
-import dao.organizationDAO;
-import dao.feedbackDAO;
-import dao.levelDAO;
-import dao.topicDAO;
+import com.sun.mail.imap.protocol.ID;
 import dao.userDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -20,20 +13,16 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.util.ArrayList;
-import model.Topic;
-import model.Course;
-import model.Feedback;
-import model.Lesson;
-import model.Rating;
 import model.User;
 
 /**
  *
  * @author Admin
  */
-@WebServlet(name = "courseDetails", urlPatterns = {"/CourseDetails"})
-public class CourseDetails extends HttpServlet {
+@WebServlet(name = "Profile", urlPatterns = {"/Profile"})
+public class Profile extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -52,10 +41,10 @@ public class CourseDetails extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet courseDetails</title>");
+            out.println("<title>Servlet Profile</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet courseDetails at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet Profile at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -73,40 +62,13 @@ public class CourseDetails extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        courseDAO courseDAO = new courseDAO();
-        categoryDAO categoryDAO = new categoryDAO();
-        feedbackDAO feedbackDAO = new feedbackDAO();
-        userDAO userDAO = new userDAO();
-        topicDAO topicDAO = new topicDAO();
-        lessonDAO lessonDAO = new lessonDAO();
-        organizationDAO organizationDAO = new organizationDAO();
-        levelDAO levelDAO = new levelDAO();
+        HttpSession session = request.getSession(false);
+        if (session != null) {
+            User user = (User) session.getAttribute("account");
 
-        int id = Integer.parseInt(request.getParameter("id"));
-        Course course = courseDAO.getCourse(id);
-        User instructor = userDAO.getUser(course.getInstructor_id());
-        User constructor = userDAO.getUser(course.getConstructor_id());
-        ArrayList<Topic> topicOnCourse = topicDAO.getAllTopicOnCourse(id);
-        ArrayList<Lesson> lessonOnCourse = lessonDAO.getLessonOnCourse(id);
-        ArrayList<Feedback> feedbackList = feedbackDAO.getFeedbackOnCousre(id);
-        ArrayList<Rating> rating = feedbackDAO.getRatingBar(id);
-        
-        course.setLevel(levelDAO.getLevelName(course.getLevel_id()));
-        course.setCategory_name(categoryDAO.getNameCategory(course.getCategory_id()));
-        course.setNumberRating(feedbackDAO.getFeedbackOnCousre(id).size());
-        course.setRating(feedbackDAO.getAverageRateOf(id));
-        course.setStudentOnCourse(userDAO.StudentOnCourse(id));
-        constructor.setOrganization_name(organizationDAO.getNameOrganization(constructor.getUser_id()));
-        course.setRatingNear((int) Math.round(course.getRating()));
-
-        request.setAttribute("rating", rating);
-        request.setAttribute("feedback", feedbackList);
-        request.setAttribute("topic", topicOnCourse);
-        request.setAttribute("instructor", instructor);
-        request.setAttribute("constructor", constructor);
-        request.setAttribute("course", course);
-        request.setAttribute("lesson", lessonOnCourse);
-        request.getRequestDispatcher("coursedetails.jsp").forward(request, response);
+            request.setAttribute("user", user);
+            request.getRequestDispatcher("profile.jsp").forward(request, response);
+        }
     }
 
     /**

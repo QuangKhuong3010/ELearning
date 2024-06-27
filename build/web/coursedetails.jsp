@@ -289,94 +289,49 @@
                                             <h2 class="title">Reviews</h2>
                                             <div class="course-rate">
                                                 <div class="course-rate__summary">
-                                                    <div class="course-rate__summary-value">4.8</div>
+                                                    <div class="course-rate__summary-value">${course.rating}</div>
                                                     <div class="course-rate__summary-stars">
-                                                        <i class="fas fa-star"></i>
-                                                        <i class="fas fa-star"></i>
-                                                        <i class="fas fa-star"></i>
-                                                        <i class="fas fa-star"></i>
-                                                        <i class="fas fa-star"></i>
+                                                        <c:forEach var="i" begin="0" end="${course.ratingNear-1}">
+                                                            <i class="fas fa-star"></i>
+                                                        </c:forEach>
                                                     </div>
                                                     <div class="course-rate__summary-text">
-                                                        12 Ratings
+                                                        ${course.numberRating} Ratings
                                                     </div>
                                                 </div>
+
                                                 <div class="course-rate__details">
-                                                    <div class="course-rate__details-row">
-                                                        <div class="course-rate__details-row-star">
-                                                            5
-                                                            <i class="fas fa-star"></i>
+                                                    <c:forEach items="${rating}" var="r">
+                                                        <div class="course-rate__details-row">
+                                                            <div class="course-rate__details-row-star">
+                                                                ${r.rating}
+                                                                <i class="fas fa-star"></i>
+                                                            </div>
+                                                            <div class="course-rate__details-row-value">
+                                                                <div class="rating-gray"></div>
+                                                                <div class="rating" style="width:80%;" title="80%"></div>
+                                                                <span class="rating-count"> ${r.quantity} </span>
+                                                            </div>
                                                         </div>
-                                                        <div class="course-rate__details-row-value">
-                                                            <div class="rating-gray"></div>
-                                                            <div class="rating" style="width:80%;" title="80%"></div>
-                                                            <span class="rating-count">2</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="course-rate__details-row">
-                                                        <div class="course-rate__details-row-star">
-                                                            4
-                                                            <i class="fas fa-star"></i>
-                                                        </div>
-                                                        <div class="course-rate__details-row-value">
-                                                            <div class="rating-gray"></div>
-                                                            <div class="rating" style="width:50%;" title="50%"></div>
-                                                            <span class="rating-count">1</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="course-rate__details-row">
-                                                        <div class="course-rate__details-row-star">
-                                                            3
-                                                            <i class="fas fa-star"></i>
-                                                        </div>
-                                                        <div class="course-rate__details-row-value">
-                                                            <div class="rating-gray"></div>
-                                                            <div class="rating" style="width:0%;" title="0%"></div>
-                                                            <span class="rating-count">0</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="course-rate__details-row">
-                                                        <div class="course-rate__details-row-star">
-                                                            2
-                                                            <i class="fas fa-star"></i>
-                                                        </div>
-                                                        <div class="course-rate__details-row-value">
-                                                            <div class="rating-gray"></div>
-                                                            <div class="rating" style="width:0%;" title="0%"></div>
-                                                            <span class="rating-count">0</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="course-rate__details-row">
-                                                        <div class="course-rate__details-row-star">
-                                                            1
-                                                            <i class="fas fa-star"></i>
-                                                        </div>
-                                                        <div class="course-rate__details-row-value">
-                                                            <div class="rating-gray"></div>
-                                                            <div class="rating" style="width:0%;" title="0%"></div>
-                                                            <span class="rating-count">0</span>
-                                                        </div>
-                                                    </div>
+                                                    </c:forEach>
                                                 </div>
                                             </div>
-                                            <c:forEach items="feedback" var="f">
+                                            <c:forEach items="${feedback}" var="f">
                                                 <div class="course-review-head">
                                                     <div class="review-author-thumb">
                                                         <img src="${l.created_by_avatar}" alt="img">
                                                     </div>
                                                     <div class="review-author-content">
                                                         <div class="author-name">
-                                                            <h5 class="name"> ${l.created_by_name}<span>${l.created_date}</span></h5>
+                                                            <h5 class="name"> ${f.created_by_name}<span>${f.created_date}</span></h5>
                                                             <div class="author-rating">
-                                                                <i class="fas fa-star"></i>
-                                                                <i class="fas fa-star"></i>
-                                                                <i class="fas fa-star"></i>
-                                                                <i class="fas fa-star"></i>
-                                                                <i class="fas fa-star"></i>
+                                                                <c:forEach var="i" begin="0" end="${f.rating-1}">
+                                                                    <i class="fas fa-star"></i>
+                                                                </c:forEach>
                                                             </div>
                                                         </div>
-                                                        <h4 class="title">${l.title}</h4>
-                                                        <p>${l.description}</p>
+                                                        <h4 class="title">${f.title}</h4>
+                                                        <p>${f.description}</p>
                                                     </div>
                                                 </div>
                                             </c:forEach>
@@ -393,7 +348,7 @@
                                 </div>
                                 <div class="courses__cost-wrap">
                                     <span>This Course Fee:</span>
-                                    <h2 class="title">$18.00 <del>$32.00</del></h2>
+                                    <h2 class="title">${course.price}00 vnd </h2>
                                 </div>
                                 <div class="courses__information-wrap">
                                     <h5 class="title">Course includes:</h5>
@@ -401,32 +356,27 @@
                                         <li>
                                             <img src="assets/img/icons/course_icon01.svg" alt="img" class="injectable">
                                             Level
-                                            <span>Expert</span>
+                                            <span>${course.level}</span>
                                         </li>
                                         <li>
                                             <img src="assets/img/icons/course_icon02.svg" alt="img" class="injectable">
                                             Duration
-                                            <span>11h 20m</span>
+                                            <span>${course.time_duration} hour</span>
                                         </li>
                                         <li>
                                             <img src="assets/img/icons/course_icon03.svg" alt="img" class="injectable">
                                             Lessons
-                                            <span>12</span>
+                                            <span>?</span>
                                         </li>
                                         <li>
                                             <img src="assets/img/icons/course_icon04.svg" alt="img" class="injectable">
                                             Quizzes
-                                            <span>145</span>
-                                        </li>
-                                        <li>
-                                            <img src="assets/img/icons/course_icon05.svg" alt="img" class="injectable">
-                                            Certifications
-                                            <span>Yes</span>
+                                            <span>?</span>
                                         </li>
                                         <li>
                                             <img src="assets/img/icons/course_icon06.svg" alt="img" class="injectable">
                                             Graduation
-                                            <span>25K</span>
+                                            <span>${course.studentOnCourse}</span>
                                         </li>
                                     </ul>
                                 </div>

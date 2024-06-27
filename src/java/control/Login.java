@@ -54,6 +54,7 @@ public class Login extends HttpServlet {
         response.addCookie(cr);
         userDAO dao = new userDAO();
         User user = dao.login(email, pass);
+        System.out.println(user.getRole_id());
         if (user == null) {
             request.setAttribute("mess", "Wrong email or password");
             request.getRequestDispatcher("Login").forward(request, response);
