@@ -3,12 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/E:/ELearning/src/java/control/Profile.java</file>
             <file>file:/E:/ELearning/src/java/dao/userDAO.java</file>
             <file>file:/E:/ELearning/src/java/control/CourseDetails.java</file>
             <file>file:/E:/ELearning/src/java/context/DBContext.java</file>
             <file>file:/E:/ELearning/src/java/dao/feedbackDAO.java</file>
             <file>file:/E:/ELearning/src/java/model/Feedback.java</file>
             <file>file:/E:/ELearning/web/coursedetails.jsp</file>
+            <file>file:/E:/ELearning/src/java/model/User.java</file>
         </group>
     </open-files>
 </project-private>

@@ -75,11 +75,11 @@ public class LoginGoogleHandler extends HttpServlet {
         String code = request.getParameter("code");
         String accessToken = getToken(code);
         User user = getUserInfo(accessToken);
-        System.out.println(user.getEmail());
-        userDAO dao = new userDAO();
-        if(!dao.checkEmailExist(user.getEmail())){
-            dao.SignUp("", "", user.getEmail(), "");
+        userDAO userDAO = new userDAO();
+        if(!userDAO.checkEmailExist(user.getEmail())){
+            userDAO.SignUpByGoogle("", "", user.getEmail(), "");
         }
+        user.setRole_id(userDAO.loginWithGoogle(user.getEmail()).getRole_id());
         HttpSession session = request.getSession();
         session.setAttribute("account", user);
         response.sendRedirect("HomePage");

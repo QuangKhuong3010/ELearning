@@ -46,7 +46,7 @@ public class User {
         this.avatar = avatar;
     }
     private String description;
-    private int isDeleted;
+    private int created_by_Google;
     private String organization_name;
 
     public String getOrganization_name() {
@@ -58,17 +58,18 @@ public class User {
     }
 
     public User() {
+        
     }
 
-    public User(int user_id, int role_id, String email, String pass, int isDeleted) {
+    public User(int user_id, int role_id, String email, String pass, int created_by_Google) {
         this.user_id = user_id;
         this.role_id = role_id;
         this.email = email;
         this.pass = pass;
-        this.isDeleted = isDeleted;
+        this.created_by_Google = created_by_Google;
     }
 
-    public User(int user_id, int role_id, String email, String pass, String registration_date, String first_name, String last_name, String phone_number, String avatar, String backgroup, String description, int isDeleted) {
+    public User(int user_id, int role_id, String email, String pass, String registration_date, String first_name, String last_name, String phone_number, String avatar, String backgroup, String description, int created_by_Google) {
         this.user_id = user_id;
         this.role_id = role_id;
         this.email = email;
@@ -80,15 +81,19 @@ public class User {
         this.avatar = avatar;
         this.backgroup = backgroup;
         this.description = description;
-        this.isDeleted = isDeleted;
+        this.created_by_Google = created_by_Google;
     }
 
-    
+    public int getCreated_by_Google() {
+        return created_by_Google;
+    }
 
+    public void setCreated_by_Google(int created_by_Google) {
+        this.created_by_Google = created_by_Google;
+    }
     
-
-    
-
+  
+ 
     public int getUser_id() {
         return user_id;
     }
@@ -161,13 +166,7 @@ public class User {
         this.description = description;
     }
 
-    public int getIsDeleted() {
-        return isDeleted;
-    }
 
-    public void setIsDeleted(int isDeleted) {
-        this.isDeleted = isDeleted;
-    }
 
     
 }

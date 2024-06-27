@@ -18,13 +18,38 @@ public class userDAO extends DBContext {
                 + "      ,[role_id]\n"
                 + "      ,[email]\n"
                 + "      ,[password]\n"
-                + "      ,[isDeleted]\n"
+                + "      ,[created_by_Google]\n"
                 + "  FROM [dbo].[User]\n"
                 + "WHERE [email] = ? and [password] = ?";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             st.setString(1, email);
             st.setString(2, pass);
+            ResultSet rs = st.executeQuery();
+            if (rs.next()) {
+                return new User(rs.getInt(1),
+                        rs.getInt(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getInt(5));
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return null;
+    }
+    
+    public User loginWithGoogle(String email) {
+        String sql = "SELECT [id]\n"
+                + "      ,[role_id]\n"
+                + "      ,[email]\n"
+                + "      ,[password]\n"
+                + "      ,[created_by_Google]\n"
+                + "  FROM [dbo].[User]\n"
+                + "WHERE [email] = ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, email);
             ResultSet rs = st.executeQuery();
             if (rs.next()) {
                 return new User(rs.getInt(1),
@@ -47,7 +72,7 @@ public class userDAO extends DBContext {
                     + "           ,[password]\n"
                     + "           ,[first_name]\n"
                     + "           ,[last_name]\n"
-                    + "           ,[isDeleted])\n"
+                    + "           ,[created_by_Google])\n"
                     + "     VALUES\n"
                     + "           (?, ?, ?, ?, ?, ?)";
             PreparedStatement st = connection.prepareStatement(sql);
@@ -57,6 +82,30 @@ public class userDAO extends DBContext {
             st.setString(4, firstName);
             st.setString(5, lastName);
             st.setString(6, "0");
+            st.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+    }
+    
+    public void SignUpByGoogle(String firstName, String lastName, String email, String pass) {
+        try {
+            String sql = "INSERT INTO [dbo].[User]\n"
+                    + "           ([role_id]\n"
+                    + "           ,[email]\n"
+                    + "           ,[password]\n"
+                    + "           ,[first_name]\n"
+                    + "           ,[last_name]\n"
+                    + "           ,[created_by_Google])\n"
+                    + "     VALUES\n"
+                    + "           (?, ?, ?, ?, ?, ?)";
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, "4");
+            st.setString(2, email);
+            st.setString(3, pass);
+            st.setString(4, firstName);
+            st.setString(5, lastName);
+            st.setString(6, "1");
             st.executeUpdate();
         } catch (SQLException ex) {
             System.out.println(ex);
@@ -107,7 +156,7 @@ public class userDAO extends DBContext {
                     + "      ,[avatar]\n"
                     + "      ,[backgroup]\n"
                     + "      ,[description]\n"
-                    + "      ,[isDeleted]\n"
+                    + "      ,[created_by_Google]\n"
                     + "  FROM [ELearning].[dbo].[User]"
                     + "  WHERE [id]=?";
             PreparedStatement st = connection.prepareStatement(sql);
