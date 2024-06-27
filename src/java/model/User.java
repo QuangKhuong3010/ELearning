@@ -13,12 +13,30 @@ public class User {
     private int user_id;
     private int role_id;
     private String email;
+
+    public String getBackgroup() {
+        return backgroup;
+    }
+
+    public void setBackgroup(String backgroup) {
+        this.backgroup = backgroup;
+    }
     private String pass;
     private String registration_date;
     private String first_name;
     private String last_name;
     private String phone_number;
     private String avatar;
+    private String backgroup;
+    private int quantityCourseLearning;
+
+    public int getQuantityCourseLearning() {
+        return quantityCourseLearning;
+    }
+
+    public void setQuantityCourseLearning(int quantityCourseLearning) {
+        this.quantityCourseLearning = quantityCourseLearning;
+    }
 
     public String getAvatar() {
         return avatar;
@@ -50,7 +68,7 @@ public class User {
         this.isDeleted = isDeleted;
     }
 
-    public User(int user_id, int role_id, String email, String pass, String registration_date, String first_name, String last_name, String phone_number, String avatar, String description, int isDeleted) {
+    public User(int user_id, int role_id, String email, String pass, String registration_date, String first_name, String last_name, String phone_number, String avatar, String backgroup, String description, int isDeleted) {
         this.user_id = user_id;
         this.role_id = role_id;
         this.email = email;
@@ -60,9 +78,16 @@ public class User {
         this.last_name = last_name;
         this.phone_number = phone_number;
         this.avatar = avatar;
+        this.backgroup = backgroup;
         this.description = description;
         this.isDeleted = isDeleted;
     }
+
+    
+
+    
+
+    
 
     public int getUser_id() {
         return user_id;

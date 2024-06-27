@@ -93,7 +93,7 @@
                                                     <a href="instructor-dashboard.jsp">Features</a>
                                                     <ul class="sub-menu">
                                                         <li><a href="instructor-dashboard.jsp">Dashboard</a></li>
-                                                        <li><a href="instructor-profile.jsp">Profile</a></li>
+                                                        <li><a href="Profile">Profile</a></li>
                                                         <li><a href="instructor-enrolled-courses.jsp">Enrolled Courses</a></li>
                                                         <li><a href="instructor-wishlist.jsp">Wishlist</a></li>
                                                         <li><a href="instructor-review.jsp">Reviews</a></li>
@@ -107,11 +107,11 @@
                                                     </ul>
                                                 </li>
                                             </c:if>
-                                            <c:if test="${sessionScope.account.role_id==3}">
-                                                <li class="menu-item-has-children"><a href="student-dashboard.jsp">Student Dashboard</a>
+                                            <c:if test="${sessionScope.account.role_id!=4}">
+                                                <li class="menu-item-has-children"><a href="student-dashboard.jsp">Dashboard</a>
                                                     <ul class="sub-menu">
                                                         <li><a href="student-dashboard.jsp">Dashboard</a></li>
-                                                        <li><a href="student-profile.jsp">Profile</a></li>
+                                                        <li><a href="Profile">Profile</a></li>
                                                         <li><a href="student-enrolled-courses.jsp">Enrolled Courses</a></li>
                                                         <li><a href="student-wishlist.jsp">Wishlist</a></li>
                                                         <li><a href="student-review.jsp">Reviews</a></li>

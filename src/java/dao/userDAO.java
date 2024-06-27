@@ -105,9 +105,10 @@ public class userDAO extends DBContext {
                     + "      ,[last_name]\n"
                     + "      ,[phone_number]\n"
                     + "      ,[avatar]\n"
+                    + "      ,[backgroup]\n"
                     + "      ,[description]\n"
                     + "      ,[isDeleted]\n"
-                    + "  FROM [dbo].[User]\n"
+                    + "  FROM [ELearning].[dbo].[User]"
                     + "  WHERE [id]=?";
             PreparedStatement st = connection.prepareStatement(sql);
             st.setInt(1, id);
@@ -123,7 +124,8 @@ public class userDAO extends DBContext {
                         rs.getString(8),
                         rs.getString(9),
                         rs.getString(10),
-                        rs.getInt(11));
+                        rs.getString(11),
+                        rs.getInt(12));
             }
         } catch (SQLException ex) {
             System.out.println(ex);

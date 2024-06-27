@@ -93,7 +93,7 @@
                                                         <a href="instructor-dashboard.jsp">Instructor Dashboard</a>
                                                         <ul class="sub-menu">
                                                             <li><a href="instructor-dashboard.jsp">Dashboard</a></li>
-                                                            <li><a href="instructor-profile.jsp">Profile</a></li>
+                                                            <li><a href="Profile">Profile</a></li>
                                                             <li><a href="instructor-enrolled-courses.jsp">Enrolled Courses</a></li>
                                                             <li><a href="instructor-wishlist.jsp">Wishlist</a></li>
                                                             <li><a href="instructor-review.jsp">Reviews</a></li>

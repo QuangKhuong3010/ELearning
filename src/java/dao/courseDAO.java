@@ -111,4 +111,20 @@ public class courseDAO extends DBContext {
         }
         return 0;
     }
+
+    public int getQuantityCourseLearning(int user_id) {
+        String sql = "SELECT COUNT(*) AS TotalCourses\n"
+                + "FROM [dbo].[Purchased]\n"
+                + "WHERE [user_id] = ?;";
+
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, user_id);
+            ResultSet rs = st.executeQuery();
+            return rs.getInt(1);
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return 0;
+    }
 }

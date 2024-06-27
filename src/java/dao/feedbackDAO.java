@@ -5,12 +5,12 @@
 package dao;
 
 import context.DBContext;
-import static java.lang.reflect.Array.get;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import model.Category;
+import java.util.Date;
 import model.Feedback;
 import model.Rating;
 
@@ -46,6 +46,7 @@ public class feedbackDAO extends DBContext {
 
     public ArrayList<Feedback> getFeedbackOnCousre(int course_id) {
         userDAO userDAO = new userDAO();
+        
         String sql = "SELECT [id]\n"
                 + "      ,[rating]\n"
                 + "      ,[course_id]\n"
@@ -61,12 +62,14 @@ public class feedbackDAO extends DBContext {
             ResultSet rs = st.executeQuery();
             ArrayList<Feedback> feedbackList = new ArrayList<>();
             while (rs.next()) {
+                Date currentDate = new Date(rs.getString(5));
+                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 feedbackList.add(new Feedback(
                         rs.getInt(1),
                         rs.getInt(2),
                         rs.getInt(3),
                         rs.getInt(4),
-                        rs.getString(5),
+                        dateFormat.format(currentDate),
                         rs.getString(6),
                         rs.getString(7),
                         userDAO.findUserName(rs.getInt(4)),
