@@ -14,7 +14,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import util.Email;
-import util.generateOTP;
+import util.generate;
 
 /**
  *
@@ -78,7 +78,7 @@ public class ForgotPassword extends HttpServlet {
         String email = request.getParameter("email");
         userDAO user = new userDAO();
         if (user.checkEmailExist(email)) {
-            generateOTP generate = new generateOTP();
+            generate generate = new generate();
             String otp = generate.generateOTP(6);
             Cookie cookieOtp = new Cookie("cotp", otp);
             Cookie cookieEmail = new Cookie("cEmail", email);

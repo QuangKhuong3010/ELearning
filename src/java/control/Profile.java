@@ -62,7 +62,7 @@ public class Profile extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession(false);
-        if (session==null){
+        if (session == null) {
             response.sendRedirect("Logout");
             return;
         }
@@ -70,12 +70,14 @@ public class Profile extends HttpServlet {
         courseDAO courseDAO = new courseDAO();
         User user_system = (User) session.getAttribute("account");
         User user = userDAO.getUser(user_system.getUser_id());
-        request.setAttribute("user", user);
         user.setQuantityCourseLearning(courseDAO.getQuantityCourseLearning(user.getUser_id()));
-        if (user.getRole_id()==4)
+        
+        request.setAttribute("user", user);
+        if (user.getRole_id() == 4) {
             request.getRequestDispatcher("studentprofile.jsp").forward(request, response);
-        else
+        } else {
             request.getRequestDispatcher("staffprofile.jsp").forward(request, response);
+        }
     }
 
     /**

@@ -4,7 +4,7 @@
  */
 package util;
 
-public class generateOTP {
+public class generate {
 
     public static String generateOTP(int length) {
         String characters = "0123456789";
@@ -14,5 +14,10 @@ public class generateOTP {
             result += characters.charAt((int) Math.floor(Math.random() * charactersLength));
         }
         return result;
+    }
+    
+    public String generateCode(int number) {
+        String code = "ORDER" + String.format("%06d", number);
+        return code;
     }
 }

@@ -87,7 +87,7 @@ public class Feedback {
     }
 
     public String getCreated_date() {
-        return created_date;
+        return created_date.substring(0,19);
     }
 
     public void setCreated_date(String created_date) {

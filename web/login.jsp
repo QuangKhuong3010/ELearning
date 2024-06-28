@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!doctype jsp>
 <jsp class="no-js" lang="en">
 
@@ -47,7 +48,7 @@
         </button>
         <!-- Scroll-top-end-->
 
-        <!-- header-area -->
+       <!-- header-area -->
         <header>
             <div class="tg-header__top">
                 <div class="container custom-container">
@@ -87,12 +88,45 @@
                                             <li class="button"><a href="HomePage">Home</a></li>
                                             <li class="button"><a href="Courses">Courses List</a></li>
                                             <li class="button"><a href="#">About Us</a></li>
+                                                <c:if test="${sessionScope.account.role_id==4}">
+                                                <li class="menu-item-has-children">
+                                                    <a href="instructor-dashboard.jsp">Features</a>
+                                                    <ul class="sub-menu">
+                                                        <li><a href="instructor-dashboard.jsp">Dashboard</a></li>
+                                                        <li><a href="Profile">Profile</a></li>
+                                                        <li><a href="instructor-enrolled-courses.jsp">Enrolled Courses</a></li>
+                                                        <li><a href="instructor-wishlist.jsp">Wishlist</a></li>
+                                                        <li><a href="instructor-review.jsp">Reviews</a></li>
+                                                        <li><a href="instructor-attempts.jsp">My Quiz Attempts</a></li>
+                                                        <li><a href="instructor-history.jsp">Order History</a></li>
+                                                        <li><a href="instructor-courses.jsp">My Course</a></li>
+                                                        <li><a href="instructor-announcement.jsp">Announcements</a></li>
+                                                        <li><a href="instructor-quiz.jsp">Quiz Attempts</a></li>
+                                                        <li><a href="instructor-assignment.jsp">Assignments</a></li>
+                                                        <li><a href="instructor-setting.jsp">Settings</a></li>
+                                                    </ul>
+                                                </li>
+                                            </c:if>
+                                            <c:if test="${sessionScope.account.role_id==3}">
+                                                <li class="menu-item-has-children"><a href="student-dashboard.jsp">Dashboard</a>
+                                                    <ul class="sub-menu">
+                                                        <li><a href="student-dashboard.jsp">Dashboard</a></li>
+                                                        <li><a href="Profile">Profile</a></li>
+                                                        <li><a href="student-enrolled-courses.jsp">Enrolled Courses</a></li>
+                                                        <li><a href="student-wishlist.jsp">Wishlist</a></li>
+                                                        <li><a href="student-review.jsp">Reviews</a></li>
+                                                        <li><a href="student-attempts.jsp">My Quiz Attempts</a></li>
+                                                        <li><a href="student-history.jsp">Order History</a></li>
+                                                        <li><a href="student-setting.jsp">Settings</a></li>
+                                                    </ul>
+                                                </li>
+                                            </c:if>
                                         </ul>
                                     </div>
                                     <div class="tgmenu__search d-none d-md-block">
-                                        <form action="#" class="tgmenu__search-form">
+                                        <form action="Courses" class="tgmenu__search-form">
                                             <div class="input-grp">
-                                                <input type="text" placeholder="Search For Course . . .">
+                                                <input name="search" type="text" placeholder="Search For Course . . .">
                                                 <button type="submit"><i class="flaticon-search"></i></button>
                                             </div>
                                         </form>
@@ -100,7 +134,12 @@
                                     <div class="tgmenu__action">
                                         <ul class="list-wrap">
                                             <li class="header-btn login-btn">
-                                                <a href="Login">Log in</a>
+                                                <c:if test="${sessionScope.account==null}">
+                                                    <a href="Login">Log in</a>
+                                                </c:if>
+                                                <c:if test="${sessionScope.account!=null}">
+                                                    <a href="Logout">Log out</a>
+                                                </c:if>
                                             </li>
                                         </ul>
                                     </div>
@@ -111,7 +150,6 @@
                 </div>
             </div>
         </header>
-
         <!-- header-area-end -->
 
 
@@ -182,7 +220,7 @@
                                     <span>or</span>
                                 </div>
                                 <div class="account__social">
-                                    <a href="https://accounts.google.com/o/oauth2/auth?scope=email&redirect_uri=http://localhost:8080/ELearning/LoginGoogleHandler&response_type=code&client_id=407572289292-0o85s9ip7lffdbee2deojs3u0lhktsvf.apps.googleusercontent.com&approval_prompt=force" class="account__social-btn">
+                                    <a href="https://accounts.google.com/o/oauth2/auth?scope=email&redirect_uri=http://localhost:9999/ELearning/LoginGoogleHandler&response_type=code&client_id=407572289292-0o85s9ip7lffdbee2deojs3u0lhktsvf.apps.googleusercontent.com&approval_prompt=force" class="account__social-btn">
                                         <img src="assets/img/icons/google.svg" alt="img">
                                         Continue with google
                                     </a>

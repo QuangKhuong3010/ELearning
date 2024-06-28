@@ -4,6 +4,10 @@
  */
 package control;
 
+import dao.categoryDAO;
+import dao.courseDAO;
+import dao.feedbackDAO;
+import dao.userDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -11,6 +15,9 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
+import model.Course;
+import model.User;
 
 /**
  *
@@ -57,6 +64,22 @@ public class HomePage extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        userDAO userDAO = new userDAO();
+        courseDAO courseDAO = new courseDAO();
+        categoryDAO categoryDAO = new categoryDAO();
+        feedbackDAO feedbackDAO = new feedbackDAO();
+        ArrayList<User> listMentee = userDAO.getAllOfRole(4);
+        ArrayList<User> listMentor = userDAO.getAllOfRole(3);
+        ArrayList<Course> listCourse = courseDAO.getAllCourse("");
+        for (Course course : listCourse) {
+                course.setCategory_name(categoryDAO.getNameCategory(course.getCategory_id()));
+                course.setInstructor_name(userDAO.findUserName(course.getInstructor_id()));
+                course.setRating(feedbackDAO.getAverageRateOf(course.getId()));
+            }
+        
+        request.setAttribute("listMentor", listMentor);
+        request.setAttribute("courses", listCourse);
+        request.setAttribute("listMentee", listMentee);
         request.getRequestDispatcher("index.jsp").forward(request, response);
     }
 

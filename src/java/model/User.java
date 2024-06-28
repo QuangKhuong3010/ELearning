@@ -69,6 +69,14 @@ public class User {
         this.created_by_Google = created_by_Google;
     }
 
+    public User(int user_id, int role_id, String email, int created_by_Google) {
+        this.user_id = user_id;
+        this.role_id = role_id;
+        this.email = email;
+        this.created_by_Google = created_by_Google;
+    }
+    
+
     public User(int user_id, int role_id, String email, String pass, String registration_date, String first_name, String last_name, String phone_number, String avatar, String backgroup, String description, int created_by_Google) {
         this.user_id = user_id;
         this.role_id = role_id;

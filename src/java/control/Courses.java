@@ -62,17 +62,28 @@ public class Courses extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
+        String search = request.getParameter("search");
+        if (search==null)
+            search="";
+        String mess=null;
+        System.out.println(search);
         categoryDAO categoryDAO = new categoryDAO();
         courseDAO courseDAO= new courseDAO();   
         userDAO userDAO = new userDAO();
         feedbackDAO rateDAO = new feedbackDAO();
         ArrayList<Category> listCategory = categoryDAO.getAllCategory();
-        ArrayList<Course> listCourse = courseDAO.getAllCourse();
-        for (Course course : listCourse) {
-            course.setCategory_name(categoryDAO.getNameCategory(course.getCategory_id()));
-            course.setInstructor_name(userDAO.findUserName(course.getInstructor_id()));
-            course.setRating(rateDAO.getAverageRateOf(course.getId()));
+        ArrayList<Course> listCourse = courseDAO.getAllCourse(search);
+        if (listCourse.size()==0){
+            mess = "Not found!";
+        }else{
+            for (Course course : listCourse) {
+                course.setCategory_name(categoryDAO.getNameCategory(course.getCategory_id()));
+                course.setInstructor_name(userDAO.findUserName(course.getInstructor_id()));
+                course.setRating(rateDAO.getAverageRateOf(course.getId()));
+            }
         }
+        
+        request.setAttribute("mess", mess);
         request.setAttribute("categories", listCategory);
         request.setAttribute("courses", listCourse);
         request.getRequestDispatcher("courses.jsp").forward(request, response);

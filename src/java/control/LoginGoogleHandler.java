@@ -22,8 +22,6 @@ import org.apache.http.client.fluent.Form;
 import org.apache.http.client.fluent.Request;
 import common.Constants;
 
-
-
 /**
  *
  * @author Admin
@@ -76,10 +74,12 @@ public class LoginGoogleHandler extends HttpServlet {
         String accessToken = getToken(code);
         User user = getUserInfo(accessToken);
         userDAO userDAO = new userDAO();
-        if(!userDAO.checkEmailExist(user.getEmail())){
-            userDAO.SignUpByGoogle("", "", user.getEmail(), "");
+        if (!userDAO.checkEmailExist(user.getEmail())) {
+            userDAO.SignUpByGoogle(user.getEmail());
         }
+
         user.setRole_id(userDAO.loginWithGoogle(user.getEmail()).getRole_id());
+        user.setUser_id(userDAO.findUserId(user.getEmail()));
         HttpSession session = request.getSession();
         session.setAttribute("account", user);
         response.sendRedirect("HomePage");

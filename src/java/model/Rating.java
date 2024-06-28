@@ -46,6 +46,11 @@ public class Rating {
         this.percen = percen;
     }
 
+    @Override
+    public String toString() {
+        return "Rating{" + "rating=" + rating + ", quantity=" + quantity + ", percen=" + percen + '}';
+    }
+
    
     
     

@@ -56,7 +56,7 @@ public class Login extends HttpServlet {
         User user = dao.login(email, pass);
         if (user == null) {
             request.setAttribute("mess", "Wrong email or password");
-            request.getRequestDispatcher("Login").forward(request, response);
+            request.getRequestDispatcher("login.jsp").forward(request, response);
         } else {
             HttpSession session = request.getSession();
             session.setAttribute("account", user);

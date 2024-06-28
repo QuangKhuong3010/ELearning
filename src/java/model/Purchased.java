@@ -13,18 +13,16 @@ public class Purchased {
     private int user_id;
     private int course_id;
     private String purchased_date;
-    private String description;
     private String Code;
 
     public Purchased() {
     }
 
-    public Purchased(int id, int user_id, int course_id, String purchased_date, String description, String Code) {
+    public Purchased(int id, int user_id, int course_id, String purchased_date,  String Code) {
         this.id = id;
         this.user_id = user_id;
         this.course_id = course_id;
         this.purchased_date = purchased_date;
-        this.description = description;
         this.Code = Code;
     }
 
@@ -58,14 +56,6 @@ public class Purchased {
 
     public void setPurchased_date(String purchased_date) {
         this.purchased_date = purchased_date;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 
     public String getCode() {

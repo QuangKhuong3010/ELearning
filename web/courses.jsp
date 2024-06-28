@@ -349,7 +349,7 @@
                                 <div class="row align-items-center">
                                     <div class="col-md-5">
                                         <div class="courses-top-left">
-                                            <p>Showing 250 total results</p>
+                                            <p>Showing ${courses.size()} total results</p>
                                         </div>
                                     </div>
                                     <div class="col-md-7">
@@ -391,6 +391,7 @@
                             <div class="tab-content" id="myTabContent">
                                 <div class="tab-pane fade show active" id="grid" role="tabpanel" aria-labelledby="grid-tab">
                                     <div class="row courses__grid-wrap row-cols-1 row-cols-xl-3 row-cols-lg-2 row-cols-md-2 row-cols-sm-1">
+                                        <c:if test="${cousres.size()!=0}">
                                         <c:forEach items="${courses}" var="c">
                                             <div class="col">
                                                 <div class="courses__item shine__animate-item">
@@ -421,6 +422,7 @@
                                                 </div>
                                             </div>
                                         </c:forEach>
+                                        </c:if>
                                     </div>
                                     <nav class="pagination__wrap mt-30">
                                         <ul class="list-wrap">

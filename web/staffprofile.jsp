@@ -109,10 +109,10 @@
                                                 </li>
                                             </c:if>
                                             <c:if test="${sessionScope.account.role_id==3}">
-                                                <li class="menu-item-has-children"><a href="student-dashboard.jsp">Student Dashboard</a>
+                                                <li class="menu-item-has-children"><a href="student-dashboard.jsp">Dashboard</a>
                                                     <ul class="sub-menu">
                                                         <li><a href="student-dashboard.jsp">Dashboard</a></li>
-                                                        <li><a href="student-profile.jsp">Profile</a></li>
+                                                        <li><a href="Profile">Profile</a></li>
                                                         <li><a href="student-enrolled-courses.jsp">Enrolled Courses</a></li>
                                                         <li><a href="student-wishlist.jsp">Wishlist</a></li>
                                                         <li><a href="student-review.jsp">Reviews</a></li>
@@ -125,9 +125,9 @@
                                         </ul>
                                     </div>
                                     <div class="tgmenu__search d-none d-md-block">
-                                        <form action="#" class="tgmenu__search-form">
+                                        <form action="Courses" class="tgmenu__search-form">
                                             <div class="input-grp">
-                                                <input type="text" placeholder="Search For Course . . .">
+                                                <input name="search" type="text" placeholder="Search For Course . . .">
                                                 <button type="submit"><i class="flaticon-search"></i></button>
                                             </div>
                                         </form>
@@ -152,7 +152,6 @@
             </div>
         </header>
         <!-- header-area-end -->
-
 
 
         <!-- main-area -->

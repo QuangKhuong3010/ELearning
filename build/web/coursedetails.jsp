@@ -1,4 +1,7 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <!doctype html>
 <html class="no-js" lang="en">
 
@@ -28,6 +31,140 @@
         <link rel="stylesheet" href="assets/css/spacing.css">
         <link rel="stylesheet" href="assets/css/tg-cursor.css">
         <link rel="stylesheet" href="assets/css/main.css">
+        <style>
+
+            .modal-body {
+                border-radius: 15px!important;
+            }
+            .pay_box {
+                background-color: #262a53;
+                box-shadow: 0 0 5px rgba(255, 255, 255, 0.35);
+                padding: 4rem;
+                border-radius: 15px;
+                opacity: 0;
+                pointer-events: none;
+                transition: 0.35s;
+                scale: 0;
+                color: #fff;
+                width: 100%;
+            }
+            .pay_box img{
+                width: 90%;
+                height: auto;
+                border-radius: 15px;
+            }
+            .pay_box {
+                opacity: 1;
+                pointer-events: all;
+                scale: 1;
+            }
+            .pay_box > div {
+                display: flex;
+                justify-content: space-between;
+                flex-direction: column;
+                gap: 1rem;
+                font-weight: 700;
+            }
+            #pay_status {
+                opacity: 0;
+                transition: 0.35s ease;
+                scale: 0;
+                height: 0;
+            }
+            #pay_status * {
+                padding: 1rem 0;
+            }
+            #pay_status:nth-child(2) {
+                width: 0;
+            }
+            #pay_status i {
+                font-size: 5rem;
+                margin: 0 auto;
+                display: block;
+                width: max-content;
+            }
+            .pay_box > div h5 {
+                width: 100%;
+                text-align: center;
+                font-size: 1.4rem;
+                color: #ffb606;
+                padding: 0;
+            }
+            .pay_box > div h6 {
+                width: 100%;
+                text-align: center;
+                font-size: 1rem;
+                color: #ffb606;
+                margin-top: -1rem;
+            }
+            .pay_status_box {
+                font-weight: 400;
+                margin-top: 1rem;
+                padding-top: 2rem !important;
+                border-top: 1px solid rgba(255, 255, 255, 0.2);
+            }
+            .pay_status_box p {
+                background-color: rgba(255, 255, 255, 0.7);
+                position: relative;
+                overflow: hidden;
+                z-index: 1;
+            }
+            .pay_status_box p span {
+                z-index: 1;
+            }
+            #pay_status i {
+                font-size: 5rem;
+                margin: 0 auto;
+                display: block;
+                width: max-content;
+            }
+            .pay_box > div {
+                display: flex;
+                justify-content: space-between;
+                flex-direction: column;
+                gap: 1rem;
+                font-weight: 700;
+            }
+
+            .text-center{
+                text-align: center;
+            }
+            #pay_load {
+                margin-top: 1rem;
+                padding-top: 1.5rem;
+                border-top: 1px solid rgba(255, 255, 255, 0.2);
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            .loader {
+                width: 100%;
+                height: 20px;
+                background:
+                    linear-gradient(90deg, #0000 ,orange) left -50px top 0/50px 20px no-repeat
+                    lightblue;
+                animation: l2 1s infinite linear;
+            }
+            @keyframes l2 {
+                100% {
+                    background-position: right -50px top 0
+                }
+            }
+            .btnDatHang {
+                padding: 13px 36px;
+                margin: 0 22px 0 15px;
+                text-transform: capitalize;
+                font-weight: 300;
+                height: 2.5rem;
+                -webkit-box-sizing: border-box;
+                box-sizing: border-box;
+                font-size: 0.875rem;
+                border-radius: 2px;
+                width: 13.125rem;
+            }
+        </style>
+
     </head>
 
     <body>
@@ -48,6 +185,7 @@
         </button>
         <!-- Scroll-top-end-->
 
+<!-- header-area -->
         <header>
             <div class="tg-header__top">
                 <div class="container custom-container">
@@ -86,46 +224,46 @@
                                         <ul class="navigation">
                                             <li class="button"><a href="HomePage">Home</a></li>
                                             <li class="button"><a href="Courses">Courses List</a></li>
-                                            <li class="menu-item-has-children"><a href="#">Dashboard</a>
-                                                <ul class="sub-menu">
-                                                    <li class="menu-item-has-children">
-                                                        <a href="instructor-dashboard.jsp">Instructor Dashboard</a>
-                                                        <ul class="sub-menu">
-                                                            <li><a href="instructor-dashboard.jsp">Dashboard</a></li>
-                                                            <li><a href="instructor-profile.jsp">Profile</a></li>
-                                                            <li><a href="instructor-enrolled-courses.jsp">Enrolled Courses</a></li>
-                                                            <li><a href="instructor-wishlist.jsp">Wishlist</a></li>
-                                                            <li><a href="instructor-review.jsp">Reviews</a></li>
-                                                            <li><a href="instructor-attempts.jsp">My Quiz Attempts</a></li>
-                                                            <li><a href="instructor-history.jsp">Order History</a></li>
-                                                            <li><a href="instructor-courses.jsp">My Course</a></li>
-                                                            <li><a href="instructor-announcement.jsp">Announcements</a></li>
-                                                            <li><a href="instructor-quiz.jsp">Quiz Attempts</a></li>
-                                                            <li><a href="instructor-assignment.jsp">Assignments</a></li>
-                                                            <li><a href="instructor-setting.jsp">Settings</a></li>
-                                                        </ul>
-                                                    </li>
-                                                    <li class="menu-item-has-children"><a href="student-dashboard.jsp">Student Dashboard</a>
-                                                        <ul class="sub-menu">
-                                                            <li><a href="student-dashboard.jsp">Dashboard</a></li>
-                                                            <li><a href="student-profile.jsp">Profile</a></li>
-                                                            <li><a href="student-enrolled-courses.jsp">Enrolled Courses</a></li>
-                                                            <li><a href="student-wishlist.jsp">Wishlist</a></li>
-                                                            <li><a href="student-review.jsp">Reviews</a></li>
-                                                            <li><a href="student-attempts.jsp">My Quiz Attempts</a></li>
-                                                            <li><a href="student-history.jsp">Order History</a></li>
-                                                            <li><a href="student-setting.jsp">Settings</a></li>
-                                                        </ul>
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                            <li class="button"><a href="#">Profile</a></li>
+                                            <li class="button"><a href="#">About Us</a></li>
+                                                <c:if test="${sessionScope.account.role_id==4}">
+                                                <li class="menu-item-has-children">
+                                                    <a href="instructor-dashboard.jsp">Features</a>
+                                                    <ul class="sub-menu">
+                                                        <li><a href="instructor-dashboard.jsp">Dashboard</a></li>
+                                                        <li><a href="Profile">Profile</a></li>
+                                                        <li><a href="instructor-enrolled-courses.jsp">Enrolled Courses</a></li>
+                                                        <li><a href="instructor-wishlist.jsp">Wishlist</a></li>
+                                                        <li><a href="instructor-review.jsp">Reviews</a></li>
+                                                        <li><a href="instructor-attempts.jsp">My Quiz Attempts</a></li>
+                                                        <li><a href="instructor-history.jsp">Order History</a></li>
+                                                        <li><a href="instructor-courses.jsp">My Course</a></li>
+                                                        <li><a href="instructor-announcement.jsp">Announcements</a></li>
+                                                        <li><a href="instructor-quiz.jsp">Quiz Attempts</a></li>
+                                                        <li><a href="instructor-assignment.jsp">Assignments</a></li>
+                                                        <li><a href="instructor-setting.jsp">Settings</a></li>
+                                                    </ul>
+                                                </li>
+                                            </c:if>
+                                            <c:if test="${sessionScope.account.role_id==3}">
+                                                <li class="menu-item-has-children"><a href="student-dashboard.jsp">Dashboard</a>
+                                                    <ul class="sub-menu">
+                                                        <li><a href="student-dashboard.jsp">Dashboard</a></li>
+                                                        <li><a href="Profile">Profile</a></li>
+                                                        <li><a href="student-enrolled-courses.jsp">Enrolled Courses</a></li>
+                                                        <li><a href="student-wishlist.jsp">Wishlist</a></li>
+                                                        <li><a href="student-review.jsp">Reviews</a></li>
+                                                        <li><a href="student-attempts.jsp">My Quiz Attempts</a></li>
+                                                        <li><a href="student-history.jsp">Order History</a></li>
+                                                        <li><a href="student-setting.jsp">Settings</a></li>
+                                                    </ul>
+                                                </li>
+                                            </c:if>
                                         </ul>
                                     </div>
                                     <div class="tgmenu__search d-none d-md-block">
-                                        <form action="#" class="tgmenu__search-form">
+                                        <form action="Courses" class="tgmenu__search-form">
                                             <div class="input-grp">
-                                                <input type="text" placeholder="Search For Course . . .">
+                                                <input name="search" type="text" placeholder="Search For Course . . .">
                                                 <button type="submit"><i class="flaticon-search"></i></button>
                                             </div>
                                         </form>
@@ -133,7 +271,12 @@
                                     <div class="tgmenu__action">
                                         <ul class="list-wrap">
                                             <li class="header-btn login-btn">
-                                                <a href="Login">Log in</a>
+                                                <c:if test="${sessionScope.account==null}">
+                                                    <a href="Login">Log in</a>
+                                                </c:if>
+                                                <c:if test="${sessionScope.account!=null}">
+                                                    <a href="Logout">Log out</a>
+                                                </c:if>
                                             </li>
                                         </ul>
                                     </div>
@@ -144,7 +287,6 @@
                 </div>
             </div>
         </header>
-        <!-- header-area-end -->
         <!-- header-area-end -->
 
 
@@ -309,7 +451,7 @@
                                                             </div>
                                                             <div class="course-rate__details-row-value">
                                                                 <div class="rating-gray"></div>
-                                                                <div class="rating" style="width:80%;" title="80%"></div>
+                                                                <div class="rating" style="width:${r.percen}%;" title="80%"></div>
                                                                 <span class="rating-count"> ${r.quantity} </span>
                                                             </div>
                                                         </div>
@@ -386,10 +528,68 @@
                                 </div>
                                 <div class="courses__details-enroll">
                                     <div class="tg-button-wrap">
-                                        <a href="courses.html" class="btn btn-two arrow-btn">
-                                            See All Instructors
-                                            <img src="assets/img/icons/right_arrow.svg" alt="img" class="injectable">
-                                        </a>
+                                        <button id="btnDatHang" class="shopee-button-solid shopee-button-solid--primary" data-bs-toggle="modal" data-bs-target="#paymentMethod">
+                                            <span class="cart-final--bottom-checkout--btn btnDatHang">Payment</span>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="modal fade" id="paymentMethod" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <div class="modal-body">
+
+
+                                                <div id="qrCodeContainer">
+                                                    <div class="pay_box">
+                                                        <div id="pay_status" class="success">
+                                                            <p><i class="fa-solid fa-circle-check"></i></p>
+                                                            <h5>Payment Success</h5>
+                                                            <div class="pay_status_box">
+                                                                <p>
+                                                                    <span>Start after <b>5</b>s</span> <i></i>
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                        <div id="pay_status" class="warn">
+                                                            <i class="fa-solid fa-triangle-exclamation"></i>
+                                                            <p>
+                                                                Take a photo of the invoice
+                                                            </p>
+                                                            <div class="pay_status_box">
+                                                                <p>0377262942</p>
+                                                            </div>
+                                                        </div>
+                                                        <div id="pay_loading">
+                                                            <div class="text-center">
+                                                                <img src="https://api.vietqr.io/image/970422-3680147639039-KeYZOgw.jpg?accountName=DINH%20QUANG%20KHUONG&amount=${course.price*1000}&addInfo=${code}"
+                                                                     alt="QR thanh toán VietQR" />
+                                                            </div>
+                                                            <h5>QR Code Generate</h5>
+                                                            <h6>Verify in 5 minutes</h6>
+                                                            <p><span>Money:</span> <span id="pay_amount"><fmt:formatNumber value="${course.price*1000} " type="number"/>vnd</span></p>
+                                                            <p>
+                                                                <span> Content of Payment:</span>
+                                                                <span id="pay_content">${code}</span>
+                                                            </p>
+                                                            <p>
+                                                                <span>Bank Name</span>
+                                                                <span id="">DINH QUANG KHUONG</span>
+                                                            </p>
+                                                            <p id="pay_load">
+                                                                <span>Waiting</span>
+                                                                <span id="pay_load_timer"></span>
+                                                            </p>
+                                                            <div class="loader">
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -431,6 +631,115 @@
         <script src="assets/js/main.js"></script>
         <script>
             SVGInject(document.querySelectorAll("img.injectable"));
+        </script>
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <!-- Template Javascript -->
+        <script>
+            var paymentBody = {
+                user_id: ${sessionScope.account.user_id},
+                code: '${code}',
+                course_id: ${course.id}
+            }
+
+            let h = 0, m = 10, s = 0;
+            let timeout;
+
+            function startCountdown() {
+                timeout = setInterval(updateCountdown, 1000);
+            }
+            startCountdown()
+            function updateCountdown() {
+                s--;
+                if (s < 0) {
+                    s = 59;
+                    m--;
+                    if (m < 0) {
+                        m = 59;
+                        h--;
+                        if (h < 0) {
+                            clearInterval(timeout);
+                            document.getElementById('pay_load_timer').innerHTML = 0 + ":" + 1;
+                        }
+                    }
+                }
+
+                document.getElementById('pay_load_timer').innerHTML = m + ":" + s;
+            }
+
+            async function checkPaid(price, content) {
+                try {
+                    const res = await fetch(
+                            "https://script.google.com/macros/s/AKfycbw93L1xnziosYMCl6145W3kx2sjT8HfDrO8UXucT_R-52y9PEk5DQMr4VI2fmToeCe4/exec"
+                            );
+                    const data = await res.json();
+                    console.log(data);
+                    const lastPaid = data.data[data.data.length - 1];
+                    const lastPrice = lastPaid.price;
+                    const lastContent = lastPaid.content;
+                    let count = 0;
+                    if (lastPrice >= price && lastContent.includes(content)) {
+                        count++;
+                        Swal.fire({
+                            title: "Sucess!",
+                            icon: "success"
+                        });
+                        if (count === 1) {
+                            orderSuccess();
+                            stopInterval();
+                            return;
+                        }
+                    }
+                } catch {
+                    console.error("Error")
+                }
+            }
+
+            const btnDatHang = document.querySelector(".btnDatHang");
+            btnDatHang.addEventListener("click", () => {
+                intervalId = setInterval(() => {
+                    checkPaid(${course.price}, '${code}');
+                }, 1000);
+            })
+            function orderSuccess() {
+                //                                                Swal.showLoading();
+                let urlPayment = 'Payment'
+                $.post(urlPayment, JSON.stringify(paymentBody), function (res) {
+                    console.log(res);
+                    if (res.code === 200) {
+                        Swal.fire({
+                            title: 'Purchase Suscess!',
+                            icon: 'success',
+                            timer: 3000,
+                        }).then(function () {
+                            window.location = "home";
+                        })
+                    } else {
+                        Swal.fire({
+                            title: 'Purchase Fail!',
+                            icon: 'error',
+                            timer: 3000,
+                        }).then(function () {
+                            window.location = "cart";
+                        })
+                    }
+
+                }).fail(function (response) {
+                    stopInterval();
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error!',
+                        text: "Error",
+                    })
+                });
+
+            }
+            const DatHang = document.getElementById("datHang");
+            if (DatHang) {
+                DatHang.addEventListener("click", orderSuccess);
+            }
+
         </script>
     </body>
 

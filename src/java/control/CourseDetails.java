@@ -11,6 +11,7 @@ import dao.lessonDAO;
 import dao.organizationDAO;
 import dao.feedbackDAO;
 import dao.levelDAO;
+import dao.purchasedDAO;
 import dao.topicDAO;
 import dao.userDAO;
 import java.io.IOException;
@@ -27,6 +28,7 @@ import model.Feedback;
 import model.Lesson;
 import model.Rating;
 import model.User;
+import util.generate;
 
 /**
  *
@@ -81,6 +83,8 @@ public class CourseDetails extends HttpServlet {
         lessonDAO lessonDAO = new lessonDAO();
         organizationDAO organizationDAO = new organizationDAO();
         levelDAO levelDAO = new levelDAO();
+        purchasedDAO purchasedDAO = new purchasedDAO();
+        generate generate = new generate();
 
         int id = Integer.parseInt(request.getParameter("id"));
         Course course = courseDAO.getCourse(id);
@@ -98,7 +102,10 @@ public class CourseDetails extends HttpServlet {
         course.setStudentOnCourse(userDAO.StudentOnCourse(id));
         constructor.setOrganization_name(organizationDAO.getNameOrganization(constructor.getUser_id()));
         course.setRatingNear((int) Math.round(course.getRating()));
-
+        
+        String code = generate.generateCode(purchasedDAO.getAll().size()+1);
+        
+        request.setAttribute("code", code);
         request.setAttribute("rating", rating);
         request.setAttribute("feedback", feedbackList);
         request.setAttribute("topic", topicOnCourse);
