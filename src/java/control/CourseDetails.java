@@ -6,7 +6,6 @@ package control;
 
 import dao.categoryDAO;
 import dao.courseDAO;
-import dao.feedbackDAO;
 import dao.lessonDAO;
 import dao.organizationDAO;
 import dao.feedbackDAO;
@@ -88,29 +87,28 @@ public class CourseDetails extends HttpServlet {
 
         int id = Integer.parseInt(request.getParameter("id"));
         Course course = courseDAO.getCourse(id);
-        User instructor = userDAO.getUser(course.getInstructor_id());
-        User constructor = userDAO.getUser(course.getConstructor_id());
+        User mentor = userDAO.getUser(course.getAssign_by());
+        User manager = userDAO.getUser(course.getManaged_by());
         ArrayList<Topic> topicOnCourse = topicDAO.getAllTopicOnCourse(id);
         ArrayList<Lesson> lessonOnCourse = lessonDAO.getLessonOnCourse(id);
         ArrayList<Feedback> feedbackList = feedbackDAO.getFeedbackOnCousre(id);
         ArrayList<Rating> rating = feedbackDAO.getRatingBar(id);
         
-        course.setLevel(levelDAO.getLevelName(course.getLevel_id()));
+        course.setLevel_name(levelDAO.getLevelName(course.getLevel_id()));
         course.setCategory_name(categoryDAO.getNameCategory(course.getCategory_id()));
         course.setNumberRating(feedbackDAO.getFeedbackOnCousre(id).size());
         course.setRating(feedbackDAO.getAverageRateOf(id));
         course.setStudentOnCourse(userDAO.StudentOnCourse(id));
-        constructor.setOrganization_name(organizationDAO.getNameOrganization(constructor.getUser_id()));
+        manager.setOrganization_name(organizationDAO.getNameOrganization(manager.getUser_id()));
         course.setRatingNear((int) Math.round(course.getRating()));
-        
         String code = generate.generateCode(purchasedDAO.getAll().size()+1);
         
         request.setAttribute("code", code);
         request.setAttribute("rating", rating);
         request.setAttribute("feedback", feedbackList);
         request.setAttribute("topic", topicOnCourse);
-        request.setAttribute("instructor", instructor);
-        request.setAttribute("constructor", constructor);
+        request.setAttribute("mentor", mentor);
+        request.setAttribute("manager", manager);
         request.setAttribute("course", course);
         request.setAttribute("lesson", lessonOnCourse);
         request.getRequestDispatcher("coursedetails.jsp").forward(request, response);

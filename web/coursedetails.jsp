@@ -185,7 +185,7 @@
         </button>
         <!-- Scroll-top-end-->
 
-<!-- header-area -->
+        <!-- header-area -->
         <header>
             <div class="tg-header__top">
                 <div class="container custom-container">
@@ -344,9 +344,9 @@
                                 <div class="courses__details-meta">
                                     <ul class="list-wrap">
                                         <li class="author-two">
-                                            <img src="${instructor.avatar}" alt="img">
+                                            <img src="${mentor.avatar}" alt="img">
                                             By
-                                            <a href="#">${instructor.first_name} ${instructor.last_name}</a>
+                                            <a href="#">${mentor.first_name} ${mentor.last_name}</a>
                                         </li>
                                         <li class="date"><i class="flaticon-calendar"></i>${course.created_date}</li>
                                         <li><i class="flaticon-mortarboard"></i>${course.studentOnCourse} Students</li>
@@ -388,14 +388,17 @@
                                                             <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                                                                 <div class="accordion-body">
                                                                     <ul class="list-wrap">
-                                                                        <li class="course-item open-item">
+                                                                        <li class="course-item">
                                                                             <a href="https://www.youtube.com/watch?v=b2Az7_lLh3g" class="course-item-link popup-video">
                                                                                 <span class="item-name">${l.name}</span>
                                                                                 <div class="course-item-meta">
                                                                                     <span class="item-meta duration">03:03</span>
+                                                                                    <span class="item-meta course-item-status">
+                                                                                        <img src="assets/img/icons/lock.svg" alt="icon">
+                                                                                    </span>
                                                                                 </div>
                                                                             </a>
-                                                                        </li>
+                                                                        </li>   
                                                                     </ul>
                                                                 </div>
                                                             </div>
@@ -411,10 +414,10 @@
                                                 <img src="assets/img/courses/course_instructors.png" alt="img">
                                             </div>
                                             <div class="courses__instructors-content">
-                                                <h2 class="title">${constructor.first_name} ${constructor.last_name}</h2>
-                                                <span class="designation">${constructor.organization_name}</span>
+                                                <h2 class="title">${manager.first_name} ${manager.last_name}</h2>
+                                                <span class="designation">${manager.organization_name}</span>
                                                 <p class="avg-rating"><i class="fas fa-star"></i>(4.8 Ratings)</p>
-                                                <p>${constructor.description}</p>
+                                                <p>${manager.description}</p>
                                                 <div class="instructor__social">
                                                     <ul class="list-wrap justify-content-start">
                                                         <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
@@ -498,12 +501,7 @@
                                         <li>
                                             <img src="assets/img/icons/course_icon01.svg" alt="img" class="injectable">
                                             Level
-                                            <span>${course.level}</span>
-                                        </li>
-                                        <li>
-                                            <img src="assets/img/icons/course_icon02.svg" alt="img" class="injectable">
-                                            Duration
-                                            <span>${course.time_duration} hour</span>
+                                            <span>${course.level_name}</span>
                                         </li>
                                         <li>
                                             <img src="assets/img/icons/course_icon03.svg" alt="img" class="injectable">
@@ -521,10 +519,6 @@
                                             <span>${course.studentOnCourse}</span>
                                         </li>
                                     </ul>
-                                </div>
-                                <div class="courses__payment">
-                                    <h5 class="title">Secure Payment:</h5>
-                                    <img src="assets/img/others/payment.png" alt="img">
                                 </div>
                                 <div class="courses__details-enroll">
                                     <div class="tg-button-wrap">

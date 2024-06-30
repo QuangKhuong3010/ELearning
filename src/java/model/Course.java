@@ -11,97 +11,52 @@ package model;
 public class Course {
 
     private int id;
-    private int instructor_id;
-    private int constructor_id;
+    private int managed_by;
+    private String managed_name;
+    private int assign_by;
+    private String assign_name;
     private String name;
     private double price;
     private int level_id;
-    private String time_duration;
+    private String level_name;
     private int category_id;
     private String category_name;
-    private String instructor_name;
-    private double rating;
-    private int ratingNear;
-    private String level;
-
-    public String getLevel() {
-        return level;
-    }
-
-    public void setLevel(String level) {
-        this.level = level;
-    }
-
-    public int getRatingNear() {
-        return ratingNear;
-    }
-
-    public void setRatingNear(int ratingNear) {
-        this.ratingNear = ratingNear;
-    }
-    private int numberRating;
-
-    public int getNumberRating() {
-        return numberRating;
-    }
-
-    public void setNumberRating(int numberRating) {
-        this.numberRating = numberRating;
-    }
-    private int studentOnCourse;
-
-    public int getStudentOnCourse() {
-        return studentOnCourse;
-    }
-
-    public void setStudentOnCourse(int studentOnCourse) {
-        this.studentOnCourse = studentOnCourse;
-    }
-
-    public double getRating() {
-        return rating;
-    }
-
-    public void setRating(double rating) {
-        this.rating = rating;
-    }
-
-    public String getCategory_name() {
-        return category_name;
-    }
-
-    public void setCategory_name(String category_name) {
-        this.category_name = category_name;
-    }
-
-    public String getConstructer_name() {
-        return instructor_name;
-    }
-
-    public void setConstructer_name(String instructor_name) {
-        this.instructor_name = instructor_name;
-    }
-    private String created_date;
     private String avatar;
     private String description;
-    
+    private String created_date;
+    private double rating;
+    private int ratingNear;
+    private int numberRating;
+    private int studentOnCourse;
+
     public Course() {
     }
 
-    
-    public Course(int id, int instructor_id, int constructor_id, String name, double price, int level_id, String time_duration, int category_id, String created_date, String avatar, String description) {
+    public Course(int id, int managed_by, int assign_by, String name, double price, int level_id, int category_id, String avatar, String description) {
         this.id = id;
-        this.instructor_id = instructor_id;
-        this.constructor_id = constructor_id;
+        this.managed_by = managed_by;
+        this.assign_by = assign_by;
         this.name = name;
         this.price = price;
         this.level_id = level_id;
-        this.time_duration = time_duration;
         this.category_id = category_id;
-        this.created_date = created_date;
         this.avatar = avatar;
         this.description = description;
     }
+
+    public Course(int id, int managed_by, int assign_by, String name, double price, int level_id, int category_id, String avatar, String description, String created_date) {
+        this.id = id;
+        this.managed_by = managed_by;
+        this.assign_by = assign_by;
+        this.name = name;
+        this.price = price;
+        this.level_id = level_id;
+        this.category_id = category_id;
+        this.avatar = avatar;
+        this.description = description;
+        this.created_date = created_date;
+    }
+    
 
     public int getId() {
         return id;
@@ -111,20 +66,36 @@ public class Course {
         this.id = id;
     }
 
-    public int getInstructor_id() {
-        return instructor_id;
+    public int getManaged_by() {
+        return managed_by;
     }
 
-    public void setInstructor_id(int instructor_id) {
-        this.instructor_id = instructor_id;
+    public void setManaged_by(int managed_by) {
+        this.managed_by = managed_by;
     }
 
-    public int getConstructor_id() {
-        return constructor_id;
+    public String getManaged_name() {
+        return managed_name;
     }
 
-    public void setConstructor_id(int constructor_id) {
-        this.constructor_id = constructor_id;
+    public void setManaged_name(String managed_name) {
+        this.managed_name = managed_name;
+    }
+
+    public int getAssign_by() {
+        return assign_by;
+    }
+
+    public void setAssign_by(int assign_by) {
+        this.assign_by = assign_by;
+    }
+
+    public String getAssign_name() {
+        return assign_name;
+    }
+
+    public void setAssign_name(String assign_name) {
+        this.assign_name = assign_name;
     }
 
     public String getName() {
@@ -151,12 +122,12 @@ public class Course {
         this.level_id = level_id;
     }
 
-    public String getTime_duration() {
-        return time_duration;
+    public String getLevel_name() {
+        return level_name;
     }
 
-    public void setTime_duration(String time_duration) {
-        this.time_duration = time_duration;
+    public void setLevel_name(String level_name) {
+        this.level_name = level_name;
     }
 
     public int getCategory_id() {
@@ -167,20 +138,12 @@ public class Course {
         this.category_id = category_id;
     }
 
-    public String getInstructor_name() {
-        return instructor_name;
+    public String getCategory_name() {
+        return category_name;
     }
 
-    public void setInstructor_name(String instructor_name) {
-        this.instructor_name = instructor_name;
-    }
-
-    public String getCreated_date() {
-        return created_date;
-    }
-
-    public void setCreated_date(String created_date) {
-        this.created_date = created_date;
+    public void setCategory_name(String category_name) {
+        this.category_name = category_name;
     }
 
     public String getAvatar() {
@@ -199,6 +162,47 @@ public class Course {
         this.description = description;
     }
 
+    public String getCreated_date() {
+        return created_date;
+    }
+
+    public void setCreated_date(String created_date) {
+        this.created_date = created_date;
+    }
+
+    public double getRating() {
+        return rating;
+    }
+
+    public void setRating(double rating) {
+        this.rating = rating;
+    }
+
+    public int getRatingNear() {
+        return ratingNear;
+    }
+
+    public void setRatingNear(int ratingNear) {
+        this.ratingNear = ratingNear;
+    }
+
+    public int getNumberRating() {
+        return numberRating;
+    }
+
+    public void setNumberRating(int numberRating) {
+        this.numberRating = numberRating;
+    }
+
+    public int getStudentOnCourse() {
+        return studentOnCourse;
+    }
+
+    public void setStudentOnCourse(int studentOnCourse) {
+        this.studentOnCourse = studentOnCourse;
+    }
+
+    
 
 
 }

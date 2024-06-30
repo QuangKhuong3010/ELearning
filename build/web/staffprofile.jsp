@@ -193,9 +193,9 @@
                                     </div>
                                 </div>
                             </div>
-                            <c:if test="${sessionScope.account.role_id==2}">
+                            <c:if test="${sessionScope.account.role_id==3}">
                                 <div class="dashboard__instructor-info-right">
-                                    <a href="#" class="btn btn-two arrow-btn">Create a New Course <img src="assets/img/icons/right_arrow.svg" alt="img" class="injectable"></a>
+                                    <a href="CreateCourse" class="btn btn-two arrow-btn">Create a New Course <img src="assets/img/icons/right_arrow.svg" alt="img" class="injectable"></a>
                                 </div>
                             </c:if>
                         </div>

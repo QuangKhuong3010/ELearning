@@ -20,20 +20,20 @@ public class courseDAO extends DBContext {
 
     public ArrayList<Course> getAllCourse(String search) {
         String sql = "SELECT [id]\n"
-                + "      ,[instructor_id]\n"
-                + "      ,[constructor_id]\n"
+                + "      ,[managed_by]\n"
+                + "      ,[assign_by]\n"
                 + "      ,[name]\n"
                 + "      ,[price]\n"
                 + "      ,[level_id]\n"
-                + "      ,[time_duration]\n"
                 + "      ,[category_id]\n"
-                + "      ,[created_date]\n"
                 + "      ,[avatar]\n"
                 + "      ,[description]\n"
+                + "      ,[created_date]\n"
                 + "  FROM [dbo].[Course]"
                 + "  WHERE 1=1";
-        if (!search.equals(""))
-            sql+="AND [name] LIKE '%" + search + "%'";
+        if (!search.equals("")) {
+            sql += "AND [name] LIKE '%" + search + "%'";
+        }
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             ResultSet rs = st.executeQuery();
@@ -46,11 +46,10 @@ public class courseDAO extends DBContext {
                         rs.getString(4),
                         rs.getFloat(5),
                         rs.getInt(6),
-                        rs.getString((7)),
-                        rs.getInt(8),
+                        rs.getInt(7),
+                        rs.getString(8),
                         rs.getString(9),
-                        rs.getString(10),
-                        rs.getString(11)));
+                        rs.getString(10)));
             }
             return CourseList;
         } catch (SQLException e) {
@@ -61,16 +60,15 @@ public class courseDAO extends DBContext {
 
     public Course getCourse(int id) {
         String sql = "SELECT [id]\n"
-                + "      ,[instructor_id]\n"
-                + "      ,[constructor_id]\n"
+                + "      ,[managed_by]\n"
+                + "      ,[assign_by]\n"
                 + "      ,[name]\n"
                 + "      ,[price]\n"
                 + "      ,[level_id]\n"
-                + "      ,[time_duration]\n"
                 + "      ,[category_id]\n"
-                + "      ,[created_date]\n"
                 + "      ,[avatar]\n"
                 + "      ,[description]\n"
+                + "      ,[created_date]\n"
                 + "  FROM [dbo].[Course]"
                 + "  WHERE id=?";
         try {
@@ -85,11 +83,10 @@ public class courseDAO extends DBContext {
                         rs.getString(4),
                         rs.getFloat(5),
                         rs.getInt(6),
-                        rs.getString((7)),
-                        rs.getInt(8),
+                        rs.getInt(7),
+                        rs.getString(8),
                         rs.getString(9),
-                        rs.getString(10),
-                        rs.getString(11));
+                        rs.getString(10));
             }
 
         } catch (SQLException e) {
@@ -129,5 +126,33 @@ public class courseDAO extends DBContext {
             System.out.println(e);
         }
         return 0;
+    }
+
+    public void createCourse(String name, int category, int managed_by, int user_id, int level, String backgroup, String description, float price) {
+        try {
+            String sql = "INSERT INTO [dbo].[Course]\n"
+                    + "           ([managed_by]\n"
+                    + "           ,[assign_by]\n"
+                    + "           ,[name]\n"
+                    + "           ,[price]\n"
+                    + "           ,[level_id]\n"
+                    + "           ,[category_id]\n"
+                    + "           ,[avatar]\n"
+                    + "           ,[description])"
+                    + "     VALUES\n"
+                    + "           (?,?,?,?,?,?,?,?)";
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, managed_by);
+            st.setInt(2, user_id);
+            st.setString(3, name);
+            st.setFloat(4, price);
+            st.setInt(5, level);
+            st.setInt(6, category);
+            st.setString(7, backgroup);
+            st.setString(8, description);
+            st.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
     }
 }

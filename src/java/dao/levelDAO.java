@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import model.Category;
 import model.Feedback;
+import model.Level;
 import model.Rating;
 
 /**
@@ -31,6 +32,24 @@ public class levelDAO extends DBContext {
             while (rs.next()) {
                 return rs.getString(1);
             }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return null;
+    }
+
+    public ArrayList<Level> getAllLevel() {
+        String sql = "SELECT [id]\n"
+                + "      ,[name]\n"
+                + "  FROM [dbo].[Level]";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            ArrayList<Level> listLevel = new ArrayList<>();
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                listLevel.add(new Level(rs.getInt(1), rs.getString(2)));
+            }
+            return listLevel;
         } catch (SQLException e) {
             System.out.println(e);
         }

@@ -73,7 +73,7 @@ public class HomePage extends HttpServlet {
         ArrayList<Course> listCourse = courseDAO.getAllCourse("");
         for (Course course : listCourse) {
                 course.setCategory_name(categoryDAO.getNameCategory(course.getCategory_id()));
-                course.setInstructor_name(userDAO.findUserName(course.getInstructor_id()));
+                course.setAssign_name(userDAO.findUserName(course.getAssign_by()));
                 course.setRating(feedbackDAO.getAverageRateOf(course.getId()));
             }
         

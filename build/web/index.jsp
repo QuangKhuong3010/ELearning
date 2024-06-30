@@ -108,16 +108,20 @@
                                                 </li>
                                             </c:if>
                                             <c:if test="${sessionScope.account.role_id==3}">
-                                                <li class="menu-item-has-children"><a href="student-dashboard.jsp">Dashboard</a>
+                                                <li class="menu-item-has-children">
+                                                    <a href="instructor-dashboard.jsp">Features</a>
                                                     <ul class="sub-menu">
-                                                        <li><a href="student-dashboard.jsp">Dashboard</a></li>
                                                         <li><a href="Profile">Profile</a></li>
-                                                        <li><a href="student-enrolled-courses.jsp">Enrolled Courses</a></li>
-                                                        <li><a href="student-wishlist.jsp">Wishlist</a></li>
-                                                        <li><a href="student-review.jsp">Reviews</a></li>
-                                                        <li><a href="student-attempts.jsp">My Quiz Attempts</a></li>
-                                                        <li><a href="student-history.jsp">Order History</a></li>
-                                                        <li><a href="student-setting.jsp">Settings</a></li>
+                                                        <li><a href="instructor-setting.jsp">Settings</a></li>
+                                                    </ul>
+                                                </li>
+                                            </c:if>
+                                            <c:if test="${sessionScope.account.role_id==2}">
+                                                <li class="menu-item-has-children">
+                                                    <a href="instructor-dashboard.jsp">Features</a>
+                                                    <ul class="sub-menu">
+                                                        <li><a href="Profile">Profile</a></li>
+                                                        <li><a href="instructor-setting.jsp">Settings</a></li>
                                                     </ul>
                                                 </li>
                                             </c:if>
@@ -377,7 +381,7 @@
                                                         <li class="avg-rating"><i class="fas fa-star"></i> (${c.rating} Reviews)</li>
                                                     </ul>
                                                     <h5 class="title"><a href="course-details.jsp">${c.name}</a></h5>
-                                                    <p class="author">By <a href="#">${c.instructor_name}</a></p>
+                                                    <p class="author">By <a href="#">${c.assign_name}</a></p>
                                                     <div class="courses__item-bottom">
                                                         <div class="button">
                                                             <a href="course-details.jsp">
@@ -630,7 +634,7 @@
                 </div>
             </section>
             <!-- fact-area-end -->
- 
+
 
             <!-- blog-area -->
             <section class="blog__post-area">

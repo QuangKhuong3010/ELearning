@@ -87,46 +87,46 @@
                                         <ul class="navigation">
                                             <li class="button"><a href="HomePage">Home</a></li>
                                             <li class="button"><a href="Courses">Courses List</a></li>
-                                            <li class="menu-item-has-children"><a href="#">Dashboard</a>
-                                                <ul class="sub-menu">
-                                                    <li class="menu-item-has-children">
-                                                        <a href="instructor-dashboard.jsp">Instructor Dashboard</a>
-                                                        <ul class="sub-menu">
-                                                            <li><a href="instructor-dashboard.jsp">Dashboard</a></li>
-                                                            <li><a href="Profile">Profile</a></li>
-                                                            <li><a href="instructor-enrolled-courses.jsp">Enrolled Courses</a></li>
-                                                            <li><a href="instructor-wishlist.jsp">Wishlist</a></li>
-                                                            <li><a href="instructor-review.jsp">Reviews</a></li>
-                                                            <li><a href="instructor-attempts.jsp">My Quiz Attempts</a></li>
-                                                            <li><a href="instructor-history.jsp">Order History</a></li>
-                                                            <li><a href="instructor-courses.jsp">My Course</a></li>
-                                                            <li><a href="instructor-announcement.jsp">Announcements</a></li>
-                                                            <li><a href="instructor-quiz.jsp">Quiz Attempts</a></li>
-                                                            <li><a href="instructor-assignment.jsp">Assignments</a></li>
-                                                            <li><a href="instructor-setting.jsp">Settings</a></li>
-                                                        </ul>
-                                                    </li>
-                                                    <li class="menu-item-has-children"><a href="student-dashboard.jsp">Student Dashboard</a>
-                                                        <ul class="sub-menu">
-                                                            <li><a href="student-dashboard.jsp">Dashboard</a></li>
-                                                            <li><a href="student-profile.jsp">Profile</a></li>
-                                                            <li><a href="student-enrolled-courses.jsp">Enrolled Courses</a></li>
-                                                            <li><a href="student-wishlist.jsp">Wishlist</a></li>
-                                                            <li><a href="student-review.jsp">Reviews</a></li>
-                                                            <li><a href="student-attempts.jsp">My Quiz Attempts</a></li>
-                                                            <li><a href="student-history.jsp">Order History</a></li>
-                                                            <li><a href="student-setting.jsp">Settings</a></li>
-                                                        </ul>
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                            <li class="button"><a href="#">Profile</a></li>
+                                            <li class="button"><a href="#">About Us</a></li>
+                                                <c:if test="${sessionScope.account.role_id==4}">
+                                                <li class="menu-item-has-children">
+                                                    <a href="instructor-dashboard.jsp">Features</a>
+                                                    <ul class="sub-menu">
+                                                        <li><a href="instructor-dashboard.jsp">Dashboard</a></li>
+                                                        <li><a href="Profile">Profile</a></li>
+                                                        <li><a href="instructor-enrolled-courses.jsp">Enrolled Courses</a></li>
+                                                        <li><a href="instructor-wishlist.jsp">Wishlist</a></li>
+                                                        <li><a href="instructor-review.jsp">Reviews</a></li>
+                                                        <li><a href="instructor-attempts.jsp">My Quiz Attempts</a></li>
+                                                        <li><a href="instructor-history.jsp">Order History</a></li>
+                                                        <li><a href="instructor-courses.jsp">My Course</a></li>
+                                                        <li><a href="instructor-announcement.jsp">Announcements</a></li>
+                                                        <li><a href="instructor-quiz.jsp">Quiz Attempts</a></li>
+                                                        <li><a href="instructor-assignment.jsp">Assignments</a></li>
+                                                        <li><a href="instructor-setting.jsp">Settings</a></li>
+                                                    </ul>
+                                                </li>
+                                            </c:if>
+                                            <c:if test="${sessionScope.account.role_id==3}">
+                                                <li class="menu-item-has-children"><a href="student-dashboard.jsp">Dashboard</a>
+                                                    <ul class="sub-menu">
+                                                        <li><a href="student-dashboard.jsp">Dashboard</a></li>
+                                                        <li><a href="Profile">Profile</a></li>
+                                                        <li><a href="student-enrolled-courses.jsp">Enrolled Courses</a></li>
+                                                        <li><a href="student-wishlist.jsp">Wishlist</a></li>
+                                                        <li><a href="student-review.jsp">Reviews</a></li>
+                                                        <li><a href="student-attempts.jsp">My Quiz Attempts</a></li>
+                                                        <li><a href="student-history.jsp">Order History</a></li>
+                                                        <li><a href="student-setting.jsp">Settings</a></li>
+                                                    </ul>
+                                                </li>
+                                            </c:if>
                                         </ul>
                                     </div>
                                     <div class="tgmenu__search d-none d-md-block">
-                                        <form action="#" class="tgmenu__search-form">
+                                        <form action="Courses" class="tgmenu__search-form">
                                             <div class="input-grp">
-                                                <input type="text" placeholder="Search For Course . . .">
+                                                <input name="search" type="text" placeholder="Search For Course . . .">
                                                 <button type="submit"><i class="flaticon-search"></i></button>
                                             </div>
                                         </form>
@@ -134,7 +134,12 @@
                                     <div class="tgmenu__action">
                                         <ul class="list-wrap">
                                             <li class="header-btn login-btn">
-                                                <a href="Login">Log in</a>
+                                                <c:if test="${sessionScope.account==null}">
+                                                    <a href="Login">Log in</a>
+                                                </c:if>
+                                                <c:if test="${sessionScope.account!=null}">
+                                                    <a href="Logout">Log out</a>
+                                                </c:if>
                                             </li>
                                         </ul>
                                     </div>
@@ -408,7 +413,7 @@
                                                             <li class="avg-rating"><i class="fas fa-star"></i> (${c.rating} Reviews)</li>
                                                         </ul>
                                                         <h5 class="title"><a href="CourseDetails?id=${c.id}"">${c.name}</a></h5>
-                                                        <p class="author">By <a href="#">${c.instructor_name}</a></p>
+                                                        <p class="author">By <a href="#">${c.assign_name}</a></p>
                                                         <div class="courses__item-bottom">
                                                             <div class="button">
                                                                 <a href="CourseDetails?id=${c.id}">

@@ -121,9 +121,9 @@ public class Setting extends HttpServlet {
         user = userDAO.getUser(user.getUser_id());
         request.setAttribute("user", user);
         if (user.getRole_id() == 4) {
-            request.getRequestDispatcher("studentsetting.jsp").forward(request, response);
+            request.getRequestDispatcher("studentprofile.jsp").forward(request, response);
         } else {
-            request.getRequestDispatcher("staffsetting.jsp").forward(request, response);
+            request.getRequestDispatcher("staffprofile.jsp").forward(request, response);
         }
     }
 
