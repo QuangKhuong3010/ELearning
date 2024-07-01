@@ -313,7 +313,7 @@
                                     <div class="col-lg-12">
                                         <div class="profile__content-wrap">
                                             <ul class="list-wrap">
-                                                <li><span>Registration Date</span> February 28, 2026 8:01 am</li>
+                                                <li><span>Registration Date</span></li>
                                                 <li><span>First Name</span>${user.first_name}</li>
                                                 <li><span>Last Name</span> ${user.last_name}</li>
                                                 <li><span>Email</span>  ${user.email}</li>

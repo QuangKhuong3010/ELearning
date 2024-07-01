@@ -58,6 +58,44 @@ public class courseDAO extends DBContext {
         return null;
     }
 
+    public ArrayList<Course> getCourseAssignBy(int assign_by) {
+        String sql = "SELECT [id]\n"
+                + "      ,[managed_by]\n"
+                + "      ,[assign_by]\n"
+                + "      ,[name]\n"
+                + "      ,[price]\n"
+                + "      ,[level_id]\n"
+                + "      ,[category_id]\n"
+                + "      ,[avatar]\n"
+                + "      ,[description]\n"
+                + "      ,[created_date]\n"
+                + "  FROM [dbo].[Course]"
+                + "  WHERE assign_by=?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            ArrayList<Course> listCourse = new ArrayList<>();
+            st.setInt(1, assign_by);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                listCourse.add(new Course(
+                        rs.getInt(1),
+                        rs.getInt(2),
+                        rs.getInt(3),
+                        rs.getString(4),
+                        rs.getFloat(5),
+                        rs.getInt(6),
+                        rs.getInt(7),
+                        rs.getString(8),
+                        rs.getString(9),
+                        rs.getString(10)));
+            }
+            return listCourse;
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return null;
+    }
+
     public Course getCourse(int id) {
         String sql = "SELECT [id]\n"
                 + "      ,[managed_by]\n"
@@ -150,6 +188,28 @@ public class courseDAO extends DBContext {
             st.setInt(6, category);
             st.setString(7, backgroup);
             st.setString(8, description);
+            st.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+    }
+
+    public void updateCourse(int category, int level, String background, String description, float price, int course_id) {
+        try {
+            String sql = "UPDATE [dbo].[Course]\n"
+                    + "   SET [price] = ?\n"
+                    + "      ,[level_id] = ?\n"
+                    + "      ,[category_id] = ?\n"
+                    + "      ,[avatar] = ?\n"
+                    + "      ,[description] = ?\n"
+                    + " WHERE id=?";
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setFloat(1, price);
+            st.setInt(2, level);
+            st.setInt(3, category);
+            st.setString(4, background);
+            st.setString(5, description);
+            st.setInt(6, course_id);
             st.executeUpdate();
         } catch (SQLException ex) {
             System.out.println(ex);

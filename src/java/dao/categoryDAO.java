@@ -47,9 +47,4 @@ public class categoryDAO extends DBContext {
         }
         return null;
     }
-
-    public static void main(String[] agrs) {
-        categoryDAO categoryDAO = new categoryDAO();
-        System.out.println(categoryDAO.getNameCategory(1));
-    }
 }

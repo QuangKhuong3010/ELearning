@@ -200,103 +200,53 @@
                         <div class="col-lg-12">
                             <div class="dashboard__content-wrap">
                                 <div class="dashboard__content-title">
-                                    <h4 class="title">Settings</h4>
+                                    <h4 class="title">Reply to Manager</h4>
                                 </div>
                                 <div class="row">
                                     <div class="col-lg-12">
                                         <div class="dashboard__nav-wrap">
                                             <ul class="nav nav-tabs" id="myTab" role="tablist">
                                                 <li class="nav-item" role="presentation">
-                                                    <button class="nav-link active" id="itemOne-tab" data-bs-toggle="tab" data-bs-target="#itemOne-tab-pane" type="button" role="tab" aria-controls="itemOne-tab-pane" aria-selected="true">Create New Course</button>
+                                                    <button class="nav-link active" id="itemOne-tab" data-bs-toggle="tab" data-bs-target="#itemOne-tab-pane" type="button" role="tab" aria-controls="itemOne-tab-pane" aria-selected="true">Reason</button>
                                                 </li>
                                             </ul>
                                         </div>
                                         <div class="tab-content" id="myTabContent">
-                                            <form enctype="multipart/form-data" action="CreateCourse" method="post" class="instructor__profile-form">
-                                                <div upload-image-preview1 class="instructor__cover-bg" data-background="${user.backgroup}" >
-                                                    <div class="instructor__cover-info">
-                                                        <div class="instructor__cover-info-right">
-                                                            <a onclick="triggerFileInput1()" data-btn-file-trigger="#fileImport1" class="btn btn-two arrow-btn">Edit Cover Photo</a>
+                                            <form action="AppointMentorDelete" method="post" class="instructor__profile-form">\
+                                                <input type="hidden" name="id" value="${user.user_id}">
+                                                <div class="instructor__profile-form-wrap">
+                                                    <div class="row">                                                      
+                                                        <div class="col-md-8">
+                                                            <div class="form-grp">
+                                                                <label for="username">Email</label>
+                                                                <input name="name" id="username" type="text" value="${user.email}" readonly>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            <div class="form-grp">
+                                                                <label for="username">Appoint By</label>
+                                                                <input name="name" id="username" type="text" value="${user.appoint_name}" readonly>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            <div class="form-grp">
+                                                                <label for="username">Appoint By Organization</label>
+                                                                <input name="name" id="username" type="text" value="${user.organization_name}" readonly>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                    <div class="instructor__profile-form-wrap">
-                                                        <div class="row">                                                      
-                                                            <div class="col-md-8">
-                                                                <div class="form-grp">
-                                                                    <label for="username">Course Name</label>
-                                                                    <input name="name" id="username" type="text" required>
-                                                                </div>
+                                                    <div class="row">  
+                                                        <div class="col-md-12">
+                                                            <div class="form-grp">
+                                                                <label for="bio">Description</label>
+                                                                <textarea name="description" id="bio"></textarea>
                                                             </div>
-                                                            <div class="col-md-2">
-                                                                <div class="form-grp">
-                                                                    <label for="price">Price</label>
-                                                                    <input name="price" id="price" type="text" required>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-2">
-                                                                <div class="form-grp">
-                                                                    <label for="Category">Category List</label>
-                                                                    <div class="courses-top-right-select">
-                                                                        <select name="category" class="category">
-                                                                            <option value="default" disabled selected>Category</option>
-                                                                            <c:forEach items="${category}" var="c">
-                                                                                <option value="${c.id}">${c.name}</option>
-                                                                            </c:forEach>
-                                                                        </select>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-10">
-                                                                <div class="form-grp">
-                                                                    <label for="bio">Description</label>
-                                                                    <textarea name="description" id="bio"></textarea>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-2">
-                                                                <div class="form-grp">
-                                                                    <label for="managed_by">Managed_by</label>
-                                                                    <div class="courses-top-right-select">
-                                                                        <select name="managed_by" class="managed_by">
-                                                                            <option value="default" disabled selected>Manager</option>
-                                                                            <c:forEach items="${manager}" var="m">
-                                                                                <option value="${m.user_id}">${m.first_name} ${m.last_name}</option>
-                                                                            </c:forEach>
-                                                                        </select>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="form-grp">
-                                                                    <label for="level">Level</label>
-                                                                    <div class="courses-top-right-select">
-                                                                        <select name="level" class="level">
-                                                                            <option value="default" disabled selected>Level</option>
-                                                                            <c:forEach items="${level}" var="l">
-                                                                                <option value="${l.id}">${l.name}</option>
-                                                                            </c:forEach>
-                                                                        </select>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="submit-btn mt-25">
-                                                            <button type="submit" class="btn">Create</button>
                                                         </div>
                                                     </div>
+                                                    <div class="submit-btn mt-25">
+                                                        <button type="submit" class="btn">Submit</button>
+                                                    </div>
                                                 </div>
-                                                <input hidden="true"
-                                                               id="fileImport"
-                                                               name="avatar"
-                                                               type="file"
-                                                               accept=".jpg,.jpeg,.png"
-                                                               upload-image-input
-                                                               />
-                                                        <input hidden="true"
-                                                               id="fileImport1"
-                                                               name="backgroup"
-                                                               type="file"
-                                                               accept=".jpg,.jpeg,.png"
-                                                               upload-image-input1
-                                                               />
                                             </form>
                                         </div>
                                     </div>
@@ -304,6 +254,7 @@
                             </div>
                         </div>
                     </div>
+                </div>
                 </div>
             </section>
             <!-- dashboard-area-end -->
@@ -337,42 +288,7 @@
         <script src="assets/js/aos.js"></script>
         <script src="assets/js/main.js"></script>
         <script>
-                                                                SVGInject(document.querySelectorAll("img.injectable"));
-                                                                function triggerFileInput() {
-                                                                    document.getElementById('fileImport').click();
-                                                                }
-                                                                function triggerFileInput1() {
-                                                                    document.getElementById('fileImport1').click();
-                                                                }
-                                                                const uploadImageInput = document.querySelector("[upload-image-input]");
-                                                                const uploadImagePreview = document.querySelector("[upload-image-preview]");
-                                                                const closeImagePreview = document.querySelector("[close-image-preview]");
-                                                                const uploadImageInput1 = document.querySelector("[upload-image-input1]");
-                                                                const uploadImagePreview1 = document.querySelector("[upload-image-preview1]");
-                                                                const closeImagePreview1 = document.querySelector("[close-image-preview1]");
-                                                                uploadImageInput.addEventListener("change", (e) => {
-                                                                    const file = e.target.files[0];
-                                                                    console.log(file);
-                                                                    if (file) {
-                                                                        const reader = new FileReader();
-                                                                        reader.onload = function (e) {
-                                                                            uploadImagePreview.src = e.target.result;
-                                                                        }
-                                                                        reader.readAsDataURL(file);
-                                                                    }
-                                                                })
-                                                                uploadImageInput1.addEventListener("change", (e) => {
-                                                                    const file = e.target.files[0];
-                                                                    console.log(file);
-                                                                    if (file) {
-                                                                        const reader = new FileReader();
-                                                                        reader.onload = function (e) {
-                                                                            let url = "url(" + e.target.result + ")";
-                                                                            uploadImagePreview1.style.backgroundImage = url;
-                                                                        }
-                                                                        reader.readAsDataURL(file);
-                                                                    }
-                                                                })
+
         </script>
     </body>
 

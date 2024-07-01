@@ -16,12 +16,19 @@ public class userDAO extends DBContext {
 
     public User login(String email, String pass) {
         String sql = "SELECT [id]\n"
-                + "      ,[role_id]\n"
-                + "      ,[email]\n"
-                + "      ,[password]\n"
-                + "      ,[created_by_Google]\n"
-                + "  FROM [dbo].[User]\n"
-                + "WHERE [email] = ? and [password] = ?";
+                + "                          ,[role_id]\n"
+                + "                          ,[email]\n"
+                + "                          ,[password]\n"
+                + "                          ,[registration_date]\n"
+                + "                          ,[first_name]\n"
+                + "                          ,[last_name]\n"
+                + "                          ,[phone_number]\n"
+                + "                          ,[avatar]\n"
+                + "                          ,[backgroup]\n"
+                + "                          ,[description]\n"
+                + "                          ,[created_by_Google]\n"
+                + "                      FROM [ELearning].[dbo].[User]\n"
+                + "                     WHERE [email]=? and [password]=?";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             st.setString(1, email);
@@ -32,7 +39,14 @@ public class userDAO extends DBContext {
                         rs.getInt(2),
                         rs.getString(3),
                         rs.getString(4),
-                        rs.getInt(5));
+                        rs.getString(5),
+                        rs.getString(6),
+                        rs.getString(7),
+                        rs.getString(8),
+                        rs.getString(9),
+                        rs.getString(10),
+                        rs.getString(11),
+                        rs.getInt(12));
             }
         } catch (SQLException e) {
             System.out.println(e);
@@ -99,6 +113,24 @@ public class userDAO extends DBContext {
             st.setString(1, "4");
             st.setString(2, email);
             st.setString(3, "1");
+            st.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+    }
+
+    public void createMentorAccount(User user) {
+        try {
+            String sql = "INSERT INTO [dbo].[User]\n"
+                    + "           ([role_id]\n"
+                    + "           ,[email]\n"
+                    + "           ,[created_by_Google])\n"
+                    + "     VALUES\n"
+                    + "           (?, ?, ?)";
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, 3);
+            st.setString(2, user.getEmail());
+            st.setInt(3, 1);
             st.executeUpdate();
         } catch (SQLException ex) {
             System.out.println(ex);
@@ -193,6 +225,35 @@ public class userDAO extends DBContext {
                         rs.getString(10),
                         rs.getString(11),
                         rs.getInt(12)));
+            }
+            return listUser;
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+        return null;
+    }
+
+    public ArrayList<User> getAll() {
+        try {
+            String sql = "SELECT [id]\n"
+                    + ",[role_id]\n"
+                    + ",[email]\n"
+                    + ",[registration_date]\n"
+                    + ",[first_name]\n"
+                    + ",[last_name]\n"
+                    + ",[description]\n"
+                    + "FROM [ELearning].[dbo].[User]\n";
+            PreparedStatement st = connection.prepareStatement(sql);
+            ArrayList listUser = new ArrayList();
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                listUser.add(new User(rs.getInt(1),
+                        rs.getInt(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getString(6),
+                        rs.getString(7)));
             }
             return listUser;
         } catch (SQLException ex) {

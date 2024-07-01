@@ -112,7 +112,8 @@
                                                     <a href="instructor-dashboard.jsp">Features</a>
                                                     <ul class="sub-menu">
                                                         <li><a href="Profile">Profile</a></li>
-                                                        <li><a href="instructor-setting.jsp">Settings</a></li>
+                                                        <li><a href="CourseManager">My Course</a></li>
+                                                        <li><a href="Setting">Settings</a></li>
                                                     </ul>
                                                 </li>
                                             </c:if>
@@ -121,7 +122,19 @@
                                                     <a href="instructor-dashboard.jsp">Features</a>
                                                     <ul class="sub-menu">
                                                         <li><a href="Profile">Profile</a></li>
-                                                        <li><a href="instructor-setting.jsp">Settings</a></li>
+                                                        <li><a href="AppointMentor">Appoint Mentor</a></li>
+                                                        <li><a href="Setting">Settings</a></li>
+                                                    </ul>
+                                                </li>
+                                            </c:if>
+                                            <c:if test="${sessionScope.account.role_id==1}">
+                                                <li class="menu-item-has-children">
+                                                    <a href="instructor-dashboard.jsp">Features</a>
+                                                    <ul class="sub-menu">
+                                                        <li><a href="Profile">Profile</a></li>
+                                                        <li><a href="ListUser">List User</a></li>
+                                                        <li><a href="AppointMentorConfirm">Registration Mentor</a></li>
+                                                        <li><a href="Setting">Settings</a></li>
                                                     </ul>
                                                 </li>
                                             </c:if>

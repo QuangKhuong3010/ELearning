@@ -4,23 +4,27 @@
  */
 package control;
 
+import dao.appointMentorDAO;
+import dao.organizationDAO;
 import dao.userDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import java.util.ArrayList;
+import model.Course;
+import model.User;
 
 /**
  *
- * @author Quangkhuong3010
- *
+ * @author Admin
  */
-@WebServlet(name = "ConfirmAccount", urlPatterns = {"/ConfirmAccount"})
-public class ConfirmAccount extends HttpServlet {
+@WebServlet(name = "AppointMentorConfirm", urlPatterns = {"/AppointMentorConfirm"})
+public class AppointMentorListAdmin extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,10 +43,10 @@ public class ConfirmAccount extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ConfirmAccount</title>");
+            out.println("<title>Servlet AppointMentorConfirm</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ConfirmAccount at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet AppointMentorConfirm at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -60,7 +64,20 @@ public class ConfirmAccount extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("confirmaccount.jsp").forward(request, response);
+        appointMentorDAO appointMentorDAO = new appointMentorDAO();
+        organizationDAO organizationDAO = new organizationDAO();
+        userDAO userDAO = new userDAO();
+        ArrayList<User> listAppoint = appointMentorDAO.getAll();
+        if (!listAppoint.isEmpty()) {
+            for (User user : listAppoint) {
+                user.setAppoint_name(userDAO.findUserName(user.getAppoint_by()));
+                user.setOrganization_name(organizationDAO.getNameOrganization(user.getAppoint_by()));
+                if(user.getOrganization_name()==null)
+                    user.setOrganization_name("No Organization");
+            }
+        }
+        request.setAttribute("list", listAppoint);
+        request.getRequestDispatcher("appointmentorlist.jsp").forward(request, response);
     }
 
     /**
@@ -74,48 +91,16 @@ public class ConfirmAccount extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String otp = request.getParameter("otp");
-        String pass = request.getParameter("password");
-        String repass = request.getParameter("repass");
-        Cookie[] cookies = request.getCookies();
-        String email = null;
-        String cotp = null;
-        for (Cookie c : cookies) {
-            if (c.getName().equals("cEmail")) {
-                email = c.getValue();
-                break;
-            }
-        }
-        for (Cookie c : cookies) {
-            if (c.getName().equals("cotp")) {
-                cotp = c.getValue();
-                break;
-            }
-        }
-        String mess;
-        userDAO user = new userDAO();
-        if (!otp.equals(cotp)) {
-            mess = "The otp you entered is incorrect";
-            request.setAttribute("mess", mess);
-            request.getRequestDispatcher("confirmaccount.jsp").forward(request, response);
-        } else if (!pass.equals(repass)) {
-            mess = "Password and Confirm password not match";
-            request.setAttribute("mess", mess);
-            request.getRequestDispatcher("confirmaccount.jsp").forward(request, response);
-        } else {
-            user.updateNewPassword(user.findUserId(email), pass);
-            response.sendRedirect("Login");
-        }
+        processRequest(request, response);
     }
 
-
-/**
- * Returns a short description of the servlet.
- *
- * @return a String containing servlet description
- */
-@Override
-public String getServletInfo() {
+    /**
+     * Returns a short description of the servlet.
+     *
+     * @return a String containing servlet description
+     */
+    @Override
+    public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
 

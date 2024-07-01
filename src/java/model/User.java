@@ -29,6 +29,18 @@ public class User {
     private String avatar;
     private String backgroup;
     private int quantityCourseLearning;
+    private int appoint_by;
+    private String appoint_name;
+    private String status;
+    private String role_name;
+
+    public String getRole_name() {
+        return role_name;
+    }
+
+    public void setRole_name(String role_name) {
+        this.role_name = role_name;
+    }
 
     public int getQuantityCourseLearning() {
         return quantityCourseLearning;
@@ -36,6 +48,14 @@ public class User {
 
     public void setQuantityCourseLearning(int quantityCourseLearning) {
         this.quantityCourseLearning = quantityCourseLearning;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public String getAvatar() {
@@ -49,6 +69,39 @@ public class User {
     private int created_by_Google;
     private String organization_name;
 
+    public User(int user_id, String email, int appoint_by) {
+        this.user_id = user_id;
+        this.email = email;
+        this.appoint_by = appoint_by;
+        this.status = "Processing";
+    }
+
+    public User(int user_id, int role_id, String email, String registration_date, String first_name, String last_name, String description) {
+        this.user_id = user_id;
+        this.role_id = role_id;
+        this.email = email;
+        this.registration_date = registration_date;
+        this.first_name = first_name;
+        this.last_name = last_name;
+        this.description = description;
+    }
+
+    public int getAppoint_by() {
+        return appoint_by;
+    }
+
+    public void setAppoint_by(int appoint_by) {
+        this.appoint_by = appoint_by;
+    }
+
+    public String getAppoint_name() {
+        return appoint_name;
+    }
+
+    public void setAppoint_name(String appoint_name) {
+        this.appoint_name = appoint_name;
+    }
+
     public String getOrganization_name() {
         return organization_name;
     }
@@ -58,7 +111,7 @@ public class User {
     }
 
     public User() {
-        
+
     }
 
     public User(int user_id, int role_id, String email, String pass, int created_by_Google) {
@@ -75,7 +128,6 @@ public class User {
         this.email = email;
         this.created_by_Google = created_by_Google;
     }
-    
 
     public User(int user_id, int role_id, String email, String pass, String registration_date, String first_name, String last_name, String phone_number, String avatar, String backgroup, String description, int created_by_Google) {
         this.user_id = user_id;
@@ -99,9 +151,7 @@ public class User {
     public void setCreated_by_Google(int created_by_Google) {
         this.created_by_Google = created_by_Google;
     }
-    
-  
- 
+
     public int getUser_id() {
         return user_id;
     }
@@ -174,7 +224,4 @@ public class User {
         this.description = description;
     }
 
-
-
-    
 }
