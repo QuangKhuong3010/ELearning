@@ -212,34 +212,13 @@
                                             </ul>
                                         </div>
                                         <div class="tab-content" id="myTabContent">
-                                            <form action="AppointMentorReject" method="post" class="instructor__profile-form">
-                                                <input type="hidden" name="id" value="${user.user_id}">
+                                            <form action="AppointMentorAdd" method="post" class="instructor__profile-form">
                                                 <div class="instructor__profile-form-wrap">
                                                     <div class="row">                                                      
                                                         <div class="col-md-8">
                                                             <div class="form-grp">
                                                                 <label for="username">Email</label>
-                                                                <input name="name" id="username" type="text" value="${user.email}" readonly>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-2">
-                                                            <div class="form-grp">
-                                                                <label for="username">Appoint By</label>
-                                                                <input name="name" id="username" type="text" value="${user.appoint_name}" readonly>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-2">
-                                                            <div class="form-grp">
-                                                                <label for="username">Appoint By Organization</label>
-                                                                <input name="name" id="username" type="text" value="${user.organization_name}" readonly>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row">  
-                                                        <div class="col-md-12">
-                                                            <div class="form-grp">
-                                                                <label for="bio">Description</label>
-                                                                <textarea name="description" id="bio"></textarea>
+                                                                <input name="email" id="email" type="text" required>
                                                             </div>
                                                         </div>
                                                     </div>

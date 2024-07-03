@@ -69,11 +69,11 @@ public class User {
     private int created_by_Google;
     private String organization_name;
 
-    public User(int user_id, String email, int appoint_by) {
+    public User(int user_id, String email, int appoint_by, String status) {
         this.user_id = user_id;
         this.email = email;
         this.appoint_by = appoint_by;
-        this.status = "Processing";
+        this.status = status;
     }
 
     public User(int user_id, int role_id, String email, String registration_date, String first_name, String last_name, String description) {

@@ -450,15 +450,27 @@
                         <div class="col-lg-9">
                             <div class="dashboard__content-wrap">
                                 <div class="dashboard__content-title">
-                                    <h4 class="title">My Courses</h4>
+                                    <h4 class="title">Course Management</h4>
                                 </div>
                                 <div class="row">
                                     <div class="col-12">
                                         <div class="dashboard__nav-wrap">
                                             <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                                <c:if test="${sessionScope.account.role_id==1}">
                                                 <li class="nav-item" role="presentation">
-                                                    <button class="nav-link active" id="itemOne-tab" data-bs-toggle="tab" data-bs-target="#itemOne-tab-pane" type="button" role="tab" aria-controls="itemOne-tab-pane" aria-selected="true">My Course</button>
+                                                    <button class="nav-link active" id="itemOne-tab" data-bs-toggle="tab" data-bs-target="#itemOne-tab-pane" type="button" role="tab" aria-controls="itemOne-tab-pane" aria-selected="true">Course List</button>
                                                 </li>
+                                                </c:if>
+                                                <c:if test="${sessionScope.account.role_id!=1}">
+                                                <li class="nav-item" role="presentation">
+                                                    <button class="nav-link active" id="itemOne-tab" data-bs-toggle="tab" data-bs-target="#itemOne-tab-pane" type="button" role="tab" aria-controls="itemOne-tab-pane" aria-selected="true">Assign List</button>
+                                                </li>
+                                                </c:if>
+                                                <c:if test="${sessionScope.account.role_id==2}">
+                                                    <li class="nav-item" role="presentation">
+                                                        <button class="nav-link" id="itemTwo-tab" data-bs-toggle="tab" data-bs-target="#itemTwo-tab-pane" type="button" role="tab" aria-controls="itemTwo-tab-pane" aria-selected="false">Manager List</button>
+                                                    </li>
+                                                </c:if>
                                             </ul>
                                         </div>
                                         <div class="tab-content" id="myTabContent">
@@ -498,12 +510,60 @@
                                                                                 <span class="text">Edit</span>
                                                                             </a>
                                                                         </div>
+                                                                        <div class="button">
+                                                                            <a href="CourseDelete?id=${c.id}">
+                                                                                <span class="text">Delete</span>
+                                                                            </a>
+                                                                        </div>
                                                                     </ul>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </c:forEach>
                                                 </div>
+                                            </div>
+                                            <div class="tab-pane fade" id="itemTwo-tab-pane" role="tabpanel" aria-labelledby="itemTwo-tab" tabindex="0">
+                                                <div class="row">
+                                                    <c:forEach items="${courseManaged}" var="c">
+                                                        <div class="col-xl-4 col-md-6">
+                                                            <div class="courses__item courses__item-two shine__animate-item">
+                                                                <div class="courses__item-thumb courses__item-thumb-two">
+                                                                    <a href="CourseDetails?id=${c.id}" class="shine__animate-link">
+                                                                        <img src="${c.avatar}" alt="img">
+                                                                    </a>
+                                                                </div>
+                                                                <div class="courses__item-content courses__item-content-two">
+                                                                    <ul class="courses__item-meta list-wrap">
+                                                                        <li class="courses__item-tag">
+                                                                            <a href="">${c.category_name}</a>
+                                                                        </li>
+                                                                        <li class="price">${c.price}00 vnd</li>
+                                                                    </ul>
+                                                                    <h5 class="title"><a href="CourseDetails?id=${c.id}">${c.name}</a></h5>
+                                                                    <div class="courses__item-content-bottom">
+                                                                        <div class="author-two">
+                                                                            <a href="#">By ${c.assign_name}</a>
+                                                                        </div>
+                                                                        <div class="avg-rating">
+                                                                            <i class="fas fa-star"></i> (${c.rating} Reviews)
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="courses__item-bottom-two">
+                                                                    <ul class="list-wrap">
+                                                                        <li><i class="flaticon-book"></i>?</li>
+                                                                        <li><i class="flaticon-mortarboard"></i>${c.studentOnCourse}</li>
+                                                                        <div class="button">
+                                                                            <a href="CourseEdit?id=${c.id}">
+                                                                                <span class="text">Edit</span>
+                                                                            </a>
+                                                                        </div>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </c:forEach>
+                                                </div> 
                                             </div>
                                         </div>
                                     </div>

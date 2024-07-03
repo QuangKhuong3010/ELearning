@@ -6,6 +6,7 @@
 package control;
 
 import dao.appointMentorDAO;
+import dao.organizationDAO;
 import dao.userDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -20,8 +21,8 @@ import model.User;
  *
  * @author Admin
  */
-@WebServlet(name="AppointMentorAccept", urlPatterns={"/AppointMentorAccept"})
-public class AppointMentorAccept extends HttpServlet {
+@WebServlet(name="AppointMentorReject", urlPatterns={"/AppointMentorReject"})
+public class AppointMentorReject extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -38,10 +39,10 @@ public class AppointMentorAccept extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet AppointMentorAccept</title>");  
+            out.println("<title>Servlet AppointMentorDelete</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet AppointMentorAccept at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet AppointMentorDelete at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -57,13 +58,16 @@ public class AppointMentorAccept extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
+    throws ServletException, IOException {       
         appointMentorDAO appointMentorDAO = new appointMentorDAO();
+        organizationDAO organizationDAO = new organizationDAO();
         userDAO userDAO = new userDAO();
         int id = Integer.parseInt(request.getParameter("id"));
         User user = appointMentorDAO.getAppointbyId(id);
-        appointMentorDAO.update(id, "Accepted");
-        response.sendRedirect("AppointMentorConfirm");
+        user.setOrganization_name(organizationDAO.getNameOrganization(user.getAppoint_by()));
+        user.setAppoint_name(userDAO.findUserName(user.getAppoint_by()));
+        request.setAttribute("user", user);
+        request.getRequestDispatcher("appointmentorreply.jsp").forward(request, response);
     } 
 
     /** 
@@ -76,7 +80,10 @@ public class AppointMentorAccept extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+        appointMentorDAO appointMentorDAO = new appointMentorDAO();
+        int id = Integer.parseInt(request.getParameter("id"));
+        appointMentorDAO.update(id, "Reject");
+        response.sendRedirect("AppointMentorConfirm");
     }
 
     /** 

@@ -72,21 +72,34 @@ public class CourseManager extends HttpServlet {
             return;
         }
         User user = (User) session.getAttribute("account");
-        
+
         courseDAO courseDAO = new courseDAO();
         categoryDAO categoryDAO = new categoryDAO();
         userDAO userDAO = new userDAO();
         feedbackDAO feedbackDAO = new feedbackDAO();
-        
-        ArrayList<Course> listCourse = courseDAO.getCourseAssignBy(user.getUser_id());
-        if (listCourse.size() != 0) {
+        ArrayList<Course> listCourse = new ArrayList<>();
+        ArrayList<Course> courseManaged = new ArrayList<>();
+        if (user.getRole_id() == 1) {
+            listCourse = courseDAO.getAllCourse("");
+        }
+        if (user.getRole_id() == 2) {
+            courseManaged = courseDAO.getCourseManagedBy(user.getUser_id());
+            listCourse = courseDAO.getCourseAssignBy(user.getUser_id());
+        }
+        if (user.getRole_id() == 3) {
+            listCourse = courseDAO.getCourseAssignBy(user.getUser_id());
+        }
+
+        if (!listCourse.isEmpty()) {
             for (Course course : listCourse) {
                 course.setCategory_name(categoryDAO.getNameCategory(course.getCategory_id()));
                 course.setAssign_name(userDAO.findUserName(course.getAssign_by()));
                 course.setRating(feedbackDAO.getAverageRateOf(course.getId()));
             }
         }
+
         request.setAttribute("course", listCourse);
+        request.setAttribute("courseManaged", courseManaged);
         request.getRequestDispatcher("coursemanager.jsp").forward(request, response);
     }
 
@@ -101,7 +114,7 @@ public class CourseManager extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
     }
 
     /**

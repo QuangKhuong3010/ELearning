@@ -212,7 +212,7 @@
                                             </ul>
                                         </div>
                                         <div class="tab-content" id="myTabContent">
-                                            <form action="AppointMentorDelete" method="post" class="instructor__profile-form">\
+                                            <form action="AppointMentorReject" method="post" class="instructor__profile-form">
                                                 <input type="hidden" name="id" value="${user.user_id}">
                                                 <div class="instructor__profile-form-wrap">
                                                     <div class="row">                                                      

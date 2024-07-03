@@ -447,8 +447,22 @@
                         </div>
                         <div class="col-lg-9">
                             <div class="dashboard__content-wrap">
-                                <div class="dashboard__content-title">
-                                    <h4 class="title">List User</h4>
+                                <div class="row">
+                                    <div class="col-5">
+                                        <div class="dashboard__content-title">
+                                            <h4 class="title">List User</h4>
+                                        </div>
+                                    </div>
+                                    <div class="col-7">
+                                        <div class="tgmenu__search d-none d-md-block">
+                                            <form action="ListUser" class="tgmenu__search-form">
+                                                <div class="input-grp">
+                                                    <input name="search" type="text" placeholder="Search . . .">
+                                                    <button type="submit"><i class="flaticon-search"></i></button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-12">
@@ -481,7 +495,7 @@
                                                                 <p>${u.first_name}</p>
                                                             </td>
                                                             <td style="border: 1px solid black;">
-                                                                 <p>${u.last_name}</p>
+                                                                <p>${u.last_name}</p>
                                                             </td>
                                                             <td style="border: 1px solid black;">
                                                                 <p>${u.description}</p>

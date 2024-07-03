@@ -28,6 +28,17 @@
         <link rel="stylesheet" href="assets/css/spacing.css">
         <link rel="stylesheet" href="assets/css/tg-cursor.css">
         <link rel="stylesheet" href="assets/css/main.css">
+        <style>
+            .dashboard__content-title{
+                display:flex;
+                align-items: center;
+                width: 100%;
+            }
+            .dashboard__content-title .row{
+                width: 100%;
+                padding-right: 3%;
+            }
+        </style>
     </head>
 
     <body>
@@ -419,10 +430,16 @@
                         <div class="col-lg-9">
                             <div class="dashboard__content-wrap">
                                 <div class="dashboard__content-title">
-                                    <h4 class="title">Appoint Mentor List</h4>
-                                    <c:if test="${sessionScope.account.role_id==2}">
-                                        
-                                    </c:if>
+                                    <div class="row">
+                                        <div class="col-9">
+                                            <h4 class="title">Appoint Mentor List</h4>
+                                        </div>
+                                        <div class="col-3">
+                                            <c:if test="${sessionScope.account.role_id==2}">
+                                                <a href="AppointMentorAdd" class="btn btn-two">Add New Appoint</a>
+                                            </c:if>
+                                        </div>  
+                                    </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-12">
@@ -475,8 +492,25 @@
                                                             </c:if>
                                                             <td>
                                                                 <div class="dashboard__review-action">
-                                                                    <a href="AppointMentorAccept?id=${l.user_id}" title="Edit"><i class="skillgro-edit"></i></a>
-                                                                    <a href="AppointMentorDelete?id=${l.user_id}" title="Delete"><i class="skillgro-bin"></i></a>
+                                                                    <c:if test="${sessionScope.account.role_id==1}">
+                                                                        <a href="AppointMentorAccept?id=${l.user_id}" title="Accept">
+                                                                            <i class="skillgro-edit">
+                                                                            </i>
+                                                                        </a>
+                                                                        <a href="AppointMentorReject?id=${l.user_id}" title="Reject">
+                                                                            <i class="skillgro-bin"></i>
+                                                                        </a>
+                                                                    </c:if>
+                                                                    <c:if test="${sessionScope.account.role_id==2}">
+                                                                        <c:if test="${l.status.equals('Processing')}">
+                                                                            <a href="AppointMentorDeleteOrConfirm?id=${l.user_id}" title="Confirm">
+                                                                                <i class="skillgro-edit"></i>
+                                                                            </a>
+                                                                        </c:if>
+                                                                        <a href="AppointMentorDeleteOrConfirm?id=${l.user_id}" title="Delete">
+                                                                            <i class="skillgro-bin"></i>
+                                                                        </a>
+                                                                    </c:if>
                                                                 </div>
                                                             </td>
                                                         </tr>

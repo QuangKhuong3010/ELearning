@@ -69,4 +69,54 @@ public class Email {
             System.out.println(e);
         }
     }
+    
+    public void sendPassword(String to, String pass) {
+        Properties props = new Properties();
+        props.put("mail.smtp.host", "smtp.gmail.com"); 
+        props.put("mail.smtp.post", "465");
+        props.put("mail.smtp.ssl.enable", "true");
+        props.put("mail.smtp.auth", "true");
+
+        //creat Authenticator
+        Authenticator auth = new Authenticator() {
+            @Override
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(from, password);
+            }
+        ;
+        };
+
+        Session session = Session.getInstance(props, auth);
+
+        MimeMessage msg = new MimeMessage(session);
+        try {
+            msg.addHeader("Content-type","text/html;charset = UTF-8");
+
+            msg.setFrom(from);
+
+            msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to, false));
+
+            msg.setSubject("Đăng Ký Mentor Thành Công","UTF-8");
+
+            msg.setSentDate(new Date());
+
+            msg.setContent("<html>"
+                    + "<body>"
+                    + "<h1>"
+                    + "SkillGo"
+                    + "</h1>"
+                    + "Mật Khẩu của bạn là: "
+                    + "<b>" + pass + "</b>"
+                    + "</body>"
+                    + "</html>",
+                    "text/html;charset = UTF-8");
+
+            Transport.send(msg);
+            System.out.println("Send mail success");
+
+        } catch (MessagingException e) {
+            System.out.println("Error send email");
+            System.out.println(e);
+        }
+    }
 }

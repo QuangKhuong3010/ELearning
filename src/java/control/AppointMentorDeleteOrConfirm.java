@@ -6,7 +6,6 @@
 package control;
 
 import dao.appointMentorDAO;
-import dao.organizationDAO;
 import dao.userDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -16,13 +15,15 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import model.User;
+import util.Email;
+import util.generate;
 
 /**
  *
  * @author Admin
  */
-@WebServlet(name="AppointMentorDelete", urlPatterns={"/AppointMentorDelete"})
-public class AppointMentorDelete extends HttpServlet {
+@WebServlet(name="AppointMentorDelete", urlPatterns={"/AppointMentorDeleteOrConfirm"})
+public class AppointMentorDeleteOrConfirm extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -58,16 +59,20 @@ public class AppointMentorDelete extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {       
+    throws ServletException, IOException {
         appointMentorDAO appointMentorDAO = new appointMentorDAO();
-        organizationDAO organizationDAO = new organizationDAO();
         userDAO userDAO = new userDAO();
+        generate generate = new generate();
         int id = Integer.parseInt(request.getParameter("id"));
         User user = appointMentorDAO.getAppointbyId(id);
-        user.setOrganization_name(organizationDAO.getNameOrganization(user.getAppoint_by()));
-        user.setAppoint_name(userDAO.findUserName(user.getAppoint_by()));
-        request.setAttribute("user", user);
-        request.getRequestDispatcher("appointmentorreply.jsp").forward(request, response);
+        appointMentorDAO.delete(id);
+        if (user.getStatus().equals("Accepted")){
+            String pass = generate.generateString(8);
+            userDAO.createMentorAccount(user, pass);
+            Email sendEmail = new Email();
+            sendEmail.sendEmail(user.getEmail(), pass);
+        }
+        response.sendRedirect("AppointMentor");
     } 
 
     /** 
@@ -80,10 +85,7 @@ public class AppointMentorDelete extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        appointMentorDAO appointMentorDAO = new appointMentorDAO();
-        int id = Integer.parseInt(request.getParameter("id"));
-        appointMentorDAO.update(id, "Reject");
-        response.sendRedirect("AppointMentorConfirm");
+        processRequest(request, response);
     }
 
     /** 

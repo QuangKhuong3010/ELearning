@@ -119,18 +119,20 @@ public class userDAO extends DBContext {
         }
     }
 
-    public void createMentorAccount(User user) {
+    public void createMentorAccount(User user, String pass) {
         try {
             String sql = "INSERT INTO [dbo].[User]\n"
                     + "           ([role_id]\n"
                     + "           ,[email]\n"
+                    + "           ,[password]\n"
                     + "           ,[created_by_Google])\n"
                     + "     VALUES\n"
-                    + "           (?, ?, ?)";
+                    + "           (?, ?, ?,?)";
             PreparedStatement st = connection.prepareStatement(sql);
             st.setInt(1, 3);
             st.setString(2, user.getEmail());
-            st.setInt(3, 1);
+            st.setString(3, pass);
+            st.setInt(4, 0);
             st.executeUpdate();
         } catch (SQLException ex) {
             System.out.println(ex);
@@ -233,7 +235,7 @@ public class userDAO extends DBContext {
         return null;
     }
 
-    public ArrayList<User> getAll() {
+    public ArrayList<User> getAll(String search) {
         try {
             String sql = "SELECT [id]\n"
                     + ",[role_id]\n"
@@ -242,7 +244,11 @@ public class userDAO extends DBContext {
                     + ",[first_name]\n"
                     + ",[last_name]\n"
                     + ",[description]\n"
-                    + "FROM [ELearning].[dbo].[User]\n";
+                    + "FROM [ELearning].[dbo].[User]\n"
+                    + "WHERE 1=1";
+            if (!search.equals("")) {
+                sql += "AND [email] LIKE '%" + search + "%'";
+            }
             PreparedStatement st = connection.prepareStatement(sql);
             ArrayList listUser = new ArrayList();
             ResultSet rs = st.executeQuery();
