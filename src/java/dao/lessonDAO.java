@@ -53,11 +53,73 @@ public class lessonDAO extends DBContext {
         ArrayList<Lesson> result = new ArrayList<>();
         ArrayList<Topic> topicList = new ArrayList<>();
         topicDAO topicDAO = new topicDAO();
-        topicList=topicDAO.getAllTopicOnCourse(course_id);
+        topicList = topicDAO.getAllTopicOnCourse(course_id);
         for (Topic topic : topicList) {
             result.addAll(getLessonOnTopic(topic.getId()));
         }
         return result;
+    }
+
+    public Lesson getFirstLessonOnTopic(int topic_id) {
+        String sql = "SELECT TOP 1 [id]\n"
+                + "      ,[topic_id]\n"
+                + "      ,[name]\n"
+                + "      ,[last_updated_date]\n"
+                + "      ,[url]\n"
+                + "      ,[description]\n"
+                + "  FROM [ELearning].[dbo].[Lesson]\n"
+                + "  WHERE topic_id = ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, topic_id);
+            ResultSet rs = st.executeQuery();
+            if (rs.next()) {
+                return new Lesson(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6));
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return null;
+    }
+
+    public Lesson getFirstLessonOnCourse(int course_id) {
+        String sql = "SELECT TOP 1 [id]\n"
+                + "      ,[course_id]\n"
+                + "      ,[name]\n"
+                + "      ,[isDeleted]\n"
+                + "  FROM [ELearning].[dbo].[Topic]\n"
+                + "  WHERE [course_id]=?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, course_id);
+            ResultSet rs = st.executeQuery();
+            if (rs.next()) {
+                return getFirstLessonOnTopic(rs.getInt(1));
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return null;
+    }
+
+    public Lesson getLesson(int lesson_id) {
+        String sql = "SELECT TOP 1 [id]\n"
+                + "      ,[course_id]\n"
+                + "      ,[name]\n"
+                + "      ,[isDeleted]\n"
+                + "  FROM [ELearning].[dbo].[Topic]\n"
+                + "  WHERE [id]=?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, lesson_id);
+            ResultSet rs = st.executeQuery();
+            if (rs.next()) {
+                return new Lesson(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6));
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return null;
     }
 
 }

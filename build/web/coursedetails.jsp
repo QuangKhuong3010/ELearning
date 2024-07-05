@@ -151,17 +151,16 @@
                     background-position: right -50px top 0
                 }
             }
-            .btnDatHang {
-                padding: 13px 36px;
+            #btnDatHang {
                 margin: 0 22px 0 15px;
+                border: none;
                 text-transform: capitalize;
                 font-weight: 300;
-                height: 2.5rem;
                 -webkit-box-sizing: border-box;
                 box-sizing: border-box;
                 font-size: 0.875rem;
                 border-radius: 2px;
-                width: 13.125rem;
+                background: none;
             }
         </style>
 
@@ -521,18 +520,26 @@
                                     </ul>
                                 </div>
                                 <div class="courses__details-enroll">
+                                    <c:if test="${purchased==null && sessionScope.account!=null}">
                                     <div class="tg-button-wrap">
-                                        <button id="btnDatHang" class="shopee-button-solid shopee-button-solid--primary" data-bs-toggle="modal" data-bs-target="#paymentMethod">
-                                            <span class="cart-final--bottom-checkout--btn btnDatHang">Payment</span>
+                                        <button id="btnDatHang" class="shopee-button-solid shopee-button-solid--primary">
+                                            <a href="Curriculum?course_id=${course.id}&lesson_id=first_lesson" class="btn arrow-btn" class="cart-final--bottom-checkout--btn btnDatHang">Enroll</a>
                                         </button>
                                     </div>
+                                    </c:if>
+                                    
+                                    <c:if test="${purchased!=null && sessionScope.account!=null}">
+                                    <div class="tg-button-wrap">
+                                        <button id="btnDatHang" class="shopee-button-solid shopee-button-solid--primary" data-bs-toggle="modal" data-bs-target="#paymentMethod">
+                                            <a  class="btn arrow-btn" class="cart-final--bottom-checkout--btn btnDatHang">Payment</a>
+                                        </button>
+                                    </div>
+                                    </c:if>
                                 </div>
                                 <div class="modal fade" id="paymentMethod" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered">
                                         <div class="modal-content">
                                             <div class="modal-body">
-
-
                                                 <div id="qrCodeContainer">
                                                     <div class="pay_box">
                                                         <div id="pay_status" class="success">

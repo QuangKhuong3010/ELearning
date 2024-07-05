@@ -20,11 +20,13 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.util.ArrayList;
 import model.Topic;
 import model.Course;
 import model.Feedback;
 import model.Lesson;
+import model.Purchased;
 import model.Rating;
 import model.User;
 import util.generate;
@@ -74,6 +76,11 @@ public class CourseDetails extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        HttpSession session = request.getSession(false);
+        User user = null;
+        if (session == null) {
+            user = (User) session.getAttribute("account");
+        }
         courseDAO courseDAO = new courseDAO();
         categoryDAO categoryDAO = new categoryDAO();
         feedbackDAO feedbackDAO = new feedbackDAO();
@@ -85,24 +92,28 @@ public class CourseDetails extends HttpServlet {
         purchasedDAO purchasedDAO = new purchasedDAO();
         generate generate = new generate();
 
-        int id = Integer.parseInt(request.getParameter("id"));
-        Course course = courseDAO.getCourse(id);
+        int course_id = Integer.parseInt(request.getParameter("id"));
+        Course course = courseDAO.getCourse(course_id);
         User mentor = userDAO.getUser(course.getAssign_by());
         User manager = userDAO.getUser(course.getManaged_by());
-        ArrayList<Topic> topicOnCourse = topicDAO.getAllTopicOnCourse(id);
-        ArrayList<Lesson> lessonOnCourse = lessonDAO.getLessonOnCourse(id);
-        ArrayList<Feedback> feedbackList = feedbackDAO.getFeedbackOnCousre(id);
-        ArrayList<Rating> rating = feedbackDAO.getRatingBar(id);
-        
+        ArrayList<Topic> topicOnCourse = topicDAO.getAllTopicOnCourse(course_id);
+        ArrayList<Lesson> lessonOnCourse = lessonDAO.getLessonOnCourse(course_id);
+        ArrayList<Feedback> feedbackList = feedbackDAO.getFeedbackOnCousre(course_id);
+        ArrayList<Rating> rating = feedbackDAO.getRatingBar(course_id);
+
         course.setLevel_name(levelDAO.getLevelName(course.getLevel_id()));
         course.setCategory_name(categoryDAO.getNameCategory(course.getCategory_id()));
-        course.setNumberRating(feedbackDAO.getFeedbackOnCousre(id).size());
-        course.setRating(feedbackDAO.getAverageRateOf(id));
-        course.setStudentOnCourse(userDAO.StudentOnCourse(id));
+        course.setNumberRating(feedbackDAO.getFeedbackOnCousre(course_id).size());
+        course.setRating(feedbackDAO.getAverageRateOf(course_id));
+        course.setStudentOnCourse(userDAO.StudentOnCourse(course_id));
         manager.setOrganization_name(organizationDAO.getNameOrganization(manager.getUser_id()));
         course.setRatingNear((int) Math.round(course.getRating()));
-        String code = generate.generateCode(purchasedDAO.getAll().size()+1);
-        
+        String code = generate.generateCode(purchasedDAO.getAll().size() + 1);
+        Purchased purchased = null;
+        if (user!=null){
+            purchased = purchasedDAO.getPurchased(user.getUser_id(), course_id);
+        }
+        request.setAttribute("purchased", purchased);
         request.setAttribute("code", code);
         request.setAttribute("rating", rating);
         request.setAttribute("feedback", feedbackList);

@@ -9,19 +9,29 @@ package model;
  * @author Quangkhuong3010
  */
 public class Topic {
+
     private int id;
     private int course_id;
     private String name;
-    private String description;
+    private int isDeleted;
 
     public Topic() {
     }
 
-    public Topic(int id, int course_id, String name, String description) {
+    public Topic(int id, int course_id, String name, int isDeleted) {
         this.id = id;
         this.course_id = course_id;
         this.name = name;
-        this.description = description;
+        this.isDeleted = isDeleted;
+    }
+
+
+    public int getIsDeleted() {
+        return isDeleted;
+    }
+
+    public void setIsDeleted(int isDeleted) {
+        this.isDeleted = isDeleted;
     }
 
     public int getId() {
@@ -48,12 +58,4 @@ public class Topic {
         this.name = name;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-    
 }

@@ -4,39 +4,33 @@
  */
 package control;
 
-import dao.categoryDAO;
 import dao.courseDAO;
-import dao.levelDAO;
+import dao.feedbackDAO;
+import dao.lessonDAO;
+import dao.organizationDAO;
 import dao.topicDAO;
 import dao.userDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 import java.util.ArrayList;
-import model.Category;
 import model.Course;
-import model.Level;
+import model.Feedback;
+import model.Lesson;
+import model.Rating;
 import model.Topic;
 import model.User;
-import util.uploadCloudinry;
 
 /**
  *
  * @author Admin
  */
-@WebServlet(name = "CourseUpdate", urlPatterns = {"/CourseEdit"})
-@MultipartConfig(
-        fileSizeThreshold = 1024 * 1024, // 1 MB
-        maxFileSize = 1024 * 1024 * 5, // 5 MB
-        maxRequestSize = 1024 * 1024 * 10 // 10 MB
-)
-public class CourseEdit extends HttpServlet {
+@WebServlet(name = "Curriculum", urlPatterns = {"/Curriculum"})
+public class Curriculum extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -55,10 +49,10 @@ public class CourseEdit extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet CourseUpdate</title>");
+            out.println("<title>Servlet Lesson</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet CourseUpdate at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet Lesson at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -76,25 +70,44 @@ public class CourseEdit extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        userDAO userDAO = new userDAO();
-        levelDAO levelDAO = new levelDAO();
-        courseDAO courseDAO = new courseDAO();
-        categoryDAO categoryDAO = new categoryDAO();
         topicDAO topicDAO = new topicDAO();
-        int course_id = Integer.parseInt(request.getParameter("id"));
+        lessonDAO lessonDAO = new lessonDAO();
+        userDAO userDAO = new userDAO();
+        courseDAO courseDAO = new courseDAO();
+        organizationDAO organizationDAO = new organizationDAO();
+        feedbackDAO feedbackDAO = new feedbackDAO();
+
+        int course_id = Integer.parseInt(request.getParameter("course_id"));
+        String lesson_id_raw = request.getParameter("lesson_id");
+        Lesson lesson = new Lesson();
+        if (lesson_id_raw.equals("first_lesson")) {
+            lesson = lessonDAO.getFirstLessonOnCourse(course_id);
+        } else {
+            int lesson_id = Integer.parseInt(lesson_id_raw);
+            lesson = lessonDAO.getLesson(lesson_id);
+        }
+
         Course course = courseDAO.getCourse(course_id);
-        ArrayList<User> listManager = userDAO.getAllOfRole(2);
-        ArrayList<Level> listLevel = levelDAO.getAllLevel();
-        ArrayList<Category> listCategory = categoryDAO.getAllCategory();
-        course.setManaged_name(userDAO.findUserName(course.getManaged_by()));
-        ArrayList<Topic> listTopic = topicDAO.getAllTopicOnCourse(course_id);
+        User manager = userDAO.getUser(course.getManaged_by());
+        manager.setOrganization_name(organizationDAO.getNameOrganization(manager.getUser_id()));
+
+        ArrayList<Topic> topicList = topicDAO.getAllTopicOnCourse(course_id);
+        ArrayList<Lesson> lessonList = lessonDAO.getLessonOnCourse(course_id);
+        ArrayList<Rating> rating = feedbackDAO.getRatingBar(course_id);
+        course.setRating(feedbackDAO.getAverageRateOf(course_id));
+        course.setRatingNear((int) Math.round(course.getRating()));
+        ArrayList<Feedback> feedbackList = feedbackDAO.getFeedbackOnCousre(course_id);
+        course.setRating(feedbackDAO.getAverageRateOf(course_id));
+        course.setNumberRating(feedbackDAO.getFeedbackOnCousre(course_id).size());
         
-        request.setAttribute("topic", listTopic);
-        request.setAttribute("category", listCategory);
-        request.setAttribute("level", listLevel);
-        request.setAttribute("manager", listManager);
+        request.setAttribute("feedback", feedbackList);
+        request.setAttribute("rating", rating);
+        request.setAttribute("manager", manager);
+        request.setAttribute("lesson", lesson);
         request.setAttribute("course", course);
-        request.getRequestDispatcher("courseedit.jsp").forward(request, response);
+        request.setAttribute("topic", topicList);
+        request.setAttribute("lessonlist", lessonList);
+        request.getRequestDispatcher("curriculum.jsp").forward(request, response);
     }
 
     /**
@@ -108,23 +121,7 @@ public class CourseEdit extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession session = request.getSession(false);
-        if (session == null) {
-            response.sendRedirect("Logout");
-            return;
-        }
-        courseDAO courseDAO = new courseDAO();
-        uploadCloudinry upload = new uploadCloudinry();
-        int category = Integer.parseInt(request.getParameter("category"));
-        int level = Integer.parseInt(request.getParameter("level"));
-        float price = Float.parseFloat(request.getParameter("price"));
-        String description = request.getParameter("description");
-        int course_id = Integer.parseInt(request.getParameter("course_id"));
-        String background = upload.uploadCloudSingleImage(request, "backgroup")!=null?upload.uploadCloudSingleImage(request, "backgroup"):"";
-        if (background.equals(""))
-            background=courseDAO.getCourse(course_id).getAvatar();
-        courseDAO.updateCourse(category, level, background, description, price, course_id);
-        response.sendRedirect("CourseManager");
+        processRequest(request, response);
     }
 
     /**

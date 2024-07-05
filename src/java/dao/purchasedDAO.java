@@ -44,6 +44,30 @@ public class purchasedDAO extends DBContext {
         return null;
     }
 
+    public Purchased getPurchased(int user_id, int course_id) {
+        String sql = "SELECT [id]\n"
+                + "      ,[user_id]\n"
+                + "      ,[course_id]\n"
+                + "      ,[purchased_date]\n"
+                + "      ,[code]\n"
+                + "  FROM [dbo].[Purchased]\n"
+                + "  WHERE user_id=? AND course_id=?";
+        try {
+            Purchased purchased = null;
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, user_id);
+            st.setInt(2, course_id);
+            ResultSet rs = st.executeQuery();
+            if (rs.next()) {
+                purchased = new Purchased(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getString(4), rs.getString(5));
+            }
+            return purchased;
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return null;
+    }
+
     public void addPurchased(int user_id, int course_id, String code) {
         try {
             String sql = "INSERT INTO [dbo].[Purchased]\n"
