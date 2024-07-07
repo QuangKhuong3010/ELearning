@@ -6,23 +6,13 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-    </head>
-    <body>
-        <h1>Hello World!</h1>
-    </body>
-</html>
-a<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!doctype html>
 <html class="no-js" lang="en">
-
+    a<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    <!doctype html>
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -512,152 +502,63 @@ a<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
                             <div class="col-lg-9">
                                 <div class="dashboard__content-wrap">
                                     <div class="dashboard__content-title">
-                                        <h4 class="title">${course.name}</h4>
+                                        <h4 class="title">${topic.name}</h4>
                                     </div>
                                     <div class="row">
                                         <div class="col-lg-12">
                                             <div class="dashboard__nav-wrap">
                                                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                                                     <li class="nav-item" role="presentation">
-                                                        <button class="nav-link active" id="itemOne-tab" data-bs-toggle="tab" data-bs-target="#itemOne-tab-pane" type="button" role="tab" aria-controls="itemOne-tab-pane" aria-selected="true">Edit Information</button>
-                                                    </li>
-                                                    <li class="nav-item" role="presentation">
-                                                        <button class="nav-link" id="itemTwo-tab" data-bs-toggle="tab" data-bs-target="#itemTwo-tab-pane" type="button" role="tab" aria-controls="itemTwo-tab-pane" aria-selected="false">Edit Curriculum</button>
+                                                        <button class="nav-link active" id="itemOne-tab" data-bs-toggle="tab" data-bs-target="#itemOne-tab-pane" type="button" role="tab" aria-controls="itemOne-tab-pane" aria-selected="true">Edit Lesson</button>
                                                     </li>
                                                 </ul>
                                             </div>
                                             <div class="tab-content" id="myTabContent">
                                                 <div class="tab-pane fade show active" id="itemOne-tab-pane" role="tabpanel" aria-labelledby="itemOne-tab" tabindex="0">
-                                                    <form enctype="multipart/form-data" action="CourseEdit" method="post" class="instructor__profile-form">
-                                                        <input type="hidden" name="course_id" value="${course.id}">
-                                                        <div upload-image-preview1 class="instructor__cover-bg" data-background="${course.avatar}" >
-                                                            <div class="instructor__cover-info">
-                                                                <div class="instructor__cover-info-right">
-                                                                    <a onclick="triggerFileInput1()" data-btn-file-trigger="#fileImport1" class="btn btn-two arrow-btn">Edit Cover Photo</a>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="instructor__profile-form-wrap">
-                                                            <div class="row">                                                      
-                                                                <div class="col-md-8">
-                                                                    <div class="form-grp">
-                                                                        <label for="username">Course Name</label>
-                                                                        <input name="name" id="username" type="text" value="${course.name}" readonly >
+                                                    <div class="row">
+                                                        <form action="TopicEdit" method="post" class="instructor__profile-form">
+                                                            <input type="hidden" name="topic_id" value="${topic.id}">
+                                                            <div class="instructor__profile-form-wrap">
+                                                                <div class="row mb-3 align-items-center"> 
+                                                                    <h1 class="col-md-2">Lesson</h1>
+                                                                    <div class="submit-btn col-md-6"">
+                                                                        <a  class="button mt-0" onclick="addRow()">Add</a>
                                                                     </div>
-                                                                </div>
-                                                                <div class="col-md-2">
-                                                                    <div class="form-grp">
-                                                                        <label for="price">Price</label>
-                                                                        <input name="price" id="price" type="text" value="${course.price}" required>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-md-2">
-                                                                    <div class="form-grp">
-                                                                        <label for="managed_by">Managed_by</label>
-                                                                        <div class="courses-top-right-select">
-                                                                            <select name="managed_by" class="managed_by">
-                                                                                <option value="default" disabled selected>${course.managed_name}</option>
-                                                                            </select>
-                                                                        </div>
-                                                                    </div>
-
-                                                                </div>
-                                                                <div class="col-md-10">
-                                                                    <div class="form-grp">
-                                                                        <label for="bio">Description</label>
-                                                                        <textarea name="description" id="bio" value="$">${course.description}</textarea>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-md-2">
-                                                                    <div class="form-grp">
-                                                                        <label for="category">Category</label>
-                                                                        <div class="courses-top-right-select">
-                                                                            <select name="category" class="category">
-                                                                                <option value="default" disabled selected>Category</option>
-                                                                                <c:forEach items="${category}" var="c">
-                                                                                    <option value="${c.id}" <c:if test="${c.id == course.category_id}">selected</c:if>> ${c.name}</option>
-                                                                                </c:forEach>
-                                                                            </select>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="form-grp">
-                                                                        <label for="level">Level</label>
-                                                                        <div class="courses-top-right-select">
-                                                                            <select name="level" class="level">
-                                                                                <option value="default" disabled selected>Level</option>
-                                                                                <c:forEach items="${level}" var="l">
-                                                                                    <option value="${l.id}" <c:if test="${l.id == course.level_id}">selected</c:if>>${l.name}</option>
-                                                                                </c:forEach>
-                                                                            </select>
+                                                                    <div class="row mt-3">  
+                                                                        <div class="col-md-12 additionalRows" >
+                                                                            <c:forEach items="${lesson}" var="l" varStatus="loop">
+                                                                                <div id="row-${loop.index+1}" class="additional-row row">
+                                                                                    <input hidden name="lesson_id" value="${l.id}">
+                                                                                    <div class="col-md-9">
+                                                                                        <div class="form-grp">
+                                                                                            <label class="col-md-12">
+                                                                                                Lesson_${loop.index+1}
+                                                                                            </label>
+                                                                                            <input name="lesson_${l.id}" class="topic-input" type="text" value="${l.name}" required>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="col-md-1">
+                                                                                        <div onclick="removeRow(${loop.index+1})" class="submit-btn mt-25">
+                                                                                            <a class="button">-</a>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="col-md-1">
+                                                                                        <div class="submit-btn mt-25">
+                                                                                            <a href="LessonEdit?id=${l.id}" class="button">Edit</a>
+                                                                                        </div>
+                                                                                    </div>     
+                                                                                </div>
+                                                                            </c:forEach>
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                        <input hidden="true"
-                                                               id="fileImport"
-                                                               name="avatar"
-                                                               type="file"
-                                                               accept=".jpg,.jpeg,.png"
-                                                               upload-image-input
-                                                               />
-                                                        <input hidden="true"
-                                                               id="fileImport1"
-                                                               name="backgroup"
-                                                               type="file"
-                                                               accept=".jpg,.jpeg,.png"
-                                                               upload-image-input1
-                                                               />
-                                                        <div class="submit-btn mt-25">
-                                                            <button type="submit" class="btn">Confirm</button>
-                                                        </div>
-                                                    </form>
+                                                            <div class="submit-btn mt-25">
+                                                                <button type="submit" class="btn">Confirm</button>
+                                                            </div>
+                                                        </form>
+                                                    </div> 
                                                 </div>
-                                            </div>
-                                            <div class="tab-pane fade" id="itemTwo-tab-pane" role="tabpanel" aria-labelledby="itemTwo-tab" tabindex="0">
-                                                <div class="row">
-                                                    <form action="CurriculumEdit" method="post" class="instructor__profile-form">
-                                                        <input type="hidden" name="course_id" value="${course.id}">
-                                                        <div class="instructor__profile-form-wrap">
-                                                            <div class="row mb-3 align-items-center"> 
-                                                                <h1 class="col-md-2">Topic</h1>
-                                                                <div class="submit-btn col-md-6"">
-                                                                    <a  class="button mt-0" onclick="addRow()">Add</a>
-                                                                </div>
-                                                                <div class="row mt-3">  
-                                                                    <div class="col-md-12 additionalRows" >
-                                                                        <c:forEach items="${topic}" var="t" varStatus="loop">
-                                                                            <div id="row-${loop.index+1}" class="additional-row row">
-                                                                                <input hidden name="topic_id" value="${t.id}">
-                                                                                <div class="col-md-9">
-                                                                                    <div class="form-grp">
-                                                                                        <label class="col-md-12">
-                                                                                            Topic_${loop.index+1}
-                                                                                        </label>
-                                                                                        <input name="topic_${t.id}" class="topic-input" type="text" value="${t.name}" required>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="col-md-1">
-                                                                                    <div onclick="removeRow(${loop.index+1})" class="submit-btn mt-25">
-                                                                                        <a class="button">-</a>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="col-md-1">
-                                                                                    <div class="submit-btn mt-25">
-                                                                                        <a href="TopicEdit?id=${t.id}" class="button">Edit</a>
-                                                                                    </div>
-                                                                                </div>     
-                                                                            </div>
-                                                                        </c:forEach>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="submit-btn mt-25">
-                                                            <button type="submit" class="btn">Confirm</button>
-                                                        </div>
-                                                    </form>
-                                                </div> 
                                             </div>
                                         </div>
                                     </div>
@@ -665,7 +566,6 @@ a<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
                             </div>
                         </div>
                     </div>
-                </div>
             </section>
             <!-- dashboard-area-end -->
 
@@ -698,45 +598,45 @@ a<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
         <script src="assets/js/aos.js"></script>
         <script src="assets/js/main.js"></script>
         <script>
-                                                                                        SVGInject(document.querySelectorAll("img.injectable"));
-                                                                                        function triggerFileInput() {
-                                                                                            document.getElementById('fileImport').click();
-                                                                                        }
-                                                                                        function triggerFileInput1() {
-                                                                                            document.getElementById('fileImport1').click();
-                                                                                        }
-                                                                                        const uploadImageInput = document.querySelector("[upload-image-input]");
-                                                                                        const uploadImagePreview = document.querySelector("[upload-image-preview]");
-                                                                                        const closeImagePreview = document.querySelector("[close-image-preview]");
-                                                                                        const uploadImageInput1 = document.querySelector("[upload-image-input1]");
-                                                                                        const uploadImagePreview1 = document.querySelector("[upload-image-preview1]");
-                                                                                        const closeImagePreview1 = document.querySelector("[close-image-preview1]");
-                                                                                        uploadImageInput.addEventListener("change", (e) => {
-                                                                                            const file = e.target.files[0];
-                                                                                            console.log(file);
-                                                                                            if (file) {
-                                                                                                const reader = new FileReader();
-                                                                                                reader.onload = function (e) {
-                                                                                                    uploadImagePreview.src = e.target.result;
-                                                                                                }
-                                                                                                reader.readAsDataURL(file);
+                                                                                            SVGInject(document.querySelectorAll("img.injectable"));
+                                                                                            function triggerFileInput() {
+                                                                                                document.getElementById('fileImport').click();
                                                                                             }
-                                                                                        })
-                                                                                        uploadImageInput1.addEventListener("change", (e) => {
-                                                                                            const file = e.target.files[0];
-                                                                                            console.log(file);
-                                                                                            if (file) {
-                                                                                                const reader = new FileReader();
-                                                                                                reader.onload = function (e) {
-                                                                                                    let url = "url(" + e.target.result + ")";
-                                                                                                    uploadImagePreview1.style.backgroundImage = url;
-                                                                                                }
-                                                                                                reader.readAsDataURL(file);
+                                                                                            function triggerFileInput1() {
+                                                                                                document.getElementById('fileImport1').click();
                                                                                             }
-                                                                                        })
+                                                                                            const uploadImageInput = document.querySelector("[upload-image-input]");
+                                                                                            const uploadImagePreview = document.querySelector("[upload-image-preview]");
+                                                                                            const closeImagePreview = document.querySelector("[close-image-preview]");
+                                                                                            const uploadImageInput1 = document.querySelector("[upload-image-input1]");
+                                                                                            const uploadImagePreview1 = document.querySelector("[upload-image-preview1]");
+                                                                                            const closeImagePreview1 = document.querySelector("[close-image-preview1]");
+                                                                                            uploadImageInput.addEventListener("change", (e) => {
+                                                                                                const file = e.target.files[0];
+                                                                                                console.log(file);
+                                                                                                if (file) {
+                                                                                                    const reader = new FileReader();
+                                                                                                    reader.onload = function (e) {
+                                                                                                        uploadImagePreview.src = e.target.result;
+                                                                                                    }
+                                                                                                    reader.readAsDataURL(file);
+                                                                                                }
+                                                                                            })
+                                                                                            uploadImageInput1.addEventListener("change", (e) => {
+                                                                                                const file = e.target.files[0];
+                                                                                                console.log(file);
+                                                                                                if (file) {
+                                                                                                    const reader = new FileReader();
+                                                                                                    reader.onload = function (e) {
+                                                                                                        let url = "url(" + e.target.result + ")";
+                                                                                                        uploadImagePreview1.style.backgroundImage = url;
+                                                                                                    }
+                                                                                                    reader.readAsDataURL(file);
+                                                                                                }
+                                                                                            })
         </script>
         <script>
-            var rowCounter = ${topic.size()};
+            var rowCounter = ${lesson.size()};
             var additionalRows = document.querySelector('.additionalRows');
 
             function addRow() {
@@ -752,12 +652,12 @@ a<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
                 var label = document.createElement('label');
                 label.setAttribute('class', 'col-md-12');
-                label.setAttribute('for', 'topic');
-                label.textContent = 'Topic_' + (rowCounter + 1);
+                label.setAttribute('for', 'lesson');
+                label.textContent = 'Lesson_' + (rowCounter + 1);
 
                 var input = document.createElement('input');
-                input.setAttribute('name', 'topic_add');
-                input.setAttribute('class', 'topic-input');
+                input.setAttribute('name', 'lesson_add');
+                input.setAttribute('class', 'lesson-input');
                 input.setAttribute('type', 'text');
                 input.setAttribute('required', ''); // Thêm thuộc tính required
 
@@ -806,8 +706,7 @@ a<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
                 var paramValuesDiv = document.getElementById('paramValues');
                 var paramValues = {};
 
-                // Loop through all inputs with class 'topic-input'
-                var inputs = document.getElementsByClassName('topic-input');
+                var inputs = document.getElementsByClassName('lesson-input');
                 for (var i = 0; i < inputs.length; i++) {
                     var paramName = inputs[i].name; // Lấy tên của tham số
                     var paramValue = inputs[i].value; // Lấy giá trị của tham số
@@ -820,5 +719,4 @@ a<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
         </script>
     </body>
 
-</html>
 </html>

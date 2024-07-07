@@ -5,6 +5,7 @@
 package control;
 
 import dao.courseDAO;
+import dao.purchasedDAO;
 import dao.userDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -73,18 +74,17 @@ public class Setting extends HttpServlet {
             response.sendRedirect("Logout");
             return;
         }
+        User user_system = (User) session.getAttribute("account");
+
         userDAO userDAO = new userDAO();
         courseDAO courseDAO = new courseDAO();
-        User user_system = (User) session.getAttribute("account");
+        purchasedDAO purchasedDAO = new purchasedDAO();
         User user = userDAO.getUser(user_system.getUser_id());
-        user.setQuantityCourseLearning(courseDAO.getQuantityCourseLearning(user.getUser_id()));
+        user.setQuantityCourseLearning(purchasedDAO.getAllOf(user.getUser_id()).size());
 
+        
         request.setAttribute("user", user);
-        if (user.getRole_id() == 4) {
-            request.getRequestDispatcher("studentsetting.jsp").forward(request, response);
-        } else {
-            request.getRequestDispatcher("staffsetting.jsp").forward(request, response);
-        }
+        request.getRequestDispatcher("setting.jsp").forward(request, response);
     }
 
     /**
@@ -111,20 +111,19 @@ public class Setting extends HttpServlet {
         String phone_number = request.getParameter("phone_number");
         String description = request.getParameter("description");
         uploadCloudinry upload = new uploadCloudinry();
-        String avatar = upload.uploadCloudSingleImage(request, "avatar")!=null?upload.uploadCloudSingleImage(request, "avatar"):"";
-        String backgroup = upload.uploadCloudSingleImage(request, "backgroup")!=null?upload.uploadCloudSingleImage(request, "backgroup"):"";
-        if (avatar.equals(""))
-            avatar=user.getAvatar();
-        if (backgroup.equals(""))
-            backgroup=user.getBackgroup();
+        String avatar = upload.uploadCloudSingleImage(request, "avatar") != null ? upload.uploadCloudSingleImage(request, "avatar") : "";
+        String backgroup = upload.uploadCloudSingleImage(request, "backgroup") != null ? upload.uploadCloudSingleImage(request, "backgroup") : "";
+        if (avatar.equals("")) {
+            avatar = user.getAvatar();
+        }
+        if (backgroup.equals("")) {
+            backgroup = user.getBackgroup();
+        }
         userDAO.updateProfile(user.getUser_id(), first_name, last_name, avatar, backgroup, phone_number, description);
         user = userDAO.getUser(user.getUser_id());
         request.setAttribute("user", user);
-        if (user.getRole_id() == 4) {
-            request.getRequestDispatcher("studentprofile.jsp").forward(request, response);
-        } else {
-            request.getRequestDispatcher("staffprofile.jsp").forward(request, response);
-        }
+        request.getRequestDispatcher("setting.jsp").forward(request, response);
+
     }
 
     /**

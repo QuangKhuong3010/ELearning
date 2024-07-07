@@ -5,6 +5,7 @@
 package control;
 
 import dao.courseDAO;
+import dao.purchasedDAO;
 import dao.userDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -67,17 +68,13 @@ public class Profile extends HttpServlet {
             return;
         }
         userDAO userDAO = new userDAO();
-        courseDAO courseDAO = new courseDAO();
+        purchasedDAO purchasedDAO = new purchasedDAO();
         User user_system = (User) session.getAttribute("account");
         User user = userDAO.getUser(user_system.getUser_id());
-        user.setQuantityCourseLearning(courseDAO.getQuantityCourseLearning(user.getUser_id()));
-        
+        user.setQuantityCourseLearning(purchasedDAO.getAllOf(user.getUser_id()).size());
+
         request.setAttribute("user", user);
-        if (user.getRole_id() == 4) {
-            request.getRequestDispatcher("studentprofile.jsp").forward(request, response);
-        } else {
-            request.getRequestDispatcher("staffprofile.jsp").forward(request, response);
-        }
+        request.getRequestDispatcher("profile.jsp").forward(request, response);
     }
 
     /**

@@ -4,6 +4,7 @@
  */
 package control;
 
+import dao.lessonDAO;
 import dao.topicDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -12,17 +13,16 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import static java.lang.Integer.max;
 import java.util.ArrayList;
-import java.util.Enumeration;
+import model.Lesson;
 import model.Topic;
 
 /**
  *
  * @author Admin
  */
-@WebServlet(name = "CurriculumEdit", urlPatterns = {"/CurriculumEdit"})
-public class CurriculumEdit extends HttpServlet {
+@WebServlet(name = "TopicEdit", urlPatterns = {"/TopicEdit"})
+public class TopicEdit extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -41,10 +41,10 @@ public class CurriculumEdit extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet CurriculumEdit</title>");
+            out.println("<title>Servlet TopicEdit</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet CurriculumEdit at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet TopicEdit at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -62,7 +62,18 @@ public class CurriculumEdit extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        int topic_id = Integer.parseInt(request.getParameter("id"));
         
+        topicDAO topicDAO = new topicDAO();
+        lessonDAO lessonDAO = new lessonDAO();
+        
+        
+        Topic topic = topicDAO.getTopic(topic_id);
+        ArrayList<Lesson> listLesson = lessonDAO.getLessonOnTopic(topic_id);
+
+        request.setAttribute("lesson", listLesson);
+        request.setAttribute("topic", topic);
+        request.getRequestDispatcher("topicedit.jsp").forward(request, response);
     }
 
     /**
@@ -76,37 +87,40 @@ public class CurriculumEdit extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String[] oldTopicsId = request.getParameterValues("topic_id");
-        String[] newTopic = request.getParameterValues("topic_add");
-        int course_id = Integer.parseInt(request.getParameter("course_id"));
-        topicDAO topicDAO = new topicDAO();
-        ArrayList<Topic> listTopic = topicDAO.getAllTopicOnCourse(course_id);
-        ArrayList<Topic> deleted = new ArrayList<>();
+        String[] oldTLessonsId = request.getParameterValues("lesson_id");
+        String[] newLessons = request.getParameterValues("lesson_add");
+        int topic_id = Integer.parseInt(request.getParameter("topic_id"));
         
-        for (Topic topic : listTopic) {
+        lessonDAO lessonDAO = new lessonDAO();
+        
+        ArrayList<Lesson> deleted = new ArrayList<>();
+        ArrayList<Lesson> listLesson = lessonDAO.getLessonOnTopic(topic_id);
+        
+        
+        for (Lesson lesson : listLesson) {
             boolean remain = false;
-            for (String topicId : oldTopicsId) {
-                if (topic.getId() == Integer.parseInt(topicId)) {
+            for (String lessonId : oldTLessonsId) {
+                if (lesson.getId() == Integer.parseInt(lessonId)) {
                     remain = true;
                 }
             }
             if (remain == false) {
-                deleted.add(topic);
+                deleted.add(lesson);
             }
         }
 
-        for (Topic delete : deleted) {
-            listTopic.remove(delete);
-            topicDAO.delete(delete.getId());
+        for (Lesson delete : deleted) {
+            listLesson.remove(delete);
+            lessonDAO.delete(delete.getId());
         }
 
-        for (Topic topic : listTopic) {
-            topicDAO.update(request.getParameter("topic_" + topic.getId()), topic.getId());
+        for (Lesson lesson : listLesson) {
+            lessonDAO.updateName(request.getParameter("lesson_" + lesson.getId()), lesson.getId());
         }
 
-        if (newTopic != null) {
-            for (String string : newTopic) {
-                topicDAO.add(course_id, string);
+        if (newLessons != null) {
+            for (String string : newLessons) {
+                lessonDAO.add(topic_id, string);
             }
         }
 

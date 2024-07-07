@@ -79,12 +79,16 @@ a<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
                 box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); /* Bóng */
                 border: 2px solid darkblue; /* Viền */
                 transition: background-color 0.3s ease, color 0.3s ease; /* Hiệu ứng chuyển đổi màu nền và màu chữ */
-                margin-top: 8px;
+                margin-top:7px;
             }
 
             .button:hover {
                 background-color: blue; /* Màu nền khi hover */
                 color: white; /* Màu chữ khi hover */
+            }
+
+            .mt-1{
+                margin-top:0px!important;
             }
         </style>
     </head>
@@ -612,36 +616,39 @@ a<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
                                             </div>
                                             <div class="tab-pane fade" id="itemTwo-tab-pane" role="tabpanel" aria-labelledby="itemTwo-tab" tabindex="0">
                                                 <div class="row">
-                                                    <form action="CurriculumEdit" method="get" class="instructor__profile-form">
+                                                    <form action="CurriculumEdit" method="post" class="instructor__profile-form">
                                                         <input type="hidden" name="course_id" value="${course.id}">
                                                         <div class="instructor__profile-form-wrap">
-                                                            <div class="row">                                                      
-                                                                <div class="col-md-6">
-                                                                    <h1>Topic</h1>
+                                                            <div class="row mb-3 align-items-center"> 
+                                                                <h1 class="col-md-2">Topic</h1>
+                                                                <div class="submit-btn col-md-6"">
+                                                                    <a  class="button mt-0" onclick="addRow()">Add</a>
                                                                 </div>
-                                                                <div class="col-md-6">
-                                                                    <h1>Lesson</h1>
-                                                                </div>
-                                                                <div class="col-md-3">
-                                                                    <div class="submit-btn mt-25">
-                                                                        <a class="button" onclick="addRow()">Add</a>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="row">  
-                                                                    <div class="col-md-6">
+                                                                <div class="row mt-3">  
+                                                                    <div class="col-md-12 additionalRows" >
                                                                         <c:forEach items="${topic}" var="t" varStatus="loop">
-                                                                            <div class="row">
+                                                                            <div id="row-${loop.index+1}" class="additional-row row">
+                                                                                <input hidden name="topic_id" value="${t.id}">
                                                                                 <div class="col-md-9">
                                                                                     <div class="form-grp">
-                                                                                        <label for="topic">Topic_${loop.index+1}</label>
-                                                                                        <input name="topic_1" class="topic-input" type="text" value="${t.name}" required>
+                                                                                        <label class="col-md-12">
+                                                                                            Topic_${loop.index+1}
+                                                                                        </label>
+                                                                                        <input name="topic_${t.id}" class="topic-input" type="text" value="${t.name}" required>
                                                                                     </div>
                                                                                 </div>
+                                                                                <div class="col-md-1">
+                                                                                    <div onclick="removeRow(${loop.index+1})" class="submit-btn mt-25">
+                                                                                        <a class="button">-</a>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="col-md-1">
+                                                                                    <div class="submit-btn mt-25">
+                                                                                        <a href="TopicEdit?id=${t.id}" class="button">Edit</a>
+                                                                                    </div>
+                                                                                </div>     
                                                                             </div>
                                                                         </c:forEach>
-                                                                        <div id="additionalRows">
-                                                                            <!-- Additional rows will be added dynamically here -->
-                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -691,48 +698,48 @@ a<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
         <script src="assets/js/aos.js"></script>
         <script src="assets/js/main.js"></script>
         <script>
-                                                                            SVGInject(document.querySelectorAll("img.injectable"));
-                                                                            function triggerFileInput() {
-                                                                                document.getElementById('fileImport').click();
-                                                                            }
-                                                                            function triggerFileInput1() {
-                                                                                document.getElementById('fileImport1').click();
-                                                                            }
-                                                                            const uploadImageInput = document.querySelector("[upload-image-input]");
-                                                                            const uploadImagePreview = document.querySelector("[upload-image-preview]");
-                                                                            const closeImagePreview = document.querySelector("[close-image-preview]");
-                                                                            const uploadImageInput1 = document.querySelector("[upload-image-input1]");
-                                                                            const uploadImagePreview1 = document.querySelector("[upload-image-preview1]");
-                                                                            const closeImagePreview1 = document.querySelector("[close-image-preview1]");
-                                                                            uploadImageInput.addEventListener("change", (e) => {
-                                                                                const file = e.target.files[0];
-                                                                                console.log(file);
-                                                                                if (file) {
-                                                                                    const reader = new FileReader();
-                                                                                    reader.onload = function (e) {
-                                                                                        uploadImagePreview.src = e.target.result;
-                                                                                    }
-                                                                                    reader.readAsDataURL(file);
-                                                                                }
-                                                                            })
-                                                                            uploadImageInput1.addEventListener("change", (e) => {
-                                                                                const file = e.target.files[0];
-                                                                                console.log(file);
-                                                                                if (file) {
-                                                                                    const reader = new FileReader();
-                                                                                    reader.onload = function (e) {
-                                                                                        let url = "url(" + e.target.result + ")";
-                                                                                        uploadImagePreview1.style.backgroundImage = url;
-                                                                                    }
-                                                                                    reader.readAsDataURL(file);
-                                                                                }
-                                                                            })
+                                                                                        SVGInject(document.querySelectorAll("img.injectable"));
+                                                                                        function triggerFileInput() {
+                                                                                            document.getElementById('fileImport').click();
+                                                                                        }
+                                                                                        function triggerFileInput1() {
+                                                                                            document.getElementById('fileImport1').click();
+                                                                                        }
+                                                                                        const uploadImageInput = document.querySelector("[upload-image-input]");
+                                                                                        const uploadImagePreview = document.querySelector("[upload-image-preview]");
+                                                                                        const closeImagePreview = document.querySelector("[close-image-preview]");
+                                                                                        const uploadImageInput1 = document.querySelector("[upload-image-input1]");
+                                                                                        const uploadImagePreview1 = document.querySelector("[upload-image-preview1]");
+                                                                                        const closeImagePreview1 = document.querySelector("[close-image-preview1]");
+                                                                                        uploadImageInput.addEventListener("change", (e) => {
+                                                                                            const file = e.target.files[0];
+                                                                                            console.log(file);
+                                                                                            if (file) {
+                                                                                                const reader = new FileReader();
+                                                                                                reader.onload = function (e) {
+                                                                                                    uploadImagePreview.src = e.target.result;
+                                                                                                }
+                                                                                                reader.readAsDataURL(file);
+                                                                                            }
+                                                                                        })
+                                                                                        uploadImageInput1.addEventListener("change", (e) => {
+                                                                                            const file = e.target.files[0];
+                                                                                            console.log(file);
+                                                                                            if (file) {
+                                                                                                const reader = new FileReader();
+                                                                                                reader.onload = function (e) {
+                                                                                                    let url = "url(" + e.target.result + ")";
+                                                                                                    uploadImagePreview1.style.backgroundImage = url;
+                                                                                                }
+                                                                                                reader.readAsDataURL(file);
+                                                                                            }
+                                                                                        })
         </script>
         <script>
             var rowCounter = ${topic.size()};
+            var additionalRows = document.querySelector('.additionalRows');
 
             function addRow() {
-                var additionalRows = document.getElementById('additionalRows');
 
                 var newRow = document.createElement('div');
                 newRow.className = 'row additional-row';
@@ -744,11 +751,12 @@ a<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
                 formGrp.className = 'form-grp';
 
                 var label = document.createElement('label');
+                label.setAttribute('class', 'col-md-12');
                 label.setAttribute('for', 'topic');
                 label.textContent = 'Topic_' + (rowCounter + 1);
 
                 var input = document.createElement('input');
-                input.setAttribute('name', 'topic_' + (rowCounter + 1));
+                input.setAttribute('name', 'topic_add');
                 input.setAttribute('class', 'topic-input');
                 input.setAttribute('type', 'text');
                 input.setAttribute('required', ''); // Thêm thuộc tính required
@@ -762,6 +770,7 @@ a<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
                 var submitBtn = document.createElement('div');
                 submitBtn.className = 'submit-btn mt-25';
+
 
                 var removeLink = document.createElement('a');
                 removeLink.setAttribute('class', 'button');
@@ -783,6 +792,14 @@ a<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
                 rowCounter++;
 
                 getValues(); // Call getValues() after adding a row
+            }
+
+            function removeRow(index) {
+                console.log(index);
+                const div = document.querySelector("#row-" + index);
+                console.log(div);
+                additionalRows.removeChild(div);
+                rowCounter--;
             }
 
             function getValues() {

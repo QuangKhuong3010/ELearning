@@ -43,6 +43,35 @@ public class purchasedDAO extends DBContext {
         }
         return null;
     }
+    
+    
+    public ArrayList<Purchased> getAllOf(int user_id) {
+        String sql = "SELECT [id]\n"
+                + "      ,[user_id]\n"
+                + "      ,[course_id]\n"
+                + "      ,[purchased_date]\n"
+                + "      ,[code]\n"
+                + "  FROM [dbo].[Purchased]\n"
+                + "  WHERE user_id = ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, user_id);
+            ResultSet rs = st.executeQuery();
+            ArrayList<Purchased> purchasedList = new ArrayList<>();
+            while (rs.next()) {
+                purchasedList.add(new Purchased(
+                        rs.getInt(1),
+                        rs.getInt(2),
+                        rs.getInt(3),
+                        rs.getString(4),
+                        rs.getString(5)));
+            }
+            return purchasedList;
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return null;
+    }
 
     public Purchased getPurchased(int user_id, int course_id) {
         String sql = "SELECT [id]\n"

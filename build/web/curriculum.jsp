@@ -41,6 +41,7 @@
                 cursor: not-allowed;
             }
         </style>
+        <link rel="stylesheet" href="https://cdn.plyr.io/3.6.8/plyr.css" />
     </head>
 
     <body>
@@ -368,10 +369,16 @@
                                         <span>${lesson.name}</span>
                                     </div>
                                 </div>
-                                <video id="player" playsinline controls data-poster="assets/img/bg/video_bg.webp">
-                                    <source src="assets/video/video.mp4" type="video/mp4" />
-                                    <source src="/path/to/video.webm" type="video/webm" />
-                                </video>
+                                <div class="plyr__video-embed" id="player">
+                                    <iframe
+                                        src="${lesson.url}""
+                                        allowfullscreen
+                                        allowtransparency
+                                        frameborder="0"
+                                        allow="autoplay; encrypted-media"
+                                        ></iframe>
+                                </div>
+
                                 <div class="lesson__next-prev-button">
                                     <button class="prev-button" title="Create a Simple React App"><i class="flaticon-arrow-right"></i></button>
                                     <button class="next-button" title="React for the Rest of us"><i class="flaticon-arrow-right"></i></button>
@@ -507,6 +514,10 @@
         <script src="assets/js/main.js"></script>
         <script>
             SVGInject(document.querySelectorAll("img.injectable"));
+        </script>
+        <script src="https://cdn.plyr.io/3.6.8/plyr.polyfilled.js"></script>
+        <script>
+            const player = new Plyr('#player');
         </script>
     </body>
 

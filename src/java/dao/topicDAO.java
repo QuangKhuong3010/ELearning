@@ -18,7 +18,7 @@ import model.Topic;
 public class topicDAO extends DBContext {
 
     public ArrayList<Topic> getAllTopicOnCourse(int id) {
-        String sql = "SELECT TOP (1000) [id]\n"
+        String sql = "SELECT [id]\n"
                 + "      ,[course_id]\n"
                 + "      ,[name]\n"
                 + "      ,[isDeleted]\n"
@@ -36,6 +36,29 @@ public class topicDAO extends DBContext {
                         rs.getInt(4)));
             }
             return topicList;
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return null;
+    }
+    
+    public Topic getTopic(int topic_id) {
+        String sql = "SELECT [id]\n"
+                + "      ,[course_id]\n"
+                + "      ,[name]\n"
+                + "      ,[isDeleted]\n"
+                + "  FROM [ELearning].[dbo].[Topic]"
+                + "WHERE [id]=? ";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, topic_id);
+            ResultSet rs = st.executeQuery();
+            if (rs.next()) {
+                return new Topic(rs.getInt(1),
+                        rs.getInt(2),
+                        rs.getString(3),
+                        rs.getInt(4));
+            }
         } catch (SQLException e) {
             System.out.println(e);
         }
@@ -74,19 +97,13 @@ public class topicDAO extends DBContext {
         }
     }
 
-    public void deleteLast(int course_id) {
+    public void delete(int topic_id) {
         try {
             String sql = "UPDATE topic\n"
                     + "SET isDeleted = 1\n"
-                    + "WHERE id = (\n"
-                    + "    SELECT top 1 id\n"
-                    + "    FROM topic\n"
-                    + "    WHERE course_id = ? and isDeleted = ?\n"
-                    + "    ORDER BY id DESC\n"
-                    + ");";
+                    + "WHERE id = ?";
             PreparedStatement st = connection.prepareStatement(sql);
-            st.setInt(1, course_id);
-            st.setInt(2, 1);
+            st.setInt(1, topic_id);
             st.executeUpdate();
         } catch (SQLException ex) {
             System.out.println(ex);

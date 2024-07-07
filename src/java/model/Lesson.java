@@ -15,18 +15,30 @@ public class Lesson {
     private String last_updated_date;
     private String url;
     private String description;
+    private int isDeleted;
 
-    public Lesson() {
-    }
-
-    public Lesson(int id, int topic_id, String name, String last_updated_date, String url, String description) {
+    public Lesson(int id, int topic_id, String name, String last_updated_date, String url, String description, int isDeleted) {
         this.id = id;
         this.topic_id = topic_id;
         this.name = name;
         this.last_updated_date = last_updated_date;
         this.url = url;
         this.description = description;
+        this.isDeleted = isDeleted;
     }
+    
+
+    public int getIsDeleted() {
+        return isDeleted;
+    }
+
+    public void setIsDeleted(int isDeleted) {
+        this.isDeleted = isDeleted;
+    }
+
+    public Lesson() {
+    }
+
 
     public int getId() {
         return id;

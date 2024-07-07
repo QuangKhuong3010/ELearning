@@ -3,10 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/E:/ELearning/web/curriculum.jsp</file>
-            <file>file:/E:/ELearning/src/java/control/CourseDetails.java</file>
-            <file>file:/E:/ELearning/web/coursedetails.jsp</file>
-            <file>file:/E:/ELearning/src/java/control/Curriculum.java</file>
+            <file>file:/E:/ELearning/web/topicedit.jsp</file>
+            <file>file:/E:/ELearning/src/java/control/TopicEdit.java</file>
+            <file>file:/E:/ELearning/src/java/dao/topicDAO.java</file>
+            <file>file:/E:/ELearning/web/courseedit.jsp</file>
         </group>
     </open-files>
 </project-private>

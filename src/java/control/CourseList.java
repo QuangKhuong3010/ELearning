@@ -24,8 +24,8 @@ import model.Course;
  *
  * @author Admin
  */
-@WebServlet(name="Courses", urlPatterns={"/Courses"})
-public class Courses extends HttpServlet {
+@WebServlet(name="CourseList", urlPatterns={"/CourseList"})
+public class CourseList extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -86,7 +86,7 @@ public class Courses extends HttpServlet {
         request.setAttribute("mess", mess);
         request.setAttribute("categories", listCategory);
         request.setAttribute("courses", listCourse);
-        request.getRequestDispatcher("courses.jsp").forward(request, response);
+        request.getRequestDispatcher("courselist.jsp").forward(request, response);
     } 
     //a
     /** 

@@ -133,6 +133,8 @@ public class courseDAO extends DBContext {
         }
         return null;
     }
+    
+    
 
     public Course getCourse(int id) {
         String sql = "SELECT [id]\n"
@@ -188,21 +190,6 @@ public class courseDAO extends DBContext {
         return 0;
     }
 
-    public int getQuantityCourseLearning(int user_id) {
-        String sql = "SELECT COUNT(*) AS TotalCourses\n"
-                + "FROM [dbo].[Purchased]\n"
-                + "WHERE [user_id] = ?;";
-
-        try {
-            PreparedStatement st = connection.prepareStatement(sql);
-            st.setInt(1, user_id);
-            ResultSet rs = st.executeQuery();
-            return rs.getInt(1);
-        } catch (SQLException e) {
-            System.out.println(e);
-        }
-        return 0;
-    }
 
     public void createCourse(String name, int category, int managed_by, int user_id, int level, String backgroup, String description, float price) {
         try {

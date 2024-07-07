@@ -285,7 +285,7 @@
                         <div class="col-lg-9">
                             <div class="dashboard__content-wrap">
                                 <div class="dashboard__content-title">
-                                    <h4 class="title">Settings</h4>
+                                    <h4 class="title">${lesson.name}</h4>
                                 </div>
                                 <div class="row">
                                     <div class="col-lg-12">
@@ -294,93 +294,27 @@
                                                 <li class="nav-item" role="presentation">
                                                     <button class="nav-link active" id="itemOne-tab" data-bs-toggle="tab" data-bs-target="#itemOne-tab-pane" type="button" role="tab" aria-controls="itemOne-tab-pane" aria-selected="true">Profile</button>
                                                 </li>
-                                                <li class="nav-item" role="presentation">
-                                                    <button class="nav-link" id="itemTwo-tab" data-bs-toggle="tab" data-bs-target="#itemTwo-tab-pane" type="button" role="tab" aria-controls="itemTwo-tab-pane" aria-selected="false">Password</button>
-                                                </li>
-                                                <li class="nav-item" role="presentation">
-                                                    <button class="nav-link" id="itemThree-tab" data-bs-toggle="tab" data-bs-target="#itemThree-tab-pane" type="button" role="tab" aria-controls="itemThree-tab-pane" aria-selected="false">Social Share</button>
-                                                </li>
                                             </ul>
                                         </div>
                                         <div class="tab-content" id="myTabContent">
                                             <div class="tab-pane fade show active" id="itemOne-tab-pane" role="tabpanel" aria-labelledby="itemOne-tab" tabindex="0">
-                                                <div upload-image-preview1 class="instructor__cover-bg" data-background="${user.backgroup}" >
-                                                    <div class="instructor__cover-info">
-                                                        <div class="instructor__cover-info-left">
-                                                            <div class="thumb">
-                                                                <img upload-image-preview src="${user.avatar}" alt="img">
-                                                            </div>
-                                                            <button onclick="triggerFileInput()" data-btn-file-trigger="#fileImport" title="Upload Photo"><i class="fas fa-camera"></i></button>
-                                                        </div>
-                                                        <div class="instructor__cover-info-right">
-                                                            <a onclick="triggerFileInput1()" data-btn-file-trigger="#fileImport1" class="btn btn-two arrow-btn">Edit Cover Photo</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
                                                 <div class="instructor__profile-form-wrap">
-                                                    <form enctype="multipart/form-data" action="Setting" method="post" class="instructor__profile-form">
-
+                                                    <form action="LessonEdit" method="post" class="instructor__profile-form">
+                                                        <input hidden name="lesson_id" value="${lesson.id}">
                                                         <div class="row">
-                                                            <div class="col-md-6">
+                                                            <div class="col-md-12">
                                                                 <div class="form-grp">
-                                                                    <label for="firstname">First Name</label>
-                                                                    <input name="first_name" id="firstname" type="text" value="${user.first_name}">
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-6">
-                                                                <div class="form-grp">
-                                                                    <label for="lastname">Last Name</label>
-                                                                    <input name="last_name" id="lastname" type="text" value="${user.last_name}">
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-6">
-                                                                <div class="form-grp">
-                                                                    <label for="phonenumber">Phone Number</label>
-                                                                    <input name="phone_number" id="phonenumber" type="tel" value="${user.phone_number}">
+                                                                    <label for="url">URL Video</label>
+                                                                    <input name="url" type="text" value="${lesson.url}">
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <div class="form-grp">
                                                             <label for="bio">Bio</label>
-                                                            <textarea name="description" id="bio">${user.description}</textarea>
+                                                            <textarea name="description" id="bio">${lesson.description}</textarea>
                                                         </div>
                                                         <div class="submit-btn mt-25">
-                                                            <button type="submit" class="btn">Update Info</button>
-                                                        </div>
-                                                        <input hidden="true"
-                                                               id="fileImport"
-                                                               name="avatar"
-                                                               type="file"
-                                                               accept=".jpg,.jpeg,.png"
-                                                               upload-image-input
-                                                               />
-                                                        <input hidden="true"
-                                                               id="fileImport1"
-                                                               name="backgroup"
-                                                               type="file"
-                                                               accept=".jpg,.jpeg,.png"
-                                                               upload-image-input1
-                                                               />
-                                                    </form>
-                                                </div>
-                                            </div>
-                                            <div class="tab-pane fade" id="itemTwo-tab-pane" role="tabpanel" aria-labelledby="itemTwo-tab" tabindex="0">
-                                                <div class="instructor__profile-form-wrap">
-                                                    <form action="#" class="instructor__profile-form">
-                                                        <div class="form-grp">
-                                                            <label for="currentpassword">Current Password</label>
-                                                            <input id="currentpassword" type="password" placeholder="Current Password">
-                                                        </div>
-                                                        <div class="form-grp">
-                                                            <label for="newpassword">New Password</label>
-                                                            <input id="newpassword" type="password" placeholder="New Password">
-                                                        </div>
-                                                        <div class="form-grp">
-                                                            <label for="repassword">Re-Type New Password</label>
-                                                            <input id="repassword" type="password" placeholder="Re-Type New Password">
-                                                        </div>
-                                                        <div class="submit-btn mt-25">
-                                                            <button type="submit" class="btn">Update Password</button>
+                                                            <button type="submit" class="btn">Update</button>
                                                         </div>
                                                     </form>
                                                 </div>
@@ -423,45 +357,6 @@
         <script src="assets/js/wow.min.js"></script>
         <script src="assets/js/aos.js"></script>
         <script src="assets/js/main.js"></script>
-        <script>
-                                                                SVGInject(document.querySelectorAll("img.injectable"));
-                                                                function triggerFileInput() {
-                                                                    document.getElementById('fileImport').click();
-                                                                }
-                                                                function triggerFileInput1() {
-                                                                    document.getElementById('fileImport1').click();
-                                                                }
-                                                                const uploadImageInput = document.querySelector("[upload-image-input]");
-                                                                const uploadImagePreview = document.querySelector("[upload-image-preview]");
-                                                                const closeImagePreview = document.querySelector("[close-image-preview]");
-                                                                const uploadImageInput1 = document.querySelector("[upload-image-input1]");
-                                                                const uploadImagePreview1 = document.querySelector("[upload-image-preview1]");
-                                                                const closeImagePreview1 = document.querySelector("[close-image-preview1]");
-                                                                uploadImageInput.addEventListener("change", (e) => {
-                                                                    const file = e.target.files[0];
-                                                                    console.log(file);
-                                                                    if (file) {
-                                                                        const reader = new FileReader();
-                                                                        reader.onload = function (e) {
-                                                                            uploadImagePreview.src = e.target.result;
-                                                                        }
-                                                                        reader.readAsDataURL(file);
-                                                                    }
-                                                                })
-                                                                uploadImageInput1.addEventListener("change", (e) => {
-                                                                    const file = e.target.files[0];
-                                                                    console.log(file);
-                                                                    if (file) {
-                                                                        const reader = new FileReader();
-                                                                        reader.onload = function (e) {
-                                                                            let url = "url(" + e.target.result + ")";
-                                                                            uploadImagePreview1.style.backgroundImage = url;
-                                                                        }
-                                                                        reader.readAsDataURL(file);
-                                                                    }
-                                                                })
-        </script>
     </body>
 
-</html>
 </html>
