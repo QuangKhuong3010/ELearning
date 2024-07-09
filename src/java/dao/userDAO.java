@@ -85,9 +85,10 @@ public class userDAO extends DBContext {
                     + "           ,[password]\n"
                     + "           ,[first_name]\n"
                     + "           ,[last_name]\n"
-                    + "           ,[created_by_Google])\n"
+                    + "           ,[created_by_Google]"
+                    + "           ,[avatar])\n"
                     + "     VALUES\n"
-                    + "           (?, ?, ?, ?, ?, ?)";
+                    + "           (?, ?, ?, ?, ?, ?,?)";
             PreparedStatement st = connection.prepareStatement(sql);
             st.setString(1, "4");
             st.setString(2, email);
@@ -95,6 +96,7 @@ public class userDAO extends DBContext {
             st.setString(4, firstName);
             st.setString(5, lastName);
             st.setString(6, "0");
+            st.setString(7, "https://ss-images.saostar.vn/wp700/pc/1613810558698/Facebook-Avatar_3.png");
             st.executeUpdate();
         } catch (SQLException ex) {
             System.out.println(ex);
@@ -106,13 +108,15 @@ public class userDAO extends DBContext {
             String sql = "INSERT INTO [dbo].[User]\n"
                     + "           ([role_id]\n"
                     + "           ,[email]\n"
-                    + "           ,[created_by_Google])\n"
+                    + "           ,[created_by_Google]"
+                    + "           ,[avatar])\n"
                     + "     VALUES\n"
                     + "           (?, ?, ?)";
             PreparedStatement st = connection.prepareStatement(sql);
             st.setString(1, "4");
             st.setString(2, email);
             st.setString(3, "1");
+            st.setString(4, "https://ss-images.saostar.vn/wp700/pc/1613810558698/Facebook-Avatar_3.png");
             st.executeUpdate();
         } catch (SQLException ex) {
             System.out.println(ex);

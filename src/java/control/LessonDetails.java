@@ -6,6 +6,7 @@ package control;
 
 import dao.courseDAO;
 import dao.feedbackDAO;
+import dao.lessonCompletedDAO;
 import dao.lessonDAO;
 import dao.organizationDAO;
 import dao.topicDAO;
@@ -17,6 +18,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.util.ArrayList;
 import model.Course;
 import model.Feedback;
@@ -24,13 +26,15 @@ import model.Lesson;
 import model.Rating;
 import model.Topic;
 import model.User;
+import model.Curriculum;
+import model.LessonCompleted;
 
 /**
  *
  * @author Admin
  */
-@WebServlet(name = "Curriculum", urlPatterns = {"/Curriculum"})
-public class Curriculum extends HttpServlet {
+@WebServlet(name = "LessonDetails", urlPatterns = {"/LessonDetails"})
+public class LessonDetails extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -76,7 +80,14 @@ public class Curriculum extends HttpServlet {
         courseDAO courseDAO = new courseDAO();
         organizationDAO organizationDAO = new organizationDAO();
         feedbackDAO feedbackDAO = new feedbackDAO();
+        lessonCompletedDAO lessonCompletedDAO = new lessonCompletedDAO();
 
+        HttpSession session = request.getSession(false);
+        if (session == null) {
+            response.sendRedirect("Logout");
+            return;
+        }
+        User user = (User) session.getAttribute("account");
         int course_id = Integer.parseInt(request.getParameter("course_id"));
         String lesson_id_raw = request.getParameter("lesson_id");
         Lesson lesson = new Lesson();
@@ -91,23 +102,35 @@ public class Curriculum extends HttpServlet {
         User manager = userDAO.getUser(course.getManaged_by());
         manager.setOrganization_name(organizationDAO.getNameOrganization(manager.getUser_id()));
 
-        ArrayList<Topic> topicList = topicDAO.getAllTopicOnCourse(course_id);
-        ArrayList<Lesson> lessonList = lessonDAO.getLessonOnCourse(course_id);
-        ArrayList<Rating> rating = feedbackDAO.getRatingBar(course_id);
+        ArrayList<Rating> rating = feedbackDAO.getRatingBar(course_id);  
+        ArrayList<Feedback> feedbackList = feedbackDAO.getFeedbackOnCousre(course_id);
+        ArrayList<Topic> topicOnCourse = topicDAO.getAllTopicOnCourse(course_id);
+        ArrayList<Curriculum> curriculum = new ArrayList<>();
+        
         course.setRating(feedbackDAO.getAverageRateOf(course_id));
         course.setRatingNear((int) Math.round(course.getRating()));
-        ArrayList<Feedback> feedbackList = feedbackDAO.getFeedbackOnCousre(course_id);
         course.setRating(feedbackDAO.getAverageRateOf(course_id));
         course.setNumberRating(feedbackDAO.getFeedbackOnCousre(course_id).size());
+        for (Topic topic : topicOnCourse) {
+            ArrayList<Lesson> lessonOnTopic = lessonDAO.getLessonOnTopic(topic.getId());
+            curriculum.add(new Curriculum(topic, lessonOnTopic));
+        }
+        for (Curriculum c : curriculum) {
+            for (Lesson l : c.getLessons()) {
+                if(lessonCompletedDAO.getLessonCompleted(user.getUser_id(), l.getId())!=null){
+                    l.setStatus("done");
+                }
+            }
+        }
         
+        
+        request.setAttribute("curriculum", curriculum);
         request.setAttribute("feedback", feedbackList);
         request.setAttribute("rating", rating);
         request.setAttribute("manager", manager);
         request.setAttribute("lesson", lesson);
         request.setAttribute("course", course);
-        request.setAttribute("topic", topicList);
-        request.setAttribute("lessonlist", lessonList);
-        request.getRequestDispatcher("curriculum.jsp").forward(request, response);
+        request.getRequestDispatcher("lessondetails.jsp").forward(request, response);
     }
 
     /**

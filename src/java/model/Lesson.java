@@ -16,6 +16,15 @@ public class Lesson {
     private String url;
     private String description;
     private int isDeleted;
+    private String status;
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
     public Lesson(int id, int topic_id, String name, String last_updated_date, String url, String description, int isDeleted) {
         this.id = id;

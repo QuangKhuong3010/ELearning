@@ -40,7 +40,27 @@
             .course-item-link.locked {
                 cursor: not-allowed;
             }
+            .styled-link {
+                margin-left: 40px;
+                display: inline-block;
+                padding: 10px 20px;
+                background-color: rgb(13, 110, 253);
+                color: white;
+                text-decoration: none;
+                font-weight: bold;
+                border-radius: 5px;
+            }
+
+            .styled-link:hover {
+                background-color: #2980b9;
+                color: #f39c12;
+                border-color: #27ae60;
+            }
+            .lesson__content .course-item-link {
+                cursor: pointer;
+            }
         </style>
+
         <link rel="stylesheet" href="https://cdn.plyr.io/3.6.8/plyr.css" />
     </head>
 
@@ -322,37 +342,47 @@
                             <div class="lesson__content">
                                 <h2 class="title">Course Content</h2>
                                 <div class="accordion" id="accordionExample">
-                                    <c:forEach items="${topic}" var="t" varStatus="status">
+                                    <c:forEach items="${curriculum}" var="c" varStatus="status">
                                         <div class="accordion-item">
                                             <h2 class="accordion-header" id="heading${status.index}">
                                                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse${status.index}" aria-expanded="false" aria-controls="collapse${status.index}">
-                                                    ${t.name}
+                                                    ${c.topic.name}
                                                     <span>${status.index + 1}/3</span>
                                                 </button>
                                             </h2>
                                             <div id="collapse${status.index}" class="accordion-collapse collapse" aria-labelledby="heading${status.index}" data-bs-parent="#accordionExample">
                                                 <div class="accordion-body">
                                                     <ul class="list-wrap">
-                                                        <li class="course-item open-item">
-                                                            <a href="#" class="course-item-link active">
-                                                                <span class="item-name">Course Installation</span>
-                                                                <div class="course-item-meta">
-                                                                    <span class="item-meta course-item-status">
-                                                                        <img src="assets/img/icons/done.png" alt="icon">
-                                                                    </span>
-                                                                </div>
-                                                            </a>
-                                                        </li>
-                                                        <li class="course-item">
-                                                            <a href="#" class="course-item-link">
-                                                                <span class="item-name">Create a Simple React App</span>
-                                                                <div class="course-item-meta">
-                                                                    <span class="item-meta course-item-status">
-                                                                        <img src="assets/img/icons/done.png" alt="icon">
-                                                                    </span>
-                                                                </div>
-                                                            </a>
-                                                        </li>
+                                                        <c:forEach items="${c.lessons}" var="l">
+                                                            <c:if test="${lesson.id==l.id}">
+                                                                <li class="course-item">
+                                                                    <a href="LessonDetails?course_id=${course.id}&lesson_id=${l.id}" class="course-item-link active">
+                                                                        <span class="item-name">${l.name}</span>
+                                                                        <c:if test="${l.status!=done}">
+                                                                            <div class="course-item-meta">
+                                                                                <span class="item-meta course-item-status">
+                                                                                    <img src="assets/img/icons/done.png" alt="icon">
+                                                                                </span>
+                                                                            </div>
+                                                                        </c:if>
+                                                                    </a>
+                                                                </li>
+                                                            </c:if>
+                                                            <c:if test="${lesson.id!=l.id}">
+                                                                <li class="course-item">
+                                                                    <a href="LessonDetails?course_id=${course.id}&lesson_id=${l.id}" class="course-item-link">
+                                                                        <span class="item-name">${l.name}</span>
+                                                                        <c:if test="${l.status!=done}">
+                                                                            <div class="course-item-meta">
+                                                                                <span class="item-meta course-item-status">
+                                                                                    <img src="assets/img/icons/done.png" alt="icon">
+                                                                                </span>
+                                                                            </div>
+                                                                        </c:if>
+                                                                    </a>
+                                                                </li>
+                                                            </c:if>
+                                                        </c:forEach>
                                                     </ul>
                                                 </div>
                                             </div>
@@ -378,24 +408,30 @@
                                         allow="autoplay; encrypted-media"
                                         ></iframe>
                                 </div>
-
                                 <div class="lesson__next-prev-button">
                                     <button class="prev-button" title="Create a Simple React App"><i class="flaticon-arrow-right"></i></button>
                                     <button class="next-button" title="React for the Rest of us"><i class="flaticon-arrow-right"></i></button>
                                 </div>
                             </div>
                             <div class="courses__details-content lesson__details-content">
-                                <ul class="nav nav-tabs" id="myTab" role="tablist">
-                                    <li class="nav-item" role="presentation">
-                                        <button class="nav-link active" id="overview-tab" data-bs-toggle="tab" data-bs-target="#overview-tab-pane" type="button" role="tab" aria-controls="overview-tab-pane" aria-selected="true">Overview</button>
-                                    </li>
-                                    <li class="nav-item" role="presentation">
-                                        <button class="nav-link" id="instructors-tab" data-bs-toggle="tab" data-bs-target="#instructors-tab-pane" type="button" role="tab" aria-controls="instructors-tab-pane" aria-selected="false">Instructors</button>
-                                    </li>
-                                    <li class="nav-item" role="presentation">
-                                        <button class="nav-link" id="reviews-tab" data-bs-toggle="tab" data-bs-target="#reviews-tab-pane" type="button" role="tab" aria-controls="reviews-tab-pane" aria-selected="false">reviews</button>
-                                    </li>
-                                </ul>
+                                <div class="row">
+                                    <div class="col-md-10">
+                                        <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                            <li class="nav-item" role="presentation">
+                                                <button class="nav-link active" id="overview-tab" data-bs-toggle="tab" data-bs-target="#overview-tab-pane" type="button" role="tab" aria-controls="overview-tab-pane" aria-selected="true">Overview</button>
+                                            </li>
+                                            <li class="nav-item" role="presentation">
+                                                <button class="nav-link" id="instructors-tab" data-bs-toggle="tab" data-bs-target="#instructors-tab-pane" type="button" role="tab" aria-controls="instructors-tab-pane" aria-selected="false">Instructors</button>
+                                            </li>
+                                            <li class="nav-item" role="presentation">
+                                                <button class="nav-link" id="reviews-tab" data-bs-toggle="tab" data-bs-target="#reviews-tab-pane" type="button" role="tab" aria-controls="reviews-tab-pane" aria-selected="false">reviews</button>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <a href="MarkAsDone?lesson_id=${lesson.id}" class="styled-link">Mark As Done</a>
+                                    </div>
+                                </div>
                                 <div class="tab-content" id="myTabContent">
                                     <div class="tab-pane fade show active" id="overview-tab-pane" role="tabpanel" aria-labelledby="overview-tab" tabindex="0">
                                         <div class="courses__overview-wrap">

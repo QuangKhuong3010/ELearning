@@ -28,7 +28,10 @@ public class Course {
     private int ratingNear;
     private int numberRating;
     private int studentOnCourse;
-
+    private String assign_avatar;
+    private double process;
+    private int numberOfLesson;
+    
     public Course() {
     }
 
@@ -56,7 +59,32 @@ public class Course {
         this.description = description;
         this.created_date = created_date;
     }
+
+    public int getNumberOfLesson() {
+        return numberOfLesson;
+    }
+
+    public void setNumberOfLesson(int numberOfLesson) {
+        this.numberOfLesson = numberOfLesson;
+    }
+
     
+    public double getProcess() {
+        return process;
+    }
+
+    public void setProcess(double process) {
+        this.process = process;
+    }
+
+    
+    public String getAssign_avatar() {
+        return assign_avatar;
+    }
+
+    public void setAssign_avatar(String assign_avatar) {
+        this.assign_avatar = assign_avatar;
+    }
 
     public int getId() {
         return id;

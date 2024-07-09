@@ -13,9 +13,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.png">
-        <!-- Place favicon.ico in the root directory -->
-
-        <!-- CSS here -->
         <link rel="stylesheet" href="assets/css/bootstrap.min.css">
         <link rel="stylesheet" href="assets/css/animate.min.css">
         <link rel="stylesheet" href="assets/css/magnific-popup.css">
@@ -161,6 +158,16 @@
                 font-size: 0.875rem;
                 border-radius: 2px;
                 background: none;
+            }
+
+            .course_avatar{
+                width: 960px;
+                height: 430px;
+            }
+
+            .mentor-avatar{
+                width: 50px;
+                height: 50px;
             }
         </style>
 
@@ -330,7 +337,7 @@
                     <div class="row">
                         <div class="col-xl-9 col-lg-8">
                             <div class="courses__details-thumb">
-                                <img src="${course.avatar}" alt="img">
+                                <img class="course_avatar" src="${course.avatar}" alt="img">
                             </div>
                             <div class="courses__details-content">
                                 <ul class="courses__item-meta list-wrap">
@@ -343,7 +350,7 @@
                                 <div class="courses__details-meta">
                                     <ul class="list-wrap">
                                         <li class="author-two">
-                                            <img src="${mentor.avatar}" alt="img">
+                                            <img class="mentor-avatar" src="${mentor.avatar}" alt="img">
                                             By
                                             <a href="#">${mentor.first_name} ${mentor.last_name}</a>
                                         </li>
@@ -375,56 +382,77 @@
                                     <div class="tab-pane fade" id="curriculum-tab-pane" role="tabpanel" aria-labelledby="curriculum-tab" tabindex="0">
                                         <div class="courses__curriculum-wrap">
                                             <h3 class="title">Course Curriculum</h3>
-                                            <c:forEach items="${topic}" var="t">
-                                                <div class="accordion" id="accordionExample">
+                                            <div class="accordion" id="accordionExample">
+                                                <c:forEach items="${curriculum}" var="c" varStatus="loop">
                                                     <div class="accordion-item">
-                                                        <h2 class="accordion-header" id="headingOne">
-                                                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"  aria-expanded="true" aria-controls="collapseOne">
-                                                                ${t.name}
+                                                        <h2 class="accordion-header" id="heading${loop.index}">
+                                                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse${loop.index}"  aria-expanded="false" aria-controls="collapse${loop.index}">
+                                                                ${c.topic.name}
                                                             </button>
                                                         </h2>
-                                                        <c:forEach items="${lesson}" var="l">   
-                                                            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                                                                <div class="accordion-body">
-                                                                    <ul class="list-wrap">
-                                                                        <li class="course-item">
-                                                                            <a href="https://www.youtube.com/watch?v=b2Az7_lLh3g" class="course-item-link popup-video">
-                                                                                <span class="item-name">${l.name}</span>
-                                                                                <div class="course-item-meta">
-                                                                                    <span class="item-meta duration">03:03</span>
-                                                                                    <span class="item-meta course-item-status">
-                                                                                        <img src="assets/img/icons/lock.svg" alt="icon">
-                                                                                    </span>
+                                                        <div id="collapse${loop.index}" class="accordion-collapse collapse" aria-labelledby="heading${loop.index}" data-bs-parent="#accordionExample">
+                                                            <div class="accordion-body">
+                                                                <ul class="list-wrap">
+                                                                    <c:forEach items="${c.lessons}" var="l" varStatus="loopLesson">
+                                                                        <c:if test="${(loop.index==0)&&(loopLesson.index==0)}">
+                                                                            <li class="course-item open-item">
+                                                                                <a class="course-item-link" data-bs-toggle="modal" data-bs-target="#exampleModal${loopLesson.index}">
+                                                                                    <span class="item-name">${l.name}</span>
+                                                                                </a>
+                                                                            </li>
+                                                                        </c:if>
+                                                                        <c:if test="${(loop.index!=0)||(loopLesson.index!=0)}">
+                                                                            <li class="course-item">
+                                                                                <a href="#" class="course-item-link">
+                                                                                    <span class="item-name">${l.name}</span>
+                                                                                    <div class="course-item-meta">
+                                                                                        <span class="item-meta course-item-status">
+                                                                                            <img src="assets/img/icons/lock.svg" alt="icon">
+                                                                                        </span>
+                                                                                    </div>
+                                                                                </a>
+                                                                            </li>
+                                                                        </c:if>
+                                                                        <div class="modal fade" id="exampleModal${loopLesson.index}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                            <div class="modal-dialog modal-dialog-centered modal-lg">
+                                                                                <div class="modal-content ">
+                                                                                    <div class="modal-header">
+                                                                                        <h1 class="modal-title fs-5" id="exampleModalLabel">${l.name}</h1>
+                                                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                                    </div>
+                                                                                    <div class="modal-body">
+                                                                                        <div class="plyr__video-embed" id="player">
+                                                                                            <iframe
+                                                                                                src="${l.url}""
+                                                                                                allowfullscreen
+                                                                                                allowtransparency
+                                                                                                frameborder="0"
+                                                                                                allow="autoplay; encrypted-media"
+                                                                                                ></iframe>
+                                                                                        </div>
+                                                                                    </div>
                                                                                 </div>
-                                                                            </a>
-                                                                        </li>   
-                                                                    </ul>
-                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </c:forEach>
+                                                                </ul>
                                                             </div>
-                                                        </c:forEach>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            </c:forEach>
+                                                </c:forEach>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="tab-pane fade" id="instructors-tab-pane" role="tabpanel" aria-labelledby="instructors-tab" tabindex="0">
                                         <div class="courses__instructors-wrap">
                                             <div class="courses__instructors-thumb">
-                                                <img src="assets/img/courses/course_instructors.png" alt="img">
+                                                <img src="${manager.avatar}" alt="img">
                                             </div>
                                             <div class="courses__instructors-content">
                                                 <h2 class="title">${manager.first_name} ${manager.last_name}</h2>
                                                 <span class="designation">${manager.organization_name}</span>
                                                 <p class="avg-rating"><i class="fas fa-star"></i>(4.8 Ratings)</p>
                                                 <p>${manager.description}</p>
-                                                <div class="instructor__social">
-                                                    <ul class="list-wrap justify-content-start">
-                                                        <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-                                                        <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                                                        <li><a href="#"><i class="fab fa-whatsapp"></i></a></li>
-                                                        <li><a href="#"><i class="fab fa-instagram"></i></a></li>
-                                                    </ul>
-                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -521,19 +549,19 @@
                                 </div>
                                 <div class="courses__details-enroll">
                                     <c:if test="${purchased==null && sessionScope.account!=null}">
-                                    <div class="tg-button-wrap">
-                                        <button id="btnDatHang" class="shopee-button-solid shopee-button-solid--primary">
-                                            <a href="Curriculum?course_id=${course.id}&lesson_id=first_lesson" class="btn arrow-btn" class="cart-final--bottom-checkout--btn btnDatHang">Enroll</a>
-                                        </button>
-                                    </div>
+                                        <div class="tg-button-wrap">
+                                            <button id="btnDatHang" class="shopee-button-solid shopee-button-solid--primary">
+                                                <a href="LessonDetails?course_id=${course.id}&lesson_id=first_lesson" class="btn arrow-btn" class="cart-final--bottom-checkout--btn btnDatHang">Enroll</a>
+                                            </button>
+                                        </div>
                                     </c:if>
-                                    
+
                                     <c:if test="${purchased!=null && sessionScope.account!=null}">
-                                    <div class="tg-button-wrap">
-                                        <button id="btnDatHang" class="shopee-button-solid shopee-button-solid--primary" data-bs-toggle="modal" data-bs-target="#paymentMethod">
-                                            <a  class="btn arrow-btn" class="cart-final--bottom-checkout--btn btnDatHang">Payment</a>
-                                        </button>
-                                    </div>
+                                        <div class="tg-button-wrap">
+                                            <button id="btnDatHang" class="shopee-button-solid shopee-button-solid--primary" data-bs-toggle="modal" data-bs-target="#paymentMethod">
+                                                <a  class="btn arrow-btn" class="cart-final--bottom-checkout--btn btnDatHang">Payment</a>
+                                            </button>
+                                        </div>
                                     </c:if>
                                 </div>
                                 <div class="modal fade" id="paymentMethod" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -741,6 +769,10 @@
                 DatHang.addEventListener("click", orderSuccess);
             }
 
+        </script>
+        <script src="https://cdn.plyr.io/3.6.8/plyr.polyfilled.js"></script>
+        <script>
+            const player = new Plyr('#player');
         </script>
     </body>
 

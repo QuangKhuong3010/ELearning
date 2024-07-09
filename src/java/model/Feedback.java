@@ -50,10 +50,6 @@ public class Feedback {
         this.created_by_avatar = created_by_avatar;
     }
 
-    
-    
-    
-
     public int getId() {
         return id;
     }

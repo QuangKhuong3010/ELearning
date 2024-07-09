@@ -9,6 +9,7 @@ import dao.courseDAO;
 import dao.lessonDAO;
 import dao.organizationDAO;
 import dao.feedbackDAO;
+import dao.lessonCompletedDAO;
 import dao.levelDAO;
 import dao.purchasedDAO;
 import dao.topicDAO;
@@ -29,6 +30,7 @@ import model.Lesson;
 import model.Purchased;
 import model.Rating;
 import model.User;
+import model.Curriculum;
 import util.generate;
 
 /**
@@ -81,6 +83,8 @@ public class CourseDetails extends HttpServlet {
         if (session == null) {
             user = (User) session.getAttribute("account");
         }
+        int course_id = Integer.parseInt(request.getParameter("id"));
+        
         courseDAO courseDAO = new courseDAO();
         categoryDAO categoryDAO = new categoryDAO();
         feedbackDAO feedbackDAO = new feedbackDAO();
@@ -91,16 +95,16 @@ public class CourseDetails extends HttpServlet {
         levelDAO levelDAO = new levelDAO();
         purchasedDAO purchasedDAO = new purchasedDAO();
         generate generate = new generate();
-
-        int course_id = Integer.parseInt(request.getParameter("id"));
+        
         Course course = courseDAO.getCourse(course_id);
         User mentor = userDAO.getUser(course.getAssign_by());
         User manager = userDAO.getUser(course.getManaged_by());
         ArrayList<Topic> topicOnCourse = topicDAO.getAllTopicOnCourse(course_id);
-        ArrayList<Lesson> lessonOnCourse = lessonDAO.getLessonOnCourse(course_id);
         ArrayList<Feedback> feedbackList = feedbackDAO.getFeedbackOnCousre(course_id);
         ArrayList<Rating> rating = feedbackDAO.getRatingBar(course_id);
-
+        ArrayList<Curriculum> curriculum = new ArrayList<>();
+        
+        
         course.setLevel_name(levelDAO.getLevelName(course.getLevel_id()));
         course.setCategory_name(categoryDAO.getNameCategory(course.getCategory_id()));
         course.setNumberRating(feedbackDAO.getFeedbackOnCousre(course_id).size());
@@ -113,15 +117,20 @@ public class CourseDetails extends HttpServlet {
         if (user!=null){
             purchased = purchasedDAO.getPurchased(user.getUser_id(), course_id);
         }
+        for (Topic topic : topicOnCourse) {
+            ArrayList<Lesson> lessonOnTopic = lessonDAO.getLessonOnTopic(topic.getId());
+            curriculum.add(new Curriculum(topic, lessonOnTopic));
+        }
+        
+        
+        request.setAttribute("curriculum", curriculum);
         request.setAttribute("purchased", purchased);
         request.setAttribute("code", code);
         request.setAttribute("rating", rating);
         request.setAttribute("feedback", feedbackList);
-        request.setAttribute("topic", topicOnCourse);
         request.setAttribute("mentor", mentor);
         request.setAttribute("manager", manager);
         request.setAttribute("course", course);
-        request.setAttribute("lesson", lessonOnCourse);
         request.getRequestDispatcher("coursedetails.jsp").forward(request, response);
     }
 
