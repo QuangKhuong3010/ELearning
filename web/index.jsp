@@ -88,7 +88,7 @@
                                             <li class="button"><a href="HomePage">Home</a></li>
                                             <li class="button"><a href="CourseList">Courses List</a></li>
                                             <li class="button"><a href="#">About Us</a></li>
-                                            <c:if test="${sessionScope.account.role_id==4}">
+                                                <c:if test="${sessionScope.account.role_id==4}">
                                                 <li class="menu-item-has-children">
                                                     <a href="instructor-dashboard.jsp">Features</a>
                                                     <ul class="sub-menu">
@@ -137,7 +137,7 @@
                                         </ul>
                                     </div>
                                     <div class="tgmenu__search d-none d-md-block">
-                                        <form action="Courses" class="tgmenu__search-form">
+                                        <form action="CourseList" class="tgmenu__search-form">
                                             <div class="input-grp">
                                                 <input name="search" type="text" placeholder="Search For Course . . .">
                                                 <button type="submit"><i class="flaticon-search"></i></button>
@@ -644,95 +644,120 @@
             </section>
             <!-- fact-area-end -->
 
+            <div style="margin: 20px;"></div>
 
-            <!-- blog-area -->
-            <section class="blog__post-area">
+
+        </main>
+        <!-- main-area-end -->
+        <footer class="footer__area">
+            <div class="footer__top">
                 <div class="container">
-                    <div class="row justify-content-center">
-                        <div class="col-lg-6">
-                            <div class="section__title text-center mb-40">
-                                <span class="sub-title">News & Blogs</span>
-                                <h2 class="title">Our Latest News Feed</h2>
-                                <p>when known printer took a galley of type scrambl edmake</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row gutter-20">
-                        <div class="col-xl-3 col-md-6">
-                            <div class="blog__post-item shine__animate-item">
-                                <div class="blog__post-thumb">
-                                    <a href="blog-details.jsp" class="shine__animate-link"><img src="assets/img/blog/blog_post01.jpg" alt="img"></a>
-                                    <a href="blog.jsp" class="post-tag">Marketing</a>
+                    <div class="row">
+                        <div class="col-xl-3 col-lg-4 col-md-6">
+                            <div class="footer__widget">
+                                <div class="logo mb-35">
+                                    <a href="Homepage"><img src="assets/img/logo/secondary_logo.svg" alt="img"></a>
                                 </div>
-                                <div class="blog__post-content">
-                                    <div class="blog__post-meta">
-                                        <ul class="list-wrap">
-                                            <li><i class="flaticon-calendar"></i>20 July, 2024</li>
-                                            <li><i class="flaticon-user-1"></i>by <a href="blog-details.jsp">Admin</a></li>
-                                        </ul>
-                                    </div>
-                                    <h4 class="title"><a href="blog-details.jsp">How To Become idiculously Self-Aware In 20 Minutes</a></h4>
+                                <div class="footer__content">
+                                    <p>when an unknown printer took galley of type and scrambled it to make pspecimen bookt has.</p>
+                                    <ul class="list-wrap">
+                                        <li>FPT University</li>
+                                        <li>0888844634</li>
+                                    </ul>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-xl-3 col-md-6">
-                            <div class="blog__post-item shine__animate-item">
-                                <div class="blog__post-thumb">
-                                    <a href="blog-details.jsp" class="shine__animate-link"><img src="assets/img/blog/blog_post02.jpg" alt="img"></a>
-                                    <a href="blog.jsp" class="post-tag">Marketing</a>
-                                </div>
-                                <div class="blog__post-content">
-                                    <div class="blog__post-meta">
-                                        <ul class="list-wrap">
-                                            <li><i class="flaticon-calendar"></i>20 July, 2024</li>
-                                            <li><i class="flaticon-user-1"></i>by <a href="blog-details.jsp">Admin</a></li>
-                                        </ul>
-                                    </div>
-                                    <h4 class="title"><a href="blog-details.jsp">Get Started With UI Design With Tips To Speed</a></h4>
+                        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
+                            <div class="footer__widget">
+                                <h4 class="footer__widget-title">Useful Links</h4>
+                                <div class="footer__link">
+                                    <ul class="list-wrap">
+                                        <li><a>Our values</a></li>
+                                        <li><a>Our advisory board</a></li>
+                                        <li><a>Our partners</a></li>
+                                        <li><a>Become a partner</a></li>
+                                        <li><a>Work at Future Learn</a></li>
+                                        <li><a>Quizlet Plus</a></li>
+                                    </ul>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-xl-3 col-md-6">
-                            <div class="blog__post-item shine__animate-item">
-                                <div class="blog__post-thumb">
-                                    <a href="blog-details.jsp" class="shine__animate-link"><img src="assets/img/blog/blog_post03.jpg" alt="img"></a>
-                                    <a href="blog.jsp" class="post-tag">Marketing</a>
-                                </div>
-                                <div class="blog__post-content">
-                                    <div class="blog__post-meta">
-                                        <ul class="list-wrap">
-                                            <li><i class="flaticon-calendar"></i>20 July, 2024</li>
-                                            <li><i class="flaticon-user-1"></i>by <a href="blog-details.jsp">Admin</a></li>
-                                        </ul>
-                                    </div>
-                                    <h4 class="title"><a href="blog-details.jsp">Make Your Own Expanding Contracting Content</a></h4>
+                        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6">
+                            <div class="footer__widget">
+                                <h4 class="footer__widget-title">Our Company</h4>
+                                <div class="footer__link">
+                                    <ul class="list-wrap">
+                                        <li><a>Contact Us</a></li>
+                                        <li><a>Become Teacher</a></li>
+                                        <li><a >Blog</a></li>
+                                        <li><a >Instructor</a></li>
+                                        <li><a >Events</a></li>
+                                    </ul>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-xl-3 col-md-6">
-                            <div class="blog__post-item shine__animate-item">
-                                <div class="blog__post-thumb">
-                                    <a href="blog-details.jsp" class="shine__animate-link"><img src="assets/img/blog/blog_post04.jpg" alt="img"></a>
-                                    <a href="blog.jsp" class="post-tag">Marketing</a>
+                        <div class="col-xl-3 col-lg-4 col-md-6">
+                            <div class="footer__widget">
+                                <h4 class="footer__widget-title">Get In Touch</h4>
+                                <div class="footer__contact-content">
+                                    <p>when an unknown printer took <br> galley type and scrambled</p>
+                                    <ul class="list-wrap footer__social">
+                                        <li>
+                                            <a target="_blank">
+                                                <img src="assets/img/icons/facebook.svg" alt="img" class="injectable">
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a target="_blank">
+                                                <img src="assets/img/icons/twitter.svg" alt="img" class="injectable">
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a target="_blank">
+                                                <img src="assets/img/icons/whatsapp.svg" alt="img" class="injectable">
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a  target="_blank">
+                                                <img src="assets/img/icons/instagram.svg" alt="img" class="injectable">
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a target="_blank">
+                                                <img src="assets/img/icons/youtube.svg" alt="img" class="injectable">
+                                            </a>
+                                        </li>
+                                    </ul>
                                 </div>
-                                <div class="blog__post-content">
-                                    <div class="blog__post-meta">
-                                        <ul class="list-wrap">
-                                            <li><i class="flaticon-calendar"></i>20 July, 2024</li>
-                                            <li><i class="flaticon-user-1"></i>by <a href="blog-details.jsp">Admin</a></li>
-                                        </ul>
-                                    </div>
-                                    <h4 class="title"><a href="blog-details.jsp">What we are capable to usually discovered</a></h4>
+                                <div class="app-download">
+                                    <a><img src="assets/img/others/google-play.svg" alt="img"></a>
+                                    <a><img src="assets/img/others/apple-store.svg" alt="img"></a>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </section>
-            <!-- blog-area-end -->
-
-        </main>
-        <!-- main-area-end -->
+            </div>
+            <div class="footer__bottom">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-md-7">
+                            <div class="copy-right-text">
+                                <p>© 2010-2024 skillgro.com. All rights reserved.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-5">
+                            <div class="footer__bottom-menu">
+                                <ul class="list-wrap">
+                                    <li><a>Term of Use</a></li>
+                                    <li><a>Privacy Policy</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
 
 
 

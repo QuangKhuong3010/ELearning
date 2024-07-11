@@ -124,7 +124,7 @@
                                         </ul>
                                     </div>
                                     <div class="tgmenu__search d-none d-md-block">
-                                        <form action="Courses" class="tgmenu__search-form">
+                                        <form action="CourseList" class="tgmenu__search-form">
                                             <div class="input-grp">
                                                 <input name="search" type="text" placeholder="Search For Course . . .">
                                                 <button type="submit"><i class="flaticon-search"></i></button>
@@ -397,36 +397,36 @@
                                 <div class="tab-pane fade show active" id="grid" role="tabpanel" aria-labelledby="grid-tab">
                                     <div class="row courses__grid-wrap row-cols-1 row-cols-xl-3 row-cols-lg-2 row-cols-md-2 row-cols-sm-1">
                                         <c:if test="${cousres.size()!=0}">
-                                        <c:forEach items="${courses}" var="c">
-                                            <div class="col">
-                                                <div class="courses__item shine__animate-item">
-                                                    <div class="courses__item-thumb">
-                                                        <a href="CourseDetails?id=${c.id}" class="shine__animate-link">
-                                                            <img src="${c.avatar}" alt="img">
-                                                        </a>
-                                                    </div>
-                                                    <div class="courses__item-content">
-                                                        <ul class="courses__item-meta list-wrap">
-                                                            <li class="courses__item-tag">
-                                                                <a>${c.category_name}</a>
-                                                            </li>
-                                                            <li class="avg-rating"><i class="fas fa-star"></i> (${c.rating} Reviews)</li>
-                                                        </ul>
-                                                        <h5 class="title"><a href="CourseDetails?id=${c.id}">${c.name}</a></h5>
-                                                        <p class="author">By <a href="#">${c.assign_name}</a></p>
-                                                        <div class="courses__item-bottom">
-                                                            <div class="button">
-                                                                <a href="CourseDetails?id=${c.id}">
-                                                                    <span class="text">Enroll Now</span>
-                                                                    <i class="flaticon-arrow-right"></i>
-                                                                </a>
+                                            <c:forEach items="${courses}" var="c">
+                                                <div class="col">
+                                                    <div class="courses__item shine__animate-item">
+                                                        <div class="courses__item-thumb">
+                                                            <a href="CourseDetails?id=${c.id}" class="shine__animate-link">
+                                                                <img src="${c.avatar}" alt="img">
+                                                            </a>
+                                                        </div>
+                                                        <div class="courses__item-content">
+                                                            <ul class="courses__item-meta list-wrap">
+                                                                <li class="courses__item-tag">
+                                                                    <a>${c.category_name}</a>
+                                                                </li>
+                                                                <li class="avg-rating"><i class="fas fa-star"></i> (${c.rating} Reviews)</li>
+                                                            </ul>
+                                                            <h5 class="title"><a href="CourseDetails?id=${c.id}">${c.name}</a></h5>
+                                                            <p class="author">By <a>${c.assign_name}</a></p>
+                                                            <div class="courses__item-bottom">
+                                                                <div class="button">
+                                                                    <a href="CourseDetails?id=${c.id}">
+                                                                        <span class="text">Enroll Now</span>
+                                                                        <i class="flaticon-arrow-right"></i>
+                                                                    </a>
+                                                                </div>
+                                                                <h5 class="price">${c.price} VND</h5>
                                                             </div>
-                                                            <h5 class="price">${c.price} VND</h5>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </c:forEach>
+                                            </c:forEach>
                                         </c:if>
                                     </div>
                                     <nav class="pagination__wrap mt-30">
@@ -440,37 +440,41 @@
                                 </div>
                                 <div class="tab-pane fade" id="list" role="tabpanel" aria-labelledby="list-tab">
                                     <div class="row courses__list-wrap row-cols-1">
-                                        <div class="col">
-                                            <div class="courses__item courses__item-three shine__animate-item">
-                                                <div class="courses__item-thumb">
-                                                    <a href="coursedetails.jsp" class="shine__animate-link">
-                                                        <img src="assets/img/courses/course_thumb01.jpg" alt="img">
-                                                    </a>
-                                                </div>
-                                                <div class="courses__item-content">
-                                                    <ul class="courses__item-meta list-wrap">
-                                                        <li class="courses__item-tag">
-                                                            <a href="Course">Development</a>
-                                                            <div class="avg-rating">
-                                                                <i class="fas fa-star"></i> (4.8 Reviews)
-                                                            </div>
-                                                        </li>
-                                                        <li class="price"><del>$29.00</del>$15.00</li>
-                                                    </ul>
-                                                    <h5 class="title"><a href="coursedetails.jsp">Resolving Conflicts Between Designers And Engineers</a></h5>
-                                                    <p class="author">By <a href="#">David Millar</a></p>
-                                                    <p class="info">when an unknown printer took a galley of type and scrambled type specimen book It has survived not only.</p>
-                                                    <div class="courses__item-bottom">
-                                                        <div class="button">
-                                                            <a href="coursedetails.jsp">
-                                                                <span class="text">Enroll Now</span>
-                                                                <i class="flaticon-arrow-right"></i>
+                                        <c:if test="${cousres.size()!=0}">
+                                            <c:forEach items="${courses}" var="c">
+                                                <div class="col">
+                                                    <div class="courses__item courses__item-three shine__animate-item">
+                                                        <div class="courses__item-thumb">
+                                                            <a href="CourseDetails?id=${c.id}" class="shine__animate-link">
+                                                                <img src="${c.avatar}" alt="img">
                                                             </a>
+                                                        </div>
+                                                        <div class="courses__item-content">
+                                                            <ul class="courses__item-meta list-wrap">
+                                                                <li class="courses__item-tag">
+                                                                    <a>${c.category_name}</a>
+                                                                    <div class="avg-rating">
+                                                                        <i class="fas fa-star"></i> (${c.rating} Reviews)
+                                                                    </div>
+                                                                </li>
+                                                                <li class="price">${c.price}</li>
+                                                            </ul>
+                                                            <h5 class="title"><a href="coursedetails.jsp">${c.name}</a></h5>
+                                                            <p class="author">By <a>${c.assign_name}</a></p>
+                                                            <p class="info">${c.description}</p>
+                                                            <div class="courses__item-bottom">
+                                                                <div class="button">
+                                                                    <a href="CourseDetails?id=${c.id}">
+                                                                        <span class="text">Enroll Now</span>
+                                                                        <i class="flaticon-arrow-right"></i>
+                                                                    </a>
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </div>
+                                            </c:forEach>
+                                        </c:if>
                                         <nav class="pagination__wrap mt-30">
                                             <ul class="list-wrap">
                                                 <li class="active"><a href="#">1</a></li>

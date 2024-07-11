@@ -117,12 +117,14 @@ public class CourseDetails extends HttpServlet {
         if (user!=null){
             purchased = purchasedDAO.getPurchased(user.getUser_id(), course_id);
         }
+        int sizeLesson = 0;
         for (Topic topic : topicOnCourse) {
             ArrayList<Lesson> lessonOnTopic = lessonDAO.getLessonOnTopic(topic.getId());
+            sizeLesson+=lessonOnTopic.size();
             curriculum.add(new Curriculum(topic, lessonOnTopic));
         }
         
-        
+        request.setAttribute("sizeLesson", sizeLesson);
         request.setAttribute("curriculum", curriculum);
         request.setAttribute("purchased", purchased);
         request.setAttribute("code", code);

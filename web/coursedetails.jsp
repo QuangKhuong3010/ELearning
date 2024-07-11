@@ -532,8 +532,13 @@
                                         </li>
                                         <li>
                                             <img src="assets/img/icons/course_icon03.svg" alt="img" class="injectable">
-                                            Lessons
-                                            <span>?</span>
+                                            Topic
+                                            <span>${curriculum.size()}</span>
+                                        </li>
+                                        <li>
+                                            <img src="assets/img/icons/course_icon03.svg" alt="img" class="injectable">
+                                            Lesson
+                                            <span>${sizeLesson}</span>
                                         </li>
                                         <li>
                                             <img src="assets/img/icons/course_icon04.svg" alt="img" class="injectable">
