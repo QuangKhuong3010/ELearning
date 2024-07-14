@@ -5,8 +5,7 @@
 
 package control;
 
-import dao.appointMentorDAO;
-import dao.userDAO;
+import dao.feedbackDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -14,16 +13,15 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import model.User;
-import util.Email;
-import util.generate;
 
 /**
  *
- * @author Admin
+ * @author Quangkhuong3010
  */
-@WebServlet(name="AppointMentorDelete", urlPatterns={"/AppointMentorDeleteOrConfirm"})
-public class AppointMentorDeleteOrConfirm extends HttpServlet {
+@WebServlet(name="FeedbackAdd", urlPatterns={"/FeedbackAdd"})
+public class FeedbackAdd extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -40,10 +38,10 @@ public class AppointMentorDeleteOrConfirm extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet AppointMentorDelete</title>");  
+            out.println("<title>Servlet FeedbackAdd</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet AppointMentorDelete at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet FeedbackAdd at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -60,10 +58,20 @@ public class AppointMentorDeleteOrConfirm extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        appointMentorDAO appointMentorDAO = new appointMentorDAO();
-        int id = Integer.parseInt(request.getParameter("id"));
-        appointMentorDAO.delete(id);
-        response.sendRedirect("AppointMentor");
+        HttpSession session = request.getSession(false);
+        if (session == null) {
+            response.sendRedirect("Logout");
+            return;
+        }
+        User user = (User) session.getAttribute("account");
+        String title = request.getParameter("title");
+        String description = request.getParameter("description");
+        int rating = Integer.parseInt(request.getParameter("rating"));
+        int course_id = Integer.parseInt(request.getParameter("course_id")); 
+        
+        feedbackDAO feedbackDAO = new feedbackDAO();
+        feedbackDAO.add(rating, course_id, user.getUser_id(), title, description);
+        response.sendRedirect("LessonDetails?course_id=" + course_id + "&lesson_id=first_lesson");
     } 
 
     /** 

@@ -43,8 +43,7 @@ public class purchasedDAO extends DBContext {
         }
         return null;
     }
-    
-    
+
     public ArrayList<Purchased> getAllOf(int user_id) {
         String sql = "SELECT [id]\n"
                 + "      ,[user_id]\n"
@@ -109,6 +108,21 @@ public class purchasedDAO extends DBContext {
             st.setInt(1, user_id);
             st.setInt(2, course_id);
             st.setString(3, code);
+            st.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+    }
+
+    public void markAsDone(int user_id, int course_id) {
+        try {
+            String sql = "UPDATE [dbo].[Purchased]\n"
+                    + "   SET [status] = ?\n"
+                    + " WHERE [user_id]=? and [course_id]=?";
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, "Completed");
+            st.setInt(2, user_id);
+            st.setInt(3, course_id);
             st.executeUpdate();
         } catch (SQLException ex) {
             System.out.println(ex);

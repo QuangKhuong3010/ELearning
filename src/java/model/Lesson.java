@@ -17,6 +17,28 @@ public class Lesson {
     private String description;
     private int isDeleted;
     private String status;
+    private String pdflink;
+    private int position;
+
+    public Lesson(int id, int topic_id, String name, String last_updated_date, String url, String description, int isDeleted, String pdflink, int position) {
+        this.id = id;
+        this.topic_id = topic_id;
+        this.name = name;
+        this.last_updated_date = last_updated_date;
+        this.url = url;
+        this.description = description;
+        this.isDeleted = isDeleted;
+        this.pdflink = pdflink;
+        this.position = position;
+    }
+
+    public int getPosition() {
+        return position;
+    }
+
+    public void setPosition(int position) {
+        this.position = position;
+    }
 
     public String getStatus() {
         return status;
@@ -26,15 +48,17 @@ public class Lesson {
         this.status = status;
     }
 
-    public Lesson(int id, int topic_id, String name, String last_updated_date, String url, String description, int isDeleted) {
-        this.id = id;
-        this.topic_id = topic_id;
-        this.name = name;
-        this.last_updated_date = last_updated_date;
-        this.url = url;
-        this.description = description;
-        this.isDeleted = isDeleted;
+    
+    public String getPdflink() {
+        return pdflink;
     }
+
+    public void setPdflink(String pdflink) {
+        this.pdflink = pdflink;
+    }
+
+    
+
     
 
     public int getIsDeleted() {

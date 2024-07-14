@@ -5,11 +5,11 @@
 package control;
 
 import dao.categoryDAO;
+import dao.certificateDAO;
 import dao.courseDAO;
 import dao.lessonDAO;
 import dao.organizationDAO;
 import dao.feedbackDAO;
-import dao.lessonCompletedDAO;
 import dao.levelDAO;
 import dao.purchasedDAO;
 import dao.topicDAO;
@@ -23,6 +23,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.util.ArrayList;
+import model.Certificate;
 import model.Topic;
 import model.Course;
 import model.Feedback;
@@ -80,7 +81,7 @@ public class CourseDetails extends HttpServlet {
             throws ServletException, IOException {
         HttpSession session = request.getSession(false);
         User user = null;
-        if (session == null) {
+        if (session != null) {
             user = (User) session.getAttribute("account");
         }
         int course_id = Integer.parseInt(request.getParameter("id"));
@@ -95,6 +96,7 @@ public class CourseDetails extends HttpServlet {
         levelDAO levelDAO = new levelDAO();
         purchasedDAO purchasedDAO = new purchasedDAO();
         generate generate = new generate();
+        certificateDAO certificateDAO = new certificateDAO();
         
         Course course = courseDAO.getCourse(course_id);
         User mentor = userDAO.getUser(course.getAssign_by());
@@ -114,9 +116,12 @@ public class CourseDetails extends HttpServlet {
         course.setRatingNear((int) Math.round(course.getRating()));
         String code = generate.generateCode(purchasedDAO.getAll().size() + 1);
         Purchased purchased = null;
+        Certificate certificate = null;
         if (user!=null){
             purchased = purchasedDAO.getPurchased(user.getUser_id(), course_id);
+            certificate = certificateDAO.getCertificate(user.getUser_id(), course_id);
         }
+        System.out.println(purchased);
         int sizeLesson = 0;
         for (Topic topic : topicOnCourse) {
             ArrayList<Lesson> lessonOnTopic = lessonDAO.getLessonOnTopic(topic.getId());
@@ -124,6 +129,10 @@ public class CourseDetails extends HttpServlet {
             curriculum.add(new Curriculum(topic, lessonOnTopic));
         }
         
+        
+        
+        
+        request.setAttribute("certificate", certificate);
         request.setAttribute("sizeLesson", sizeLesson);
         request.setAttribute("curriculum", curriculum);
         request.setAttribute("purchased", purchased);

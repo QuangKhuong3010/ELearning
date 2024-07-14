@@ -117,10 +117,10 @@ public class TopicEdit extends HttpServlet {
         for (Lesson lesson : listLesson) {
             lessonDAO.updateName(request.getParameter("lesson_" + lesson.getId()), lesson.getId());
         }
-
+                 
         if (newLessons != null) {
             for (String string : newLessons) {
-                lessonDAO.add(topic_id, string);
+                lessonDAO.add(topic_id, string, lessonDAO.getMaxPosition(topic_id)+1);
             }
         }
 

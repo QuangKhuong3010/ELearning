@@ -86,7 +86,7 @@
                                     <div class="tgmenu__navbar-wrap tgmenu__main-menu d-none d-xl-flex">
                                         <ul class="navigation">
                                             <li class="button"><a href="HomePage">Home</a></li>
-                                            <li class="button"><a href="Courses">Courses List</a></li>
+                                            <li class="button"><a href="CourseList">Courses List</a></li>
                                             <li class="button"><a href="#">About Us</a></li>
                                                 <c:if test="${sessionScope.account.role_id==4}">
                                                 <li class="menu-item-has-children">
@@ -94,37 +94,50 @@
                                                     <ul class="sub-menu">
                                                         <li><a href="instructor-dashboard.jsp">Dashboard</a></li>
                                                         <li><a href="Profile">Profile</a></li>
-                                                        <li><a href="instructor-enrolled-courses.jsp">Enrolled Courses</a></li>
-                                                        <li><a href="instructor-wishlist.jsp">Wishlist</a></li>
-                                                        <li><a href="instructor-review.jsp">Reviews</a></li>
-                                                        <li><a href="instructor-attempts.jsp">My Quiz Attempts</a></li>
-                                                        <li><a href="instructor-history.jsp">Order History</a></li>
-                                                        <li><a href="instructor-courses.jsp">My Course</a></li>
-                                                        <li><a href="instructor-announcement.jsp">Announcements</a></li>
-                                                        <li><a href="instructor-quiz.jsp">Quiz Attempts</a></li>
-                                                        <li><a href="instructor-assignment.jsp">Assignments</a></li>
-                                                        <li><a href="instructor-setting.jsp">Settings</a></li>
+                                                        <li><a href="CourseEnrolled">Enrolled Courses</a></li>
+                                                        <li><a href="Setting">Settings</a></li>
                                                     </ul>
                                                 </li>
                                             </c:if>
                                             <c:if test="${sessionScope.account.role_id==3}">
-                                                <li class="menu-item-has-children"><a href="student-dashboard.jsp">Dashboard</a>
+                                                <li class="menu-item-has-children">
+                                                    <a href="instructor-dashboard.jsp">Features</a>
                                                     <ul class="sub-menu">
-                                                        <li><a href="student-dashboard.jsp">Dashboard</a></li>
                                                         <li><a href="Profile">Profile</a></li>
-                                                        <li><a href="student-enrolled-courses.jsp">Enrolled Courses</a></li>
-                                                        <li><a href="student-wishlist.jsp">Wishlist</a></li>
-                                                        <li><a href="student-review.jsp">Reviews</a></li>
-                                                        <li><a href="student-attempts.jsp">My Quiz Attempts</a></li>
-                                                        <li><a href="student-history.jsp">Order History</a></li>
-                                                        <li><a href="student-setting.jsp">Settings</a></li>
+                                                        <li><a href="CourseEnrolled">Enrolled Courses</a></li>
+                                                        <li><a href="CourseManager">Course Management</a></li>
+                                                        <li><a href="Setting">Settings</a></li>
+                                                    </ul>
+                                                </li>
+                                            </c:if>
+                                            <c:if test="${sessionScope.account.role_id==2}">
+                                                <li class="menu-item-has-children">
+                                                    <a href="instructor-dashboard.jsp">Features</a>
+                                                    <ul class="sub-menu">
+                                                        <li><a href="Profile">Profile</a></li>
+                                                        <li><a href="CourseEnrolled">Enrolled Courses</a></li>
+                                                        <li><a href="CourseManager">Course Management</a></li>
+                                                        <li><a href="AppointMentor">Appoint Mentor</a></li>
+                                                        <li><a href="Setting">Settings</a></li>
+                                                    </ul>
+                                                </li>
+                                            </c:if>
+                                            <c:if test="${sessionScope.account.role_id==1}">
+                                                <li class="menu-item-has-children">
+                                                    <a href="instructor-dashboard.jsp">Features</a>
+                                                    <ul class="sub-menu">
+                                                        <li><a href="Profile">Profile</a></li>
+                                                        <li><a href="ListUser">List User</a></li>
+                                                        <li><a href="CourseManager">Course Management</a></li>
+                                                        <li><a href="AppointMentorConfirm">Registration Mentor</a></li>
+                                                        <li><a href="Setting">Settings</a></li>
                                                     </ul>
                                                 </li>
                                             </c:if>
                                         </ul>
                                     </div>
                                     <div class="tgmenu__search d-none d-md-block">
-                                        <form action="Courses" class="tgmenu__search-form">
+                                        <form action="CourseList" class="tgmenu__search-form">
                                             <div class="input-grp">
                                                 <input name="search" type="text" placeholder="Search For Course . . .">
                                                 <button type="submit"><i class="flaticon-search"></i></button>
@@ -192,7 +205,7 @@
                             <div class="singUp-wrap">
                                 <h2 class="title">Create New Password</h2>
                                 <p>Enter your new password and confirm it to reset your password.</p>
-                                <form action="ConfirmAccount" method="post" class="account__form">
+                                <form action="OTPConfirm" method="post" class="account__form">
                                     <div class="form-grp">
                                         <label for="password">Type your OTP</label>
                                         <input name="otp" type="otp" id="otp" placeholder="otp">

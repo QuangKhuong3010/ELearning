@@ -46,7 +46,7 @@ public class feedbackDAO extends DBContext {
 
     public ArrayList<Feedback> getFeedbackOnCousre(int course_id) {
         userDAO userDAO = new userDAO();
-        
+
         String sql = "SELECT [id]\n"
                 + "      ,[rating]\n"
                 + "      ,[course_id]\n"
@@ -55,7 +55,8 @@ public class feedbackDAO extends DBContext {
                 + "      ,[title]\n"
                 + "      ,[description]\n"
                 + "  FROM [dbo].[Feedback]\n"
-                + "  WHERE [course_id]=?";
+                + "  WHERE [course_id]=?"
+                + "  ORDER By [created_date] desc";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             st.setInt(1, course_id);
@@ -79,7 +80,7 @@ public class feedbackDAO extends DBContext {
         }
         return null;
     }
-    
+
     public ArrayList<Rating> getRatingBar(int course_id) {
         String sql = "WITH RatingValues AS (\n"
                 + "    SELECT 5 AS rating UNION ALL\n"
@@ -106,7 +107,7 @@ public class feedbackDAO extends DBContext {
             ResultSet rs = st.executeQuery();
             ArrayList<Rating> feedbackList = new ArrayList<>();
             while (rs.next()) {
-                feedbackList.add(new Rating(rs.getInt(1),rs.getInt(2), rs.getInt(2)*100.0/getFeedbackOnCousre(course_id).size()));
+                feedbackList.add(new Rating(rs.getInt(1), rs.getInt(2), rs.getInt(2) * 100.0 / getFeedbackOnCousre(course_id).size()));
             }
             return feedbackList;
         } catch (SQLException e) {
@@ -114,11 +115,26 @@ public class feedbackDAO extends DBContext {
         }
         return null;
     }
-    
-    public static void main(String[] args) {
-        feedbackDAO feedbackDAO = new feedbackDAO();
-        ArrayList rating = feedbackDAO.getRatingBar(1);
-        System.out.println(rating);
+
+    public void add(int rating, int course_id, int created_by, String title, String description) {
+        try {
+            String sql = "INSERT INTO [dbo].[Feedback]\n"
+                    + "           ([rating]\n"
+                    + "           ,[course_id]\n"
+                    + "           ,[created_by]\n"
+                    + "           ,[title]\n"
+                    + "           ,[description])\n"
+                    + "     VALUES\n"
+                    + "           (?,?,?,?,?)";
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, rating);
+            st.setInt(2, course_id);
+            st.setInt(3, created_by);
+            st.setString(4, title);
+            st.setString(5, description);
+            st.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
     }
 }
-

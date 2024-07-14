@@ -51,6 +51,11 @@
                 border: 0px solid var(--tg-common-color-white);
                 padding: 0px;
             }
+            .pdfobject-container {
+                height: 500px;
+                width: 100%;
+                border: 1px solid #ccc;
+            }
         </style>
     </head>
 
@@ -110,7 +115,7 @@
                                     <div class="tgmenu__navbar-wrap tgmenu__main-menu d-none d-xl-flex">
                                         <ul class="navigation">
                                             <li class="button"><a href="HomePage">Home</a></li>
-                                            <li class="button"><a href="Courses">Courses List</a></li>
+                                            <li class="button"><a href="CourseList">Courses List</a></li>
                                             <li class="button"><a href="#">About Us</a></li>
                                                 <c:if test="${sessionScope.account.role_id==4}">
                                                 <li class="menu-item-has-children">
@@ -118,37 +123,50 @@
                                                     <ul class="sub-menu">
                                                         <li><a href="instructor-dashboard.jsp">Dashboard</a></li>
                                                         <li><a href="Profile">Profile</a></li>
-                                                        <li><a href="instructor-enrolled-courses.jsp">Enrolled Courses</a></li>
-                                                        <li><a href="instructor-wishlist.jsp">Wishlist</a></li>
-                                                        <li><a href="instructor-review.jsp">Reviews</a></li>
-                                                        <li><a href="instructor-attempts.jsp">My Quiz Attempts</a></li>
-                                                        <li><a href="instructor-history.jsp">Order History</a></li>
-                                                        <li><a href="instructor-courses.jsp">My Course</a></li>
-                                                        <li><a href="instructor-announcement.jsp">Announcements</a></li>
-                                                        <li><a href="instructor-quiz.jsp">Quiz Attempts</a></li>
-                                                        <li><a href="instructor-assignment.jsp">Assignments</a></li>
-                                                        <li><a href="instructor-setting.jsp">Settings</a></li>
+                                                        <li><a href="CourseEnrolled">Enrolled Courses</a></li>
+                                                        <li><a href="Setting">Settings</a></li>
                                                     </ul>
                                                 </li>
                                             </c:if>
                                             <c:if test="${sessionScope.account.role_id==3}">
-                                                <li class="menu-item-has-children"><a href="student-dashboard.jsp">Dashboard</a>
+                                                <li class="menu-item-has-children">
+                                                    <a href="instructor-dashboard.jsp">Features</a>
                                                     <ul class="sub-menu">
-                                                        <li><a href="student-dashboard.jsp">Dashboard</a></li>
                                                         <li><a href="Profile">Profile</a></li>
-                                                        <li><a href="student-enrolled-courses.jsp">Enrolled Courses</a></li>
-                                                        <li><a href="student-wishlist.jsp">Wishlist</a></li>
-                                                        <li><a href="student-review.jsp">Reviews</a></li>
-                                                        <li><a href="student-attempts.jsp">My Quiz Attempts</a></li>
-                                                        <li><a href="student-history.jsp">Order History</a></li>
-                                                        <li><a href="student-setting.jsp">Settings</a></li>
+                                                        <li><a href="CourseEnrolled">Enrolled Courses</a></li>
+                                                        <li><a href="CourseManager">Course Management</a></li>
+                                                        <li><a href="Setting">Settings</a></li>
+                                                    </ul>
+                                                </li>
+                                            </c:if>
+                                            <c:if test="${sessionScope.account.role_id==2}">
+                                                <li class="menu-item-has-children">
+                                                    <a href="instructor-dashboard.jsp">Features</a>
+                                                    <ul class="sub-menu">
+                                                        <li><a href="Profile">Profile</a></li>
+                                                        <li><a href="CourseEnrolled">Enrolled Courses</a></li>
+                                                        <li><a href="CourseManager">Course Management</a></li>
+                                                        <li><a href="AppointMentor">Appoint Mentor</a></li>
+                                                        <li><a href="Setting">Settings</a></li>
+                                                    </ul>
+                                                </li>
+                                            </c:if>
+                                            <c:if test="${sessionScope.account.role_id==1}">
+                                                <li class="menu-item-has-children">
+                                                    <a href="instructor-dashboard.jsp">Features</a>
+                                                    <ul class="sub-menu">
+                                                        <li><a href="Profile">Profile</a></li>
+                                                        <li><a href="ListUser">List User</a></li>
+                                                        <li><a href="CourseManager">Course Management</a></li>
+                                                        <li><a href="AppointMentorConfirm">Registration Mentor</a></li>
+                                                        <li><a href="Setting">Settings</a></li>
                                                     </ul>
                                                 </li>
                                             </c:if>
                                         </ul>
                                     </div>
                                     <div class="tgmenu__search d-none d-md-block">
-                                        <form action="Courses" class="tgmenu__search-form">
+                                        <form action="CourseList" class="tgmenu__search-form">
                                             <div class="input-grp">
                                                 <input name="search" type="text" placeholder="Search For Course . . .">
                                                 <button type="submit"><i class="flaticon-search"></i></button>
@@ -292,14 +310,14 @@
                                         <div class="dashboard__nav-wrap">
                                             <ul class="nav nav-tabs" id="myTab" role="tablist">
                                                 <li class="nav-item" role="presentation">
-                                                    <button class="nav-link active" id="itemOne-tab" data-bs-toggle="tab" data-bs-target="#itemOne-tab-pane" type="button" role="tab" aria-controls="itemOne-tab-pane" aria-selected="true">Profile</button>
+                                                    <button class="nav-link active" id="itemOne-tab" data-bs-toggle="tab" data-bs-target="#itemOne-tab-pane" type="button" role="tab" aria-controls="itemOne-tab-pane" aria-selected="true">Lesson Edit</button>
                                                 </li>
                                             </ul>
                                         </div>
                                         <div class="tab-content" id="myTabContent">
                                             <div class="tab-pane fade show active" id="itemOne-tab-pane" role="tabpanel" aria-labelledby="itemOne-tab" tabindex="0">
                                                 <div class="instructor__profile-form-wrap">
-                                                    <form action="LessonEdit" method="post" class="instructor__profile-form">
+                                                    <form enctype="multipart/form-data" action="LessonEdit" method="post" class="instructor__profile-form">
                                                         <input hidden name="lesson_id" value="${lesson.id}">
                                                         <div class="row">
                                                             <div class="col-md-12">
@@ -309,8 +327,10 @@
                                                                 </div>
                                                             </div>
                                                         </div>
+                                                        <input name="file" type="file" accept="application/pdf">
+                                                        <div id="my-pdf"></div>
                                                         <div class="form-grp">
-                                                            <label for="bio">Bio</label>
+                                                            <label for="bio">Description</label>
                                                             <textarea name="description" id="bio">${lesson.description}</textarea>
                                                         </div>
                                                         <div class="submit-btn mt-25">
@@ -357,6 +377,8 @@
         <script src="assets/js/wow.min.js"></script>
         <script src="assets/js/aos.js"></script>
         <script src="assets/js/main.js"></script>
+        <script src="https://unpkg.com/pdfobject"></script>
+        <script>PDFObject.embed("${lesson.pdflink}", "#my-pdf");</script>
     </body>
 
 </html>

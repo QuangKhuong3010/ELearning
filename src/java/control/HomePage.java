@@ -70,7 +70,7 @@ public class HomePage extends HttpServlet {
         feedbackDAO feedbackDAO = new feedbackDAO();
         ArrayList<User> listMentee = userDAO.getAllOfRole(4);
         ArrayList<User> listMentor = userDAO.getAllOfRole(3);
-        ArrayList<Course> listCourse = courseDAO.getAllCourse("");
+        ArrayList<Course> listCourse = courseDAO.getAllCourse("", "[created_date]");
         for (Course course : listCourse) {
                 course.setCategory_name(categoryDAO.getNameCategory(course.getCategory_id()));
                 course.setAssign_name(userDAO.findUserName(course.getAssign_by()));

@@ -15,6 +15,8 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import model.User;
+import util.Email;
+import util.generate;
 
 /**
  *
@@ -62,7 +64,14 @@ public class AppointMentorAccept extends HttpServlet {
         userDAO userDAO = new userDAO();
         int id = Integer.parseInt(request.getParameter("id"));
         User user = appointMentorDAO.getAppointbyId(id);
+        generate generate = new generate();
         appointMentorDAO.update(id, "Accepted");
+        if (user.getStatus().equals("Accepted")){
+            String pass = generate.generateString(8);
+            userDAO.createMentorAccount(user, pass);
+            Email sendEmail = new Email();
+            sendEmail.sendEmail(user.getEmail(), pass);
+        }
         response.sendRedirect("AppointMentorConfirm");
     } 
 

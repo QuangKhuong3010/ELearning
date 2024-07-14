@@ -18,7 +18,7 @@ import model.Course;
  */
 public class courseDAO extends DBContext {
 
-    public ArrayList<Course> getAllCourse(String search) {
+    public ArrayList<Course> getAllCourse(String search, String orderBy) {
         String sql = "SELECT [id]\n"
                 + "      ,[managed_by]\n"
                 + "      ,[assign_by]\n"
@@ -32,8 +32,9 @@ public class courseDAO extends DBContext {
                 + "  FROM [dbo].[Course]"
                 + "  WHERE 1=1";
         if (!search.equals("")) {
-            sql += "AND [name] LIKE '%" + search + "%'";
+            sql += "AND [name] LIKE '%" + search + "%' \n ";
         }
+        sql += " order by " + orderBy +" desc";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             ResultSet rs = st.executeQuery();

@@ -39,6 +39,29 @@ public class lessonCompletedDAO extends DBContext {
         }
         return null;
     }
+    
+    public ArrayList<LessonCompleted> getAllLessonCompleted(int user_id) {
+        String sql = "SELECT [id]\n"
+                + "      ,[user_id]\n"
+                + "      ,[lesson_id]\n"
+                + "  FROM [dbo].[LessonCompleted]"
+                + "     WHERE user_id=?";
+        try {
+            ArrayList<LessonCompleted> list = new ArrayList<>();
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, user_id);
+            ResultSet rs = st.executeQuery();
+            while (rs.next()) {
+                list.add(new LessonCompleted(rs.getInt(1),
+                        rs.getInt(2), 
+                        rs.getInt(3))) ;
+            }
+            return list;
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return null;
+    }
 
     public double add(int userId, int lessonId) {
         String sql = "INSERT INTO [dbo].[LessonCompleted]\n"

@@ -72,7 +72,7 @@ public class CourseList extends HttpServlet {
         userDAO userDAO = new userDAO();
         feedbackDAO rateDAO = new feedbackDAO();
         ArrayList<Category> listCategory = categoryDAO.getAllCategory();
-        ArrayList<Course> listCourse = courseDAO.getAllCourse(search);
+        ArrayList<Course> listCourse = courseDAO.getAllCourse(search, "[created_date]");
         if (listCourse.size()==0){
             mess = "Not found!";
         }else{

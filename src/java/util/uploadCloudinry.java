@@ -73,4 +73,23 @@ public class uploadCloudinry {
         }
 
     }
+    
+    public String uploadCloudPDF(HttpServletRequest request, String name) throws IOException, ServletException {
+        Cloudinary cloudinary = new Cloudinary(ObjectUtils.asMap(
+                "cloud_name", "doq5nrr4z",
+                "api_key", "499616597969877",
+                "api_secret", "AfMM5G2bn-p-RSWxpqVb-Sd8_d4",
+                "secure", true));
+        //add single image
+        Part filePart = request.getPart(name);
+        if (filePart != null && filePart.getSize() != 0) {
+            Map uploadResult = cloudinary.uploader().upload(filePart.getInputStream().readAllBytes(),
+                    ObjectUtils.asMap("resource_type", "auto"));
+            String pdf = (String) uploadResult.get("url");
+            return pdf;
+        } else {
+            return null;
+        }
+
+    }
 }

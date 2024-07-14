@@ -80,7 +80,7 @@ public class CourseManager extends HttpServlet {
         ArrayList<Course> listCourse = new ArrayList<>();
         ArrayList<Course> courseManaged = new ArrayList<>();
         if (user.getRole_id() == 1) {
-            listCourse = courseDAO.getAllCourse("");
+            listCourse = courseDAO.getAllCourse("", "[created_date]");
         }
         if (user.getRole_id() == 2) {
             courseManaged = courseDAO.getCourseManagedBy(user.getUser_id());

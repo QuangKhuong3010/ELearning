@@ -9,16 +9,23 @@ import dao.lessonDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import model.Lesson;
+import util.uploadCloudinry;
 
 /**
  *
  * @author Admin
  */
+@MultipartConfig(
+        fileSizeThreshold = 1024 * 1024, // 1 MB
+        maxFileSize = 1024 * 1024 * 5, // 5 MB
+        maxRequestSize = 1024 * 1024 * 10 // 10 MB
+)
 @WebServlet(name="LessonEdit", urlPatterns={"/LessonEdit"})
 public class LessonEdit extends HttpServlet {
    
@@ -60,9 +67,7 @@ public class LessonEdit extends HttpServlet {
         int lessonId=Integer.parseInt(request.getParameter("id"));
         
         lessonDAO lessonDAO = new lessonDAO();
-        
         Lesson lesson = lessonDAO.getLesson(lessonId);
-        
         request.setAttribute("lesson", lesson);
         request.getRequestDispatcher("lessonedit.jsp").forward(request, response);
     } 
@@ -80,11 +85,11 @@ public class LessonEdit extends HttpServlet {
         int lessonId=Integer.parseInt(request.getParameter("lesson_id"));
         String url = request.getParameter("url");
         String description = request.getParameter("description");
-        
+        uploadCloudinry upload = new uploadCloudinry();
+        String pdf = upload.uploadCloudPDF(request, "file");
         lessonDAO lessonDAO = new lessonDAO();
-        lessonDAO.updateInformation(lessonId, url, description);
-        
-        response.sendRedirect("CourseManager");
+        lessonDAO.updateInformation(lessonId, url, pdf, description);
+        response.sendRedirect("LessonEdit?id="+lessonId);
         
     }
 

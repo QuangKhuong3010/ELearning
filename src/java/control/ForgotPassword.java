@@ -88,7 +88,7 @@ public class ForgotPassword extends HttpServlet {
             sendEmail.sendEmail(email, otp);
             response.addCookie(cookieOtp);
             response.addCookie(cookieEmail);
-            response.sendRedirect("ConfirmAccount");
+            response.sendRedirect("OTPConfirm");
         } else {
             request.setAttribute("error", "Email not exist");
             request.getRequestDispatcher("forgotpassword.jsp").forward(request, response);

@@ -169,6 +169,170 @@
                 width: 50px;
                 height: 50px;
             }
+
+            .cursive {
+                font-family: "Pinyon Script", cursive;
+            }
+
+            .sans {
+                font-family: "Open Sans", sans-serif;
+            }
+
+            .bold {
+                font-weight: bold;
+            }
+
+            .block {
+                display: block;
+            }
+
+            .underline {
+                border-bottom: 1px solid #777;
+                padding: 5px;
+                margin-bottom: 15px;
+            }
+
+            .margin-0 {
+                margin: 0;
+            }
+
+            .padding-0 {
+                padding: 0;
+            }
+
+            .pm-empty-space {
+                height: 40px;
+                width: 100%;
+            }
+
+            .pm-certificate-container {
+                position: relative;
+                width: 800px;
+                height: 600px;
+                background-color: #618597;
+                padding: 30px;
+                color: #333;
+                font-family: "Open Sans", sans-serif;
+                box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+                /*background: -webkit-repeating-linear-gradient(
+                  45deg,
+                  #618597,
+                  #618597 1px,
+                  #b2cad6 1px,
+                  #b2cad6 2px
+                );
+                background: repeating-linear-gradient(
+                  90deg,
+                  #618597,
+                  #618597 1px,
+                  #b2cad6 1px,
+                  #b2cad6 2px
+                );*/
+
+                .outer-border {
+                    width: 794px;
+                    height: 594px;
+                    position: absolute;
+                    left: 50%;
+                    margin-left: -397px;
+                    top: 50%;
+                    margin-top: -297px;
+                    border: 2px solid #fff;
+                }
+
+                .inner-border {
+                    width: 730px;
+                    height: 530px;
+                    position: absolute;
+                    left: 50%;
+                    margin-left: -365px;
+                    top: 50%;
+                    margin-top: -265px;
+                    border: 2px solid #fff;
+                }
+
+                .pm-certificate-border {
+                    position: relative;
+                    width: 720px;
+                    height: 520px;
+                    padding: 0;
+                    border: 1px solid #e1e5f0;
+                    background-color: rgba(255, 255, 255, 1);
+                    background-image: none;
+                    left: 50%;
+                    margin-left: -360px;
+                    top: 50%;
+                    margin-top: -260px;
+
+                    .pm-certificate-block {
+                        width: 650px;
+                        height: 200px;
+                        position: relative;
+                        left: 50%;
+                        margin-left: -325px;
+                        top: 70px;
+                        margin-top: 0;
+                    }
+
+                    .pm-certificate-header {
+                        margin-bottom: 10px;
+                    }
+
+                    .pm-certificate-title {
+                        position: relative;
+                        top: 40px;
+
+                        h2 {
+                            font-size: 34px !important;
+                        }
+                    }
+
+                    .pm-certificate-body {
+                        padding: 0px;
+                        .pm-name-text {
+                            font-size: 20px;
+                        }
+                    }
+
+                    .pm-earned {
+                        margin: 15px 0 20px;
+                        .pm-earned-text {
+                            font-size: 20px;
+                        }
+                        .pm-credits-text {
+                            font-size: 15px;
+                        }
+                    }
+
+                    .pm-course-title {
+                        .pm-earned-text {
+                            font-size: 20px;
+                        }
+                        .pm-credits-text {
+                            font-size: 15px;
+                        }
+                    }
+
+                    .pm-certified {
+                        font-size: 12px;
+
+                        .underline {
+                            margin-bottom: 5px;
+                        }
+                    }
+
+                    .pm-certificate-footer {
+                        width: 650px;
+                        height: 100px;
+                        position: relative;
+                        left: 50%;
+                        margin-left: -325px;
+                        bottom: -105px;
+                    }
+                }
+            }
+
+
         </style>
 
     </head>
@@ -229,7 +393,7 @@
                                     <div class="tgmenu__navbar-wrap tgmenu__main-menu d-none d-xl-flex">
                                         <ul class="navigation">
                                             <li class="button"><a href="HomePage">Home</a></li>
-                                            <li class="button"><a href="Courses">Courses List</a></li>
+                                            <li class="button"><a href="CourseList">Courses List</a></li>
                                             <li class="button"><a href="#">About Us</a></li>
                                                 <c:if test="${sessionScope.account.role_id==4}">
                                                 <li class="menu-item-has-children">
@@ -237,37 +401,50 @@
                                                     <ul class="sub-menu">
                                                         <li><a href="instructor-dashboard.jsp">Dashboard</a></li>
                                                         <li><a href="Profile">Profile</a></li>
-                                                        <li><a href="instructor-enrolled-courses.jsp">Enrolled Courses</a></li>
-                                                        <li><a href="instructor-wishlist.jsp">Wishlist</a></li>
-                                                        <li><a href="instructor-review.jsp">Reviews</a></li>
-                                                        <li><a href="instructor-attempts.jsp">My Quiz Attempts</a></li>
-                                                        <li><a href="instructor-history.jsp">Order History</a></li>
-                                                        <li><a href="instructor-courses.jsp">My Course</a></li>
-                                                        <li><a href="instructor-announcement.jsp">Announcements</a></li>
-                                                        <li><a href="instructor-quiz.jsp">Quiz Attempts</a></li>
-                                                        <li><a href="instructor-assignment.jsp">Assignments</a></li>
-                                                        <li><a href="instructor-setting.jsp">Settings</a></li>
+                                                        <li><a href="CourseEnrolled">Enrolled Courses</a></li>
+                                                        <li><a href="Setting">Settings</a></li>
                                                     </ul>
                                                 </li>
                                             </c:if>
                                             <c:if test="${sessionScope.account.role_id==3}">
-                                                <li class="menu-item-has-children"><a href="student-dashboard.jsp">Dashboard</a>
+                                                <li class="menu-item-has-children">
+                                                    <a href="instructor-dashboard.jsp">Features</a>
                                                     <ul class="sub-menu">
-                                                        <li><a href="student-dashboard.jsp">Dashboard</a></li>
                                                         <li><a href="Profile">Profile</a></li>
-                                                        <li><a href="student-enrolled-courses.jsp">Enrolled Courses</a></li>
-                                                        <li><a href="student-wishlist.jsp">Wishlist</a></li>
-                                                        <li><a href="student-review.jsp">Reviews</a></li>
-                                                        <li><a href="student-attempts.jsp">My Quiz Attempts</a></li>
-                                                        <li><a href="student-history.jsp">Order History</a></li>
-                                                        <li><a href="student-setting.jsp">Settings</a></li>
+                                                        <li><a href="CourseEnrolled">Enrolled Courses</a></li>
+                                                        <li><a href="CourseManager">Course Management</a></li>
+                                                        <li><a href="Setting">Settings</a></li>
+                                                    </ul>
+                                                </li>
+                                            </c:if>
+                                            <c:if test="${sessionScope.account.role_id==2}">
+                                                <li class="menu-item-has-children">
+                                                    <a href="instructor-dashboard.jsp">Features</a>
+                                                    <ul class="sub-menu">
+                                                        <li><a href="Profile">Profile</a></li>
+                                                        <li><a href="CourseEnrolled">Enrolled Courses</a></li>
+                                                        <li><a href="CourseManager">Course Management</a></li>
+                                                        <li><a href="AppointMentor">Appoint Mentor</a></li>
+                                                        <li><a href="Setting">Settings</a></li>
+                                                    </ul>
+                                                </li>
+                                            </c:if>
+                                            <c:if test="${sessionScope.account.role_id==1}">
+                                                <li class="menu-item-has-children">
+                                                    <a href="instructor-dashboard.jsp">Features</a>
+                                                    <ul class="sub-menu">
+                                                        <li><a href="Profile">Profile</a></li>
+                                                        <li><a href="ListUser">List User</a></li>
+                                                        <li><a href="CourseManager">Course Management</a></li>
+                                                        <li><a href="AppointMentorConfirm">Registration Mentor</a></li>
+                                                        <li><a href="Setting">Settings</a></li>
                                                     </ul>
                                                 </li>
                                             </c:if>
                                         </ul>
                                     </div>
                                     <div class="tgmenu__search d-none d-md-block">
-                                        <form action="Courses" class="tgmenu__search-form">
+                                        <form action="CourseList" class="tgmenu__search-form">
                                             <div class="input-grp">
                                                 <input name="search" type="text" placeholder="Search For Course . . .">
                                                 <button type="submit"><i class="flaticon-search"></i></button>
@@ -451,7 +628,6 @@
                                             <div class="courses__instructors-content">
                                                 <h2 class="title">${manager.first_name} ${manager.last_name}</h2>
                                                 <span class="designation">${manager.organization_name}</span>
-                                                <p class="avg-rating"><i class="fas fa-star"></i>(4.8 Ratings)</p>
                                                 <p>${manager.description}</p>
                                             </div>
                                         </div>
@@ -514,10 +690,11 @@
                         </div>
                         <div class="col-xl-3 col-lg-4">
                             <div class="courses__details-sidebar">
-                                <div class="courses__details-video">
-                                    <img src="assets/img/courses/course_thumb02.jpg" alt="img">
-                                    <a href="https://www.youtube.com/watch?v=YwrHGratByU" class="popup-video"><i class="fas fa-play"></i></a>
-                                </div>
+                                <c:if test="${certificate!=null}">
+                                    <div class="courses__details-video">
+                                        <img data-bs-toggle="modal" data-bs-target="#certificate" src="https://media.istockphoto.com/id/1136599028/vector/approved-accept-or-certified-icon-medal-with-ribbons-and-check-mark.jpg?s=612x612&w=0&k=20&c=IC-nXrym1xLky-27vFgBIgSR2QBg_-KMCAua9y2c7qs=" alt="img">
+                                    </div>
+                                </c:if>
                                 <div class="courses__cost-wrap">
                                     <span>This Course Fee:</span>
                                     <h2 class="title">${course.price}00 vnd </h2>
@@ -553,7 +730,7 @@
                                     </ul>
                                 </div>
                                 <div class="courses__details-enroll">
-                                    <c:if test="${purchased==null && sessionScope.account!=null}">
+                                    <c:if test="${purchased!=null && sessionScope.account!=null}">
                                         <div class="tg-button-wrap">
                                             <button id="btnDatHang" class="shopee-button-solid shopee-button-solid--primary">
                                                 <a href="LessonDetails?course_id=${course.id}&lesson_id=first_lesson" class="btn arrow-btn" class="cart-final--bottom-checkout--btn btnDatHang">Enroll</a>
@@ -561,10 +738,10 @@
                                         </div>
                                     </c:if>
 
-                                    <c:if test="${purchased!=null && sessionScope.account!=null}">
+                                    <c:if test="${purchased==null && sessionScope.account!=null}">
                                         <div class="tg-button-wrap">
                                             <button id="btnDatHang" class="shopee-button-solid shopee-button-solid--primary" data-bs-toggle="modal" data-bs-target="#paymentMethod">
-                                                <a  class="btn arrow-btn" class="cart-final--bottom-checkout--btn btnDatHang">Payment</a>
+                                                <a class="btn arrow-btn" class="cart-final--bottom-checkout--btn btnDatHang">Payment</a>
                                             </button>
                                         </div>
                                     </c:if>
@@ -636,7 +813,92 @@
         </main>
         <!-- main-area-end -->
 
+        <div class="modal fade" id="certificate" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-xl">
+                <div class="modal-body" style="width:800px">
+                    <div class="container pm-certificate-container">
+                        <div class="outer-border"></div>
+                        <div class="inner-border"></div>
 
+                        <div class="pm-certificate-border col-xs-12">
+                            <div class="row pm-certificate-header">
+                                <div class="pm-certificate-title cursive col-xs-12 text-center">
+                                    <h2>${course.name}</h2>
+                                </div>
+                            </div>
+
+                            <div class="row pm-certificate-body">
+
+                                <div class="pm-certificate-block">
+                                    <div class="col-xs-12">
+                                        <div class="row">
+                                            <div class="col-xs-2"><!-- LEAVE EMPTY --></div>
+                                            <div class="pm-certificate-name underline margin-0 col-xs-8 text-center">
+                                                <span class="pm-name-text bold">KayTea ELearning</span>
+                                            </div>
+                                            <div class="col-xs-2"><!-- LEAVE EMPTY --></div>
+                                        </div>
+                                    </div>          
+
+                                    <div class="col-xs-12">
+                                        <div class="row">
+                                            <div class="col-xs-2"><!-- LEAVE EMPTY --></div>
+                                            <div class="pm-earned col-xs-8 text-center">
+                                                <span class="pm-earned-text padding-0 block cursive">${sessionScope.account.first_name}  ${sessionScope.account.last_name} has earned</span>
+                                                <span class="pm-credits-text block bold sans">${course.level_name} Course</span>
+                                            </div>
+                                            <div class="col-xs-2"><!-- LEAVE EMPTY --></div>
+                                            <div class="col-xs-12"></div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xs-12">
+                                        <div class="row">
+                                            <div class="col-xs-2"><!-- LEAVE EMPTY --></div>
+                                            <div class="pm-course-title col-xs-8 text-center">
+                                                <span class="pm-earned-text block cursive">while completing the training course entitled</span>
+                                            </div>
+                                            <div class="col-xs-2"><!-- LEAVE EMPTY --></div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xs-12">
+                                        <div class="row">
+                                            <div class="col-xs-2"><!-- LEAVE EMPTY --></div>
+                                            <div class="pm-course-title underline col-xs-8 text-center">
+                                                <span class="pm-credits-text block bold sans"></span>
+                                            </div>
+                                            <div class="col-xs-2"><!-- LEAVE EMPTY --></div>
+                                        </div>
+                                    </div>
+                                </div>       
+
+                                <div class="col-xs-12">
+                                    <div class="row">
+                                        <div class="pm-certificate-footer">
+                                            <div class="col-xs-4 pm-certified col-xs-4 text-center">
+                                                <span class="pm-credits-text block bold sans">Authorized by ${manager.organization_name}</span>
+                                                <span class="pm-empty-space block underline"></span>
+                                                <span class="bold block"></span>
+                                            </div>
+                                            <div class="col-xs-4">
+                                                <!-- LEAVE EMPTY -->
+                                            </div>
+                                            <div class="col-xs-4 pm-certified col-xs-4 text-center">
+                                                <span class="pm-credits-text block sans">Date Completed: ${certificate.created_date}</span>
+                                                <span class="pm-empty-space block underline"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>  
+            </div>
+        </div>
 
 
 
@@ -730,7 +992,7 @@
                 }
             }
 
-            const btnDatHang = document.querySelector(".btnDatHang");
+            const btnDatHang = document.querySelector("#btnDatHang");
             btnDatHang.addEventListener("click", () => {
                 intervalId = setInterval(() => {
                     checkPaid(${course.price}, '${code}');
@@ -747,7 +1009,7 @@
                             icon: 'success',
                             timer: 3000,
                         }).then(function () {
-                            window.location = "home";
+                            window.location = "CourseDetails?id=${course.id}";
                         })
                     } else {
                         Swal.fire({
@@ -779,6 +1041,8 @@
         <script>
             const player = new Plyr('#player');
         </script>
+
+
     </body>
 
 </html>

@@ -19,7 +19,7 @@ import jakarta.servlet.http.HttpServletResponse;
  * @author Quangkhuong3010
  *
  */
-@WebServlet(name = "ConfirmAccount", urlPatterns = {"/ConfirmAccount"})
+@WebServlet(name = "OTPConfirm", urlPatterns = {"/OTPConfirm"})
 public class OTPConfirm extends HttpServlet {
 
     /**
@@ -60,7 +60,7 @@ public class OTPConfirm extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("confirmaccount.jsp").forward(request, response);
+        request.getRequestDispatcher("confirmotp.jsp").forward(request, response);
     }
 
     /**
@@ -97,11 +97,11 @@ public class OTPConfirm extends HttpServlet {
         if (!otp.equals(cotp)) {
             mess = "The otp you entered is incorrect";
             request.setAttribute("mess", mess);
-            request.getRequestDispatcher("confirmaccount.jsp").forward(request, response);
+            request.getRequestDispatcher("confirmotp.jsp").forward(request, response);
         } else if (!pass.equals(repass)) {
             mess = "Password and Confirm password not match";
             request.setAttribute("mess", mess);
-            request.getRequestDispatcher("confirmaccount.jsp").forward(request, response);
+            request.getRequestDispatcher("confirmotp.jsp").forward(request, response);
         } else {
             user.updateNewPassword(user.findUserId(email), pass);
             response.sendRedirect("Login");
