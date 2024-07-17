@@ -339,14 +339,6 @@
 
     <body>
 
-        <!--Preloader-->
-        <div id="preloader">
-            <div id="loader" class="loader">
-                <div class="loader-container">
-                    <div class="loader-icon"><img src="assets/img/logo/preloader.svg" alt="Preloader"></div>
-                </div>
-            </div>
-        </div>
         <!--Preloader-end -->
 
         <!-- Scroll-top -->
@@ -399,7 +391,6 @@
                                                 <li class="menu-item-has-children">
                                                     <a href="instructor-dashboard.jsp">Features</a>
                                                     <ul class="sub-menu">
-                                                        <li><a href="instructor-dashboard.jsp">Dashboard</a></li>
                                                         <li><a href="Profile">Profile</a></li>
                                                         <li><a href="CourseEnrolled">Enrolled Courses</a></li>
                                                         <li><a href="Setting">Settings</a></li>
@@ -433,7 +424,6 @@
                                                 <li class="menu-item-has-children">
                                                     <a href="instructor-dashboard.jsp">Features</a>
                                                     <ul class="sub-menu">
-                                                        <li><a href="Profile">Profile</a></li>
                                                         <li><a href="ListUser">List User</a></li>
                                                         <li><a href="CourseManager">Course Management</a></li>
                                                         <li><a href="AppointMentorConfirm">Registration Mentor</a></li>

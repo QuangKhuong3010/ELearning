@@ -93,7 +93,6 @@
                                                 <li class="menu-item-has-children">
                                                     <a href="instructor-dashboard.jsp">Features</a>
                                                     <ul class="sub-menu">
-                                                        <li><a href="instructor-dashboard.jsp">Dashboard</a></li>
                                                         <li><a href="Profile">Profile</a></li>
                                                         <li><a href="CourseEnrolled">Enrolled Courses</a></li>
                                                         <li><a href="Setting">Settings</a></li>
@@ -127,7 +126,6 @@
                                                 <li class="menu-item-has-children">
                                                     <a href="instructor-dashboard.jsp">Features</a>
                                                     <ul class="sub-menu">
-                                                        <li><a href="Profile">Profile</a></li>
                                                         <li><a href="ListUser">List User</a></li>
                                                         <li><a href="CourseManager">Course Management</a></li>
                                                         <li><a href="AppointMentorConfirm">Registration Mentor</a></li>
@@ -195,16 +193,16 @@
                                 <div class="content">
                                     <h4 class="title">${user.first_name} ${user.last_name}</h4>
                                     <c:if test="${sessionScope.account.role_id==3}">
-                                    <div class="review__wrap review__wrap-two">
-                                        <div class="rating">
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
+                                        <div class="review__wrap review__wrap-two">
+                                            <div class="rating">
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                            </div>
+                                            <span>(15 Reviews)</span>
                                         </div>
-                                        <span>(15 Reviews)</span>
-                                    </div>
                                     </c:if>
                                     <ul class="list-wrap">
                                         <li>
@@ -231,83 +229,81 @@
                                 <div class="dashboard__sidebar-title mb-20">
                                     <h6 class="title">Welcome, ${user.first_name} ${user.last_name}</h6>
                                 </div>
-                                <nav class="dashboard__sidebar-menu">
-                                    <ul class="list-wrap">
-                                        <li>
-                                            <a href="instructor-dashboard.html">
-                                                <i class="fas fa-home"></i>
-                                                Dashboard
-                                            </a>
-                                        </li>
-                                        <li class="active">
-                                            <a href="instructor-profile.html">
-                                                <i class="skillgro-avatar"></i>
-                                                My Profile
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="instructor-enrolled-courses.html">
-                                                <i class="skillgro-book"></i>
-                                                Enrolled Courses
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="instructor-wishlist.html">
-                                                <i class="skillgro-label"></i>
-                                                Wishlist
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="instructor-review.html">
-                                                <i class="skillgro-book-2"></i>
-                                                Reviews
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="instructor-attempts.html">
-                                                <i class="skillgro-question"></i>
-                                                My Quiz Attempts
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="instructor-history.html">
-                                                <i class="skillgro-satchel"></i>
-                                                Order History
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </nav>
-                                <div class="dashboard__sidebar-title mt-40 mb-20">
-                                    <h6 class="title">INSTRUCTOR</h6>
-                                </div>
-                                <nav class="dashboard__sidebar-menu">
-                                    <ul class="list-wrap">
-                                        <li>
-                                            <a href="instructor-courses.html">
-                                                <i class="skillgro-video-tutorial"></i>
-                                                My Courses
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="instructor-announcement.html">
-                                                <i class="skillgro-marketing"></i>
-                                                Announcements
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="instructor-quiz.html">
-                                                <i class="skillgro-chat"></i>
-                                                Quiz Attempts
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="instructor-assignment.html">
-                                                <i class="skillgro-list"></i>
-                                                Assignments
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </nav>
+                                <c:if test="${sessionScope.account.role_id!=1}">
+                                    <nav class="dashboard__sidebar-menu">
+                                        <ul class="list-wrap">
+                                            <li class="active">
+                                                <a href="Profile">
+                                                    <i class="skillgro-avatar"></i>
+                                                    My Profile
+                                                </a>
+                                            </li>
+
+                                            <li>
+                                                <a href="CourseEnrolled">
+                                                    <i class="skillgro-book"></i>
+                                                    Enrolled Courses
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </nav>
+                                </c:if>
+                                <c:if test="${sessionScope.account.role_id==1}">
+                                    <div class="dashboard__sidebar-title mt-40 mb-20">
+                                        <h6 class="title">Administration</h6>
+                                    </div>
+                                    <nav class="dashboard__sidebar-menu">
+                                        <ul class="list-wrap">
+                                            <li>
+                                                <a href="ListUser">
+                                                    <i class="skillgro-avatar"></i>
+                                                    User Management
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="instructor-announcement.html">
+                                                    <i class="skillgro-marketing"></i>
+                                                    Announcements
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="CourseManager">
+                                                    <i class="skillgro-book"></i>
+                                                    Course Management
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="AppointMentor">
+                                                    <i class="skillgro-book"></i>
+                                                    Appoint Mentor List
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </nav>
+                                </c:if>
+                                <c:if test="${(sessionScope.account.role_id==3) || (sessionScope.account.role_id==2)}">
+                                    <div class="dashboard__sidebar-title mt-40 mb-20">
+                                        <h6 class="title">Management</h6>
+                                    </div>
+                                    <nav class="dashboard__sidebar-menu">
+                                        <ul class="list-wrap">
+                                            <li>
+                                                <a href="CourseManager">
+                                                    <i class="skillgro-video-tutorial"></i>
+                                                    Courses Management
+                                                </a>
+                                            </li>
+                                            <c:if test="${sessionScope.account.role_id==2}">
+                                            <li>
+                                                <a href="AppointMentor">
+                                                    <i class="skillgro-chat"></i>
+                                                    Appoint Mentor List
+                                                </a>
+                                            </li>
+                                            </c:if>
+                                        </ul>
+                                    </nav>
+                                </c:if>
                                 <div class="dashboard__sidebar-title mt-30 mb-20">
                                     <h6 class="title">User</h6>
                                 </div>
@@ -317,12 +313,6 @@
                                             <a href="Setting">
                                                 <i class="skillgro-settings"></i>
                                                 Settings
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="index.html">
-                                                <i class="skillgro-logout"></i>
-                                                Logout
                                             </a>
                                         </li>
                                     </ul>

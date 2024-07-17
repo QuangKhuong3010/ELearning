@@ -110,7 +110,7 @@ public class MarkAsDone extends HttpServlet {
             lessonOnCourse.addAll(lessonDAO.getLessonOnTopic(topic.getId()));
         }
 
-        if (!listCompleted.containsAll(lessonOnCourse)) {
+        if (listCompleted.containsAll(lessonOnCourse)) {
             purchasedDAO.markAsDone(user.getUser_id(), course.getId());
             if(certificateDAO.getCertificate(user.getUser_id(),course.getId())==null){
                 certificateDAO.createCertificate(user.getUser_id(), course.getId());

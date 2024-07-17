@@ -146,7 +146,6 @@
                                                 <li class="menu-item-has-children">
                                                     <a href="instructor-dashboard.jsp">Features</a>
                                                     <ul class="sub-menu">
-                                                        <li><a href="instructor-dashboard.jsp">Dashboard</a></li>
                                                         <li><a href="Profile">Profile</a></li>
                                                         <li><a href="CourseEnrolled">Enrolled Courses</a></li>
                                                         <li><a href="Setting">Settings</a></li>
@@ -180,7 +179,6 @@
                                                 <li class="menu-item-has-children">
                                                     <a href="instructor-dashboard.jsp">Features</a>
                                                     <ul class="sub-menu">
-                                                        <li><a href="Profile">Profile</a></li>
                                                         <li><a href="ListUser">List User</a></li>
                                                         <li><a href="CourseManager">Course Management</a></li>
                                                         <li><a href="AppointMentorConfirm">Registration Mentor</a></li>
@@ -240,93 +238,80 @@
             <section class="dashboard__area section-pb-120">
                 <div class="container">
                     <div class="dashboard__top-wrap">
-                        <div class="dashboard__top-bg" data-background="assets/img/bg/instructor_dashboard_bg.jpg"></div>
+                        <div class="dashboard__top-bg" data-background="${user.backgroup}"></div>
                         <div class="dashboard__instructor-info">
                             <div class="dashboard__instructor-info-left">
                                 <div class="thumb">
-                                    <img src="assets/img/courses/details_instructors01.jpg" alt="img">
+                                    <img src="${user.avatar}" alt="img">
                                 </div>
                                 <div class="content">
-                                    <h4 class="title">John Due</h4>
-                                    <div class="review__wrap review__wrap-two">
-                                        <div class="rating">
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
+                                    <h4 class="title">${user.first_name} ${user.last_name}</h4>
+                                    <c:if test="${sessionScope.account.role_id==3}">
+                                        <div class="review__wrap review__wrap-two">
+                                            <div class="rating">
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                            </div>
+                                            <span>(15 Reviews)</span>
                                         </div>
-                                        <span>(15 Reviews)</span>
-                                    </div>
+                                    </c:if>
+                                    <ul class="list-wrap">
+                                        <li>
+                                            <img src="assets/img/icons/course_icon03.svg" alt="img" class="injectable">
+                                            ${user.quantityCourseLearning} Courses Enrolled
+                                        </li>
+                                        <li>
+                                            <img src="assets/img/icons/course_icon05.svg" alt="img" class="injectable">
+                                            ? Certificate
+                                        </li>
+                                    </ul>
                                 </div>
                             </div>
-                            <div class="dashboard__instructor-info-right">
-                                <a href="#" class="btn btn-two arrow-btn">Create a New Course <img src="assets/img/icons/right_arrow.svg" alt="img" class="injectable"></a>
-                            </div>
+                            <c:if test="${sessionScope.account.role_id==3}">
+                                <div>
+                                    <a href="CreateCourse" class="btn btn-two arrow-btn">Create a New Course <img src="assets/img/icons/right_arrow.svg" alt="img" class="injectable"></a>
+                                </div>
+                            </c:if>
                         </div>
                     </div>
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-lg-3">
-                                <div class="dashboard__sidebar-wrap">
-                                    <div class="dashboard__sidebar-title mb-20">
-                                        <h6 class="title">Welcome, Jone Due</h6>
-                                    </div>
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <div class="dashboard__sidebar-wrap">
+                                <div class="dashboard__sidebar-title mb-20">
+                                    <h6 class="title">Welcome, ${user.first_name} ${user.last_name}</h6>
+                                </div>
+                                <c:if test="${sessionScope.account.role_id!=1}">
                                     <nav class="dashboard__sidebar-menu">
                                         <ul class="list-wrap">
                                             <li>
-                                                <a href="instructor-dashboard.html">
-                                                    <i class="fas fa-home"></i>
-                                                    Dashboard
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="instructor-profile.html">
+                                                <a href="Profile">
                                                     <i class="skillgro-avatar"></i>
                                                     My Profile
                                                 </a>
                                             </li>
+
                                             <li>
-                                                <a href="instructor-enrolled-courses.html">
+                                                <a href="CourseEnrolled">
                                                     <i class="skillgro-book"></i>
                                                     Enrolled Courses
                                                 </a>
                                             </li>
-                                            <li>
-                                                <a href="instructor-wishlist.html">
-                                                    <i class="skillgro-label"></i>
-                                                    Wishlist
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="instructor-review.html">
-                                                    <i class="skillgro-book-2"></i>
-                                                    Reviews
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="instructor-attempts.html">
-                                                    <i class="skillgro-question"></i>
-                                                    My Quiz Attempts
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="instructor-history.html">
-                                                    <i class="skillgro-satchel"></i>
-                                                    Order History
-                                                </a>
-                                            </li>
                                         </ul>
                                     </nav>
+                                </c:if>
+                                <c:if test="${sessionScope.account.role_id==1}">
                                     <div class="dashboard__sidebar-title mt-40 mb-20">
-                                        <h6 class="title">INSTRUCTOR</h6>
+                                        <h6 class="title">Administration</h6>
                                     </div>
                                     <nav class="dashboard__sidebar-menu">
                                         <ul class="list-wrap">
-                                            <li class="active">
-                                                <a href="instructor-courses.html">
-                                                    <i class="skillgro-video-tutorial"></i>
-                                                    My Courses
+                                            <li>
+                                                <a href="ListUser">
+                                                    <i class="skillgro-avatar"></i>
+                                                    User Management
                                                 </a>
                                             </li>
                                             <li>
@@ -335,191 +320,208 @@
                                                     Announcements
                                                 </a>
                                             </li>
-                                            <li>
-                                                <a href="instructor-quiz.html">
-                                                    <i class="skillgro-chat"></i>
-                                                    Quiz Attempts
+                                            <li  class="active">
+                                                <a href="CourseManager">
+                                                    <i class="skillgro-book"></i>
+                                                    Course Management
                                                 </a>
                                             </li>
                                             <li>
-                                                <a href="instructor-assignment.html">
-                                                    <i class="skillgro-list"></i>
-                                                    Assignments
+                                                <a href="AppointMentor">
+                                                    <i class="skillgro-book"></i>
+                                                    Appoint Mentor List
                                                 </a>
                                             </li>
                                         </ul>
                                     </nav>
-                                    <div class="dashboard__sidebar-title mt-30 mb-20">
-                                        <h6 class="title">User</h6>
+                                </c:if>
+                                <c:if test="${(sessionScope.account.role_id==3) || (sessionScope.account.role_id==2)}">
+                                    <div class="dashboard__sidebar-title mt-40 mb-20">
+                                        <h6 class="title">Management</h6>
                                     </div>
                                     <nav class="dashboard__sidebar-menu">
                                         <ul class="list-wrap">
                                             <li>
-                                                <a href="instructor-setting.html">
-                                                    <i class="skillgro-settings"></i>
-                                                    Settings
+                                                <a href="CourseManager">
+                                                    <i class="skillgro-video-tutorial"></i>
+                                                    Courses Management
                                                 </a>
                                             </li>
+                                            <c:if test="${sessionScope.account.role_id==2}">
                                             <li>
-                                                <a href="index.html">
-                                                    <i class="skillgro-logout"></i>
-                                                    Logout
+                                                <a href="AppointMentor">
+                                                    <i class="skillgro-chat"></i>
+                                                    Appoint Mentor List
                                                 </a>
                                             </li>
+                                            </c:if>
                                         </ul>
                                     </nav>
+                                </c:if>
+                                <div class="dashboard__sidebar-title mt-30 mb-20">
+                                    <h6 class="title">User</h6>
                                 </div>
+                                <nav class="dashboard__sidebar-menu">
+                                    <ul class="list-wrap">
+                                        <li>
+                                            <a href="Setting">
+                                                <i class="skillgro-settings"></i>
+                                                Settings
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </nav>
                             </div>
-                            <div class="col-lg-9">
-                                <div class="dashboard__content-wrap">
-                                    <div class="dashboard__content-title">
-                                        <h4 class="title">${course.name}</h4>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-lg-12">
-                                            <div class="dashboard__nav-wrap">
-                                                <ul class="nav nav-tabs" id="myTab" role="tablist">
-                                                    <li class="nav-item" role="presentation">
-                                                        <button class="nav-link active" id="itemOne-tab" data-bs-toggle="tab" data-bs-target="#itemOne-tab-pane" type="button" role="tab" aria-controls="itemOne-tab-pane" aria-selected="true">Edit Information</button>
-                                                    </li>
-                                                    <li class="nav-item" role="presentation">
-                                                        <button class="nav-link" id="itemTwo-tab" data-bs-toggle="tab" data-bs-target="#itemTwo-tab-pane" type="button" role="tab" aria-controls="itemTwo-tab-pane" aria-selected="false">Edit Curriculum</button>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="tab-content" id="myTabContent">
-                                                <div class="tab-pane fade show active" id="itemOne-tab-pane" role="tabpanel" aria-labelledby="itemOne-tab" tabindex="0">
-                                                    <form enctype="multipart/form-data" action="CourseEdit" method="post" class="instructor__profile-form">
-                                                        <input type="hidden" name="course_id" value="${course.id}">
-                                                        <div upload-image-preview1 class="instructor__cover-bg" data-background="${course.avatar}" >
-                                                            <div class="instructor__cover-info">
-                                                                <div class="instructor__cover-info-right">
-                                                                    <a onclick="triggerFileInput1()" data-btn-file-trigger="#fileImport1" class="btn btn-two arrow-btn">Edit Cover Photo</a>
-                                                                </div>
+                        </div>
+                        <div class="col-lg-9">
+                            <div class="dashboard__content-wrap">
+                                <div class="dashboard__content-title">
+                                    <h4 class="title">${course.name}</h4>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="dashboard__nav-wrap">
+                                            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                                <li class="nav-item" role="presentation">
+                                                    <button class="nav-link active" id="itemOne-tab" data-bs-toggle="tab" data-bs-target="#itemOne-tab-pane" type="button" role="tab" aria-controls="itemOne-tab-pane" aria-selected="true">Edit Information</button>
+                                                </li>
+                                                <li class="nav-item" role="presentation">
+                                                    <button class="nav-link" id="itemTwo-tab" data-bs-toggle="tab" data-bs-target="#itemTwo-tab-pane" type="button" role="tab" aria-controls="itemTwo-tab-pane" aria-selected="false">Edit Curriculum</button>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="tab-content" id="myTabContent">
+                                            <div class="tab-pane fade show active" id="itemOne-tab-pane" role="tabpanel" aria-labelledby="itemOne-tab" tabindex="0">
+                                                <form enctype="multipart/form-data" action="CourseEdit" method="post" class="instructor__profile-form">
+                                                    <input type="hidden" name="course_id" value="${course.id}">
+                                                    <div upload-image-preview1 class="instructor__cover-bg" data-background="${course.avatar}" >
+                                                        <div class="instructor__cover-info">
+                                                            <div class="instructor__cover-info-right">
+                                                                <a onclick="triggerFileInput1()" data-btn-file-trigger="#fileImport1" class="btn btn-two arrow-btn">Edit Cover Photo</a>
                                                             </div>
                                                         </div>
-                                                        <div class="instructor__profile-form-wrap">
-                                                            <div class="row">                                                      
-                                                                <div class="col-md-8">
-                                                                    <div class="form-grp">
-                                                                        <label for="username">Course Name</label>
-                                                                        <input name="name" id="username" type="text" value="${course.name}" readonly >
+                                                    </div>
+                                                    <div class="instructor__profile-form-wrap">
+                                                        <div class="row">                                                      
+                                                            <div class="col-md-8">
+                                                                <div class="form-grp">
+                                                                    <label for="username">Course Name</label>
+                                                                    <input name="name" id="username" type="text" value="${course.name}" readonly >
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-2">
+                                                                <div class="form-grp">
+                                                                    <label for="price">Price</label>
+                                                                    <input name="price" id="price" type="text" value="${course.price}" required>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-2">
+                                                                <div class="form-grp">
+                                                                    <label for="managed_by">Managed_by</label>
+                                                                    <div class="courses-top-right-select">
+                                                                        <select name="managed_by" class="managed_by">
+                                                                            <option value="default" disabled selected>${course.managed_name}</option>
+                                                                        </select>
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-md-2">
-                                                                    <div class="form-grp">
-                                                                        <label for="price">Price</label>
-                                                                        <input name="price" id="price" type="text" value="${course.price}" required>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-md-2">
-                                                                    <div class="form-grp">
-                                                                        <label for="managed_by">Managed_by</label>
-                                                                        <div class="courses-top-right-select">
-                                                                            <select name="managed_by" class="managed_by">
-                                                                                <option value="default" disabled selected>${course.managed_name}</option>
-                                                                            </select>
-                                                                        </div>
-                                                                    </div>
 
+                                                            </div>
+                                                            <div class="col-md-10">
+                                                                <div class="form-grp">
+                                                                    <label for="bio">Description</label>
+                                                                    <textarea name="description" id="bio" value="$">${course.description}</textarea>
                                                                 </div>
-                                                                <div class="col-md-10">
-                                                                    <div class="form-grp">
-                                                                        <label for="bio">Description</label>
-                                                                        <textarea name="description" id="bio" value="$">${course.description}</textarea>
+                                                            </div>
+                                                            <div class="col-md-2">
+                                                                <div class="form-grp">
+                                                                    <label for="category">Category</label>
+                                                                    <div class="courses-top-right-select">
+                                                                        <select name="category" class="category">
+                                                                            <option value="default" disabled selected>Category</option>
+                                                                            <c:forEach items="${category}" var="c">
+                                                                                <option value="${c.id}" <c:if test="${c.id == course.category_id}">selected</c:if>> ${c.name}</option>
+                                                                            </c:forEach>
+                                                                        </select>
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-md-2">
-                                                                    <div class="form-grp">
-                                                                        <label for="category">Category</label>
-                                                                        <div class="courses-top-right-select">
-                                                                            <select name="category" class="category">
-                                                                                <option value="default" disabled selected>Category</option>
-                                                                                <c:forEach items="${category}" var="c">
-                                                                                    <option value="${c.id}" <c:if test="${c.id == course.category_id}">selected</c:if>> ${c.name}</option>
-                                                                                </c:forEach>
-                                                                            </select>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="form-grp">
-                                                                        <label for="level">Level</label>
-                                                                        <div class="courses-top-right-select">
-                                                                            <select name="level" class="level">
-                                                                                <option value="default" disabled selected>Level</option>
-                                                                                <c:forEach items="${level}" var="l">
-                                                                                    <option value="${l.id}" <c:if test="${l.id == course.level_id}">selected</c:if>>${l.name}</option>
-                                                                                </c:forEach>
-                                                                            </select>
-                                                                        </div>
+                                                                <div class="form-grp">
+                                                                    <label for="level">Level</label>
+                                                                    <div class="courses-top-right-select">
+                                                                        <select name="level" class="level">
+                                                                            <option value="default" disabled selected>Level</option>
+                                                                            <c:forEach items="${level}" var="l">
+                                                                                <option value="${l.id}" <c:if test="${l.id == course.level_id}">selected</c:if>>${l.name}</option>
+                                                                            </c:forEach>
+                                                                        </select>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <input hidden="true"
-                                                               id="fileImport"
-                                                               name="avatar"
-                                                               type="file"
-                                                               accept=".jpg,.jpeg,.png"
-                                                               upload-image-input
-                                                               />
-                                                        <input hidden="true"
-                                                               id="fileImport1"
-                                                               name="backgroup"
-                                                               type="file"
-                                                               accept=".jpg,.jpeg,.png"
-                                                               upload-image-input1
-                                                               />
-                                                        <div class="submit-btn mt-25">
-                                                            <button type="submit" class="btn">Confirm</button>
-                                                        </div>
-                                                    </form>
-                                                </div>
+                                                    </div>
+                                                    <input hidden="true"
+                                                           id="fileImport"
+                                                           name="avatar"
+                                                           type="file"
+                                                           accept=".jpg,.jpeg,.png"
+                                                           upload-image-input
+                                                           />
+                                                    <input hidden="true"
+                                                           id="fileImport1"
+                                                           name="backgroup"
+                                                           type="file"
+                                                           accept=".jpg,.jpeg,.png"
+                                                           upload-image-input1
+                                                           />
+                                                    <div class="submit-btn mt-25">
+                                                        <button type="submit" class="btn">Confirm</button>
+                                                    </div>
+                                                </form>
                                             </div>
-                                            <div class="tab-pane fade" id="itemTwo-tab-pane" role="tabpanel" aria-labelledby="itemTwo-tab" tabindex="0">
-                                                <div class="row">
-                                                    <form action="CurriculumEdit" method="post" class="instructor__profile-form">
-                                                        <input type="hidden" name="course_id" value="${course.id}">
-                                                        <div class="instructor__profile-form-wrap">
-                                                            <div class="row mb-3 align-items-center"> 
-                                                                <h1 class="col-md-2">Topic</h1>
-                                                                <div class="submit-btn col-md-6"">
-                                                                    <a  class="button mt-0" onclick="addRow()">Add</a>
-                                                                </div>
-                                                                <div class="row mt-3">  
-                                                                    <div class="col-md-12 additionalRows" >
-                                                                        <c:forEach items="${topic}" var="t" varStatus="loop">
-                                                                            <div id="row-${loop.index+1}" class="additional-row row">
-                                                                                <input hidden name="topic_id" value="${t.id}">
-                                                                                <div class="col-md-9">
-                                                                                    <div class="form-grp">
-                                                                                        <label class="col-md-12">
-                                                                                            Topic_${loop.index+1}
-                                                                                        </label>
-                                                                                        <input name="topic_${t.id}" class="topic-input" type="text" value="${t.name}" required>
-                                                                                    </div>
+                                        </div>
+                                        <div class="tab-pane fade" id="itemTwo-tab-pane" role="tabpanel" aria-labelledby="itemTwo-tab" tabindex="0">
+                                            <div class="row">
+                                                <form action="CurriculumEdit" method="post" class="instructor__profile-form">
+                                                    <input type="hidden" name="course_id" value="${course.id}">
+                                                    <div class="instructor__profile-form-wrap">
+                                                        <div class="row mb-3 align-items-center"> 
+                                                            <h1 class="col-md-2">Topic</h1>
+                                                            <div class="submit-btn col-md-6"">
+                                                                <a  class="button mt-0" onclick="addRow()">Add</a>
+                                                            </div>
+                                                            <div class="row mt-3">  
+                                                                <div class="col-md-12 additionalRows" >
+                                                                    <c:forEach items="${topic}" var="t" varStatus="loop">
+                                                                        <div id="row-${loop.index+1}" class="additional-row row">
+                                                                            <input hidden name="topic_id" value="${t.id}">
+                                                                            <div class="col-md-9">
+                                                                                <div class="form-grp">
+                                                                                    <label class="col-md-12">
+                                                                                        Topic_${loop.index+1}
+                                                                                    </label>
+                                                                                    <input name="topic_${t.id}" class="topic-input" type="text" value="${t.name}" required>
                                                                                 </div>
-                                                                                <div class="col-md-1">
-                                                                                    <div onclick="removeRow(${loop.index+1})" class="submit-btn mt-25">
-                                                                                        <a class="buttonEdit">-</a>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="col-md-1">
-                                                                                    <div class="submit-btn mt-25">
-                                                                                        <a href="TopicEdit?id=${t.id}" class="buttonEdit">Edit</a>
-                                                                                    </div>
-                                                                                </div>     
                                                                             </div>
-                                                                        </c:forEach>
-                                                                    </div>
+                                                                            <div class="col-md-1">
+                                                                                <div onclick="removeRow(${loop.index+1})" class="submit-btn mt-25">
+                                                                                    <a class="buttonEdit">-</a>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-md-1">
+                                                                                <div class="submit-btn mt-25">
+                                                                                    <a href="TopicEdit?id=${t.id}" class="buttonEdit">Edit</a>
+                                                                                </div>
+                                                                            </div>     
+                                                                        </div>
+                                                                    </c:forEach>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div class="submit-btn mt-25">
-                                                            <button type="submit" class="btn">Confirm</button>
-                                                        </div>
-                                                    </form>
-                                                </div> 
-                                            </div>
+                                                    </div>
+                                                    <div class="submit-btn mt-25">
+                                                        <button type="submit" class="btn">Confirm</button>
+                                                    </div>
+                                                </form>
+                                            </div> 
                                         </div>
                                     </div>
                                 </div>
@@ -559,42 +561,42 @@
         <script src="assets/js/aos.js"></script>
         <script src="assets/js/main.js"></script>
         <script>
-                                                                                        SVGInject(document.querySelectorAll("img.injectable"));
-                                                                                        function triggerFileInput() {
-                                                                                            document.getElementById('fileImport').click();
-                                                                                        }
-                                                                                        function triggerFileInput1() {
-                                                                                            document.getElementById('fileImport1').click();
-                                                                                        }
-                                                                                        const uploadImageInput = document.querySelector("[upload-image-input]");
-                                                                                        const uploadImagePreview = document.querySelector("[upload-image-preview]");
-                                                                                        const closeImagePreview = document.querySelector("[close-image-preview]");
-                                                                                        const uploadImageInput1 = document.querySelector("[upload-image-input1]");
-                                                                                        const uploadImagePreview1 = document.querySelector("[upload-image-preview1]");
-                                                                                        const closeImagePreview1 = document.querySelector("[close-image-preview1]");
-                                                                                        uploadImageInput.addEventListener("change", (e) => {
-                                                                                            const file = e.target.files[0];
-                                                                                            console.log(file);
-                                                                                            if (file) {
-                                                                                                const reader = new FileReader();
-                                                                                                reader.onload = function (e) {
-                                                                                                    uploadImagePreview.src = e.target.result;
-                                                                                                }
-                                                                                                reader.readAsDataURL(file);
+                                                                                    SVGInject(document.querySelectorAll("img.injectable"));
+                                                                                    function triggerFileInput() {
+                                                                                        document.getElementById('fileImport').click();
+                                                                                    }
+                                                                                    function triggerFileInput1() {
+                                                                                        document.getElementById('fileImport1').click();
+                                                                                    }
+                                                                                    const uploadImageInput = document.querySelector("[upload-image-input]");
+                                                                                    const uploadImagePreview = document.querySelector("[upload-image-preview]");
+                                                                                    const closeImagePreview = document.querySelector("[close-image-preview]");
+                                                                                    const uploadImageInput1 = document.querySelector("[upload-image-input1]");
+                                                                                    const uploadImagePreview1 = document.querySelector("[upload-image-preview1]");
+                                                                                    const closeImagePreview1 = document.querySelector("[close-image-preview1]");
+                                                                                    uploadImageInput.addEventListener("change", (e) => {
+                                                                                        const file = e.target.files[0];
+                                                                                        console.log(file);
+                                                                                        if (file) {
+                                                                                            const reader = new FileReader();
+                                                                                            reader.onload = function (e) {
+                                                                                                uploadImagePreview.src = e.target.result;
                                                                                             }
-                                                                                        })
-                                                                                        uploadImageInput1.addEventListener("change", (e) => {
-                                                                                            const file = e.target.files[0];
-                                                                                            console.log(file);
-                                                                                            if (file) {
-                                                                                                const reader = new FileReader();
-                                                                                                reader.onload = function (e) {
-                                                                                                    let url = "url(" + e.target.result + ")";
-                                                                                                    uploadImagePreview1.style.backgroundImage = url;
-                                                                                                }
-                                                                                                reader.readAsDataURL(file);
+                                                                                            reader.readAsDataURL(file);
+                                                                                        }
+                                                                                    })
+                                                                                    uploadImageInput1.addEventListener("change", (e) => {
+                                                                                        const file = e.target.files[0];
+                                                                                        console.log(file);
+                                                                                        if (file) {
+                                                                                            const reader = new FileReader();
+                                                                                            reader.onload = function (e) {
+                                                                                                let url = "url(" + e.target.result + ")";
+                                                                                                uploadImagePreview1.style.backgroundImage = url;
                                                                                             }
-                                                                                        })
+                                                                                            reader.readAsDataURL(file);
+                                                                                        }
+                                                                                    })
         </script>
         <script>
             var rowCounter = ${topic.size()};
