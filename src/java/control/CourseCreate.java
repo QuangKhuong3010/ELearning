@@ -81,10 +81,10 @@ public class CourseCreate extends HttpServlet {
         userDAO userDAO = new userDAO();
         levelDAO levelDAO = new levelDAO();
         ArrayList<Category> listCategory = categoryDAO.getAllCategory();
-        ArrayList<User> listManager = userDAO.getAllOfRole(2);
+        ArrayList<User> listMentor = userDAO.getAllOfRole(3);
         ArrayList<Level> listLevel = levelDAO.getAllLevel();
         request.setAttribute("level", listLevel);
-        request.setAttribute("manager", listManager);
+        request.setAttribute("mentor", listMentor);
         request.setAttribute("category", listCategory);
         request.getRequestDispatcher("coursecreate.jsp").forward(request, response);
     } 
@@ -111,13 +111,13 @@ public class CourseCreate extends HttpServlet {
         
         String name = request.getParameter("name");
         int category = Integer.parseInt(request.getParameter("category"));
-        int managed_by =Integer.parseInt( request.getParameter("managed_by"));
+        int Assign_by =Integer.parseInt( request.getParameter("Assign_by"));
         int level =Integer.parseInt( request.getParameter("level"));
         float price = Float.parseFloat(request.getParameter("price"));
         String description = request.getParameter("description");
         uploadCloudinry upload = new uploadCloudinry();
         String backgroup = upload.uploadCloudSingleImage(request, "backgroup");
-        courseDAO.createCourse(name, category, managed_by, user.getUser_id(), level,backgroup, description, price);
+        courseDAO.createCourse(name, category, user.getUser_id(), Assign_by, level,backgroup, description, price);
         
         response.sendRedirect("Profile");
     }

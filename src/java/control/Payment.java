@@ -96,7 +96,6 @@ public class Payment extends HttpServlet {
 
     }
 
-// đọc dữ liệu từ client
     private String getRequestData(HttpServletRequest request) throws IOException {
         try (BufferedReader reader = request.getReader()) {
             StringBuilder requestData = new StringBuilder();

@@ -9,7 +9,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import model.Category;
 import model.Course;
 
 /**
@@ -29,12 +28,13 @@ public class courseDAO extends DBContext {
                 + "      ,[avatar]\n"
                 + "      ,[description]\n"
                 + "      ,[created_date]\n"
+                + "      ,[isActive]\n"
                 + "  FROM [dbo].[Course]"
-                + "  WHERE 1=1";
+                + "  WHERE 1=1 and [isActive]=1";
         if (!search.equals("")) {
             sql += "AND [name] LIKE '%" + search + "%' \n ";
         }
-        sql += " order by " + orderBy +" desc";
+        sql += " order by " + orderBy + " desc";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             ResultSet rs = st.executeQuery();
@@ -50,7 +50,8 @@ public class courseDAO extends DBContext {
                         rs.getInt(7),
                         rs.getString(8),
                         rs.getString(9),
-                        rs.getString(10)));
+                        rs.getString(10),
+                        rs.getInt(11)));
             }
             return CourseList;
         } catch (SQLException e) {
@@ -70,6 +71,7 @@ public class courseDAO extends DBContext {
                 + "      ,[avatar]\n"
                 + "      ,[description]\n"
                 + "      ,[created_date]\n"
+                + "      ,[isActive]\n"
                 + "  FROM [dbo].[Course]"
                 + "  WHERE managed_by=?";
         try {
@@ -88,7 +90,8 @@ public class courseDAO extends DBContext {
                         rs.getInt(7),
                         rs.getString(8),
                         rs.getString(9),
-                        rs.getString(10)));
+                        rs.getString(10),
+                        rs.getInt(11)));
             }
             return listCourse;
         } catch (SQLException e) {
@@ -96,7 +99,7 @@ public class courseDAO extends DBContext {
         }
         return null;
     }
-    
+
     public ArrayList<Course> getCourseAssignBy(int assign_by) {
         String sql = "SELECT [id]\n"
                 + "      ,[managed_by]\n"
@@ -108,6 +111,7 @@ public class courseDAO extends DBContext {
                 + "      ,[avatar]\n"
                 + "      ,[description]\n"
                 + "      ,[created_date]\n"
+                + "      ,[isActive]\n"
                 + "  FROM [dbo].[Course]"
                 + "  WHERE assign_by=?";
         try {
@@ -126,7 +130,8 @@ public class courseDAO extends DBContext {
                         rs.getInt(7),
                         rs.getString(8),
                         rs.getString(9),
-                        rs.getString(10)));
+                        rs.getString(10),
+                        rs.getInt(11)));
             }
             return listCourse;
         } catch (SQLException e) {
@@ -134,8 +139,6 @@ public class courseDAO extends DBContext {
         }
         return null;
     }
-    
-    
 
     public Course getCourse(int id) {
         String sql = "SELECT [id]\n"
@@ -148,6 +151,7 @@ public class courseDAO extends DBContext {
                 + "      ,[avatar]\n"
                 + "      ,[description]\n"
                 + "      ,[created_date]\n"
+                + "      ,[isActive]\n"
                 + "  FROM [dbo].[Course]"
                 + "  WHERE id=?";
         try {
@@ -165,7 +169,8 @@ public class courseDAO extends DBContext {
                         rs.getInt(7),
                         rs.getString(8),
                         rs.getString(9),
-                        rs.getString(10));
+                        rs.getString(10), 
+                        rs.getInt(11));
             }
 
         } catch (SQLException e) {
@@ -191,7 +196,6 @@ public class courseDAO extends DBContext {
         return 0;
     }
 
-
     public void createCourse(String name, int category, int managed_by, int user_id, int level, String backgroup, String description, float price) {
         try {
             String sql = "INSERT INTO [dbo].[Course]\n"
@@ -203,8 +207,9 @@ public class courseDAO extends DBContext {
                     + "           ,[category_id]\n"
                     + "           ,[avatar]\n"
                     + "           ,[description])"
+                    + "           ,[isActive])"
                     + "     VALUES\n"
-                    + "           (?,?,?,?,?,?,?,?)";
+                    + "           (?,?,?,?,?,?,?,?,?)";
             PreparedStatement st = connection.prepareStatement(sql);
             st.setInt(1, managed_by);
             st.setInt(2, user_id);
@@ -214,6 +219,7 @@ public class courseDAO extends DBContext {
             st.setInt(6, category);
             st.setString(7, backgroup);
             st.setString(8, description);
+            st.setInt(9, 0);
             st.executeUpdate();
         } catch (SQLException ex) {
             System.out.println(ex);
@@ -236,6 +242,32 @@ public class courseDAO extends DBContext {
             st.setString(4, background);
             st.setString(5, description);
             st.setInt(6, course_id);
+            st.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+    }
+    
+    public void activeCourse() {
+        try {
+            String sql = "UPDATE [dbo].[Course]\n"
+                    + "   SET [isActive] = ?\n"
+                    + " WHERE id=?";
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setFloat(1, 1);
+            st.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+    }
+    
+    public void deActiveCourse() {
+        try {
+            String sql = "UPDATE [dbo].[Course]\n"
+                    + "   SET [isActive] = ?\n"
+                    + " WHERE id=?";
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setFloat(1, 0);
             st.executeUpdate();
         } catch (SQLException ex) {
             System.out.println(ex);

@@ -111,7 +111,7 @@
                                         <ul class="navigation">
                                             <li class="button"><a href="HomePage">Home</a></li>
                                             <li class="button"><a href="CourseList">Courses List</a></li>
-                                            <li class="button"><a href="#">About Us</a></li>
+                                            <li class="button"><a >About Us</a></li>
                                                 <c:if test="${sessionScope.account.role_id==4}">
                                                 <li class="menu-item-has-children">
                                                     <a>Features</a>
@@ -247,11 +247,11 @@
                                                         </div>
                                                         <div class="col-md-2">
                                                             <div class="form-grp">
-                                                                <label for="managed_by">Managed_by</label>
+                                                                <label for="managed_by">Assign_by</label>
                                                                 <div class="courses-top-right-select">
-                                                                    <select name="managed_by" class="managed_by">
-                                                                        <option value="default" disabled selected>Manager</option>
-                                                                        <c:forEach items="${manager}" var="m">
+                                                                    <select name="Assign_by" class="Assign_by">
+                                                                        <option value="default" disabled selected>Assign_by</option>
+                                                                        <c:forEach items="${mentor}" var="m">
                                                                             <option value="${m.user_id}">${m.first_name} ${m.last_name}</option>
                                                                         </c:forEach>
                                                                     </select>

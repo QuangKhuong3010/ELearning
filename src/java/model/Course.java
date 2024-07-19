@@ -31,6 +31,7 @@ public class Course {
     private String assign_avatar;
     private double process;
     private int numberOfLesson;
+    private int isActive;
     
     public Course() {
     }
@@ -47,7 +48,7 @@ public class Course {
         this.description = description;
     }
 
-    public Course(int id, int managed_by, int assign_by, String name, double price, int level_id, int category_id, String avatar, String description, String created_date) {
+    public Course(int id, int managed_by, int assign_by, String name, double price, int level_id, int category_id, String avatar, String description, String created_date, int isActive) {
         this.id = id;
         this.managed_by = managed_by;
         this.assign_by = assign_by;
@@ -58,8 +59,18 @@ public class Course {
         this.avatar = avatar;
         this.description = description;
         this.created_date = created_date;
+        this.isActive = isActive;
     }
 
+    public int getIsActive() {
+        return isActive;
+    }
+
+    public void setIsActive(int isActive) {
+        this.isActive = isActive;
+    }
+
+    
     public int getNumberOfLesson() {
         return numberOfLesson;
     }

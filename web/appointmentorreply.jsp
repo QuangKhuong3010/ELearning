@@ -72,7 +72,7 @@
         </button>
         <!-- Scroll-top-end-->
 
-        <!-- header-area -->
+         <!-- header-area -->
         <header>
             <div class="tg-header__top">
                 <div class="container custom-container">
@@ -111,7 +111,7 @@
                                         <ul class="navigation">
                                             <li class="button"><a href="HomePage">Home</a></li>
                                             <li class="button"><a href="CourseList">Courses List</a></li>
-                                            <li class="button"><a href="#">About Us</a></li>
+                                            <li class="button"><a >About Us</a></li>
                                                 <c:if test="${sessionScope.account.role_id==4}">
                                                 <li class="menu-item-has-children">
                                                     <a>Features</a>

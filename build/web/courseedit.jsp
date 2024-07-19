@@ -102,7 +102,7 @@
         </button>
         <!-- Scroll-top-end-->
 
-        <!-- header-area -->
+       <!-- header-area -->
         <header>
             <div class="tg-header__top">
                 <div class="container custom-container">
@@ -141,10 +141,10 @@
                                         <ul class="navigation">
                                             <li class="button"><a href="HomePage">Home</a></li>
                                             <li class="button"><a href="CourseList">Courses List</a></li>
-                                            <li class="button"><a href="#">About Us</a></li>
+                                            <li class="button"><a >About Us</a></li>
                                                 <c:if test="${sessionScope.account.role_id==4}">
                                                 <li class="menu-item-has-children">
-                                                    <a href="instructor-dashboard.jsp">Features</a>
+                                                    <a>Features</a>
                                                     <ul class="sub-menu">
                                                         <li><a href="Profile">Profile</a></li>
                                                         <li><a href="CourseEnrolled">Enrolled Courses</a></li>
@@ -154,7 +154,7 @@
                                             </c:if>
                                             <c:if test="${sessionScope.account.role_id==3}">
                                                 <li class="menu-item-has-children">
-                                                    <a href="instructor-dashboard.jsp">Features</a>
+                                                    <a>Features</a>
                                                     <ul class="sub-menu">
                                                         <li><a href="Profile">Profile</a></li>
                                                         <li><a href="CourseEnrolled">Enrolled Courses</a></li>
@@ -165,7 +165,7 @@
                                             </c:if>
                                             <c:if test="${sessionScope.account.role_id==2}">
                                                 <li class="menu-item-has-children">
-                                                    <a href="instructor-dashboard.jsp">Features</a>
+                                                    <a>Features</a>
                                                     <ul class="sub-menu">
                                                         <li><a href="Profile">Profile</a></li>
                                                         <li><a href="CourseEnrolled">Enrolled Courses</a></li>
@@ -177,7 +177,7 @@
                                             </c:if>
                                             <c:if test="${sessionScope.account.role_id==1}">
                                                 <li class="menu-item-has-children">
-                                                    <a href="instructor-dashboard.jsp">Features</a>
+                                                    <a>Features</a>
                                                     <ul class="sub-menu">
                                                         <li><a href="ListUser">List User</a></li>
                                                         <li><a href="CourseManager">Course Management</a></li>
@@ -216,7 +216,6 @@
             </div>
         </header>
         <!-- header-area-end -->
-
 
 
         <!-- main-area -->

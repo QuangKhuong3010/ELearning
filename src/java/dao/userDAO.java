@@ -213,7 +213,9 @@ public class userDAO extends DBContext {
                     + "                          ,[description]\n"
                     + "                          ,[created_by_Google]\n"
                     + "                      FROM [ELearning].[dbo].[User]\n"
-                    + "                     WHERE [dbo].[User].[role_id]=?";
+                    + "                     WHERE [dbo].[User].[role_id]=?"
+                    + "                     ORDER BY first_name, last_name";
+
             PreparedStatement st = connection.prepareStatement(sql);
             ArrayList listUser = new ArrayList();
             st.setInt(1, role_id);

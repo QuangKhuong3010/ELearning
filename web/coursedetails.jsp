@@ -386,10 +386,10 @@
                                         <ul class="navigation">
                                             <li class="button"><a href="HomePage">Home</a></li>
                                             <li class="button"><a href="CourseList">Courses List</a></li>
-                                            <li class="button"><a href="#">About Us</a></li>
+                                            <li class="button"><a >About Us</a></li>
                                                 <c:if test="${sessionScope.account.role_id==4}">
                                                 <li class="menu-item-has-children">
-                                                    <a href="instructor-dashboard.jsp">Features</a>
+                                                    <a>Features</a>
                                                     <ul class="sub-menu">
                                                         <li><a href="Profile">Profile</a></li>
                                                         <li><a href="CourseEnrolled">Enrolled Courses</a></li>
@@ -399,7 +399,7 @@
                                             </c:if>
                                             <c:if test="${sessionScope.account.role_id==3}">
                                                 <li class="menu-item-has-children">
-                                                    <a href="instructor-dashboard.jsp">Features</a>
+                                                    <a>Features</a>
                                                     <ul class="sub-menu">
                                                         <li><a href="Profile">Profile</a></li>
                                                         <li><a href="CourseEnrolled">Enrolled Courses</a></li>
@@ -410,7 +410,7 @@
                                             </c:if>
                                             <c:if test="${sessionScope.account.role_id==2}">
                                                 <li class="menu-item-has-children">
-                                                    <a href="instructor-dashboard.jsp">Features</a>
+                                                    <a>Features</a>
                                                     <ul class="sub-menu">
                                                         <li><a href="Profile">Profile</a></li>
                                                         <li><a href="CourseEnrolled">Enrolled Courses</a></li>
@@ -422,7 +422,7 @@
                                             </c:if>
                                             <c:if test="${sessionScope.account.role_id==1}">
                                                 <li class="menu-item-has-children">
-                                                    <a href="instructor-dashboard.jsp">Features</a>
+                                                    <a>Features</a>
                                                     <ul class="sub-menu">
                                                         <li><a href="ListUser">List User</a></li>
                                                         <li><a href="CourseManager">Course Management</a></li>
@@ -965,7 +965,7 @@
                     const lastPrice = lastPaid.price;
                     const lastContent = lastPaid.content;
                     let count = 0;
-                    if (lastPrice >= price && lastContent.includes(content)) {
+                    if (lastPrice === price && lastContent.includes(content)) {
                         count++;
                         Swal.fire({
                             title: "Sucess!",
@@ -976,6 +976,10 @@
                             stopInterval();
                             return;
                         }
+                    } else {
+                        orderFail(lastPrice-price);
+                        stopInterval();
+                        return;
                     }
                 } catch {
                     console.error("Error")
@@ -988,6 +992,11 @@
                     checkPaid(${course.price}, '${code}');
                 }, 1000);
             })
+
+            function orderFail(money) {
+
+            }
+
             function orderSuccess() {
                 //                                                Swal.showLoading();
                 let urlPayment = 'Payment'

@@ -87,10 +87,10 @@
                                         <ul class="navigation">
                                             <li class="button"><a href="HomePage">Home</a></li>
                                             <li class="button"><a href="CourseList">Courses List</a></li>
-                                            <li class="button"><a href="#">About Us</a></li>
+                                            <li class="button"><a >About Us</a></li>
                                                 <c:if test="${sessionScope.account.role_id==4}">
                                                 <li class="menu-item-has-children">
-                                                    <a href="instructor-dashboard.jsp">Features</a>
+                                                    <a>Features</a>
                                                     <ul class="sub-menu">
                                                         <li><a href="Profile">Profile</a></li>
                                                         <li><a href="CourseEnrolled">Enrolled Courses</a></li>
@@ -100,7 +100,7 @@
                                             </c:if>
                                             <c:if test="${sessionScope.account.role_id==3}">
                                                 <li class="menu-item-has-children">
-                                                    <a href="instructor-dashboard.jsp">Features</a>
+                                                    <a>Features</a>
                                                     <ul class="sub-menu">
                                                         <li><a href="Profile">Profile</a></li>
                                                         <li><a href="CourseEnrolled">Enrolled Courses</a></li>
@@ -111,7 +111,7 @@
                                             </c:if>
                                             <c:if test="${sessionScope.account.role_id==2}">
                                                 <li class="menu-item-has-children">
-                                                    <a href="instructor-dashboard.jsp">Features</a>
+                                                    <a>Features</a>
                                                     <ul class="sub-menu">
                                                         <li><a href="Profile">Profile</a></li>
                                                         <li><a href="CourseEnrolled">Enrolled Courses</a></li>
@@ -123,7 +123,7 @@
                                             </c:if>
                                             <c:if test="${sessionScope.account.role_id==1}">
                                                 <li class="menu-item-has-children">
-                                                    <a href="instructor-dashboard.jsp">Features</a>
+                                                    <a>Features</a>
                                                     <ul class="sub-menu">
                                                         <li><a href="ListUser">List User</a></li>
                                                         <li><a href="CourseManager">Course Management</a></li>
@@ -162,7 +162,6 @@
             </div>
         </header>
         <!-- header-area-end -->
-
 
         <!-- main-area -->
         <main class="main-area">
@@ -215,7 +214,7 @@
                                     </ul>
                                 </div>
                             </div>
-                            <c:if test="${sessionScope.account.role_id==3}">
+                            <c:if test="${sessionScope.account.role_id==2}">
                                 <div class="dashboard__instructor-info-right">
                                     <a href="CreateCourse" class="btn btn-two arrow-btn">Create a New Course <img src="assets/img/icons/right_arrow.svg" alt="img" class="injectable"></a>
                                 </div>
