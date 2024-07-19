@@ -169,6 +169,12 @@
                 width: 50px;
                 height: 50px;
             }
+            
+            .manager-avatar{
+                width: 225px;
+                height: 225px;
+            }
+            
 
             .cursive {
                 font-family: "Pinyon Script", cursive;
@@ -362,7 +368,7 @@
                             <div class="tg-header__top-right">
                                 <div class="tg-header__phone">
                                     <img src="assets/img/icons/phone.svg" alt="Icon">Call us: <a href="tel:0888844634">0888844634</a>
-                                </div
+                                </div>
                                 <ul class="tg-header__top-social list-wrap">
                                     <li>Follow Us On :</li>
                                     <li><a href="https://www.facebook.com/profile.php?id=100015581985913"><i class="fab fa-facebook-f"></i></a></li>
@@ -612,7 +618,7 @@
                                     </div>
                                     <div class="tab-pane fade" id="instructors-tab-pane" role="tabpanel" aria-labelledby="instructors-tab" tabindex="0">
                                         <div class="courses__instructors-wrap">
-                                            <div class="courses__instructors-thumb">
+                                            <div class="manager-avatar">
                                                 <img src="${manager.avatar}" alt="img">
                                             </div>
                                             <div class="courses__instructors-content">
@@ -720,7 +726,7 @@
                                     </ul>
                                 </div>
                                 <div class="courses__details-enroll">
-                                    <c:if test="${purchased!=null && sessionScope.account!=null}">
+                                    <c:if test="${purchased!=null && sessionScope.account!=null && course.assign_by != sessionScope.account.user_id && course.managed_by != sessionScope.account.user_id && course.isActive==1}} ">
                                         <div class="tg-button-wrap">
                                             <button id="btnDatHang" class="shopee-button-solid shopee-button-solid--primary">
                                                 <a href="LessonDetails?course_id=${course.id}&lesson_id=first_lesson" class="btn arrow-btn" class="cart-final--bottom-checkout--btn btnDatHang">Enroll</a>
@@ -728,12 +734,18 @@
                                         </div>
                                     </c:if>
 
-                                    <c:if test="${purchased==null && sessionScope.account!=null}">
+                                    <c:if test="${purchased==null && sessionScope.account!=null && course.assign_by != sessionScope.account.user_id && course.managed_by != sessionScope.account.user_id && course.isActive==1}">
                                         <div class="tg-button-wrap">
                                             <button id="btnDatHang" class="shopee-button-solid shopee-button-solid--primary" data-bs-toggle="modal" data-bs-target="#paymentMethod">
                                                 <a class="btn arrow-btn" class="cart-final--bottom-checkout--btn btnDatHang">Payment</a>
                                             </button>
                                         </div>
+                                    </c:if>
+
+                                    <c:if test="${course.isActive==0}">
+                                        <span class="alert alert-danger alert-center">
+                                            This course is inactive
+                                        </span>
                                     </c:if>
                                 </div>
                                 <div class="modal fade" id="paymentMethod" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -977,7 +989,7 @@
                             return;
                         }
                     } else {
-                        orderFail(lastPrice-price);
+                        orderFail(lastPrice - price);
                         stopInterval();
                         return;
                     }

@@ -184,7 +184,7 @@
             <section class="dashboard__area section-pb-120">
                 <div class="container">
                     <div class="row">
-                       <div class="col-lg-3">
+                        <div class="col-lg-3">
                             <div class="dashboard__sidebar-wrap">
                                 <div class="dashboard__sidebar-title mb-20">
                                     <h6 class="title">Welcome, Admin</h6>
@@ -254,12 +254,12 @@
                                                 </a>
                                             </li>
                                             <c:if test="${sessionScope.account.role_id==2}">
-                                            <li>
-                                                <a href="AppointMentor">
-                                                    <i class="skillgro-chat"></i>
-                                                    Appoint Mentor List
-                                                </a>
-                                            </li>
+                                                <li>
+                                                    <a href="AppointMentor">
+                                                        <i class="skillgro-chat"></i>
+                                                        Appoint Mentor List
+                                                    </a>
+                                                </li>
                                             </c:if>
                                         </ul>
                                     </nav>
@@ -279,7 +279,7 @@
                                 </nav>
                             </div>
                         </div>
-                       <div class="col-lg-9">
+                        <div class="col-lg-9">
                             <div class="dashboard__content-wrap">
                                 <div class="row">
                                     <div class="col-5">
@@ -311,6 +311,7 @@
                                                         <th style="border: 1px solid black;">Last Name</th>
                                                         <th style="border: 1px solid black;">Description</th>
                                                         <th style="border: 1px solid black;">Registration Date</th>
+                                                        <th style="border: 1px solid black;">Active</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -337,6 +338,18 @@
                                                             <td style="border: 1px solid black;">
                                                                 <p>${u.registration_date}</p>
                                                             </td>
+                                                            <td  style="border: 1px solid black;">
+                                                                <c:if test="${u.isBan==1}">
+                                                                    <form action="UserActive" method="post">
+                                                                        <input type="submit" value="Active">
+                                                                    </form>
+                                                                </c:if>
+                                                                <c:if test="${u.isBan==0}">
+                                                                    <form action="UserActive" method="post">
+                                                                        <input type="submit" value="DeActive">
+                                                                    </form>
+                                                                </c:if>
+                                                            </td>
                                                         </tr>
                                                     </c:forEach>
                                                 </tbody>
@@ -356,7 +369,7 @@
 
 
 
-     
+
 
 
 

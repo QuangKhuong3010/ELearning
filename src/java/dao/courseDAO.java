@@ -30,7 +30,7 @@ public class courseDAO extends DBContext {
                 + "      ,[created_date]\n"
                 + "      ,[isActive]\n"
                 + "  FROM [dbo].[Course]"
-                + "  WHERE 1=1 and [isActive]=1";
+                + "  WHERE 1=1 ";
         if (!search.equals("")) {
             sql += "AND [name] LIKE '%" + search + "%' \n ";
         }
@@ -248,29 +248,18 @@ public class courseDAO extends DBContext {
         }
     }
     
-    public void activeCourse() {
+    public void activeCourse(int course_id, int isActive) {
         try {
             String sql = "UPDATE [dbo].[Course]\n"
                     + "   SET [isActive] = ?\n"
                     + " WHERE id=?";
             PreparedStatement st = connection.prepareStatement(sql);
-            st.setFloat(1, 1);
+            st.setInt(1, isActive);
+            st.setInt(2, course_id);
             st.executeUpdate();
         } catch (SQLException ex) {
             System.out.println(ex);
         }
     }
-    
-    public void deActiveCourse() {
-        try {
-            String sql = "UPDATE [dbo].[Course]\n"
-                    + "   SET [isActive] = ?\n"
-                    + " WHERE id=?";
-            PreparedStatement st = connection.prepareStatement(sql);
-            st.setFloat(1, 0);
-            st.executeUpdate();
-        } catch (SQLException ex) {
-            System.out.println(ex);
-        }
-    }
+   
 }

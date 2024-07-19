@@ -27,6 +27,7 @@ public class userDAO extends DBContext {
                 + "                          ,[backgroup]\n"
                 + "                          ,[description]\n"
                 + "                          ,[created_by_Google]\n"
+                + "                          ,[isActive]\n"
                 + "                      FROM [ELearning].[dbo].[User]\n"
                 + "                     WHERE [email]=? and [password]=?";
         try {
@@ -46,7 +47,8 @@ public class userDAO extends DBContext {
                         rs.getString(9),
                         rs.getString(10),
                         rs.getString(11),
-                        rs.getInt(12));
+                        rs.getInt(12),
+                        rs.getInt(13));
             }
         } catch (SQLException e) {
             System.out.println(e);
@@ -59,6 +61,7 @@ public class userDAO extends DBContext {
                 + "      ,[role_id]\n"
                 + "      ,[email]\n"
                 + "      ,[created_by_Google]\n"
+                + "      ,[isActive]\n"
                 + "  FROM [dbo].[User]\n"
                 + "WHERE [email] = ?";
         try {
@@ -69,7 +72,8 @@ public class userDAO extends DBContext {
                 return new User(rs.getInt(1),
                         rs.getInt(2),
                         rs.getString(3),
-                        rs.getInt(4));
+                        rs.getInt(4),
+                        rs.getInt(5));
             }
         } catch (SQLException e) {
             System.out.println(e);
@@ -87,6 +91,7 @@ public class userDAO extends DBContext {
                     + "           ,[last_name]\n"
                     + "           ,[created_by_Google]"
                     + "           ,[avatar])\n"
+                    + "      ,[isActive]\n"
                     + "     VALUES\n"
                     + "           (?, ?, ?, ?, ?, ?,?)";
             PreparedStatement st = connection.prepareStatement(sql);
@@ -97,6 +102,7 @@ public class userDAO extends DBContext {
             st.setString(5, lastName);
             st.setString(6, "0");
             st.setString(7, "https://ss-images.saostar.vn/wp700/pc/1613810558698/Facebook-Avatar_3.png");
+            st.setInt(8, 1);
             st.executeUpdate();
         } catch (SQLException ex) {
             System.out.println(ex);
@@ -110,6 +116,7 @@ public class userDAO extends DBContext {
                     + "           ,[email]\n"
                     + "           ,[created_by_Google]"
                     + "           ,[avatar])\n"
+                    + "      ,[isActive]\n"
                     + "     VALUES\n"
                     + "           (?, ?, ?)";
             PreparedStatement st = connection.prepareStatement(sql);
@@ -117,6 +124,7 @@ public class userDAO extends DBContext {
             st.setString(2, email);
             st.setString(3, "1");
             st.setString(4, "https://ss-images.saostar.vn/wp700/pc/1613810558698/Facebook-Avatar_3.png");
+            st.setInt(5, 1);
             st.executeUpdate();
         } catch (SQLException ex) {
             System.out.println(ex);
@@ -130,13 +138,15 @@ public class userDAO extends DBContext {
                     + "           ,[email]\n"
                     + "           ,[password]\n"
                     + "           ,[created_by_Google])\n"
+                    + "      ,[isActive]\n"
                     + "     VALUES\n"
-                    + "           (?, ?, ?,?)";
+                    + "           (?, ?, ?,?,?)";
             PreparedStatement st = connection.prepareStatement(sql);
             st.setInt(1, 3);
             st.setString(2, user.getEmail());
             st.setString(3, pass);
             st.setInt(4, 0);
+            st.setInt(5, 1);
             st.executeUpdate();
         } catch (SQLException ex) {
             System.out.println(ex);
@@ -158,6 +168,23 @@ public class userDAO extends DBContext {
             System.out.println(e);
         }
         return false;
+    }
+
+    public int isActive(String email) {
+        String sql = "SELECT [isBan]\n"
+                + "  FROM [dbo].[User]\n"
+                + "WHERE [email] = ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, email);
+            ResultSet rs = st.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return 0;
     }
 
     public void updateNewPassword(int id, String pass) {
@@ -212,6 +239,7 @@ public class userDAO extends DBContext {
                     + "                          ,[backgroup]\n"
                     + "                          ,[description]\n"
                     + "                          ,[created_by_Google]\n"
+                    + "      ,[isActive]\n"
                     + "                      FROM [ELearning].[dbo].[User]\n"
                     + "                     WHERE [dbo].[User].[role_id]=?"
                     + "                     ORDER BY first_name, last_name";
@@ -232,7 +260,8 @@ public class userDAO extends DBContext {
                         rs.getString(9),
                         rs.getString(10),
                         rs.getString(11),
-                        rs.getInt(12)));
+                        rs.getInt(12),
+                        rs.getInt(13)));
             }
             return listUser;
         } catch (SQLException ex) {
@@ -288,6 +317,7 @@ public class userDAO extends DBContext {
                     + "      ,[backgroup]\n"
                     + "      ,[description]\n"
                     + "      ,[created_by_Google]\n"
+                    + "      ,[isActive]\n"
                     + "  FROM [ELearning].[dbo].[User]"
                     + "  WHERE [id]=?";
             PreparedStatement st = connection.prepareStatement(sql);
@@ -305,7 +335,8 @@ public class userDAO extends DBContext {
                         rs.getString(9),
                         rs.getString(10),
                         rs.getString(11),
-                        rs.getInt(12));
+                        rs.getInt(12),
+                        rs.getInt(13));
             }
         } catch (SQLException ex) {
             System.out.println(ex);

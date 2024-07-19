@@ -52,12 +52,15 @@ public class Login extends HttpServlet {
         response.addCookie(ce);
         response.addCookie(cp);
         response.addCookie(cr);
-        userDAO dao = new userDAO();
-        User user = dao.login(email, pass);
+        userDAO userDAO = new userDAO();
+        User user = userDAO.login(email, pass);
         if (user == null) {
             request.setAttribute("mess", "Wrong email or password");
             request.getRequestDispatcher("login.jsp").forward(request, response);
-        } else {
+        }
+        else if (userDAO.isActive(email)==0) {
+            request.getRequestDispatcher("userban.jsp").forward(request, response);
+        }else {
             HttpSession session = request.getSession();
             session.setAttribute("account", user);
             response.sendRedirect("HomePage");

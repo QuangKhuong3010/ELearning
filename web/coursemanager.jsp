@@ -296,12 +296,12 @@
                                                 </a>
                                             </li>
                                             <c:if test="${sessionScope.account.role_id==2}">
-                                            <li>
-                                                <a href="AppointMentor">
-                                                    <i class="skillgro-chat"></i>
-                                                    Appoint Mentor List
-                                                </a>
-                                            </li>
+                                                <li>
+                                                    <a href="AppointMentor">
+                                                        <i class="skillgro-chat"></i>
+                                                        Appoint Mentor List
+                                                    </a>
+                                                </li>
                                             </c:if>
                                         </ul>
                                     </nav>
@@ -331,14 +331,14 @@
                                         <div class="dashboard__nav-wrap">
                                             <ul class="nav nav-tabs" id="myTab" role="tablist">
                                                 <c:if test="${sessionScope.account.role_id==1}">
-                                                <li class="nav-item" role="presentation">
-                                                    <button class="nav-link active" id="itemOne-tab" data-bs-toggle="tab" data-bs-target="#itemOne-tab-pane" type="button" role="tab" aria-controls="itemOne-tab-pane" aria-selected="true">Course List</button>
-                                                </li>
+                                                    <li class="nav-item" role="presentation">
+                                                        <button class="nav-link active" id="itemOne-tab" data-bs-toggle="tab" data-bs-target="#itemOne-tab-pane" type="button" role="tab" aria-controls="itemOne-tab-pane" aria-selected="true">Course List</button>
+                                                    </li>
                                                 </c:if>
                                                 <c:if test="${sessionScope.account.role_id!=1}">
-                                                <li class="nav-item" role="presentation">
-                                                    <button class="nav-link active" id="itemOne-tab" data-bs-toggle="tab" data-bs-target="#itemOne-tab-pane" type="button" role="tab" aria-controls="itemOne-tab-pane" aria-selected="true">Assign List</button>
-                                                </li>
+                                                    <li class="nav-item" role="presentation">
+                                                        <button class="nav-link active" id="itemOne-tab" data-bs-toggle="tab" data-bs-target="#itemOne-tab-pane" type="button" role="tab" aria-controls="itemOne-tab-pane" aria-selected="true">Assign List</button>
+                                                    </li>
                                                 </c:if>
                                                 <c:if test="${sessionScope.account.role_id==2}">
                                                     <li class="nav-item" role="presentation">
@@ -379,9 +379,19 @@
                                                                     <ul class="list-wrap">
                                                                         <li><i class="flaticon-book"></i>?</li>
                                                                         <li><i class="flaticon-mortarboard"></i>${c.studentOnCourse}</li>
-                                                                        <div class="button">
-                                                                            <a href="CourseEdit?id=${c.id}">
-                                                                                <span class="text">Edit</span>
+                                                                        <div class="button"> 
+                                                                            <c:if test="${(sessionScope.account.role_id==2)||(sessionScope.account.role_id==3)}">
+                                                                                <a href="CourseEdit?id=${c.id}">
+                                                                                    <span class="text">Edit</span>
+                                                                                </a>
+                                                                            </c:if>
+                                                                            <a href="CourseActive?id=${c.id}">
+                                                                                <c:if test="${c.isActive==0}">
+                                                                                    <span class="text">Active</span>
+                                                                                </c:if>
+                                                                                <c:if test="${c.isActive==1}">
+                                                                                    <span class="text">De-Active</span>
+                                                                                </c:if>
                                                                             </a>
                                                                         </div>
                                                                     </ul>
@@ -425,6 +435,14 @@
                                                                         <div class="button">
                                                                             <a href="CourseEdit?id=${c.id}">
                                                                                 <span class="text">Edit</span>
+                                                                            </a>
+                                                                            <a href="CourseActive?id=${c.id}">
+                                                                                <c:if test="${c.isActive==0}">
+                                                                                    <span class="text">Active</span>
+                                                                                </c:if>
+                                                                                <c:if test="${c.isActive==1}">
+                                                                                    <span class="text">De-Active</span>
+                                                                                </c:if>
                                                                             </a>
                                                                         </div>
                                                                     </ul>
