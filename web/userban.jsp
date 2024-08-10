@@ -107,7 +107,8 @@
             <div class="box">
                 <h1>403</h1>
                 <p>Sorry, it's not allowed to go beyond this point!</p>
-                <p><a href="Login">Please, go back this way.</a></p>
+                <p><a href="Logout">Please, go back this way.</a></p>
+                <p><a href="mailto:khuongdqhe176204@fpt.edu.vn">Or you can contact with admin to resolve this</a></p>
             </div>
         </div>
     </body>

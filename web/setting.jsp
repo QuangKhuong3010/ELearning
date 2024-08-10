@@ -32,6 +32,7 @@
         <link rel="stylesheet" href="assets/css/spacing.css">
         <link rel="stylesheet" href="assets/css/tg-cursor.css">
         <link rel="stylesheet" href="assets/css/main.css">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
         <style>
             img{
                 width: 100%;
@@ -207,56 +208,33 @@
             <!-- dashboard-area -->
             <section class="dashboard__area section-pb-120">
                 <div class="container">
-                    <div class="dashboard__top-wrap">
-                        <div class="dashboard__top-bg" data-background="${user.backgroup}"></div>
-                        <div class="dashboard__instructor-info">
-                            <div class="dashboard__instructor-info-left">
-                                <div class="thumb">
-                                    <img src="${user.avatar}" alt="img">
+                    <c:if test="${sessionScope.account.role_id!=1}">
+                        <div class="dashboard__top-wrap">
+                            <div class="dashboard__top-bg" data-background="${user.backgroup}"></div>
+                            <div class="dashboard__instructor-info">
+                                <div class="dashboard__instructor-info-left">
+                                    <div class="thumb">
+                                        <img src="${user.avatar}" alt="img">
+                                    </div>
+                                    <div class="content">
+                                        <h4 class="title">${user.first_name} ${user.last_name}</h4>
+                                    </div>
                                 </div>
-                                <div class="content">
-                                    <h4 class="title">${user.first_name} ${user.last_name}</h4>
-                                    <c:if test="${sessionScope.account.role_id==3}">
-                                        <div class="review__wrap review__wrap-two">
-                                            <div class="rating">
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                            </div>
-                                            <span>(15 Reviews)</span>
-                                        </div>
-                                    </c:if>
-                                    <ul class="list-wrap">
-                                        <li>
-                                            <img src="assets/img/icons/course_icon03.svg" alt="img" class="injectable">
-                                            ${user.quantityCourseLearning} Courses Enrolled
-                                        </li>
-                                        <li>
-                                            <img src="assets/img/icons/course_icon05.svg" alt="img" class="injectable">
-                                            ? Certificate
-                                        </li>
-                                    </ul>
-                                </div>
+                                <c:if test="${sessionScope.account.role_id==2}">
+                                    <div class="dashboard__instructor-info-right">
+                                        <a href="CreateCourse" class="btn btn-two arrow-btn">Create a New Course <img src="assets/img/icons/right_arrow.svg" alt="img" class="injectable"></a>
+                                    </div>
+                                </c:if>
                             </div>
-                            <c:if test="${sessionScope.account.role_id==2}">
-                                <div class="dashboard__instructor-info-right">
-                                    <a href="CreateCourse" class="btn btn-two arrow-btn">Create a New Course <img src="assets/img/icons/right_arrow.svg" alt="img" class="injectable"></a>
-                                </div>
-                            </c:if>
                         </div>
-                    </div>
+                    </c:if>
                     <div class="row">
                         <div class="col-lg-3">
                             <div class="dashboard__sidebar-wrap">
-                                <div class="dashboard__sidebar-title mb-20">
-                                    <h6 class="title">Welcome, ${user.first_name} ${user.last_name}</h6>
-                                </div>
                                 <c:if test="${sessionScope.account.role_id!=1}">
                                     <nav class="dashboard__sidebar-menu">
                                         <ul class="list-wrap">
-                                            <li >
+                                            <li class="active">
                                                 <a href="Profile">
                                                     <i class="skillgro-avatar"></i>
                                                     My Profile
@@ -282,12 +260,6 @@
                                                 <a href="ListUser">
                                                     <i class="skillgro-avatar"></i>
                                                     User Management
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="instructor-announcement.html">
-                                                    <i class="skillgro-marketing"></i>
-                                                    Announcements
                                                 </a>
                                             </li>
                                             <li>
@@ -318,12 +290,12 @@
                                                 </a>
                                             </li>
                                             <c:if test="${sessionScope.account.role_id==2}">
-                                            <li>
-                                                <a href="AppointMentor">
-                                                    <i class="skillgro-chat"></i>
-                                                    Appoint Mentor List
-                                                </a>
-                                            </li>
+                                                <li>
+                                                    <a href="AppointMentor">
+                                                        <i class="skillgro-chat"></i>
+                                                        Appoint Mentor List
+                                                    </a>
+                                                </li>
                                             </c:if>
                                         </ul>
                                     </nav>
@@ -333,7 +305,7 @@
                                 </div>
                                 <nav class="dashboard__sidebar-menu">
                                     <ul class="list-wrap">
-                                        <li  class="active">
+                                        <li>
                                             <a href="Setting">
                                                 <i class="skillgro-settings"></i>
                                                 Settings
@@ -352,94 +324,112 @@
                                     <div class="col-lg-12">
                                         <div class="dashboard__nav-wrap">
                                             <ul class="nav nav-tabs" id="myTab" role="tablist">
-                                                <li class="nav-item" role="presentation">
-                                                    <button class="nav-link active" id="itemOne-tab" data-bs-toggle="tab" data-bs-target="#itemOne-tab-pane" type="button" role="tab" aria-controls="itemOne-tab-pane" aria-selected="true">Profile</button>
-                                                </li>
-                                                <li class="nav-item" role="presentation">
-                                                    <button class="nav-link" id="itemTwo-tab" data-bs-toggle="tab" data-bs-target="#itemTwo-tab-pane" type="button" role="tab" aria-controls="itemTwo-tab-pane" aria-selected="false">Password</button>
-                                                </li>
+                                                <c:if test="${sessionScope.account.role_id!=1}">
+                                                    <li class="nav-item" role="presentation">
+                                                        <button class="nav-link active" id="itemOne-tab" data-bs-toggle="tab" data-bs-target="#itemOne-tab-pane" type="button" role="tab" aria-controls="itemOne-tab-pane" aria-selected="true">Profile</button>
+                                                    </li> 
+                                                </c:if>
+                                                <c:if test="${user.created_by_Google==0}">
+                                                    <li class="nav-item" role="presentation">
+                                                        <button class="nav-link" id="itemTwo-tab" data-bs-toggle="tab" data-bs-target="#itemTwo-tab-pane" type="button" role="tab" aria-controls="itemTwo-tab-pane" aria-selected="false">Password</button>
+                                                    </li>
+                                                </c:if>
                                             </ul>
                                         </div>
                                         <div class="tab-content" id="myTabContent">
-                                            <div class="tab-pane fade show active" id="itemOne-tab-pane" role="tabpanel" aria-labelledby="itemOne-tab" tabindex="0">
-                                                <div upload-image-preview1 class="instructor__cover-bg" data-background="${user.backgroup}" >
-                                                    <div class="instructor__cover-info">
-                                                        <div class="instructor__cover-info-left">
-                                                            <div class="thumb">
-                                                                <img upload-image-preview src="${user.avatar}" alt="img">
+                                            <c:if test="${sessionScope.account.role_id!=1}">
+                                                <div class="tab-pane fade show active" id="itemOne-tab-pane" role="tabpanel" aria-labelledby="itemOne-tab" tabindex="0">
+                                                    <div upload-image-preview1 class="instructor__cover-bg" data-background="${user.backgroup}" >
+                                                        <div class="instructor__cover-info">
+                                                            <div class="instructor__cover-info-left">
+                                                                <div class="thumb">
+                                                                    <img upload-image-preview src="${user.avatar}" alt="img">
+                                                                </div>
+                                                                <button onclick="triggerFileInput()" data-btn-file-trigger="#fileImport" title="Upload Photo"><i class="fas fa-camera"></i></button>
                                                             </div>
-                                                            <button onclick="triggerFileInput()" data-btn-file-trigger="#fileImport" title="Upload Photo"><i class="fas fa-camera"></i></button>
-                                                        </div>
-                                                        <div class="instructor__cover-info-right">
-                                                            <a onclick="triggerFileInput1()" data-btn-file-trigger="#fileImport1" class="btn btn-two arrow-btn">Edit Cover Photo</a>
+                                                            <div class="instructor__cover-info-right">
+                                                                <a onclick="triggerFileInput1()" data-btn-file-trigger="#fileImport1" class="btn btn-success btn-two arrow-btn">Edit Cover Photo</a>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div class="instructor__profile-form-wrap">
-                                                    <form enctype="multipart/form-data" action="Setting" method="post" class="instructor__profile-form">
+                                                    <div class="instructor__profile-form-wrap">
+                                                        <form enctype="multipart/form-data" action="Setting" method="post" class="instructor__profile-form" id="form-setting">
 
-                                                        <div class="row">
-                                                            <div class="col-md-6">
-                                                                <div class="form-grp">
-                                                                    <label for="firstname">First Name</label>
-                                                                    <input name="first_name" id="firstname" type="text" value="${user.first_name}">
+                                                            <div class="row">
+                                                                <div class="col-md-6">
+                                                                    <div class="form-grp">
+                                                                        <label for="firstname">First Name</label>
+                                                                        <input name="first_name" id="firstname" type="text" value="${user.first_name}">
+                                                                    </div>
+                                                                    <div class="messFirst mt-4">
+
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <div class="form-grp">
+                                                                        <label for="lastname">Last Name</label>
+                                                                        <input name="last_name" id="lastname" type="text" value="${user.last_name}">
+                                                                    </div>
+                                                                    <div class="messLast mt-4">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <div class="form-grp">
+                                                                        <label for="phonenumber">Phone Number</label>
+                                                                        <input name="phone_number" id="phonenumber" type="tel" value="${user.phone_number}" oninput="validate(this)">
+                                                                    </div>
+                                                                    <div class="messPhone mt-4">
+
+                                                                    </div>
                                                                 </div>
                                                             </div>
-                                                            <div class="col-md-6">
-                                                                <div class="form-grp">
-                                                                    <label for="lastname">Last Name</label>
-                                                                    <input name="last_name" id="lastname" type="text" value="${user.last_name}">
-                                                                </div>
+                                                            <div class="form-grp">
+                                                                <label for="bio">Bio</label>
+                                                                <textarea name="description" id="bio">${user.description}</textarea>
                                                             </div>
-                                                            <div class="col-md-6">
-                                                                <div class="form-grp">
-                                                                    <label for="phonenumber">Phone Number</label>
-                                                                    <input name="phone_number" id="phonenumber" type="tel" value="${user.phone_number}">
-                                                                </div>
+                                                            <div class="submit-btn mt-25">
+                                                                <button type="submit" class="btn btn-success" id="update_info">Update Info</button>
                                                             </div>
-                                                        </div>
-                                                        <div class="form-grp">
-                                                            <label for="bio">Bio</label>
-                                                            <textarea name="description" id="bio">${user.description}</textarea>
-                                                        </div>
-                                                        <div class="submit-btn mt-25">
-                                                            <button type="submit" class="btn">Update Info</button>
-                                                        </div>
-                                                        <input hidden="true"
-                                                               id="fileImport"
-                                                               name="avatar"
-                                                               type="file"
-                                                               accept=".jpg,.jpeg,.png"
-                                                               upload-image-input
-                                                               />
-                                                        <input hidden="true"
-                                                               id="fileImport1"
-                                                               name="backgroup"
-                                                               type="file"
-                                                               accept=".jpg,.jpeg,.png"
-                                                               upload-image-input1
-                                                               />
-                                                    </form>
+                                                            <input hidden="true"
+                                                                   id="fileImport"
+                                                                   name="avatar"
+                                                                   type="file"
+                                                                   accept=".jpg,.jpeg,.png"
+                                                                   upload-image-input
+                                                                   />
+                                                            <input hidden="true"
+                                                                   id="fileImport1"
+                                                                   name="backgroup"
+                                                                   type="file"
+                                                                   accept=".jpg,.jpeg,.png"
+                                                                   upload-image-input1
+                                                                   />
+                                                        </form>
+                                                    </div>
                                                 </div>
-                                            </div>
+                                            </c:if>
                                             <div class="tab-pane fade" id="itemTwo-tab-pane" role="tabpanel" aria-labelledby="itemTwo-tab" tabindex="0">
                                                 <div class="instructor__profile-form-wrap">
-                                                    <form action="#" class="instructor__profile-form">
+                                                    <form action="ChangePassword" class="instructor__profile-form" method="post">
+                                                        <input name="email" type="hidden" value="${user.email}"/>
                                                         <div class="form-grp">
                                                             <label for="currentpassword">Current Password</label>
-                                                            <input id="currentpassword" type="password" placeholder="Current Password">
+                                                            <input id="currentpassword" name='currentPass' type="password" placeholder="Current Password" required>
                                                         </div>
                                                         <div class="form-grp">
                                                             <label for="newpassword">New Password</label>
-                                                            <input id="newpassword" type="password" placeholder="New Password">
+                                                            <input id="newpassword" type="password" name="pass" placeholder="New Password" required>
                                                         </div>
                                                         <div class="form-grp">
                                                             <label for="repassword">Re-Type New Password</label>
-                                                            <input id="repassword" type="password" placeholder="Re-Type New Password">
+                                                            <input id="repassword" type="password" name="repass" placeholder="Re-Type New Password" required>
                                                         </div>
-                                                        <div class="submit-btn mt-25">
-                                                            <button type="submit" class="btn">Update Password</button>
+                                                        <div class="submit-btn mt-25 ">
+                                                            <button type="submit" class="btn btn-success">Update Password</button>
                                                         </div>
+                                                        <c:if test="${mess!= null}">
+                                                            <div class="alert alert-danger"> ${mess}</div>
+                                                        </c:if>
                                                     </form>
                                                 </div>
                                             </div>
@@ -482,42 +472,85 @@
         <script src="assets/js/aos.js"></script>
         <script src="assets/js/main.js"></script>
         <script>
-                                                                SVGInject(document.querySelectorAll("img.injectable"));
-                                                                function triggerFileInput() {
-                                                                    document.getElementById('fileImport').click();
-                                                                }
-                                                                function triggerFileInput1() {
-                                                                    document.getElementById('fileImport1').click();
-                                                                }
-                                                                const uploadImageInput = document.querySelector("[upload-image-input]");
-                                                                const uploadImagePreview = document.querySelector("[upload-image-preview]");
-                                                                const closeImagePreview = document.querySelector("[close-image-preview]");
-                                                                const uploadImageInput1 = document.querySelector("[upload-image-input1]");
-                                                                const uploadImagePreview1 = document.querySelector("[upload-image-preview1]");
-                                                                const closeImagePreview1 = document.querySelector("[close-image-preview1]");
-                                                                uploadImageInput.addEventListener("change", (e) => {
-                                                                    const file = e.target.files[0];
-                                                                    console.log(file);
-                                                                    if (file) {
-                                                                        const reader = new FileReader();
-                                                                        reader.onload = function (e) {
-                                                                            uploadImagePreview.src = e.target.result;
-                                                                        }
-                                                                        reader.readAsDataURL(file);
+                                                                    SVGInject(document.querySelectorAll("img.injectable"));
+                                                                    function triggerFileInput() {
+                                                                        document.getElementById('fileImport').click();
                                                                     }
-                                                                })
-                                                                uploadImageInput1.addEventListener("change", (e) => {
-                                                                    const file = e.target.files[0];
-                                                                    console.log(file);
-                                                                    if (file) {
-                                                                        const reader = new FileReader();
-                                                                        reader.onload = function (e) {
-                                                                            let url = "url(" + e.target.result + ")";
-                                                                            uploadImagePreview1.style.backgroundImage = url;
-                                                                        }
-                                                                        reader.readAsDataURL(file);
+                                                                    function triggerFileInput1() {
+                                                                        document.getElementById('fileImport1').click();
                                                                     }
-                                                                })
+                                                                    const uploadImageInput = document.querySelector("[upload-image-input]");
+                                                                    const uploadImagePreview = document.querySelector("[upload-image-preview]");
+                                                                    const closeImagePreview = document.querySelector("[close-image-preview]");
+                                                                    const uploadImageInput1 = document.querySelector("[upload-image-input1]");
+                                                                    const uploadImagePreview1 = document.querySelector("[upload-image-preview1]");
+                                                                    const closeImagePreview1 = document.querySelector("[close-image-preview1]");
+                                                                    uploadImageInput.addEventListener("change", (e) => {
+                                                                        const file = e.target.files[0];
+                                                                        console.log(file);
+                                                                        if (file) {
+                                                                            const reader = new FileReader();
+                                                                            reader.onload = function (e) {
+                                                                                uploadImagePreview.src = e.target.result;
+                                                                            }
+                                                                            reader.readAsDataURL(file);
+                                                                        }
+                                                                    })
+                                                                    uploadImageInput1.addEventListener("change", (e) => {
+                                                                        const file = e.target.files[0];
+                                                                        console.log(file);
+                                                                        if (file) {
+                                                                            const reader = new FileReader();
+                                                                            reader.onload = function (e) {
+                                                                                let url = "url(" + e.target.result + ")";
+                                                                                uploadImagePreview1.style.backgroundImage = url;
+                                                                            }
+                                                                            reader.readAsDataURL(file);
+                                                                        }
+                                                                    });
+                                                                    function validate(element) {
+                                                                        const update_info = document.querySelector("#update_info");
+                                                                        const phoneNumberPattern = /^0\d{9}$/;
+                                                                        const messPhone = document.querySelector(".messPhone");
+                                                                        const messFirst = document.querySelector(".messFirst");
+                                                                        const messLast = document.querySelector(".messLast");
+                                                                        if (phoneNumberPattern.test(element.value)) {
+                                                                            messPhone.innerHTML = ""
+                                                                        } else {
+                                                                            messPhone.innerHTML = "<span class='alert alert-danger mt-2'>Phone number must have 10 digits and start with 0.</span>"
+                                                                            update_info.disabled = true;
+                                                                        }
+                                                                    }
+
+                                                                    const form_setting = document.querySelector("#form-setting");
+                                                                    if (form_setting) {
+                                                                        const messPhone = document.querySelector(".messPhone");
+                                                                        const messFirst = document.querySelector(".messFirst");
+                                                                        const messLast = document.querySelector(".messLast");
+                                                                        form_setting.addEventListener("submit", (e) => {
+                                                                            e.preventDefault(); // Prevent form submission for validation
+                                                                            const firstName = e.target.elements.first_name.value;
+                                                                            const lastName = e.target.elements.last_name.value;
+                                                                            const phoneNumber = e.target.elements.phone_number.value;
+                                                                            let check = true;
+                                                                            if (firstName == '') {
+                                                                                messFirst.innerHTML = "<span class='alert alert-danger mt-2'>First Name is not empty.</span>";
+                                                                                check = false;
+                                                                            }
+                                                                            if (lastName == '') {
+                                                                                messLast.innerHTML = "<span class='alert alert-danger mt-2'>Last Name is not empty.</span>"
+                                                                                check = false;
+                                                                            }
+                                                                            const phoneNumberPattern = /^0\d{9}$/;
+                                                                            if (phoneNumberPattern.test(phoneNumber.value)) {
+                                                                                messPhone.innerHTML = "<span class='alert alert-danger mt-2'>Phone number must have 10 digits and start with 0.</span>"
+                                                                                check = false;
+                                                                            }
+                                                                            if (check == true) {
+                                                                                form_setting.submit();
+                                                                            }
+                                                                        });
+                                                                    }
         </script>
     </body>
 

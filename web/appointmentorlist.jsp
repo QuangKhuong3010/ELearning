@@ -28,6 +28,7 @@
         <link rel="stylesheet" href="assets/css/spacing.css">
         <link rel="stylesheet" href="assets/css/tg-cursor.css">
         <link rel="stylesheet" href="assets/css/main.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <style>
             .dashboard__content-title{
                 display:flex;
@@ -59,7 +60,7 @@
         </button>
         <!-- Scroll-top-end-->
 
-         <!-- header-area -->
+        <!-- header-area -->
         <header>
             <div class="tg-header__top">
                 <div class="container custom-container">
@@ -194,61 +195,39 @@
             <!-- dashboard-area -->
             <section class="dashboard__area section-pb-120">
                 <div class="container">
-                    <div class="dashboard__top-wrap">
-                        <div class="dashboard__top-bg" data-background="${user.backgroup}"></div>
-                        <div class="dashboard__instructor-info">
-                            <div class="dashboard__instructor-info-left">
-                                <div class="thumb">
-                                    <img src="${user.avatar}" alt="img">
+                    <c:if test="${sessionScope.account.role_id!=1}">
+                        <div class="dashboard__top-wrap">
+                            <div class="dashboard__top-bg" data-background="${user.backgroup}"></div>
+                            <div class="dashboard__instructor-info">
+                                <div class="dashboard__instructor-info-left">
+                                    <div class="thumb">
+                                        <img src="${user.avatar}" alt="img">
+                                    </div>
+                                    <div class="content">
+                                        <h4 class="title">${user.first_name} ${user.last_name}</h4>
+                                    </div>
                                 </div>
-                                <div class="content">
-                                    <h4 class="title">${user.first_name} ${user.last_name}</h4>
-                                    <c:if test="${sessionScope.account.role_id==3}">
-                                        <div class="review__wrap review__wrap-two">
-                                            <div class="rating">
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                            </div>
-                                            <span>(15 Reviews)</span>
-                                        </div>
-                                    </c:if>
-                                    <ul class="list-wrap">
-                                        <li>
-                                            <img src="assets/img/icons/course_icon03.svg" alt="img" class="injectable">
-                                            ${user.quantityCourseLearning} Courses Enrolled
-                                        </li>
-                                        <li>
-                                            <img src="assets/img/icons/course_icon05.svg" alt="img" class="injectable">
-                                            ? Certificate
-                                        </li>
-                                    </ul>
-                                </div>
+                                <c:if test="${sessionScope.account.role_id==2}">
+                                    <div class="dashboard__instructor-info-right">
+                                        <a href="CreateCourse" class="btn btn-two arrow-btn">Create a New Course <img src="assets/img/icons/right_arrow.svg" alt="img" class="injectable"></a>
+                                    </div>
+                                </c:if>
                             </div>
-                            <c:if test="${sessionScope.account.role_id==2}">
-                                <div class="dashboard__instructor-info-right">
-                                    <a href="CreateCourse" class="btn btn-two arrow-btn">Create a New Course <img src="assets/img/icons/right_arrow.svg" alt="img" class="injectable"></a>
-                                </div>
-                            </c:if>
                         </div>
-                    </div>
+                    </c:if>
                     <div class="row">
                         <div class="col-lg-3">
                             <div class="dashboard__sidebar-wrap">
-                                <div class="dashboard__sidebar-title mb-20">
-                                    <h6 class="title">Welcome, ${user.first_name} ${user.last_name}</h6>
-                                </div>
                                 <c:if test="${sessionScope.account.role_id!=1}">
                                     <nav class="dashboard__sidebar-menu">
                                         <ul class="list-wrap">
-                                            <li>
+                                            <li class="active">
                                                 <a href="Profile">
                                                     <i class="skillgro-avatar"></i>
                                                     My Profile
                                                 </a>
                                             </li>
+
                                             <li>
                                                 <a href="CourseEnrolled">
                                                     <i class="skillgro-book"></i>
@@ -271,19 +250,13 @@
                                                 </a>
                                             </li>
                                             <li>
-                                                <a href="instructor-announcement.html">
-                                                    <i class="skillgro-marketing"></i>
-                                                    Announcements
-                                                </a>
-                                            </li>
-                                            <li>
                                                 <a href="CourseManager">
                                                     <i class="skillgro-book"></i>
                                                     Course Management
                                                 </a>
                                             </li>
-                                            <li  class="active">
-                                                <a href="AppointMentor">
+                                            <li>
+                                                <a href="AppointMentorConfirm">
                                                     <i class="skillgro-book"></i>
                                                     Appoint Mentor List
                                                 </a>
@@ -304,12 +277,12 @@
                                                 </a>
                                             </li>
                                             <c:if test="${sessionScope.account.role_id==2}">
-                                            <li class="active">
-                                                <a href="AppointMentor">
-                                                    <i class="skillgro-chat"></i>
-                                                    Appoint Mentor List
-                                                </a>
-                                            </li>
+                                                <li>
+                                                    <a href="AppointMentor">
+                                                        <i class="skillgro-chat"></i>
+                                                        Appoint Mentor List
+                                                    </a>
+                                                </li>
                                             </c:if>
                                         </ul>
                                     </nav>
@@ -333,12 +306,15 @@
                             <div class="dashboard__content-wrap">
                                 <div class="dashboard__content-title">
                                     <div class="row">
-                                        <div class="col-9">
+                                        <div class="col-8">
                                             <h4 class="title">Appoint Mentor List</h4>
                                         </div>
                                         <div class="col-3">
                                             <c:if test="${sessionScope.account.role_id==2}">
                                                 <a href="AppointMentorAdd" class="btn btn-two">Add New Appoint</a>
+                                            </c:if>
+                                            <c:if test="${sessionScope.account.role_id==1}">
+                                                <a href="AddManager" class="btn btn-two">Add New Manager</a>
                                             </c:if>
                                         </div>  
                                     </div>
@@ -358,6 +334,7 @@
                                                             <c:if test="${sessionScope.account.role_id==2}">
                                                             <th>Status</th>
                                                             </c:if>
+                                                        <th>Setting</th>
                                                     </tr>
                                                 </thead>
                                                 <c:forEach items="${list}" var='l'>
@@ -365,7 +342,7 @@
                                                         <tr>
                                                             <td>
                                                                 <div class="dashboard__quiz-info">
-                                                                    <h6 name="$" class="title">${l.user_id}</h6>
+                                                                    <h6 name="id" class="title">${l.user_id}</h6>
                                                                 </div>
                                                             </td>
                                                             <td>
@@ -392,26 +369,27 @@
                                                                     </div>
                                                                 </td>
                                                             </c:if>
-                                                            <td>
-                                                                <div class="dashboard__review-action">
+                                                            <td style="text-align: center">
+                                                                <div class="dashboard__review-action" style="justify-content: center">
                                                                     <c:if test="${sessionScope.account.role_id==1}">
                                                                         <a href="AppointMentorAccept?id=${l.user_id}" title="Accept">
-                                                                            <i class="skillgro-edit">
-                                                                            </i>
+                                                                                <i class="fa-solid fa-check" style="color: green;"></i>
                                                                         </a>
                                                                         <a href="AppointMentorReject?id=${l.user_id}" title="Reject">
-                                                                            <i class="skillgro-bin"></i>
+                                                                            <i class="fa-solid fa-question"></i>
                                                                         </a>
                                                                     </c:if>
                                                                     <c:if test="${sessionScope.account.role_id==2}">
                                                                         <c:if test="${l.status.equals('Processing')}">
-                                                                            <a href="AppointMentorDeleteOrConfirm?id=${l.user_id}" title="Confirm">
-                                                                                <i class="skillgro-edit"></i>
+                                                                            <a href="AppointMentorDeleteOrConfirm?id=${l.user_id}" title="Delete">
+                                                                                <i class="fa-solid fa-trash" style="color: red;"></i>
                                                                             </a>
                                                                         </c:if>
-                                                                        <a href="AppointMentorDeleteOrConfirm?id=${l.user_id}" title="Delete">
-                                                                            <i class="skillgro-bin"></i>
-                                                                        </a>
+                                                                        <c:if test="${!l.status.equals('Processing')}">
+                                                                            <a href="AppointMentorDeleteOrConfirm?id=${l.user_id}" title="Delete">
+                                                                                <i class="fa-solid fa-check" style="color: green;"></i>
+                                                                            </a>
+                                                                        </c:if>
                                                                     </c:if>
                                                                 </div>
                                                             </td>

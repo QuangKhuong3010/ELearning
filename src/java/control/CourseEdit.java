@@ -119,11 +119,12 @@ public class CourseEdit extends HttpServlet {
         int level = Integer.parseInt(request.getParameter("level"));
         float price = Float.parseFloat(request.getParameter("price"));
         String description = request.getParameter("description");
+        String title = request.getParameter("name");
         int course_id = Integer.parseInt(request.getParameter("course_id"));
         String background = upload.uploadCloudSingleImage(request, "backgroup")!=null?upload.uploadCloudSingleImage(request, "backgroup"):"";
         if (background.equals(""))
             background=courseDAO.getCourse(course_id).getAvatar();
-        courseDAO.updateCourse(category, level, background, description, price, course_id);
+        courseDAO.updateCourse(category, level, background, description, price, course_id,title);
         response.sendRedirect("CourseManager");
     }
 

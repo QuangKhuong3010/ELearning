@@ -238,6 +238,9 @@
                                                     </div>
                                                 </div>
                                             </form>
+                                            <c:if test="${mess!=null}">
+                                                        <a class="alert alert-danger">${mess}</a>
+                                                    </c:if>
                                         </div>
                                     </div>
                                 </div>

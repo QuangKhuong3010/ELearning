@@ -181,63 +181,40 @@
             <!-- dashboard-area -->
             <section class="dashboard__area section-pb-120">
                 <div class="container">
-                    <div class="dashboard__top-wrap">
-                        <div class="dashboard__top-bg" data-background="${user.backgroup}"></div>
-                        <div class="dashboard__instructor-info">
-                            <div class="dashboard__instructor-info-left">
-                                <div class="thumb">
-                                    <img src="${user.avatar}" alt="img">
+                    <c:if test="${sessionScope.account.role_id!=1}">
+                        <div class="dashboard__top-wrap">
+                            <div class="dashboard__top-bg" data-background="${user.backgroup}"></div>
+                            <div class="dashboard__instructor-info">
+                                <div class="dashboard__instructor-info-left">
+                                    <div class="thumb">
+                                        <img src="${user.avatar}" alt="img">
+                                    </div>
+                                    <div class="content">
+                                        <h4 class="title">${user.first_name} ${user.last_name}</h4>
+                                    </div>
                                 </div>
-                                <div class="content">
-                                    <h4 class="title">${user.first_name} ${user.last_name}</h4>
-                                    <c:if test="${sessionScope.account.role_id==3}">
-                                        <div class="review__wrap review__wrap-two">
-                                            <div class="rating">
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                            </div>
-                                            <span>(15 Reviews)</span>
-                                        </div>
-                                    </c:if>
-                                    <ul class="list-wrap">
-                                        <li>
-                                            <img src="assets/img/icons/course_icon03.svg" alt="img" class="injectable">
-                                            ${user.quantityCourseLearning} Courses Enrolled
-                                        </li>
-                                        <li>
-                                            <img src="assets/img/icons/course_icon05.svg" alt="img" class="injectable">
-                                            ? Certificate
-                                        </li>
-                                    </ul>
-                                </div>
+                                <c:if test="${sessionScope.account.role_id==2}">
+                                    <div class="dashboard__instructor-info-right">
+                                        <a href="CreateCourse" class="btn btn-two arrow-btn">Create a New Course <img src="assets/img/icons/right_arrow.svg" alt="img" class="injectable"></a>
+                                    </div>
+                                </c:if>
                             </div>
-                            <c:if test="${sessionScope.account.role_id==2}">
-                                <div class="dashboard__instructor-info-right">
-                                    <a href="CreateCourse" class="btn btn-two arrow-btn">Create a New Course <img src="assets/img/icons/right_arrow.svg" alt="img" class="injectable"></a>
-                                </div>
-                            </c:if>
                         </div>
-                    </div>
+                    </c:if>
                     <div class="row">
                         <div class="col-lg-3">
                             <div class="dashboard__sidebar-wrap">
-                                <div class="dashboard__sidebar-title mb-20">
-                                    <h6 class="title">Welcome, ${user.first_name} ${user.last_name}</h6>
-                                </div>
                                 <c:if test="${sessionScope.account.role_id!=1}">
                                     <nav class="dashboard__sidebar-menu">
                                         <ul class="list-wrap">
-                                            <li>
+                                            <li class="active">
                                                 <a href="Profile">
                                                     <i class="skillgro-avatar"></i>
                                                     My Profile
                                                 </a>
                                             </li>
 
-                                            <li  class="active">
+                                            <li>
                                                 <a href="CourseEnrolled">
                                                     <i class="skillgro-book"></i>
                                                     Enrolled Courses
@@ -256,12 +233,6 @@
                                                 <a href="ListUser">
                                                     <i class="skillgro-avatar"></i>
                                                     User Management
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="instructor-announcement.html">
-                                                    <i class="skillgro-marketing"></i>
-                                                    Announcements
                                                 </a>
                                             </li>
                                             <li>
@@ -292,12 +263,12 @@
                                                 </a>
                                             </li>
                                             <c:if test="${sessionScope.account.role_id==2}">
-                                            <li>
-                                                <a href="AppointMentor">
-                                                    <i class="skillgro-chat"></i>
-                                                    Appoint Mentor List
-                                                </a>
-                                            </li>
+                                                <li>
+                                                    <a href="AppointMentor">
+                                                        <i class="skillgro-chat"></i>
+                                                        Appoint Mentor List
+                                                    </a>
+                                                </li>
                                             </c:if>
                                         </ul>
                                     </nav>
@@ -330,12 +301,6 @@
                                                     <button class="nav-link active" id="all-tab" data-bs-toggle="tab" data-bs-target="#all-tab-pane" type="button"
                                                             role="tab" aria-controls="all-tab-pane" aria-selected="true">
                                                         Enrolled Courses
-                                                    </button>
-                                                </li>
-                                                <li class="nav-item" role="presentation">
-                                                    <button class="nav-link" id="design-tab" data-bs-toggle="tab" data-bs-target="#design-tab-pane" type="button"
-                                                            role="tab" aria-controls="design-tab-pane" aria-selected="false">
-                                                        Active Courses
                                                     </button>
                                                 </li>
                                                 <li class="nav-item" role="presentation">
@@ -384,7 +349,6 @@
                                                                         <ul class="list-wrap">
                                                                             <li><i class="flaticon-book"></i>${ci.numberOfLesson}</li>
                                                                             <li><i class="flaticon-mortarboard"></i>${ci.studentOnCourse}</li>
-                                                                            <li><i class="flaticon-mortarboard"></i>Certificate</li>
                                                                         </ul>
                                                                     </div>
                                                                 </div>
@@ -482,7 +446,6 @@
                                                                                 <ul class="list-wrap">
                                                                                     <li><i class="flaticon-book"></i>${ci.numberOfLesson}</li>
                                                                                     <li><i class="flaticon-mortarboard"></i>${ci.studentOnCourse}</li>
-                                                                                    <li><i class="flaticon-mortarboard"></i>Certificate</li>
                                                                                 </ul>
                                                                             </div>
                                                                         </div>

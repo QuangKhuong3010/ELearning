@@ -8,7 +8,6 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import dao.userDAO;
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -16,7 +15,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import model.User;
-import org.apache.catalina.connector.ClientAbortException;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.fluent.Form;
 import org.apache.http.client.fluent.Request;
@@ -72,17 +70,24 @@ public class LoginGoogleHandler extends HttpServlet {
             throws ServletException, IOException {
         String code = request.getParameter("code");
         String accessToken = getToken(code);
-        User user = getUserInfo(accessToken);
         userDAO userDAO = new userDAO();
-        if (!userDAO.checkEmailExist(user.getEmail())) {
-            userDAO.SignUpByGoogle(user.getEmail());
+        User user_raw = getUserInfo(accessToken);
+        User user = userDAO.getUserWithEmail(user_raw.getEmail());
+        if (user==null) {
+            userDAO.SignUpByGoogle(user_raw.getEmail());
+            HttpSession session = request.getSession();
+            session.setAttribute("account", user);
+            response.sendRedirect("HomePage");
         }
-
-        user.setRole_id(userDAO.loginWithGoogle(user.getEmail()).getRole_id());
-        user.setUser_id(userDAO.findUserId(user.getEmail()));
-        HttpSession session = request.getSession();
-        session.setAttribute("account", user);
-        response.sendRedirect("HomePage");
+        else if (user.getIsActive() == 0) {
+            HttpSession session = request.getSession();
+            session.setAttribute("account", user);
+            request.getRequestDispatcher("userban.jsp").forward(request, response);
+        } else {
+            HttpSession session = request.getSession();
+            session.setAttribute("account", user);
+            response.sendRedirect("HomePage");
+        }
     }
 
     /**

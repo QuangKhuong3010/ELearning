@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import model.User;
+import util.generate;
 
 public class userDAO extends DBContext {
 
@@ -81,7 +82,57 @@ public class userDAO extends DBContext {
         return null;
     }
 
+    public void changePassword(String email, String pass) {
+        String sql = "UPDATE [dbo].[User]\n"
+                + "   SET [password] = ?\n"
+                + " WHERE [email] = ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, pass);
+            st.setString(2, email);
+            st.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+    }
+
+    public void addManager(String email, String pass) {
+        generate generate = new generate();
+        try {
+            String sql = "INSERT INTO [dbo].[User]\n"
+                    + "           ([role_id]\n"
+                    + "           ,[first_name]\n"
+                    + "           ,[last_name]\n"
+                    + "           ,[email]\n"
+                    + "           ,[password]\n"
+                    + "           ,[created_by_Google]"
+                    + "           ,[avatar]\n"
+                    + "           ,[isActive])\n"
+                    + "     VALUES\n"
+                    + "           (?, ?, ?, ?, ?, ?, ? ,?)";
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, "2");
+            st.setString(2, "User");
+            st.setString(3, generate.generateOTP(6));
+            st.setString(4, email);
+            st.setString(5, pass);
+            st.setString(6, "0");
+            st.setString(7, "https://ss-images.saostar.vn/wp700/pc/1613810558698/Facebook-Avatar_3.png");
+            st.setInt(8, 1);
+            st.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+    }
+
     public void SignUp(String firstName, String lastName, String email, String pass) {
+        generate generate = new generate();
+        if (firstName == null) {
+            firstName = "User";
+        }
+        if (lastName == null) {
+            lastName = generate.generateOTP(6);
+        }
         try {
             String sql = "INSERT INTO [dbo].[User]\n"
                     + "           ([role_id]\n"
@@ -90,10 +141,10 @@ public class userDAO extends DBContext {
                     + "           ,[first_name]\n"
                     + "           ,[last_name]\n"
                     + "           ,[created_by_Google]"
-                    + "           ,[avatar])\n"
-                    + "      ,[isActive]\n"
+                    + "           ,[avatar]\n"
+                    + "      ,[isActive])\n"
                     + "     VALUES\n"
-                    + "           (?, ?, ?, ?, ?, ?,?)";
+                    + "           (?, ?, ?, ?, ?, ?,?,?)";
             PreparedStatement st = connection.prepareStatement(sql);
             st.setString(1, "4");
             st.setString(2, email);
@@ -110,21 +161,26 @@ public class userDAO extends DBContext {
     }
 
     public void SignUpByGoogle(String email) {
+        generate generate = new generate();
         try {
             String sql = "INSERT INTO [dbo].[User]\n"
                     + "           ([role_id]\n"
                     + "           ,[email]\n"
+                    + "           ,[first_name]\n"
+                    + "           ,[last_name]\n"
                     + "           ,[created_by_Google]"
-                    + "           ,[avatar])\n"
-                    + "      ,[isActive]\n"
+                    + "           ,[avatar]\n"
+                    + "           ,[isActive])\n"
                     + "     VALUES\n"
-                    + "           (?, ?, ?)";
+                    + "           (?, ?, ?, ? ,? ,?, ?)";
             PreparedStatement st = connection.prepareStatement(sql);
             st.setString(1, "4");
             st.setString(2, email);
-            st.setString(3, "1");
-            st.setString(4, "https://ss-images.saostar.vn/wp700/pc/1613810558698/Facebook-Avatar_3.png");
-            st.setInt(5, 1);
+            st.setString(3, "User");
+            st.setString(4, generate.generateOTP(6));
+            st.setString(5, "1");
+            st.setString(6, "https://ss-images.saostar.vn/wp700/pc/1613810558698/Facebook-Avatar_3.png");
+            st.setInt(7, 1);
             st.executeUpdate();
         } catch (SQLException ex) {
             System.out.println(ex);
@@ -135,18 +191,22 @@ public class userDAO extends DBContext {
         try {
             String sql = "INSERT INTO [dbo].[User]\n"
                     + "           ([role_id]\n"
+                    + "           ,[first_name]\n"
+                    + "           ,[last_name]\n"
                     + "           ,[email]\n"
                     + "           ,[password]\n"
                     + "           ,[created_by_Google])\n"
                     + "      ,[isActive]\n"
                     + "     VALUES\n"
-                    + "           (?, ?, ?,?,?)";
+                    + "           (?, ?, ?,?,?, ? ,?)";
             PreparedStatement st = connection.prepareStatement(sql);
             st.setInt(1, 3);
-            st.setString(2, user.getEmail());
-            st.setString(3, pass);
-            st.setInt(4, 0);
-            st.setInt(5, 1);
+            st.setString(2, "User");
+            st.setString(3, generate.generateOTP(6));
+            st.setString(4, user.getEmail());
+            st.setString(5, pass);
+            st.setInt(6, 0);
+            st.setInt(7, 1);
             st.executeUpdate();
         } catch (SQLException ex) {
             System.out.println(ex);
@@ -168,23 +228,6 @@ public class userDAO extends DBContext {
             System.out.println(e);
         }
         return false;
-    }
-
-    public int isActive(String email) {
-        String sql = "SELECT [isBan]\n"
-                + "  FROM [dbo].[User]\n"
-                + "WHERE [email] = ?";
-        try {
-            PreparedStatement st = connection.prepareStatement(sql);
-            st.setString(1, email);
-            ResultSet rs = st.executeQuery();
-            if (rs.next()) {
-                return rs.getInt(1);
-            }
-        } catch (SQLException e) {
-            System.out.println(e);
-        }
-        return 0;
     }
 
     public void updateNewPassword(int id, String pass) {
@@ -279,6 +322,7 @@ public class userDAO extends DBContext {
                     + ",[first_name]\n"
                     + ",[last_name]\n"
                     + ",[description]\n"
+                    + ",[isActive]\n"
                     + "FROM [ELearning].[dbo].[User]\n"
                     + "WHERE 1=1";
             if (!search.equals("")) {
@@ -294,7 +338,8 @@ public class userDAO extends DBContext {
                         rs.getString(4),
                         rs.getString(5),
                         rs.getString(6),
-                        rs.getString(7)));
+                        rs.getString(7),
+                        rs.getInt(8)));
             }
             return listUser;
         } catch (SQLException ex) {
@@ -322,6 +367,47 @@ public class userDAO extends DBContext {
                     + "  WHERE [id]=?";
             PreparedStatement st = connection.prepareStatement(sql);
             st.setInt(1, id);
+            ResultSet rs = st.executeQuery();
+            if (rs.next()) {
+                return new User(rs.getInt(1),
+                        rs.getInt(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getString(6),
+                        rs.getString(7),
+                        rs.getString(8),
+                        rs.getString(9),
+                        rs.getString(10),
+                        rs.getString(11),
+                        rs.getInt(12),
+                        rs.getInt(13));
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+        return null;
+    }
+
+    public User getUserWithEmail(String Email) {
+        try {
+            String sql = "SELECT [id]\n"
+                    + "      ,[role_id]\n"
+                    + "      ,[email]\n"
+                    + "      ,[password]\n"
+                    + "      ,[registration_date]\n"
+                    + "      ,[first_name]\n"
+                    + "      ,[last_name]\n"
+                    + "      ,[phone_number]\n"
+                    + "      ,[avatar]\n"
+                    + "      ,[backgroup]\n"
+                    + "      ,[description]\n"
+                    + "      ,[created_by_Google]\n"
+                    + "      ,[isActive]\n"
+                    + "  FROM [ELearning].[dbo].[User]"
+                    + "  WHERE [email]=?";
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, Email);
             ResultSet rs = st.executeQuery();
             if (rs.next()) {
                 return new User(rs.getInt(1),
@@ -397,4 +483,17 @@ public class userDAO extends DBContext {
         return 0;
     }
 
+    public void active(int status, int id) {
+        String sql = "UPDATE [dbo].[User]\n"
+                + "   SET [isActive] = ?\n"
+                + " WHERE [id] = ?";
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setInt(1, status);
+            st.setInt(2, id);
+            st.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+    }
 }

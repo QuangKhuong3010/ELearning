@@ -237,142 +237,113 @@
         <!-- dashboard-area -->
         <section class="dashboard__area section-pb-120">
             <div class="container">
-                <div class="dashboard__top-wrap">
-                    <div class="dashboard__top-bg" data-background="${user.backgroup}"></div>
-                    <div class="dashboard__instructor-info">
-                        <div class="dashboard__instructor-info-left">
-                            <div class="thumb">
-                                <img src="${user.avatar}" alt="img">
-                            </div>
-                            <div class="content">
-                                <h4 class="title">${user.first_name} ${user.last_name}</h4>
-                                <c:if test="${sessionScope.account.role_id==3}">
-                                    <div class="review__wrap review__wrap-two">
-                                        <div class="rating">
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                        </div>
-                                        <span>(15 Reviews)</span>
+                <c:if test="${sessionScope.account.role_id!=1}">
+                        <div class="dashboard__top-wrap">
+                            <div class="dashboard__top-bg" data-background="${user.backgroup}"></div>
+                            <div class="dashboard__instructor-info">
+                                <div class="dashboard__instructor-info-left">
+                                    <div class="thumb">
+                                        <img src="${user.avatar}" alt="img">
+                                    </div>
+                                    <div class="content">
+                                        <h4 class="title">${user.first_name} ${user.last_name}</h4>
+                                    </div>
+                                </div>
+                                <c:if test="${sessionScope.account.role_id==2}">
+                                    <div class="dashboard__instructor-info-right">
+                                        <a href="CreateCourse" class="btn btn-two arrow-btn">Create a New Course <img src="assets/img/icons/right_arrow.svg" alt="img" class="injectable"></a>
                                     </div>
                                 </c:if>
-                                <ul class="list-wrap">
-                                    <li>
-                                        <img src="assets/img/icons/course_icon03.svg" alt="img" class="injectable">
-                                        ${user.quantityCourseLearning} Courses Enrolled
-                                    </li>
-                                    <li>
-                                        <img src="assets/img/icons/course_icon05.svg" alt="img" class="injectable">
-                                        ? Certificate
-                                    </li>
-                                </ul>
                             </div>
                         </div>
-                        <c:if test="${sessionScope.account.role_id==2}">
-                            <div class="dashboard__instructor-info-right">
-                                <a href="CreateCourse" class="btn btn-two arrow-btn">Create a New Course <img src="assets/img/icons/right_arrow.svg" alt="img" class="injectable"></a>
-                            </div>
-                        </c:if>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-3">
-                        <div class="dashboard__sidebar-wrap">
-                            <div class="dashboard__sidebar-title mb-20">
-                                <h6 class="title">Welcome, ${user.first_name} ${user.last_name}</h6>
-                            </div>
-                            <c:if test="${sessionScope.account.role_id!=1}">
-                                <nav class="dashboard__sidebar-menu">
-                                    <ul class="list-wrap">
-                                        <li >
-                                            <a href="Profile">
-                                                <i class="skillgro-avatar"></i>
-                                                My Profile
-                                            </a>
-                                        </li>
+                    </c:if>
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <div class="dashboard__sidebar-wrap">
+                                <c:if test="${sessionScope.account.role_id!=1}">
+                                    <nav class="dashboard__sidebar-menu">
+                                        <ul class="list-wrap">
+                                            <li class="active">
+                                                <a href="Profile">
+                                                    <i class="skillgro-avatar"></i>
+                                                    My Profile
+                                                </a>
+                                            </li>
 
-                                        <li>
-                                            <a href="CourseEnrolled">
-                                                <i class="skillgro-book"></i>
-                                                Enrolled Courses
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </nav>
-                            </c:if>
-                            <c:if test="${sessionScope.account.role_id==1}">
-                                <div class="dashboard__sidebar-title mt-40 mb-20">
-                                    <h6 class="title">Administration</h6>
-                                </div>
-                                <nav class="dashboard__sidebar-menu">
-                                    <ul class="list-wrap">
-                                        <li class="active">
-                                            <a href="ListUser">
-                                                <i class="skillgro-avatar"></i>
-                                                User Management
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="instructor-announcement.html">
-                                                <i class="skillgro-marketing"></i>
-                                                Announcements
-                                            </a>
-                                        </li>
-                                        <li class="active">
-                                            <a href="CourseManager">
-                                                <i class="skillgro-book"></i>
-                                                Course Management
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="AppointMentor">
-                                                <i class="skillgro-book"></i>
-                                                Appoint Mentor List
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </nav>
-                            </c:if>
-                            <c:if test="${(sessionScope.account.role_id==3) || (sessionScope.account.role_id==2)}">
-                                <div class="dashboard__sidebar-title mt-40 mb-20">
-                                    <h6 class="title">Management</h6>
-                                </div>
-                                <nav class="dashboard__sidebar-menu">
-                                    <ul class="list-wrap">
-                                        <li>
-                                            <a href="CourseManager">
-                                                <i class="skillgro-video-tutorial"></i>
-                                                Courses Management
-                                            </a>
-                                        </li>
-                                        <c:if test="${sessionScope.account.role_id==2}">
+                                            <li>
+                                                <a href="CourseEnrolled">
+                                                    <i class="skillgro-book"></i>
+                                                    Enrolled Courses
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </nav>
+                                </c:if>
+                                <c:if test="${sessionScope.account.role_id==1}">
+                                    <div class="dashboard__sidebar-title mt-40 mb-20">
+                                        <h6 class="title">Administration</h6>
+                                    </div>
+                                    <nav class="dashboard__sidebar-menu">
+                                        <ul class="list-wrap">
+                                            <li>
+                                                <a href="ListUser">
+                                                    <i class="skillgro-avatar"></i>
+                                                    User Management
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="CourseManager">
+                                                    <i class="skillgro-book"></i>
+                                                    Course Management
+                                                </a>
+                                            </li>
                                             <li>
                                                 <a href="AppointMentor">
-                                                    <i class="skillgro-chat"></i>
+                                                    <i class="skillgro-book"></i>
                                                     Appoint Mentor List
                                                 </a>
                                             </li>
-                                        </c:if>
+                                        </ul>
+                                    </nav>
+                                </c:if>
+                                <c:if test="${(sessionScope.account.role_id==3) || (sessionScope.account.role_id==2)}">
+                                    <div class="dashboard__sidebar-title mt-40 mb-20">
+                                        <h6 class="title">Management</h6>
+                                    </div>
+                                    <nav class="dashboard__sidebar-menu">
+                                        <ul class="list-wrap">
+                                            <li>
+                                                <a href="CourseManager">
+                                                    <i class="skillgro-video-tutorial"></i>
+                                                    Courses Management
+                                                </a>
+                                            </li>
+                                            <c:if test="${sessionScope.account.role_id==2}">
+                                                <li>
+                                                    <a href="AppointMentor">
+                                                        <i class="skillgro-chat"></i>
+                                                        Appoint Mentor List
+                                                    </a>
+                                                </li>
+                                            </c:if>
+                                        </ul>
+                                    </nav>
+                                </c:if>
+                                <div class="dashboard__sidebar-title mt-30 mb-20">
+                                    <h6 class="title">User</h6>
+                                </div>
+                                <nav class="dashboard__sidebar-menu">
+                                    <ul class="list-wrap">
+                                        <li>
+                                            <a href="Setting">
+                                                <i class="skillgro-settings"></i>
+                                                Settings
+                                            </a>
+                                        </li>
                                     </ul>
                                 </nav>
-                            </c:if>
-                            <div class="dashboard__sidebar-title mt-30 mb-20">
-                                <h6 class="title">User</h6>
                             </div>
-                            <nav class="dashboard__sidebar-menu">
-                                <ul class="list-wrap">
-                                    <li>
-                                        <a href="Setting">
-                                            <i class="skillgro-settings"></i>
-                                            Settings
-                                        </a>
-                                    </li>
-                                </ul>
-                            </nav>
                         </div>
-                    </div>
                     <div class="col-lg-9">
                         <div class="dashboard__content-wrap">
                             <div class="dashboard__content-title">
@@ -396,7 +367,7 @@
                                                         <div class="row mb-3 align-items-center"> 
                                                             <h1 class="col-md-2">Lesson</h1>
                                                             <div class="submit-btn col-md-6"">
-                                                                <a  class="button mt-0" onclick="addRow()">Add</a>
+                                                                <a  class="button mt-0 btn btn-warning" onclick="addRow()">Add</a>
                                                             </div>
                                                             <div class="row mt-3">  
                                                                 <div class="col-md-12 additionalRows" >

@@ -17,6 +17,8 @@ import model.Course;
  */
 public class courseDAO extends DBContext {
 
+ 
+
     public ArrayList<Course> getAllCourse(String search, String orderBy) {
         String sql = "SELECT [id]\n"
                 + "      ,[managed_by]\n"
@@ -59,7 +61,101 @@ public class courseDAO extends DBContext {
         }
         return null;
     }
-
+    public ArrayList<Course> getAllCourseByCid(String search, int cid) {
+        String sql = "SELECT [id]\n"
+                + "      ,[managed_by]\n"
+                + "      ,[assign_by]\n"
+                + "      ,[name]\n"
+                + "      ,[price]\n"
+                + "      ,[level_id]\n"
+                + "      ,[category_id]\n"
+                + "      ,[avatar]\n"
+                + "      ,[description]\n"
+                + "      ,[created_date]\n"
+                + "      ,[isActive]\n"
+                + "  FROM [dbo].[Course]"
+                + "  WHERE 1=1 ";
+        if (!search.equals("")) {
+            sql += "AND [name] LIKE '%" + search + "%' \n ";
+        }
+        if(cid != 0)
+        sql += "category_id = " + cid ;
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            ResultSet rs = st.executeQuery();
+            ArrayList<Course> CourseList = new ArrayList<>();
+            while (rs.next()) {
+                CourseList.add(new Course(
+                        rs.getInt(1),
+                        rs.getInt(2),
+                        rs.getInt(3),
+                        rs.getString(4),
+                        rs.getFloat(5),
+                        rs.getInt(6),
+                        rs.getInt(7),
+                        rs.getString(8),
+                        rs.getString(9),
+                        rs.getString(10),
+                        rs.getInt(11)));
+            }
+            return CourseList;
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return null;
+    }
+    public ArrayList<Course> getListCourseByCids(String search, int [] cid) {
+        String sql = "SELECT [id]\n"
+                + "      ,[managed_by]\n"
+                + "      ,[assign_by]\n"
+                + "      ,[name]\n"
+                + "      ,[price]\n"
+                + "      ,[level_id]\n"
+                + "      ,[category_id]\n"
+                + "      ,[avatar]\n"
+                + "      ,[description]\n"
+                + "      ,[created_date]\n"
+                + "      ,[isActive]\n"
+                + "  FROM [dbo].[Course]"
+                + "  WHERE 1=1 ";
+        if (!search.equals("")) {
+            sql += "AND [name] LIKE '%" + search + "%' \n ";
+        }
+       if (cid != null && cid[0] != 0) {
+            sql += " and category_id in(";
+            for (int i = 0; i < cid.length; i++) {
+                sql += cid[i] + ",";
+            }
+            if (sql.endsWith(",")) {
+                sql = sql.substring(0, sql.length() - 1);
+            }
+            sql += ")";
+       }
+        try {
+            PreparedStatement st = connection.prepareStatement(sql);
+            ResultSet rs = st.executeQuery();
+            ArrayList<Course> CourseList = new ArrayList<>();
+            while (rs.next()) {
+                CourseList.add(new Course(
+                        rs.getInt(1),
+                        rs.getInt(2),
+                        rs.getInt(3),
+                        rs.getString(4),
+                        rs.getFloat(5),
+                        rs.getInt(6),
+                        rs.getInt(7),
+                        rs.getString(8),
+                        rs.getString(9),
+                        rs.getString(10),
+                        rs.getInt(11)));
+            }
+            return CourseList;
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return null;
+    }
+    
     public ArrayList<Course> getCourseManagedBy(int managed_by) {
         String sql = "SELECT [id]\n"
                 + "      ,[managed_by]\n"
@@ -226,14 +322,15 @@ public class courseDAO extends DBContext {
         }
     }
 
-    public void updateCourse(int category, int level, String background, String description, float price, int course_id) {
+    public void updateCourse(int category, int level, String background, String description, float price, int course_id,String title) {
         try {
             String sql = "UPDATE [dbo].[Course]\n"
                     + "   SET [price] = ?\n"
                     + "      ,[level_id] = ?\n"
                     + "      ,[category_id] = ?\n"
                     + "      ,[avatar] = ?\n"
-                    + "      ,[description] = ?\n"
+                    + "      ,[description] = ?"
+                    + "      ,[name] = ?\n"
                     + " WHERE id=?";
             PreparedStatement st = connection.prepareStatement(sql);
             st.setFloat(1, price);
@@ -241,7 +338,8 @@ public class courseDAO extends DBContext {
             st.setInt(3, category);
             st.setString(4, background);
             st.setString(5, description);
-            st.setInt(6, course_id);
+            st.setString(6, title);
+            st.setInt(7, course_id);
             st.executeUpdate();
         } catch (SQLException ex) {
             System.out.println(ex);

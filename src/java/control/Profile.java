@@ -4,6 +4,7 @@
  */
 package control;
 
+import dao.certificateDAO;
 import dao.courseDAO;
 import dao.purchasedDAO;
 import dao.userDAO;
@@ -15,6 +16,8 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.util.ArrayList;
+import model.Certificate;
 import model.User;
 
 /**
@@ -67,12 +70,17 @@ public class Profile extends HttpServlet {
             response.sendRedirect("Logout");
             return;
         }
-        userDAO userDAO = new userDAO();
+        
+       
+        User user = (User) session.getAttribute("account");
+        
+        certificateDAO  certificateDAO = new  certificateDAO();
         purchasedDAO purchasedDAO = new purchasedDAO();
-        User user_system = (User) session.getAttribute("account");
-        User user = userDAO.getUser(user_system.getUser_id());
+        
         user.setQuantityCourseLearning(purchasedDAO.getAllOf(user.getUser_id()).size());
-
+        ArrayList<Certificate> listCertificate = certificateDAO.getAllCertificate(user.getUser_id());
+        
+        request.setAttribute("certificate", listCertificate);
         request.setAttribute("user", user);
         request.getRequestDispatcher("profile.jsp").forward(request, response);
     }

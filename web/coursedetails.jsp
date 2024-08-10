@@ -169,12 +169,12 @@
                 width: 50px;
                 height: 50px;
             }
-            
+
             .manager-avatar{
                 width: 225px;
                 height: 225px;
             }
-            
+
 
             .cursive {
                 font-family: "Pinyon Script", cursive;
@@ -337,8 +337,17 @@
                     }
                 }
             }
-
-
+            .manager-avatar{
+                border-radius: 50%;
+                height: 100px;
+                width:  100px;
+            }
+            .manager-avatar img{
+                aspect-ratio: 1/1;
+                border-radius: 50%;
+                width: 100%;
+                object-fit: cover;
+            }
         </style>
 
     </head>
@@ -714,11 +723,6 @@
                                             <span>${sizeLesson}</span>
                                         </li>
                                         <li>
-                                            <img src="assets/img/icons/course_icon04.svg" alt="img" class="injectable">
-                                            Quizzes
-                                            <span>?</span>
-                                        </li>
-                                        <li>
                                             <img src="assets/img/icons/course_icon06.svg" alt="img" class="injectable">
                                             Graduation
                                             <span>${course.studentOnCourse}</span>
@@ -726,18 +730,18 @@
                                     </ul>
                                 </div>
                                 <div class="courses__details-enroll">
-                                    <c:if test="${purchased!=null && sessionScope.account!=null && course.assign_by != sessionScope.account.user_id && course.managed_by != sessionScope.account.user_id && course.isActive==1}} ">
+                                    <c:if test="${purchased!=null && sessionScope.account!=null && course.assign_by != sessionScope.account.user_id && course.managed_by != sessionScope.account.user_id && course.isActive==1}">
                                         <div class="tg-button-wrap">
                                             <button id="btnDatHang" class="shopee-button-solid shopee-button-solid--primary">
-                                                <a href="LessonDetails?course_id=${course.id}&lesson_id=first_lesson" class="btn arrow-btn" class="cart-final--bottom-checkout--btn btnDatHang">Enroll</a>
+                                                <a href="LessonDetails?course_id=${course.id}&lesson_id=${firstLesson.id}" class="btn arrow-btn" class="cart-final--bottom-checkout--btn btnDatHang">Join</a>
                                             </button>
                                         </div>
                                     </c:if>
 
                                     <c:if test="${purchased==null && sessionScope.account!=null && course.assign_by != sessionScope.account.user_id && course.managed_by != sessionScope.account.user_id && course.isActive==1}">
-                                        <div class="tg-button-wrap">
+                                        <div class="tg-button-wrap btnDatHang">
                                             <button id="btnDatHang" class="shopee-button-solid shopee-button-solid--primary" data-bs-toggle="modal" data-bs-target="#paymentMethod">
-                                                <a class="btn arrow-btn" class="cart-final--bottom-checkout--btn btnDatHang">Payment</a>
+                                                <a class="btn arrow-btn" class="cart-final--bottom-checkout--btn btnDatHang">Enroll</a>
                                             </button>
                                         </div>
                                     </c:if>
@@ -774,7 +778,7 @@
                                                         </div>
                                                         <div id="pay_loading">
                                                             <div class="text-center">
-                                                                <img src="https://api.vietqr.io/image/970422-3680147639039-KeYZOgw.jpg?accountName=DINH%20QUANG%20KHUONG&amount=${course.price*1000}&addInfo=${code}"
+                                                                <img src="https://api.vietqr.io/image/970422-3680147639039-KeYZOgw.jpg?accountName=DINH%20QUANG%20KHUONG&amount=${course.price*1000}&addInfo=${sessionScope.account.user_id} ${course.id} ${code}"
                                                                      alt="QR thanh toán VietQR" />
                                                             </div>
                                                             <h5>QR Code Generate</h5>
@@ -782,7 +786,7 @@
                                                             <p><span>Money:</span> <span id="pay_amount"><fmt:formatNumber value="${course.price*1000} " type="number"/>vnd</span></p>
                                                             <p>
                                                                 <span> Content of Payment:</span>
-                                                                <span id="pay_content">${code}</span>
+                                                                <span id="pay_content">${sessionScope.account.user_id} ${course.id} ${code}</span>
                                                             </p>
                                                             <p>
                                                                 <span>Bank Name</span>
@@ -893,9 +897,7 @@
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
-
                         </div>
                     </div>
                 </div>  
@@ -936,7 +938,7 @@
         <!-- Template Javascript -->
         <script>
             var paymentBody = {
-                user_id: ${sessionScope.account.user_id},
+                user_id: '${sessionScope.account.user_id}',
                 code: '${code}',
                 course_id: ${course.id}
             }
@@ -947,6 +949,12 @@
             function startCountdown() {
                 timeout = setInterval(updateCountdown, 1000);
             }
+
+            function stopInterval() {
+                clearInterval(intervalId);
+                clearInterval(timeout);
+            }
+            
             startCountdown()
             function updateCountdown() {
                 s--;
@@ -977,7 +985,7 @@
                     const lastPrice = lastPaid.price;
                     const lastContent = lastPaid.content;
                     let count = 0;
-                    if (lastPrice === price && lastContent.includes(content)) {
+                    if (lastPrice >= price && lastContent.includes(content)) {
                         count++;
                         Swal.fire({
                             title: "Sucess!",
@@ -988,10 +996,6 @@
                             stopInterval();
                             return;
                         }
-                    } else {
-                        orderFail(lastPrice - price);
-                        stopInterval();
-                        return;
                     }
                 } catch {
                     console.error("Error")
@@ -1001,14 +1005,9 @@
             const btnDatHang = document.querySelector("#btnDatHang");
             btnDatHang.addEventListener("click", () => {
                 intervalId = setInterval(() => {
-                    checkPaid(${course.price}, '${code}');
+                    checkPaid(${course.price}, '${sessionScope.account.user_id} ${course.id} ${code}');
                 }, 1000);
             })
-
-            function orderFail(money) {
-
-            }
-
             function orderSuccess() {
                 //                                                Swal.showLoading();
                 let urlPayment = 'Payment'
@@ -1052,8 +1051,6 @@
         <script>
             const player = new Plyr('#player');
         </script>
-
-
     </body>
 
 </html>

@@ -33,14 +33,14 @@ public class User {
     private String appoint_name;
     private String status;
     private String role_name;
-    private int isBan;
+    private int isActive;
 
-    public int getIsBan() {
-        return isBan;
+    public int getIsActive() {
+        return isActive;
     }
 
-    public void setIsBan(int isBan) {
-        this.isBan = isBan;
+    public void setIsActive(int isActive) {
+        this.isActive = isActive;
     }
 
     public String getRole_name() {
@@ -85,7 +85,7 @@ public class User {
         this.status = status;
     }
 
-    public User(int user_id, int role_id, String email, String registration_date, String first_name, String last_name, String description) {
+    public User(int user_id, int role_id, String email, String registration_date, String first_name, String last_name, String description, int isActive) {
         this.user_id = user_id;
         this.role_id = role_id;
         this.email = email;
@@ -93,6 +93,7 @@ public class User {
         this.first_name = first_name;
         this.last_name = last_name;
         this.description = description;
+        this.isActive = isActive;
     }
 
     public int getAppoint_by() {
@@ -131,15 +132,15 @@ public class User {
         this.created_by_Google = created_by_Google;
     }
 
-    public User(int user_id, int role_id, String email, int created_by_Google, int isBan) {
+    public User(int user_id, int role_id, String email, int created_by_Google, int isActive) {
         this.user_id = user_id;
         this.role_id = role_id;
         this.email = email;
         this.created_by_Google = created_by_Google;
-        this.isBan = isBan;
+        this.isActive = isActive;
     }
 
-    public User(int user_id, int role_id, String email, String pass, String registration_date, String first_name, String last_name, String phone_number, String avatar, String backgroup, String description, int created_by_Google, int isBan) {
+    public User(int user_id, int role_id, String email, String pass, String registration_date, String first_name, String last_name, String phone_number, String avatar, String backgroup, String description, int created_by_Google, int isActive) {
         this.user_id = user_id;
         this.role_id = role_id;
         this.email = email;
@@ -152,7 +153,7 @@ public class User {
         this.backgroup = backgroup;
         this.description = description;
         this.created_by_Google = created_by_Google;
-        this.isBan = isBan;
+        this.isActive = isActive;
     }
 
     public int getCreated_by_Google() {

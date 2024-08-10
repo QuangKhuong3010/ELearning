@@ -111,6 +111,9 @@ public class CourseEnrolled extends HttpServlet {
                 }
             }
             course.setProcess((double)totalLessonCompletedList / totalLesson*100);
+            if (totalLesson==0){
+                course.setProcess(0);
+            }
             course.setNumberOfLesson(totalLesson);
             course.setStudentOnCourse(userDAO.StudentOnCourse(course.getId()));
         }

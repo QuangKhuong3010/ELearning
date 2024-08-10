@@ -102,7 +102,7 @@
         </button>
         <!-- Scroll-top-end-->
 
-       <!-- header-area -->
+        <!-- header-area -->
         <header>
             <div class="tg-header__top">
                 <div class="container custom-container">
@@ -236,56 +236,33 @@
             <!-- dashboard-area -->
             <section class="dashboard__area section-pb-120">
                 <div class="container">
-                    <div class="dashboard__top-wrap">
-                        <div class="dashboard__top-bg" data-background="${user.backgroup}"></div>
-                        <div class="dashboard__instructor-info">
-                            <div class="dashboard__instructor-info-left">
-                                <div class="thumb">
-                                    <img src="${user.avatar}" alt="img">
+                    <c:if test="${sessionScope.account.role_id!=1}">
+                        <div class="dashboard__top-wrap">
+                            <div class="dashboard__top-bg" data-background="${user.backgroup}"></div>
+                            <div class="dashboard__instructor-info">
+                                <div class="dashboard__instructor-info-left">
+                                    <div class="thumb">
+                                        <img src="${user.avatar}" alt="img">
+                                    </div>
+                                    <div class="content">
+                                        <h4 class="title">${user.first_name} ${user.last_name}</h4>
+                                    </div>
                                 </div>
-                                <div class="content">
-                                    <h4 class="title">${user.first_name} ${user.last_name}</h4>
-                                    <c:if test="${sessionScope.account.role_id==3}">
-                                        <div class="review__wrap review__wrap-two">
-                                            <div class="rating">
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                            </div>
-                                            <span>(15 Reviews)</span>
-                                        </div>
-                                    </c:if>
-                                    <ul class="list-wrap">
-                                        <li>
-                                            <img src="assets/img/icons/course_icon03.svg" alt="img" class="injectable">
-                                            ${user.quantityCourseLearning} Courses Enrolled
-                                        </li>
-                                        <li>
-                                            <img src="assets/img/icons/course_icon05.svg" alt="img" class="injectable">
-                                            ? Certificate
-                                        </li>
-                                    </ul>
-                                </div>
+                                <c:if test="${sessionScope.account.role_id==2}">
+                                    <div class="dashboard__instructor-info-right">
+                                        <a href="CreateCourse" class="btn btn-two arrow-btn">Create a New Course <img src="assets/img/icons/right_arrow.svg" alt="img" class="injectable"></a>
+                                    </div>
+                                </c:if>
                             </div>
-                            <c:if test="${sessionScope.account.role_id==3}">
-                                <div>
-                                    <a href="CreateCourse" class="btn btn-two arrow-btn">Create a New Course <img src="assets/img/icons/right_arrow.svg" alt="img" class="injectable"></a>
-                                </div>
-                            </c:if>
                         </div>
-                    </div>
+                    </c:if>
                     <div class="row">
                         <div class="col-lg-3">
                             <div class="dashboard__sidebar-wrap">
-                                <div class="dashboard__sidebar-title mb-20">
-                                    <h6 class="title">Welcome, ${user.first_name} ${user.last_name}</h6>
-                                </div>
                                 <c:if test="${sessionScope.account.role_id!=1}">
                                     <nav class="dashboard__sidebar-menu">
                                         <ul class="list-wrap">
-                                            <li>
+                                            <li class="active">
                                                 <a href="Profile">
                                                     <i class="skillgro-avatar"></i>
                                                     My Profile
@@ -314,12 +291,6 @@
                                                 </a>
                                             </li>
                                             <li>
-                                                <a href="instructor-announcement.html">
-                                                    <i class="skillgro-marketing"></i>
-                                                    Announcements
-                                                </a>
-                                            </li>
-                                            <li  class="active">
                                                 <a href="CourseManager">
                                                     <i class="skillgro-book"></i>
                                                     Course Management
@@ -347,12 +318,12 @@
                                                 </a>
                                             </li>
                                             <c:if test="${sessionScope.account.role_id==2}">
-                                            <li>
-                                                <a href="AppointMentor">
-                                                    <i class="skillgro-chat"></i>
-                                                    Appoint Mentor List
-                                                </a>
-                                            </li>
+                                                <li>
+                                                    <a href="AppointMentor">
+                                                        <i class="skillgro-chat"></i>
+                                                        Appoint Mentor List
+                                                    </a>
+                                                </li>
                                             </c:if>
                                         </ul>
                                     </nav>
@@ -391,7 +362,7 @@
                                         </div>
                                         <div class="tab-content" id="myTabContent">
                                             <div class="tab-pane fade show active" id="itemOne-tab-pane" role="tabpanel" aria-labelledby="itemOne-tab" tabindex="0">
-                                                <form enctype="multipart/form-data" action="CourseEdit" method="post" class="instructor__profile-form">
+                                                <form enctype="multipart/form-data" action="CourseEdit" method="post" class="instructor__profile-form" id="formAddTopic">
                                                     <input type="hidden" name="course_id" value="${course.id}">
                                                     <div upload-image-preview1 class="instructor__cover-bg" data-background="${course.avatar}" >
                                                         <div class="instructor__cover-info">
@@ -405,26 +376,29 @@
                                                             <div class="col-md-8">
                                                                 <div class="form-grp">
                                                                     <label for="username">Course Name</label>
-                                                                    <input name="name" id="username" type="text" value="${course.name}" readonly >
+                                                                    <input name="name" id="username" type="text" value="${course.name}" oninput="validate(this)">
+                                                                </div>
+                                                                <div class="messName mt-4 mb-4">
+
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-2">
                                                                 <div class="form-grp">
                                                                     <label for="price">Price</label>
-                                                                    <input name="price" id="price" type="text" value="${course.price}" required>
+                                                                    <input name="price" id="price" type="number" value="${course.price}" required>
                                                                 </div>
                                                             </div>
-                                                            <div class="col-md-2">
-                                                                <div class="form-grp">
-                                                                    <label for="managed_by">Managed_by</label>
-                                                                    <div class="courses-top-right-select">
-                                                                        <select name="managed_by" class="managed_by">
-                                                                            <option value="default" disabled selected>${course.managed_name}</option>
-                                                                        </select>
-                                                                    </div>
-                                                                </div>
-
-                                                            </div>
+                                                            <!--                                                            <div class="col-md-2">
+                                                                                                                            <div class="form-grp">
+                                                                                                                                <label for="managed_by">Managed_by</label>
+                                                                                                                                <div class="courses-top-right-select">
+                                                                                                                                    <select name="managed_by" class="managed_by">
+                                                                                                                                        <option value="default" disabled selected>${course.managed_name}</option>
+                                                                                                                                    </select>
+                                                                                                                                </div>
+                                                                                                                            </div>
+                                                            
+                                                                                                                        </div>-->
                                                             <div class="col-md-10">
                                                                 <div class="form-grp">
                                                                     <label for="bio">Description</label>
@@ -472,7 +446,7 @@
                                                            upload-image-input1
                                                            />
                                                     <div class="submit-btn mt-25">
-                                                        <button type="submit" class="btn">Confirm</button>
+                                                        <button type="submit" class="btn" id="confirmForm">Confirm</button>
                                                     </div>
                                                 </form>
                                             </div>
@@ -485,8 +459,9 @@
                                                         <div class="row mb-3 align-items-center"> 
                                                             <h1 class="col-md-2">Topic</h1>
                                                             <div class="submit-btn col-md-6"">
-                                                                <a  class="button mt-0" onclick="addRow()">Add</a>
+                                                                <a  class="button mt-0 btn btn-warning" onclick="addRow()">Add</a>
                                                             </div>
+                                                            <div id="messError"></div>
                                                             <div class="row mt-3">  
                                                                 <div class="col-md-12 additionalRows" >
                                                                     <c:forEach items="${topic}" var="t" varStatus="loop">
@@ -517,7 +492,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="submit-btn mt-25">
-                                                        <button type="submit" class="btn">Confirm</button>
+                                                        <button type="submit" class="btn" id="confirmForm">Confirm</button>
                                                     </div>
                                                 </form>
                                             </div> 
@@ -598,6 +573,18 @@
                                                                                     })
         </script>
         <script>
+            const confirmForm = document.querySelector("#confirmForm");
+            function validate(element) {
+                const courseName = document.querySelector("#username");
+                const messName = document.querySelector(".messName");
+                if (!element.value.trim() == '') {
+                    messName.innerHTML = ""
+                    confirmForm.disabled = false;
+                } else {
+                    messName.innerHTML = "<span class='alert alert-danger mt-2'>Course name not is empty.</span>"
+                    confirmForm.disabled = true;
+                }
+            }
             var rowCounter = ${topic.size()};
             var additionalRows = document.querySelector('.additionalRows');
 
@@ -678,6 +665,33 @@
 
                 // Hiển thị các giá trị tham số
                 paramValuesDiv.textContent = JSON.stringify(paramValues);
+            }
+            document.getElementById('formAddTopic').addEventListener('submit', function (e) {
+                e.preventDefault();
+                validateForm();
+            });
+            function validateForm() {
+                const inputs = document.getElementsByClassName('topic-input');
+                let isValid = true;
+                let message = '';
+                for (let i = 0; i < inputs.length; i++) {
+                    if (inputs[i].value.trim() === '') {
+                        isValid = false;
+                        message = 'All fields must be filled.';
+                        inputs[i].classList.add('alert');
+                    } else {
+                        inputs[i].classList.remove('alert');
+                    }
+                }
+
+                if (isValid) {
+                    alert('Form submitted successfully!');
+                } else {
+                    const messError = document.getElementById('messError');
+                    
+                    console.log(mess)
+                    messError.innerHTML = `<span class="alert alert-danger">${mess}</span>`;
+                }
             }
         </script>
     </body>

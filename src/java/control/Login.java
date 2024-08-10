@@ -6,7 +6,6 @@ package control;
 
 import dao.userDAO;
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.Cookie;
@@ -58,7 +57,9 @@ public class Login extends HttpServlet {
             request.setAttribute("mess", "Wrong email or password");
             request.getRequestDispatcher("login.jsp").forward(request, response);
         }
-        else if (userDAO.isActive(email)==0) {
+        else if (user.getIsActive()==0) {
+            HttpSession session = request.getSession();
+            session.setAttribute("account", user);
             request.getRequestDispatcher("userban.jsp").forward(request, response);
         }else {
             HttpSession session = request.getSession();

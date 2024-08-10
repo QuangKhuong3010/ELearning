@@ -242,7 +242,7 @@
                                                         <div class="col-md-2">
                                                             <div class="form-grp">
                                                                 <label for="price">Price</label>
-                                                                <input name="price" id="price" type="text" required>
+                                                                <input name="price" id="price" type="number" value="0" required>
                                                             </div>
                                                         </div>
                                                         <div class="col-md-2">
@@ -250,7 +250,6 @@
                                                                 <label for="managed_by">Assign_by</label>
                                                                 <div class="courses-top-right-select">
                                                                     <select name="Assign_by" class="Assign_by">
-                                                                        <option value="default" disabled selected>Assign_by</option>
                                                                         <c:forEach items="${mentor}" var="m">
                                                                             <option value="${m.user_id}">${m.first_name} ${m.last_name}</option>
                                                                         </c:forEach>
@@ -272,7 +271,6 @@
                                                                     <label for="Category">Category</label>
                                                                     <div class="courses-top-right-select">
                                                                         <select name="category" class="category">
-                                                                            <option value="default" disabled selected>Category</option>
                                                                             <c:forEach items="${category}" var="c">
                                                                                 <option value="${c.id}">${c.name}</option>
                                                                             </c:forEach>
@@ -284,7 +282,6 @@
                                                                 <label for="level">Level</label>
                                                                 <div class="courses-top-right-select">
                                                                     <select name="level" class="level">
-                                                                        <option value="default" disabled selected>Level</option>
                                                                         <c:forEach items="${level}" var="l">
                                                                             <option value="${l.id}">${l.name}</option>
                                                                         </c:forEach>

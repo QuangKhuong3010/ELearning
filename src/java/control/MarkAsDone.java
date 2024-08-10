@@ -78,16 +78,16 @@ public class MarkAsDone extends HttpServlet {
         }
         User user = (User) session.getAttribute("account");
         Lesson lessonCurrent = new Lesson();
-
         lessonCompletedDAO lessonCompletedDAO = new lessonCompletedDAO();
         lessonDAO lessonDAO = new lessonDAO();
         topicDAO topicDAO = new topicDAO();
         courseDAO courseDAO = new courseDAO();
         purchasedDAO purchasedDAO = new purchasedDAO();
         certificateDAO certificateDAO = new certificateDAO();
-        
+
         Lesson lesson = lessonDAO.getLesson(lesson_id);
-        lessonCompletedDAO.add(user.getUser_id(), lesson_id);
+        if (lessonCompletedDAO.getLessonCompleted(user.getUser_id(), lesson_id)==null)
+            lessonCompletedDAO.add(user.getUser_id(), lesson_id);
         int Currentposition = lesson.getPosition();
         System.out.println(Currentposition);
 
@@ -95,7 +95,7 @@ public class MarkAsDone extends HttpServlet {
             int position = Currentposition + 1;
             lessonCurrent = lessonDAO.getLessonByPosition(lesson.getTopic_id(), position);
             while (lessonCurrent.getIsDeleted() == 1) {
-                position = Currentposition + 1;
+                position = position + 1;
                 lessonCurrent = lessonDAO.getLessonByPosition(lesson.getTopic_id(), position);
             }
         } else {
@@ -109,16 +109,33 @@ public class MarkAsDone extends HttpServlet {
         for (Topic topic : topicDAO.getAllTopicOnCourse(course.getId())) {
             lessonOnCourse.addAll(lessonDAO.getLessonOnTopic(topic.getId()));
         }
+        boolean status=true;
+        for (Lesson lesson1 : lessonOnCourse) {
+            boolean done = false;
+            for (LessonCompleted lessonCompleted1 : listCompleted) {
+                if (lesson1.getId() == lessonCompleted1.getLesson_id()) {
+                    done = true;
+                    break;
+                }
+            }
+            if (done==false){
+                status=false;
+            }
+        }
+        
+        if(status==true){
+            purchasedDAO.markAsDone(user.getUser_id(), course.getId(), "Completed");
+        }else{
+            purchasedDAO.markAsDone(user.getUser_id(), course.getId(), "Active");
+        }
 
-        if (listCompleted.containsAll(lessonOnCourse)) {
-            purchasedDAO.markAsDone(user.getUser_id(), course.getId());
-            if(certificateDAO.getCertificate(user.getUser_id(),course.getId())==null){
+        if ((purchasedDAO.getPurchased(user.getUser_id(), course.getId()).getStatus().equals("Completed"))) {
+            if (certificateDAO.getCertificate(user.getUser_id(), course.getId()) == null) {
                 certificateDAO.createCertificate(user.getUser_id(), course.getId());
             }
             response.sendRedirect("CourseDetails?id=" + course.getId());
         } else {
             response.sendRedirect("LessonDetails?course_id=" + topicDAO.getTopic(lessonDAO.getLesson(lesson_id).getTopic_id()).getCourse_id() + "&" + "lesson_id=" + lessonCurrent.getId());
-
         }
     }
 

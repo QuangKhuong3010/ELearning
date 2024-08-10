@@ -14,16 +14,27 @@ public class Purchased {
     private int course_id;
     private String purchased_date;
     private String Code;
-
+    private String status;
+    
     public Purchased() {
     }
 
-    public Purchased(int id, int user_id, int course_id, String purchased_date,  String Code) {
+    public Purchased(int id, int user_id, int course_id, String purchased_date, String Code, String status) {
         this.id = id;
         this.user_id = user_id;
         this.course_id = course_id;
         this.purchased_date = purchased_date;
         this.Code = Code;
+        this.status = status;
+    }
+
+    
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public int getId() {

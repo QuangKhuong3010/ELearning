@@ -1,6 +1,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!doctype jsp>
-<jsp class="no-js" lang="en">
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!doctype html>
+<html class="no-js" lang="en">
 
     <head>
         <meta charset="utf-8">
@@ -28,6 +32,26 @@
         <link rel="stylesheet" href="assets/css/spacing.css">
         <link rel="stylesheet" href="assets/css/tg-cursor.css">
         <link rel="stylesheet" href="assets/css/main.css">
+        <style>
+            img{
+                width: 100%;
+                object-fit: cover;
+                height: 100%;
+
+            }
+
+            .instructor__cover-info-left .thumb{
+                border-radius: 50%;
+                overflow:hidden;
+            }
+            .instructor__cover-info-left .thumb img {
+                border-radius: 0%;
+                width: 100%;
+                background: var(--tg-common-color-white);
+                border: 0px solid var(--tg-common-color-white);
+                padding: 0px;
+            }
+        </style>
     </head>
 
     <body>
@@ -43,12 +67,12 @@
         <!--Preloader-end -->
 
         <!-- Scroll-top -->
-        <button class="scroll__top scroll-to-target" data-target="jsp">
+        <button class="scroll__top scroll-to-target" data-target="html">
             <i class="tg-flaticon-arrowhead-up"></i>
         </button>
         <!-- Scroll-top-end-->
 
-        <!-- header-area -->
+       <!-- header-area -->
         <header>
             <div class="tg-header__top">
                 <div class="container custom-container">
@@ -166,26 +190,10 @@
 
 
         <!-- main-area -->
-        <main class="main-area fix">
+        <main class="main-area">
 
             <!-- breadcrumb-area -->
-            <section class="breadcrumb__area breadcrumb__bg" data-background="assets/img/bg/breadcrumb_bg.jpg">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="breadcrumb__content">
-                                <h3 class="title">Login</h3>
-                                <nav class="breadcrumb">
-                                    <span property="itemListElement" typeof="ListItem">
-                                        <a href="HomePage">Home</a>
-                                    </span>
-                                    <span class="breadcrumb-separator"><i class="fas fa-angle-right"></i></span>
-                                    <span property="itemListElement" typeof="ListItem">Login</span>
-                                </nav>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div class="breadcrumb__area breadcrumb__bg breadcrumb__bg-three" data-background="assets/img/bg/breadcrumb_bg.jpg">
                 <div class="breadcrumb__shape-wrap">
                     <img src="assets/img/others/breadcrumb_shape01.svg" alt="img" class="alltuchtopdown">
                     <img src="assets/img/others/breadcrumb_shape02.svg" alt="img" data-aos="fade-right" data-aos-delay="300">
@@ -193,61 +201,69 @@
                     <img src="assets/img/others/breadcrumb_shape04.svg" alt="img" data-aos="fade-down-left" data-aos-delay="400">
                     <img src="assets/img/others/breadcrumb_shape05.svg" alt="img" data-aos="fade-left" data-aos-delay="400">
                 </div>
-            </section>
+            </div>
             <!-- breadcrumb-area-end -->
 
-            <!-- singUp-area -->
-            <section class="singUp-area section-py-120">
+            <!-- dashboard-area -->
+            <section class="dashboard__area section-pb-120">
                 <div class="container">
-                    <div class="row justify-content-center">
-                        <div class="col-xl-6 col-lg-8">
-                            <div class="singUp-wrap">
-                                <h2 class="title">Welcome back!</h2>
-                                <p>Hey there! Ready to log in? Just enter your username and password below and you'll be back in action in no time. Let's go!</p>
-                                <c:if test="${mess!=null}">
-                                    <a class="alert alert-danger">${mess}</a>
-                                </c:if>
-                                <form action="Login" method="post" class="account__form">
-                                    <div class="form-grp">
-                                        <label for="email">Email</label>
-                                        <input name="email" id="email" type="text" placeholder="email" required>
-                                    </div>
-                                    <div class="form-grp">
-                                        <label for="password">Password</label>
-                                        <input name="password" id="password" type="password" placeholder="password" required>
-                                    </div>
-                                    <div class="account__check">
-                                        <div class="account__check-remember">
-                                            <input type="checkbox" class="form-check-input" value="" id="terms-check">
-                                            <label for="terms-check" class="form-check-label">Remember me</label>
-                                        </div>
-                                        <div class="account__check-forgot">
-                                            <a href="ForgotPassword">Forgotten password?</a>
-                                        </div>
-                                    </div>
-                                    <button type="submit" class="btn btn-two arrow-btn">Sign In<img src="assets/img/icons/right_arrow.svg" alt="img" class="injectable"></button>
-                                </form>
-                                <div class="account__switch">
-                                    <p>Don't have an account?<a href="Registration">Sign Up</a></p>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="dashboard__content-wrap">
+                                <div class="dashboard__content-title">
+                                    <h4 class="title">Reply to Manager</h4>
                                 </div>
-                                <div class="account__divider">
-                                    <span>or</span>
-                                </div>
-                                <div class="account__social">
-                                    <a href="https://accounts.google.com/o/oauth2/auth?scope=email&redirect_uri=http://localhost:9999/ELearning/LoginGoogleHandler&response_type=code&client_id=407572289292-0o85s9ip7lffdbee2deojs3u0lhktsvf.apps.googleusercontent.com&approval_prompt=force" class="account__social-btn">
-                                        <img src="assets/img/icons/google.svg" alt="img">
-                                        Continue with google
-                                    </a>
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="dashboard__nav-wrap">
+                                            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                                <li class="nav-item" role="presentation">
+                                                    <button class="nav-link active" id="itemOne-tab" data-bs-toggle="tab" data-bs-target="#itemOne-tab-pane" type="button" role="tab" aria-controls="itemOne-tab-pane" aria-selected="true">Reason</button>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="tab-content" id="myTabContent">
+                                            <form action="AddManager" method="post" class="instructor__profile-form">
+                                                <div class="instructor__profile-form-wrap">
+                                                    <div class="row">                                                      
+                                                        <div class="col-md-8">
+                                                            <div class="form-grp">
+                                                                <label for="username">Email</label>
+                                                                <input name="email" id="email" type="text" required>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <div class="form-grp">
+                                                                <label for="organization">Organization</label>
+                                                                <input name="organization" id="organization" type="text" required>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="submit-btn mt-25">
+                                                        <button type="submit" class="btn">Submit</button>
+                                                    </div>
+                                                    <c:if test="${mess!=null}">
+                                                        <a class="alert alert-danger">${mess}</a>
+                                                    </c:if>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
-            <!-- singUp-area-end -->
+            <!-- dashboard-area-end -->
 
         </main>
         <!-- main-area-end -->
+
+
+
+
+
         <!-- JS here -->
         <script src="assets/js/vendor/jquery-3.6.0.min.js"></script>
         <script src="assets/js/bootstrap.min.js"></script>
@@ -270,8 +286,9 @@
         <script src="assets/js/aos.js"></script>
         <script src="assets/js/main.js"></script>
         <script>
-            SVGInject(document.querySelectorAll("img.injectable"));
+
         </script>
     </body>
 
-</jsp>
+</html>
+</html>

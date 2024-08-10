@@ -24,6 +24,7 @@ public class purchasedDAO extends DBContext {
                 + "      ,[course_id]\n"
                 + "      ,[purchased_date]\n"
                 + "      ,[code]\n"
+                + "      ,[status]\n"
                 + "  FROM [dbo].[Purchased]";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
@@ -35,7 +36,8 @@ public class purchasedDAO extends DBContext {
                         rs.getInt(2),
                         rs.getInt(3),
                         rs.getString(4),
-                        rs.getString(5)));
+                        rs.getString(5),
+                        rs.getString(6)));
             }
             return purchasedList;
         } catch (SQLException e) {
@@ -50,6 +52,7 @@ public class purchasedDAO extends DBContext {
                 + "      ,[course_id]\n"
                 + "      ,[purchased_date]\n"
                 + "      ,[code]\n"
+                + "      ,[status]\n"
                 + "  FROM [dbo].[Purchased]\n"
                 + "  WHERE user_id = ?";
         try {
@@ -63,7 +66,8 @@ public class purchasedDAO extends DBContext {
                         rs.getInt(2),
                         rs.getInt(3),
                         rs.getString(4),
-                        rs.getString(5)));
+                        rs.getString(5),
+                        rs.getString(6)));
             }
             return purchasedList;
         } catch (SQLException e) {
@@ -78,18 +82,16 @@ public class purchasedDAO extends DBContext {
                 + "      ,[course_id]\n"
                 + "      ,[purchased_date]\n"
                 + "      ,[code]\n"
+                + "      ,[status]\n"
                 + "  FROM [dbo].[Purchased]\n"
                 + "  WHERE user_id=? AND course_id=?";
         try {
-            Purchased purchased = null;
             PreparedStatement st = connection.prepareStatement(sql);
             st.setInt(1, user_id);
             st.setInt(2, course_id);
             ResultSet rs = st.executeQuery();
-            if (rs.next()) {
-                purchased = new Purchased(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getString(4), rs.getString(5));
-            }
-            return purchased;
+            if(rs.next())
+                return new Purchased(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getString(4), rs.getString(5), rs.getString(6));
         } catch (SQLException e) {
             System.out.println(e);
         }
@@ -114,13 +116,13 @@ public class purchasedDAO extends DBContext {
         }
     }
 
-    public void markAsDone(int user_id, int course_id) {
+    public void markAsDone(int user_id, int course_id, String status) {
         try {
             String sql = "UPDATE [dbo].[Purchased]\n"
                     + "   SET [status] = ?\n"
                     + " WHERE [user_id]=? and [course_id]=?";
             PreparedStatement st = connection.prepareStatement(sql);
-            st.setString(1, "Completed");
+            st.setString(1, status);
             st.setInt(2, user_id);
             st.setInt(3, course_id);
             st.executeUpdate();

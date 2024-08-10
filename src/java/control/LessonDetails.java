@@ -74,6 +74,7 @@ public class LessonDetails extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
         topicDAO topicDAO = new topicDAO();
         lessonDAO lessonDAO = new lessonDAO();
         userDAO userDAO = new userDAO();
@@ -90,23 +91,22 @@ public class LessonDetails extends HttpServlet {
         User user = (User) session.getAttribute("account");
         int course_id = Integer.parseInt(request.getParameter("course_id"));
         String lesson_id_raw = request.getParameter("lesson_id");
-        Lesson lesson = new Lesson();
-        if (lesson_id_raw.equals("first_lesson")) {
-            lesson = lessonDAO.getFirstLessonOnCourse(course_id);
-        } else {
-            int lesson_id = Integer.parseInt(lesson_id_raw);
-            lesson = lessonDAO.getLesson(lesson_id);
+        if (lesson_id_raw==""){
+            request.setAttribute("course_id", course_id);
+            request.getRequestDispatcher("nolesson.jsp").forward(request, response);
+            return;
         }
-
+        int lesson_id = Integer.parseInt(lesson_id_raw);
+        Lesson lesson = lessonDAO.getLesson(lesson_id);
         Course course = courseDAO.getCourse(course_id);
         User manager = userDAO.getUser(course.getManaged_by());
         manager.setOrganization_name(organizationDAO.getNameOrganization(manager.getUser_id()));
 
-        ArrayList<Rating> rating = feedbackDAO.getRatingBar(course_id);  
+        ArrayList<Rating> rating = feedbackDAO.getRatingBar(course_id);
         ArrayList<Feedback> feedbackList = feedbackDAO.getFeedbackOnCousre(course_id);
         ArrayList<Topic> topicOnCourse = topicDAO.getAllTopicOnCourse(course_id);
         ArrayList<Curriculum> curriculum = new ArrayList<>();
-        
+
         course.setRating(feedbackDAO.getAverageRateOf(course_id));
         course.setRatingNear((int) Math.round(course.getRating()));
         course.setRating(feedbackDAO.getAverageRateOf(course_id));
@@ -117,13 +117,12 @@ public class LessonDetails extends HttpServlet {
         }
         for (Curriculum c : curriculum) {
             for (Lesson l : c.getLessons()) {
-                if(lessonCompletedDAO.getLessonCompleted(user.getUser_id(), l.getId())!=null){
+                if (lessonCompletedDAO.getLessonCompleted(user.getUser_id(), l.getId()) != null) {
                     l.setStatus("done");
                 }
             }
         }
-        
-        
+
         request.setAttribute("curriculum", curriculum);
         request.setAttribute("feedback", feedbackList);
         request.setAttribute("rating", rating);

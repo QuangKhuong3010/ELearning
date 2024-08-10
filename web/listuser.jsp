@@ -186,14 +186,11 @@
                     <div class="row">
                         <div class="col-lg-3">
                             <div class="dashboard__sidebar-wrap">
-                                <div class="dashboard__sidebar-title mb-20">
-                                    <h6 class="title">Welcome, Admin</h6>
-                                </div>
                                 <c:if test="${sessionScope.account.role_id!=1}">
                                     <nav class="dashboard__sidebar-menu">
                                         <ul class="list-wrap">
-                                            <li>
-                                                <a href=Profile">
+                                            <li class="active">
+                                                <a href="Profile">
                                                     <i class="skillgro-avatar"></i>
                                                     My Profile
                                                 </a>
@@ -214,16 +211,10 @@
                                     </div>
                                     <nav class="dashboard__sidebar-menu">
                                         <ul class="list-wrap">
-                                            <li  class="active">
-                                                <a href="ListUser" >
+                                            <li class="active">
+                                                <a href="ListUser">
                                                     <i class="skillgro-avatar"></i>
                                                     User Management
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="instructor-announcement.html">
-                                                    <i class="skillgro-marketing"></i>
-                                                    Announcements
                                                 </a>
                                             </li>
                                             <li>
@@ -233,7 +224,7 @@
                                                 </a>
                                             </li>
                                             <li>
-                                                <a href="AppointMentor">
+                                                <a href="AppointMentorConfirm">
                                                     <i class="skillgro-book"></i>
                                                     Appoint Mentor List
                                                 </a>
@@ -339,14 +330,16 @@
                                                                 <p>${u.registration_date}</p>
                                                             </td>
                                                             <td  style="border: 1px solid black;">
-                                                                <c:if test="${u.isBan==1}">
+                                                                <c:if test="${u.isActive==1}">
                                                                     <form action="UserActive" method="post">
-                                                                        <input type="submit" value="Active">
+                                                                        <input type="hidden" name="user_id" value="${u.user_id}">
+                                                                        <input type="submit" value="DeActive">
                                                                     </form>
                                                                 </c:if>
-                                                                <c:if test="${u.isBan==0}">
+                                                                <c:if test="${u.isActive==0}">
                                                                     <form action="UserActive" method="post">
-                                                                        <input type="submit" value="DeActive">
+                                                                        <input type="hidden" name="user_id" value="${u.user_id}">
+                                                                        <input type="submit" value="Active">
                                                                     </form>
                                                                 </c:if>
                                                             </td>

@@ -9,8 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import model.Category;
-import model.Feedback;
+import model.Purchased;
 
 /**
  *
@@ -33,5 +32,21 @@ public class organizationDAO extends DBContext {
             System.out.println(e);
         }
         return null;
+    }
+
+    public void addOrganiztion(String name, int manager_id) {
+        try {
+            String sql = "IINSERT INTO [dbo].[Organization]\n"
+                    + "           ([name]\n"
+                    + "           ,[manager_id])\n"
+                    + "     VALUES\n"
+                    + "           (?,?)";
+            PreparedStatement st = connection.prepareStatement(sql);
+            st.setString(1, name);
+            st.setInt(2, manager_id);
+            st.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
     }
 }

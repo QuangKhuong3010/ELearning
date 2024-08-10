@@ -105,7 +105,7 @@ public class CourseDetails extends HttpServlet {
         ArrayList<Feedback> feedbackList = feedbackDAO.getFeedbackOnCousre(course_id);
         ArrayList<Rating> rating = feedbackDAO.getRatingBar(course_id);
         ArrayList<Curriculum> curriculum = new ArrayList<>();
-        
+        Lesson firstLesson = lessonDAO.getFirstLessonOnCourse(course_id);
         
         course.setLevel_name(levelDAO.getLevelName(course.getLevel_id()));
         course.setCategory_name(categoryDAO.getNameCategory(course.getCategory_id()));
@@ -121,7 +121,6 @@ public class CourseDetails extends HttpServlet {
             purchased = purchasedDAO.getPurchased(user.getUser_id(), course_id);
             certificate = certificateDAO.getCertificate(user.getUser_id(), course_id);
         }
-        System.out.println(purchased);
         int sizeLesson = 0;
         for (Topic topic : topicOnCourse) {
             ArrayList<Lesson> lessonOnTopic = lessonDAO.getLessonOnTopic(topic.getId());
@@ -129,9 +128,7 @@ public class CourseDetails extends HttpServlet {
             curriculum.add(new Curriculum(topic, lessonOnTopic));
         }
         
-        
-        
-        
+        request.setAttribute("firstLesson", firstLesson);
         request.setAttribute("certificate", certificate);
         request.setAttribute("sizeLesson", sizeLesson);
         request.setAttribute("curriculum", curriculum);

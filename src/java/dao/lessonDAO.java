@@ -106,15 +106,11 @@ public class lessonDAO extends DBContext {
 
     public Lesson getFirstLessonOnCourse(int course_id) {
         String sql = "SELECT TOP 1 [id]\n"
-                + "      ,[topic_id]\n"
+                + "      ,[course_id]\n"
                 + "      ,[name]\n"
-                + "      ,[last_updated_date]\n"
-                + "	  ,[url]\n"
-                + "      ,[description]\n"
                 + "      ,[isDeleted]\n"
-                + "      ,[pdf]\n"
-                + "  FROM [ELearning].[dbo].[Lesson]\n"
-                + "  WHERE topic_id = ? AND isDeleted=0";
+                + "  FROM [ELearning].[dbo].[Topic]"
+                + "  WHERE course_id =? AND isDeleted=0";
         try {
             PreparedStatement st = connection.prepareStatement(sql);
             st.setInt(1, course_id);
@@ -129,7 +125,7 @@ public class lessonDAO extends DBContext {
     }
 
     public Lesson getLesson(int lesson_id) {
-        String sql = "SELECT TOP 1 [id]\n"
+        String sql = "SELECT [id]\n"
                 + "      ,[topic_id]\n"
                 + "      ,[name]\n"
                 + "      ,[last_updated_date]\n"
@@ -225,7 +221,7 @@ public class lessonDAO extends DBContext {
             System.out.println(ex);
         }
     }
-    
+
     public Lesson getLessonByPosition(int topic_id, int position) {
         String sql = "SELECT [id]\n"
                 + "      ,[topic_id]\n"

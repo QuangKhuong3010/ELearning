@@ -97,6 +97,14 @@ public class CourseManager extends HttpServlet {
                 course.setRating(feedbackDAO.getAverageRateOf(course.getId()));
             }
         }
+        
+        if (!courseManaged.isEmpty()) {
+            for (Course course : courseManaged) {
+                course.setCategory_name(categoryDAO.getNameCategory(course.getCategory_id()));
+                course.setAssign_name(userDAO.findUserName(course.getAssign_by()));
+                course.setRating(feedbackDAO.getAverageRateOf(course.getId()));
+            }
+        }
 
         request.setAttribute("course", listCourse);
         request.setAttribute("courseManaged", courseManaged);

@@ -16,6 +16,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import model.User;
+import util.Email;
 
 /**
  *
@@ -80,8 +81,15 @@ public class AppointMentorReject extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        appointMentorDAO appointMentorDAO = new appointMentorDAO();
+        
         int id = Integer.parseInt(request.getParameter("id"));
+        String email = request.getParameter("name");
+        appointMentorDAO appointMentorDAO = new appointMentorDAO();
+        Email Email = new Email();     
+        
+        String reason = request.getParameter("description");
+        Email.sendReason(email, reason);
+        
         appointMentorDAO.update(id, "Reject");
         response.sendRedirect("AppointMentorConfirm");
     }

@@ -32,7 +32,9 @@ public class Course {
     private double process;
     private int numberOfLesson;
     private int isActive;
-    
+//    private int rating;
+    private int count;
+
     public Course() {
     }
 
@@ -46,6 +48,16 @@ public class Course {
         this.category_id = category_id;
         this.avatar = avatar;
         this.description = description;
+        rating = 0;
+        count = 0;
+    }
+
+    public int getCount() {
+        return count;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
     }
 
     public Course(int id, int managed_by, int assign_by, String name, double price, int level_id, int category_id, String avatar, String description, String created_date, int isActive) {
@@ -70,7 +82,6 @@ public class Course {
         this.isActive = isActive;
     }
 
-    
     public int getNumberOfLesson() {
         return numberOfLesson;
     }
@@ -79,7 +90,6 @@ public class Course {
         this.numberOfLesson = numberOfLesson;
     }
 
-    
     public double getProcess() {
         return process;
     }
@@ -88,7 +98,6 @@ public class Course {
         this.process = process;
     }
 
-    
     public String getAssign_avatar() {
         return assign_avatar;
     }
@@ -240,8 +249,5 @@ public class Course {
     public void setStudentOnCourse(int studentOnCourse) {
         this.studentOnCourse = studentOnCourse;
     }
-
-    
-
 
 }
